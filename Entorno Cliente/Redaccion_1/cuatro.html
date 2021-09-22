@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <form action="post">
+    Introduce el radio:
+    <br>
+    <input type="number" id="radio">
+    <br>
+    <button type="submit" id="resolver">Calcular</button>
+    </form>
+
+    <script type="text/javascript">
+    //Volumen = (4/3)*pi*(radio*radio*radio)
+    //Area = pi*(radio*radio)
+    //Longitud = pi*radio
+
+    /*
+    let r = document.getElementById("radio").value;
+            let longitud = pi*r;
+            let area = pi*(r*r);
+            let volumen = (4/3)*pi*(r*r*r);
+            document.write("La longitud es: <br> <input type='text' disabled value=" + longitud + "> <br>");
+            document.write("El area es: <br> <input type='text' disabled value=" + area + "> <br>");
+            document.write("El volumen es: <br> <input type='text' disabled value=" + volumen + "> <br>");
+
+    */
+        const pi = 3.14;
+        
+        let boton = document.getElementById("resolver");
+        boton.addEventListener("click", calcular)
+
+        function calcular() {
+            let r = document.getElementById("radio").value;
+            calcularLongitud(r);
+            calcularArea(r);
+            calcularVolumen(r);
+        }
+
+        function calcularLongitud(r) {
+            let longitud = pi*r;
+            document.write("La longitud es: <br> <input type='text' disabled value=" + longitud + "> <br>");
+        }
+
+        function calcularArea(r) {
+            let area = pi*(r*r);
+            document.write("El area es: <br> <input type='text' disabled value=" + area + "> <br>");
+        }
+
+        function calcularVolumen(r) {
+            let volumen = (4/3)*pi*(r*r*r);
+            document.write("El volumen es: <br> <input type='text' disabled value=" + volumen + "> <br>");
+        }
+    </script>
+</body>
+</html>

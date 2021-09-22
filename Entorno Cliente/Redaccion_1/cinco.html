@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <form action="post">
+    Introduce el radio:
+    <br>
+    <input type="number" id="radio">
+    <br>
+    <button type="submit" id="resolverLongitud">Calcular Longitud</button>
+    <button type="submit" id="resolverArea">Calcular Area</button>
+    <button type="submit" id="resolverVolumen">Calcular Volumen</button>
+    </form>
+
+    <script type="text/javascript">
+    //Volumen = (4/3)*pi*(radio*radio*radio)
+    //Area = pi*(radio*radio)
+    //Longitud = pi*radio
+
+    /*
+    let r = document.getElementById("radio").value;
+            let longitud = pi*r;
+            let area = pi*(r*r);
+            let volumen = (4/3)*pi*(r*r*r);
+            document.write("La longitud es: <br> <input type='text' disabled value=" + longitud + "> <br>");
+            document.write("El area es: <br> <input type='text' disabled value=" + area + "> <br>");
+            document.write("El volumen es: <br> <input type='text' disabled value=" + volumen + "> <br>");
+
+    */
+        const pi = 3.14;
+        
+        let boton1 = document.getElementById("resolverLongitud");
+        let boton2 = document.getElementById("resolverArea");
+        let boton3 = document.getElementById("resolverVolumen");
+        
+        boton1.addEventListener("click", calcularLongitud);
+        boton2.addEventListener("click", calcularArea);
+        boton3.addEventListener("click", calcularVolumen);
+
+        function calcularLongitud() {
+            let r = document.getElementById("radio").value;
+            let longitud = pi*r;
+            document.write("La longitud es: <br> <input type='text' disabled value=" + longitud + "> <br>");
+        }
+
+        function calcularArea() {
+            let r = document.getElementById("radio").value;
+            let area = pi*(r*r);
+            document.write("El area es: <br> <input type='text' disabled value=" + area + "> <br>");
+        }
+
+        function calcularVolumen() {
+            let r = document.getElementById("radio").value;
+            let volumen = (4/3)*pi*(r*r*r);
+            document.write("El volumen es: <br> <input type='text' disabled value=" + volumen + "> <br>");
+        }
+    </script>
+</body>
+</html>
