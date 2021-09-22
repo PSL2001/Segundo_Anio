@@ -21,12 +21,25 @@
     <br>
     Resultado:
     <br>
-    <input type="number" id="res" disabled>
-    <br>
+    
     <button id="ordenar">Ordenar</button>
 
     <script type="text/javascript">
-     
+        // Voy a ordenar los numeros de menor a mayor
+        let boton = document.getElementById("ordenar");
+        let res = document.getElementById("res");
+        boton.addEventListener("click", ordenar);
+
+        function ordenar() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let num3 = document.getElementById("num3").value;
+            let numeros = [num1, num2, num3];
+            let orden=numeros.sort();
+            console.log(orden);
+            document.write("<input type='text' id='res' value="+orden[0]+","+orden[1]+","+orden[2]+"><br>");
+            
+        }
     </script>
 </body>
 </html>
