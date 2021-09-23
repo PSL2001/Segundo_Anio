@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10</title>
+</head>
+<body>
+    <input type="number" id="nums">
+    <br>
+    <button id="siguiente">Siguiente</button>
+    <button id="anterior">Anterior</button>
+    <script type="text/javascript">
+        let num = prompt("Introduce un numero del 1 al 100");
+        let numero = document.getElementById("nums");
+        let siguiente = document.getElementById("siguiente");
+        let anterior = document.getElementById("anterior");
+
+        if (num<0 || num>100) {
+            alert("El numero no esta en rango")
+        }
+
+        for (let i = 1; i <= num; i++) {
+            num.value = i;
+            
+        }
+    </script>
+</body>
+</html>
