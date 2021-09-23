@@ -1,3 +1,9 @@
+<?php
+//Constantes
+    define("PI", 3.141592);
+    define('NOMBRE', 'Mi aplicación');
+    
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -42,6 +48,48 @@
     }
     echo "</table>";
 
+    //Do while y while
+    echo "<hr> Bucle while <br>";
+    $i = 0;
+    while ($i <= 10) {
+        echo "$i <br>";
+        $i++;
+    }
+
+    echo "<hr> Bucle do while <br>";
+    $j = 0;
+    do {
+        echo "$j <br>";
+        $j++;
+    } while ($j <= 10);
+    //--If/Else if------------------------------------------------
+    echo "<hr>";
+    $a = 0;
+    if ($a) {
+        echo "\$a = $a lo considera verdadero";
+    } else {
+        echo "\$a = $a lo considera falso";
+    }
+    //&&->AND ||->OR
+    echo "<hr>";
+    $nombre = "Manolo";
+
+    switch ($nombre) {
+        case 'Manolo':
+            echo "Bueno";
+            break;
+        case 'Juan':
+            echo "Veremos......";
+            break;
+        default:
+            echo "No se tu nombre";
+            break;
+    }
+    //Constantes
+    echo "<hr>";
+    echo PI; //Por convenio siempre en mayusculas
+    echo "<br>";
+    echo NOMBRE;
 
 
 
