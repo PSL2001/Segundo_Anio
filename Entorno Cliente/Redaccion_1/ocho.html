@@ -7,20 +7,41 @@
     <title>Ejercicio 8</title>
 </head>
 <body>
-    <script type="text/javascript">
-    let nota = prompt("Introduce un numero del 0 al 10");
+    <script>
+        do {
+            var nota = prompt("Introduce tu nota");
 
-    if (0>nota ) {
-        alert("Rango de nota no correcto");
-    } else if (1<=nota||nota>=4) {
-        alert("Suspenso");
-    } else if(5<=nota||nota>=8) {
-        alert("Aprovado");
-    } else if(9<=nota||nota==10){
-        alert("Sobresaliente");
-    }else if (nota>10) {
-        alert("Rango de nota no correcto");
-    }
+            if (Number(nota) == nota) {
+                if (nota > 0 && nota <= 10) {
+                    if (nota < 3) {
+                        alert("Muy deficiente");
+                    }
+                    else if (nota < 5) {
+                        alert("Insuficiete");
+                    }
+                    else if (nota < 6) {
+                        alert("Suficiente");
+                    }
+                    else if (nota < 7) {
+                        alert("Bien");
+                    }
+                    else if (nota < 9) {
+                        alert("Notable"); 5
+                    }
+                    else if (nota >= 9) {
+                        alert("Sobresaliente");
+                    }
+                }
+                else {
+                    alert("Nota erronea");
+                }
+            }
+            else {
+                if (nota != undefined) {
+                    alert("Introduce un numero valido");
+                }
+            }
+        } while (nota != undefined);
     </script>
 </body>
 </html>
