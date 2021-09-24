@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    Escribe un numero:
+    <br>
+    <input type="number" id="numero">
+    <br>
+    <button id="grados">Hacer calculo en grados</button>
+    <button id="radian">Hacer calculo en raidanes</button>
+
+    <script type="text/javascript">
+    //Guardamos en una variable el input
+        let input = document.getElementById("numero");
+    //Hacemos lo mismo con botones
+        let boton1 = document.getElementById("grados");
+        let boton2 = document.getElementById("radian");
+    //Añadimos eventos para escuchar (EventListener)
+        boton1.addEventListener("click", calculoGrado);
+        boton2.addEventListener("click", calculoRadian);
+
+
+        function calculoGrado() {
+            //Esta funcion hace el calculo 
+            let valor = input.value;
+
+            let seno = Math.sin(valor);
+            let coseno = Math.cos(valor);
+            let tangente = Math.tan(valor);
+
+            document.write("Resultado en radianes: <br> Seno: " + seno + "<br> Coseno: " +coseno + "<br> Tangente: " + tangente);
+        }
+
+        function calculoRadian() {
+            let valor = input.value;
+
+            let seno = Math.sin(valor)*(Math.PI/180);
+            let coseno = Math.cos(valor)*(Math.PI/180);
+            let tangente = Math.tan(valor)*(Math.PI/180);
+
+            document.write("Resultado en grados: <br> Seno: " + seno + "<br> Coseno: " +coseno + "<br> Tangente: " + tangente);
+        }
+    </script>
+</body>
+</html>
