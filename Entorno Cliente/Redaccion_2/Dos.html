@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    Introduce un Número
+    <br>
+    <input type="number" id="num">
+    <br>
+    <button id="grados">Calcular en Grados</button>
+    <button id="radianes">Calcular en Radianes</button>
+    <script type="text/javascript">
+        //Guardamos el input en una variable
+        let numero = document.getElementById("num");
+        //Hacemos lo mismo con botones
+        let boton1 = document.getElementById("grados");
+        let boton2 = document.getElementById("radianes");
+        //Añadimos eventos
+        boton1.addEventListener("click", calculoGrados);
+        boton2.addEventListener("click", calculoRadianes);
+
+        function calculoGrados() {
+            let num = numero.value; //Cogemos el valor del input
+            /*
+            Como seno, coseno y tangente muestran un resultado en radianes, para pasar a grados hay
+            que dividir por (PI/180)
+            */
+            let seno = Math.sin(num)*(Math.PI/180); 
+            let coseno = Math.cos(num)*(Math.PI/180);
+            let tangente = Math.tan(num)*(Math.PI/180);
+
+            alert("Resultado en grados: \n" + " Seno: " + seno + "\n Coseno: " + coseno + "\n Tangente: " + tangente);
+            //Mostramos el resultado por alert
+        }
+
+        function calculoRadianes() {
+            let num = numero.value; //Cogemos el valor del input
+
+            //La funcion Math muestra el resultado en radianes
+            let seno = Math.sin(num);
+            let coseno = Math.cos(num);
+            let tangente = Math.tan(num);
+            //Mostramos el resultado por alert
+            alert("Resultado en radianes: \n" + " Seno: " + seno + "\n Coseno: " + coseno + "\n Tangente: " + tangente);
+        }
+    </script>
+
+</body>
+</html>
