@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //Inicializamos las fechas
+     let fecha = new Date;
+     //Cojemos un string local de fecha: Esto devuelve la fecha de hoy en dd/mm/aa
+     let hoy = fecha.toLocaleDateString();
+
+     let res = prompt("¿Que dia es hoy?"); //Preguntamos por fecha
+
+     if (res == hoy) { //Si la respuesta es correcta, le decimos que es correcto, caso contrario si no
+         alert("Correcto");
+     } else {
+         alert("Incorrecto");
+     }
+
+     
+    </script>
+</body>
+</html>
