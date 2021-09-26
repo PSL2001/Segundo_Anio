@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let fecha = prompt("Introduce tu fecha de Nacimiento");
+
+        console.log(calcularEdad(fecha)); 
+
+        /*
+        Funcion: Calcular la edad de una persona
+        E: Date de tipo string
+        S: Entero con la edad o false en caso de que la fecha sea incorrecta o mayor que el dia actual
+        */
+
+        function calcularEdad(fecha) {
+
+            //Calculamos la fecha de hoy
+            let hoy = new Date()
+            //alert(hoy)
+
+            //Se calcula la fecha que recibe
+            //La separamos en un array separando por /
+            let array_fecha = fecha.split("/");
+            //Si el array no tiene tres partes, la fecha es incorrecta y nos vamos
+            if (array_fecha.length != 3)
+                return false
+
+            //compruebo que los anio, mes, dia son correctos
+            let anio
+            anio = parseInt(array_fecha[2]);
+            if (isNaN(anio))
+                return false
+
+            let mes
+            mes = parseInt(array_fecha[1]);
+            if (isNaN(mes))
+                return false
+
+            var dia
+            dia = parseInt(array_fecha[0]);
+            if (isNaN(dia))
+                return false
+
+
+            //Si el año de la fecha que recibe solo tiene 4 cifras hay que restarle 1900
+             if (anio >= 99)
+                 anio -= 1900
+
+            //Resto los años de las dos fechas
+            edad = hoy.getYear() - ano - 1; //-1 porque no se si ha cumplido años ya este año
+
+            //Si resto los meses y me da menor que 0 entonces no ha cumplido años. Si da mayor si ha cumplido
+            if (hoy.getMonth() + 1 - mes < 0) //+ 1 porque los meses empiezan en 0
+                return edad
+            if (hoy.getMonth() + 1 - mes > 0)
+                return edad + 1
+
+            //Entonces es que eran iguales. Miro los dias
+            //Si resto los dias y me da menor que 0 entonces no ha cumplido años. Si da mayor o igual si ha cumplido
+            if (hoy.getUTCDate() - dia >= 0)
+                return edad + 1
+
+            return edad
+        }
+    </script>
+</body>
+
+</html>
