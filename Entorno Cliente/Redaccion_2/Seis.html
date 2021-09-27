@@ -33,7 +33,7 @@
             if (array_fecha.length != 3) {
                 return false;
             }
-            //compruebo que los anio, mes, dia son correctos
+            //Compruebo que anio, mes y dia son correctos
             let anio;
             anio = parseInt(array_fecha[2]);
             if (isNaN(anio)) {
@@ -53,7 +53,7 @@
             }
 
 
-            //Si el año de la fecha que recibe solo tiene 4 cifras hay que restarle 1900
+            //Si el año de la fecha que recibe tiene 4 cifras hay que restarle 1900
              if (anio >= 99) {
                  anio -= 1900;
              }
