@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body>
+    <input type="number" id="numero">
+    <br>
+    <button id="insert">Insertar</button>
+    <button id="mostrar">Mostrar todos los Elementos</button>
+    <button id="MaxElemento">Mostrar Ultimo elemento</button>
+    <button id="MinElemento">Mostrar Primer Elemento</button>
+    <br>
+    <button id="MaxPosicion">Mostrar la posicion del Ultimo elemento del Array</button>
+    <button id="sumaArray">Suma de los elementos en el array</button>
+    <br>
+    <button id="mediaArray">Media del Array</button>
+    <button id="OrdenArray">Ordenar y Mostrar Array</button>
+
+    <script type="text/javascript">
+        //Creamos el array
+        let array = [];
+        //Guardamos el input con el numero
+        let inputNum = document.getElementById("numero");
+        // Guardamos los botones
+        let botonInser = document.getElementById("insert");
+        let botonMos = document.getElementById("mostrar");
+        let botonMaxEl = document.getElementById("MaxElemento");
+        let botonMin = document.getElementById("MinElemento");
+        let botonMaxPos = document.getElementById("MaxPosicion");
+        let botonsuma = document.getElementById("sumaArray");
+        let botonMedia = document.getElementById("mediaArray");
+        let botonOrden = document.getElementById("OrdenArray");
+        //Añadimos eventos
+        botonInser.addEventListener("click", insertarElemento);
+        botonMos.addEventListener("click", mostrarElemento);
+        botonMaxEl.addEventListener("click", mostrarMaxElemento);
+        botonMin.addEventListener("click", mostrarMinElemento);
+        botonMaxPos.addEventListener("click", mostrarUltElemento);
+        botonsuma.addEventListener("click", sumaElemento);
+        botonMedia.addEventListener("click", mediaElemento);
+        botonOrden.addEventListener("click", orderElemento);
+
+        /*
+        E: nada
+        S: Guarda el valor del input en una variable y lo guarda en el array
+        */
+        function insertarElemento() {
+            let valor = inputNum.value; 
+            array.push(valor);
+        }
+        /*
+        E: nada
+        S: Muestra el array en el momento con sus posiciones
+        */
+
+        function mostrarElemento() {
+            alert(array);
+        }
+        /*
+        E: Nada
+        S: Muestra el ultimo elemento al final del array
+        */
+        function mostrarMaxElemento() {
+            let ultArray = array[array.length-1];
+            alert(ultArray);
+        }
+        /*
+        E: nada
+        S: Muestra la primera posicion del array
+        */
+        function mostrarMinElemento() {
+            let primArray = array[0];
+            alert(primArray);
+        }
+
+        /*
+        E: Nada
+        S: Muestrala ultima posicion del array
+        */
+
+        function mostrarUltElemento() {
+            let posArray = array.length;
+            alert(posArray);
+        }
+
+        /*
+        E: Nada
+        S: Suma los contenidos del array
+        */
+
+        function sumaElemento() {
+            let suma = 0;
+            let numero;
+            for (let i = 0; i < array.length; i++) {
+                numero = parseInt(array[i]);
+                suma += numero;
+            }
+            alert("La suma total es: " + suma);
+        }
+
+        /*
+        E: Nada
+        S: Hace la media del array
+        */
+        function mediaElemento() {
+            array.sort((a, b) => a - b);
+
+            let mitadBaja = Math.floor((array.length - 1) / 2);
+            let mitadAlta = Math.ceil((array.length - 1) / 2);
+
+            let media = (array[mitadBaja] + array[mitadAlta]) / 2;
+
+            alert("La media es " + media);
+        }
+
+        /*
+        E: nada
+        S: Ordena el array y lo muestra
+        */
+        function orderElemento() {
+            let arrayOrdenado = array.sort(function(a, b) {return a - b});
+
+            alert(arrayOrdenado);
+        }
+
+    </script>
+</body>
+</html>
