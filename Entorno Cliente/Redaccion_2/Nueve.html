@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    //Creamos los 2 arrays
+        let array1 = [1, 23, 67, 92, 33];
+        let array2 = [2 ,65 ,32 , 98, 4];
+
+        alert(" Array 1: " + array1 + "\n Array 2: " + array2);
+        let array1Or = orderElemento(array1); //llamamos una funcion para ordenarlos
+        let array2Or = orderElemento(array2);
+        alert(" Arrays despues de ordenarlos: \n Array 1: " + array1Or + " Array 2: " + array2Or);
+
+        let arraycomb = array1.concat(array2); //Los concatenamos
+
+        let arraycombOr = orderElemento(arraycomb); // y lo ordenamos
+        alert("Arrays combinados y ordenados: " + arraycombOr);
+
+
+        function orderElemento(array) {
+            let arrayOrdenado = array.sort(function (a, b) {
+                return a - b;
+            });
+
+            return arrayOrdenado;
+        }
+    </script>
+</body>
+
+</html>
