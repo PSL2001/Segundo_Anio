@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let numero = prompt("Introduce un numero para mostrar su tabla de mulitplicar"); //Primero pedimos el numero cuya tabla quiera mostrar el usuario
+
+        EscribeTabla(numero); //Llamamos a la funcion
+
+        function EscribeTabla(num) {
+            //Escribimos en el documento la tabla
+            document.write("<h1>Tabla de multiplicar del " + num + "</h2>"); 
+
+            document.write("<table border ='3'>\n");
+
+            for (let i = 1; i <= 10; i++) {
+                document.write("<tr>");
+                    document.write("<td>" + num + "</td>");
+                    document.write("<td> x </td>");
+                    document.write("<td>" + i + "</td>");
+                    document.write("<td> = </td>");
+                    document.write("<td>" + num*i + "</td>");
+                document.write("</tr>");
+            }
+            document.write("</table>");
+        }
+    </script>
+</body>
+
+</html>

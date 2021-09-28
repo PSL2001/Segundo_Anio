@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <p id="texto">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus quam tempore et illo, corporis, accusamus officia fugit dolor qui neque ipsum dignissimos molestiae in repellat hic libero expedita odio perspiciatis?
+    </p>
+    <br>
+    <button id="cambiaTamanio">Cambiar Tamaño</button>
+    <button id="cambiaLetra">Cambiar Letra</button>
+    <button id="cambiaColor">Cambiar Color</button>
+    <script type="text/javascript">
+        //Guardamos el texto en una variable
+        let texto = document.getElementById("texto");
+        //Hacemos lo mismo en los botones
+        let boton1 = document.getElementById("cambiaTamanio");
+        let boton2 = document.getElementById("cambiaLetra");
+        let boton3 = document.getElementById("cambiaColor");
+        //Creamos eventos para las funciones
+        boton1.addEventListener("click", cambiaTamanio);
+        boton2.addEventListener("click", cambiaLetra);
+        boton3.addEventListener("click", cambiaColor);
+
+
+        function cambiaTamanio() { //La funcion escoge un numero aleatorio entre 1 y 100 px
+            let aleatorio = random(1,100);
+            //Despues de escoger el numero, los añade al estilo del texto
+            texto.style = "font-size: "+aleatorio+"px;";
+        }
+
+        function cambiaLetra() {
+            let fuentes = ["Times New Roman", "Arial", "Courrier New"]; //Tenemos un array con 3 fuentes
+            let aleatorio = fuentes[random(0,2)]; //Despues aleatoriamente se elige entre estas variables
+
+            texto.style = "font-family:"+aleatorio+";"; //Y se aplica el estilo con esa fuente (Puede variar dependiendo del equipo del usuario, estas son fuentes en Windows)
+        }
+
+        function cambiaColor() {
+            let colores = ["green", "yellow", "red", "black", "blue", "gold", "cadetblue"]; //Tenemos un array con colores en HTML
+            let aleatorio = colores[random(0,6)] //Se elige aleatoriamente una posicion del array anterior
+
+            texto.style = "color:"+aleatorio+";"; //Se aplica el estilo al texto
+        }
+
+        function random(min, max) { //La funcion elige entre un minimo y maximo un numero aleatorio
+            return Math.floor((Math.random() * (max - min + 1)) + min); //Se utilizan max y min porque Math.random elige un numero entre 1 y 0
+        }
+
+    </script>
+</body>
+</html>
