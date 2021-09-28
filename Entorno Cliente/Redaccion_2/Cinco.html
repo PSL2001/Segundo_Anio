@@ -13,68 +13,93 @@
         //Inicializamos las fechas
         let fecha = new Date;
 
+        //Cojemos las variables para dia mes y año
         let dia = prompt("Introduce el dia");
         let mes = prompt("Introduce el mes");
         let anio = prompt("Introduce el año");
 
         comprobarFecha(dia, mes, anio);
 
+        /*
+        E: Dia, mes y anio (string)
+        S: Nada, muestra si la fecha es correcta o no
+        */
+
         function comprobarFecha(dia, mes, anio) {
+            //Parseamos a enteros las variables anteriores
             let diareal = parseInt(dia);
             let mesreal = parseInt(mes);
             let anioreal = parseInt(anio);
 
+            /*
+            Ahora hay que comprobar, segun el mes, cuantos dias tiene:
+            Si el mes es 1, 3, 5, 7, 8, 10 o 12; el dia maximo es 31
+            Si el mes 4, 6, 9, 11; el dia maximo es 30
+            Si el mes es 2; hay que además comprobar que el año sea bisiesto; El dia maximo es 28 o 29 si es bisiesto
+            */
+
             switch (mesreal) {
                 case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                    if (diareal < 1) {
+                    if (diareal < 1) { //Si entramos aqui, comprobamos que el dia ni sea menor a 1 o mayor a 31
                         alert("El dia es incorrecto");
                         break;
                     } else if (diareal > 31) {
                         alert("El dia es incorrecto");
                         break;
                     }
+                    //Si ninguna de las condiciones es activada, la fecha es correcta
                     alert("La fecha es correcta");
                     break;
                 case 4: case 6: case 9: case 11:
-                    if (diareal < 1) {
+                    if (diareal < 1) { //Si entramos aqui, comprobamos que el dia ni sea menor a 1 o mayor a 30
                         alert("El dia es incorrecto");
                         break;
                     } else if (diareal > 30) {
                         alert("El dia es incorrecto");
                         break;
                     }
+                    //Si ninguna condicion se activa entonces la fecha es correcta
                     alert("La fecha es correcta");
                     break;
                 case 2:
-                    if (esBisiesto(anioreal)) {
-                        if (diareal < 1) {
+                    //Si entramos aqui lo primero que comprobamos es que el año sea bisiesto o no
+                    if (esBisiesto(anioreal)) { 
+                        if (diareal < 1) { //Si es bisiesto comprobamos que dia ni sea menor a 1 o mayor a 29
                             alert("El dia es incorrecto");
                             break;
                         } else if (diareal > 29) {
                             alert("El dia es incorrecto");
                             break;
                         }
+                        //Si es bisiesto y no se activan ninguna de las condiciones, la fecha es correcta
                         alert("La fecha es correcta");
                         break;
                     } else {
-                        if (diareal < 1) {
+                        if (diareal < 1) { //Si estamos aqui, el año no es bisiesto, hay que comprobar que ni dia sea menor a 1 o mayor a 28
                             alert("El dia es incorrecto");
                             break;
                         } else if (diareal > 28) {
                             alert("El dia es incorrecto");
                             break;
                         }
+                        //Si ninguna condicion se activa, la fecha es correcta
                         alert("La fecha es correcta");
                     }
                     break;
                 default:
+                    //Si se ha escrito otro mes que no se corresponda entonces el mes es incorrecto
                     alert("El mes es incorrrecto");
                     break;
             }
 
         }
 
+        /*
+        E: Anio
+        S: Boolean que dice si un año es bisiesto o no
+        */
         function esBisiesto(anio) {
+            //Un año es bisiesto si se puede dividir por 4 o por 400, pero no por 100
             if (anio % 4 == 0 && !(anio % 100 == 0 && anio % 400 != 0)) {
                 return true;
             }
