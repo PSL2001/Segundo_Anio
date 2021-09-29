@@ -15,15 +15,16 @@
         let mes = prompt("Introduce el mes");
         let anio = prompt("Introduce el año");
 
+        //Guardamos en un array los meses, tal y como pide el ejercicio
         let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
             "Noviembre", "Diciembre"
         ];
 
-
-
-        if (!comprobarFecha(dia, mes, anio)) {
+        if (!comprobarFecha(dia, mes, anio)) { //Antes de hacer calculos, vamos a comprobar que la fecha es correcta
+            //Si NO es correcta, entonces mostramos un mensaje diciendolo
             alert("La fecha no es correcta");
         } else {
+            //En caso contrario llamamos a la funcion correspondiente
             calcularFecha(dia, mes, anio);
         }
 
@@ -31,7 +32,7 @@
 
         /*
         E: Dia, mes y anio (string)
-        S: Nada, muestra si la fecha es correcta o no
+        S: Boolean que muestra si la fecha es correcta o no
         */
 
         function comprobarFecha(dia, mes, anio) {
@@ -126,22 +127,21 @@
         }
 
         function calcularFecha(d, m, a) {
-            //Calculamos la fecha de hoy
-            let hoy = new Date();
-
+            //Parseamos los datos a enteros ya que nos llega un String
             let diareal = parseInt(d);
             let mesreal = parseInt(m);
             let anioreal = parseInt(a);
 
-            //Cojemos el mes
+            //Cojemos el mes real. Le quitamos 1 para que coincida con el mes (Si no se quitara 1 se iria un mes hacia delante)
             let mes = meses[mesreal - 1];
-            //Vamos a usar una funcion para poner un 0 a la izquierda
+            //Vamos a usar una funcion para poner un 0 a la izquierda, pero antes vamos a comprobar de que su longitud es 2
             if (diareal.toString().length == 2) {
-                //Y mostramos
+                //Si NO es el caso, no hace falta poner 0 a la izq e imprimimos
                 document.write("Dia " + diareal + " de " + mes + " de " + anioreal);
-
             } else {
+                //Pero si es el caso, creamos una variable que arregla el dia poniendo un 0 a la izquierda
                 let diafx = ceroAlaIzq(diareal);
+                // E imprimimos
                 document.write("Dia " + diafx + " de " + mes + " de " + anioreal);
 
             }
@@ -151,11 +151,15 @@
 
 
         function ceroAlaIzq(m) {
-            let cero = "0";
-            let cerfix = cero.repeat(1);
-            cerfix += m;
+            //Creamos una string que añade "0" (no es lo mismo que 0 ya que js concatena strings)
+            /*let cero = "0";
+            let cerfix = cero.repeat(1); //Cerfix llama a una funcion repeat, que repite la cadena, tantas veces como se indique
+            cerfix += m; //Lo sumamos al dia que ahora tiene el 0 a la izquierda
 
-            return cerfix;
+            return cerfix; //Lo devolvemos
+            */
+
+            return "0" + m;
         }
     </script>
 </body>
