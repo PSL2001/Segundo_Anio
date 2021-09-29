@@ -133,13 +133,29 @@
             let mesreal = parseInt(m);
             let anioreal = parseInt(a);
 
-            //Vamos a usar una funcion para poner un 0 a la izquierda (De esto no encontre manera como hacerlo)
-
             //Cojemos el mes
             let mes = meses[mesreal - 1];
+            //Vamos a usar una funcion para poner un 0 a la izquierda
+            if (diareal.toString().length == 2) {
+                //Y mostramos
+                document.write("Dia " + diareal + " de " + mes + " de " + anioreal);
 
-            //Y mostramos
-            document.write("Dia " + d + " de " + mes + " de " + a);
+            } else {
+                let diafx = ceroAlaIzq(diareal);
+                document.write("Dia " + diafx + " de " + mes + " de " + anioreal);
+
+            }
+
+
+        }
+
+
+        function ceroAlaIzq(m) {
+            let cero = "0";
+            let cerfix = cero.repeat(1);
+            cerfix += m;
+
+            return cerfix;
         }
     </script>
 </body>
