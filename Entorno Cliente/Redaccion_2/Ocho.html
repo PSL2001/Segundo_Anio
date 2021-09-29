@@ -79,12 +79,13 @@
 
         /*
         E: Nada
-        S: Muestrala ultima posicion del array
+        S: Muestra la posición del elemento máximo del array 
         */
 
         function mostrarUltElemento() {
-            let posArray = array.length;
-            alert(posArray);
+            let max = Math.max(...array);
+            array.indexOf(max);
+            alert(max + " " + array.indexOf(max));
         }
 
         /*
