@@ -150,3 +150,25 @@ $b = ["b1", "b2", "b3", 9, 1];
 $mezcla = array_merge($a,$b);
 echo "<hr>";
 print_r($mezcla);
+
+//Desordenar un array
+$valores = range(1,6); //[1,2,3,4,5,6]
+shuffle($valores);
+echo "<br>";
+var_dump($valores);
+
+//Extraer claves o valores
+$comunidades = [
+    'Andalucia' => 'Almeria', 'Cadiz', 'Malaga',
+    'Extremadura' => 'Caceres', 'Badajoz',
+    'Murcia' => 'Murcia'
+];
+
+$claves = array_keys($comunidades); //Muestra claves
+$valores = array_values($comunidades); //Muestra valores
+echo "<hr>";
+echo "Los valores son: <br>";
+var_dump($valores);
+echo "Las claves son: <br>";
+var_dump($claves);
+
