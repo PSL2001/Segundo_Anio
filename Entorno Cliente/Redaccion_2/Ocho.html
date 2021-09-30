@@ -49,7 +49,7 @@
         S: Guarda el valor del input en una variable y lo guarda en el array
         */
         function insertarElemento() {
-            let valor = inputNum.value; 
+            let valor = parseInt(inputNum.value); 
             array.push(valor);
         }
         /*
@@ -83,9 +83,9 @@
         */
 
         function mostrarUltElemento() {
-            let max = Math.max(...array);
-            array.indexOf(max);
-            alert(max + " " + array.indexOf(max));
+            let max = Math.max(...array); //Usando la funcion max, buscamos el numero mas alto en el array
+            let posicion = array.indexOf(max); //Para coger su posicion utilizamos indexOf
+            alert("El numero mas alto en el array es: " +max + " siendo su posicion: " + posicion); //Le mostramos al usuario el numero y la posicion
         }
 
         /*
