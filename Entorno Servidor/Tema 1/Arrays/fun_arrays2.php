@@ -72,3 +72,20 @@ PintarArray($positivos1);
 
 $mult1 = sectionArray($numeros, 'isMult3');
 PintarArray($mult1);
+//-----------------------------------------
+$primos2 = array_filter($numeros, 'isPrimo');
+PintarArray($primos2);
+//----------------Funciones anonimas--------------------------
+$saludo = function($nombre) {
+    return "Hola $nombre";
+};
+//------------------------------------------------------------
+// array_map
+$numeros = range(5,10);
+function doble($n) {
+    return $n*2; 
+}
+$dobles = array_map("doble", $numeros);
+PintarArray($dobles);
+$dobles1 = array_map(function($n){ return $n*2; },$numeros);
+PintarArray($dobles1);
