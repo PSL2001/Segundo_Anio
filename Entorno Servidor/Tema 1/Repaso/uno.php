@@ -44,15 +44,17 @@ var_export($primos);
 //Ejercicio 2
 function pintarFila($trabajador, $valor) {
     $campos = array_keys($valor);
-    $valor = array_values($valor);
+    $valores = array_values($valor);
     echo "<tr>\n 
-    <td colspan='3' align='center' style='background-color: silver'>$trabajador</td>\n </tr>";
+    <td colspan='3' align='center' style='background-color: silver;'>$trabajador</td>\n </tr>";
+    pintarFilas2($campos, 1);
+    pintarFilas2($valores, 0);
 
 }
-function pintarFilas2($array) {
+function pintarFilas2($array, $f) {
     echo "<tr>";
     foreach ($array as $value) {
-        echo "<td>$value</td> \n";
+        echo  ($f == 1) ? "<td style='background-color:silver;'>$value</td> \n" : "<td>$value</td> \n"; 
     }
 }
 function PintarTrabajadores($array) {
