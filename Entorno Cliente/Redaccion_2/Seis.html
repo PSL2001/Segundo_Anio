@@ -47,11 +47,8 @@
 
             if (anio_int > anio_hoy || mes_int > mes_hoy) {
                 return false;
-            } else if (anio_int <= anio_hoy && mes_int <= mes_hoy || dia_int > dia_hoy) {
-                return false;
-            }
-            //dia_int > dia_hoy || mes_int > mes_hoy
-
+            } else if (anio_int <= anio_hoy && mes_int <= mes_hoy && dia_int <= dia_hoy) {
+                
             //Si el año de la fecha que recibe tiene 4 cifras hay que restarle 1900
              if (anio >= 99) {
                  anio -= 1900;
@@ -75,6 +72,10 @@
             }
 
             return edad;
+                
+            }
+            //dia_int > dia_hoy || mes_int > mes_hoy
+
         }
 
         function comprobarFecha(dia, mes, anio) {
