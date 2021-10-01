@@ -42,9 +42,25 @@ do {
 var_export($primos);
 
 //Ejercicio 2
+function pintarFila($trabajador, $valor) {
+    $campos = array_keys($valor);
+    $valor = array_values($valor);
+    echo "<tr>\n 
+    <td colspan='3' align='center' style='background-color: silver'>$trabajador</td>\n </tr>";
+
+}
+function pintarFilas2($array) {
+    echo "<tr>";
+    foreach ($array as $value) {
+        echo "<td>$value</td> \n";
+    }
+}
 function PintarTrabajadores($array) {
-    echo "<table border='2'>";
-    
+    echo "<table border='2' cellpadding='3' cellspacing='4' \n>";
+    foreach($array as $k => $v) {
+        pintarFila($array, $v);
+    }
+
     echo "</table>";
 }
 $trabajadores = [
@@ -64,4 +80,6 @@ $trabajadores = [
         "Ciudad"=> "Sevilla"
     ]
 ];
+
+PintarTrabajadores($trabajadores);
 
