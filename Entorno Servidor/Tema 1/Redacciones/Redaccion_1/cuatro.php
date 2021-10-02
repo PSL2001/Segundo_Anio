@@ -10,8 +10,8 @@ $countPrimos = 0;
 $cuantosPrimos = 10;
 $primos = [];
 $numero = 1;
-if ($cuantosPrimos > 500) {
-    echo "No puedes pedir mas de 500 numeros primos";
+if ($cuantosPrimos > 1000) {
+    echo "No puedes pedir mas de 1000 numeros primos";
     die();
 } else {
 do {
