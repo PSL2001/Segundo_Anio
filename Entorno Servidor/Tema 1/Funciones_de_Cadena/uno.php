@@ -83,3 +83,28 @@ echo str_replace(" ","_", $cadena);
 $cadena = "El año que viene vendra el niño";
 echo "<br>";
 echo str_replace("ñ","ni", $cadena);
+echo "<br>";
+//ltrim, trim, rtrim
+$cadena = "   Hola soy una cadena   ";
+//echo ltrim($cadena). "<br>";
+//echo rtrim($cadena). "<br>";
+echo "La longitud de \$cadena = $cadena es: ". strlen($cadena). "<br>";
+echo "La longitud de la cadena trimeada es: ". strlen(trim($cadena)). "<br>";
+//str_pad
+$cadena = "Hola mundo";
+$cadena1 = str_pad($cadena,20);
+$cadena2 = str_pad($cadena,20, STR_PAD_BOTH);
+echo "<hr>";
+echo "La longitud de \$cadena = $cadena es: ". strlen($cadena). "<br>";
+echo "La longitud de \$cadena1 = $cadena1 es: ". strlen($cadena1). "<br>";
+echo "La longitud de \$cadena2 = $cadena2 es: ". strlen($cadena2). "<br>";
+//Mayusculas, minusculas strtolower, strtoupper, ucwords, ucfirst
+$nombre = "manolo perez sanchez";
+echo strtoupper($nombre). "<br>";
+echo ucwords($nombre). "<br>";
+echo ucfirst($nombre). "<br>";
+
+//html: htmlspecialchars(); htmlentities();
+echo "La negrita la ponemos con <b>Esto</b>\n";
+echo "<br>\n";
+echo htmlspecialchars("La negrita la ponemos con <b>Esto</b>\n");
