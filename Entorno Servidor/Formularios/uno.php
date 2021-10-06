@@ -27,7 +27,7 @@
             <div class="mb-3">
             <label for="labelprov" class="form-label">Provincia</label>
                 <select class="form-select" aria-label="Default select example" name="provincia">
-                    <option value="1" selected>Elije una provincia</option>
+                    <option disabled selected>---Elije una provincia---</option>
                     <option>Almería</option>
                     <option>Cádiz</option>
                     <option>Sevilla</option>

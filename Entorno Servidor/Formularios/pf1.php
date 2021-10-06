@@ -15,14 +15,24 @@
     <div class="container">
         <?php
         //Recogemos los datos mandados por el formulario
-        $nombre = trim(ucwords($_POST['nombre']));
+        //$_REQUEST
+        echo "<br>";
+        var_dump($_REQUEST);
+        echo "<br>";
+
+
+        //--------------------------------------
+        $nombre = trim(ucwords($_REQUEST['nombre']));
         $correo = trim($_POST['correo']);
         $texto = trim(ucfirst($_POST['texto']));
-        $provaux = $_POST['provincia'];
-        $prov = ($provaux == 1) ? "Sin Provincia" : $provaux;
+        //if (isset($_POST['provincia'])) {
+        //    echo "La provincia que has elejido es: ". $_POST['provincia'];
+        //} else {
+        //    echo "No has elegido provincia";
+        //}
+        echo isset($_POST['provincia']) ? "La provincia que has elejido es: ". $_POST['provincia'] : "No has elegido provincia";
         echo "<br> Tu nombre es: ". $nombre;
         echo "<br> Tu correo es: ". $correo;
-        echo "<br> Tu provincia es: ".$prov;
         echo "<br> Esto es lo que hablastes sobre ti: ". $texto;
 
         ?>
