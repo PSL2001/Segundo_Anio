@@ -10,9 +10,9 @@
 <?php
 /* Añadir la función aquí */
 function calculaCantidad($n, $C0, $i) {
-    $Cf = $C0*(1+($i+$n));
+    $Cf = $C0*(1+($i*$n));
 
-    return $Cf.",00";
+    printf ('%.2f',$Cf);
 }
 $interes=5;
 echo "<p><b>El interés actual es $interes%.</b></p>" ;
