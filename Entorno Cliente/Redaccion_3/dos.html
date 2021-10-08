@@ -14,14 +14,31 @@
     <button id="comprobarHora"> Comprobar Hora</button>
 
     <script type="text/javascript">
-    // let horas_mins = document.getElementById("fecha");
-    // let sec = document.getElementById("sec").value;
+    let horas_mins = document.getElementById("fecha");
+    let sec = document.getElementById("sec");
     // let horas = horas_mins.value.slice(0,-3);
     // let mins = horas_mins.value.slice(3);
 
     // console.log(horas+":"+mins+":"+sec);
 
     // Lo de los comentarios funciona añadir en una funcion para evitar caracteres vacios
+
+    let boton = document.getElementById("comprobarHora");
+    boton.addEventListener("click", comprobarHora);
+
+
+    function comprobarHora() {
+        let horas = horas_mins.value.slice(0,-3);
+        let mins = horas_mins.value.slice(3);
+        let secs = sec.value;
+
+        if (horas == "" || mins == "" || secs == "") {
+            alert("Las horas/minutos/segundos estan vacios!");
+        }
+
+        
+    }
+    
     </script>
 </body>
 </html>
