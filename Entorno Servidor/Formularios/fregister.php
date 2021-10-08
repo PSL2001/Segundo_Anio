@@ -37,7 +37,7 @@ function error(string $texto)
                error("No has mandado un usuario y contraseña validos");
            } else {
                if (strlen($usuario)>=5) {
-                   
+                   echo "Usuario registrado";
                }
            }
        } else {
