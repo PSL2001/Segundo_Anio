@@ -10,14 +10,20 @@
 
 <body>
     <script type="text/javascript">
-    function factorial(n) {
-            if (n == 0) {
+        /*
+        E: Un entero 
+        S: El numero multiplicado por si mismo - 1 / 1 en caso de que N ya sea 0
+        */
+        function factorial(n) {
+            if (n == 0) { // Si ya vale 0, devolvemos 1
                 return 1;
             }
             return n * factorial(n - 1);
+            //Para hacer el factorial de un numero, hay que multiplicar este por el numero anterior, hasta llegar a 1,
+            //Para archivar esto, llamamos a la misma funcion, quitando su valor en 1
         }
-        let entero = parseInt(prompt("Introduce un numero entero"));
-        alert("El factorial es: "+ factorial(entero));
+        let entero = parseInt(prompt("Introduce un numero entero")); //Pedimos un entero
+        alert("El factorial es: " + factorial(entero)); //Llamamos a la funcion que nos devuelve el factorial
     </script>
 </body>
 
