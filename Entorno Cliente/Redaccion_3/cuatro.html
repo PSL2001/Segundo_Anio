@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //Este ejercicio es como el 3 pero ahora se nos da el descuento dependiendo del precio del producto
+    let precio = parseFloat(prompt("Introduce un precio en €"));
+
+    //Guardamos el total en una variable
+    let total = calcularDescuento(precio);
+
+    alert("El descuento de " + precio + "€ es " + total + "€"); // mostramos el resultado
+    function calcularDescuento(precio) {
+        if (precio < 10) { // Si el precio es menor a 10, no le aplicamos descuento
+            total = precio;
+            return total;
+        } else if (10 <= precio || precio < 30) { //Si el precio esta entre 10 y 30, le aplicamos el 10%
+            let desc = 0.1;
+            let desc_total = precio * desc;
+            let total = precio - desc_total;
+            return total;
+        } else if (precio >= 30) { //Si es mayor a 30, le aplicamos el 20%
+            let desc = 0.2;
+            let desc_total = precio * desc;
+            let total = precio - desc_total;
+            return total;
+        }
+    }
+    </script>
+</body>
+</html>

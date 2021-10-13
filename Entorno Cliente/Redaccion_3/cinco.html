@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <p><b>Introduce un Nombre</b></p>
+    <input type="text" id="nombre" placeholder="Nombre">
+    <br>
+    <p><b>Introduce el Primer Apellido</b></p>
+    <input type="text" id="apellido1" placeholder="1er Apellido">
+    <br>
+    <p><b>Introduce el Segundo Apellido</b></p>
+    <input type="text" id="apellido2" placeholder="2do Apellido">
+    <br>
+    <button id="mostrar"> Mostrar</button>
+    <script type="text/javascript">
+    //Guardamos nombre y apellidos en variables
+        let nombre = document.getElementById("nombre");
+        let apellido1 = document.getElementById("apellido1");
+        let apellido2 = document.getElementById("apellido2");
+        //Guardamos el boton y le añadimos el evento
+        let boton = document.getElementById("mostrar");
+        boton.addEventListener("click", mostrar);
+
+
+        function mostrar() {
+            //Cojemos el value de los inputs y los guardamos
+            let nom = nombre.value;
+            let ape1 = apellido1.value;
+            let ape2 = apellido2.value;
+
+            if (nom == "" || ape1 == "" || ape2 == "") { //Si algunos de los valores esta vacio, lo mostramos en alert
+                alert("El nombre/apellido1/apellido2 esta/estan vacios");
+            } else {
+                let cadena = ape2 + " " + ape1 + ", " + nom; //En caso contrario, los guardamos en cadena y lo escribimos
+                document.write(cadena);
+            }
+        }
+    </script>
+</body>
+</html>

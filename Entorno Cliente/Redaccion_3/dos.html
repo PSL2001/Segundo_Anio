@@ -14,28 +14,39 @@
     <button id="comprobarHora"> Comprobar Hora</button>
 
     <script type="text/javascript">
+    //Cojemos las horas, minutos y segundos
     let horas_mins = document.getElementById("fecha");
     let sec = document.getElementById("sec");
-    // let horas = horas_mins.value.slice(0,-3);
-    // let mins = horas_mins.value.slice(3);
 
-    // console.log(horas+":"+mins+":"+sec);
-
-    // Lo de los comentarios funciona añadir en una funcion para evitar caracteres vacios
-
+    //Cogemos el boton y añadimos el evento
     let boton = document.getElementById("comprobarHora");
     boton.addEventListener("click", comprobarHora);
 
 
     function comprobarHora() {
-        let horas = horas_mins.value.slice(0,-3);
+        let horas = horas_mins.value.slice(0,-3); //Como las horas y los minutos nos venian juntos, los separamos aqui
         let mins = horas_mins.value.slice(3);
         let secs = sec.value;
 
-        if (horas == "" || mins == "" || secs == "") {
+        if (horas == "" || mins == "" || secs == "") { //Si nos llegan vacios mandamos una alerta dicendolo
             alert("Las horas/minutos/segundos estan vacios!");
+        } else if(secs < 0) {
+            secs = 0;
         }
-
+        
+        secs++; //Sumamos 1 segundo
+        
+       if (secs > 59) { //Comprobamos que los segundos, minutos y horas son correctos
+           mins++;
+           secs = "00";
+       } if (mins > 59) {
+           horas++;
+           mins = "00";
+       } if (horas >= 24) {
+           horas = "00";
+       }
+        
+       document.body.innerHTML = horas + ":" + mins + ":" + secs; //Los mostramos
         
     }
     

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+
+<body>
+    <input type="text" id="texto">
+    <br>
+    <input type="text" disabled id="res">
+    <br>
+    <button id="mayus">Pasar a mayusculas</button>
+    <button id="minus">Pasar a minusculas</button>
+    <button id="prim">Mostrar Primer palabra</button>
+    <button id="ult">Mostrar Ultimo palabra</button>
+    <button id="car">Mostrar Caracteres</button>
+
+    <script type="text/javascript">
+    //Cojemos los inputs y botones
+        let texto = document.getElementById("texto");
+        let res = document.getElementById("res");
+
+        let mayus = document.getElementById("mayus");
+        let minus = document.getElementById("minus");
+        let prim = document.getElementById("prim");
+        let ult = document.getElementById("ult");
+        let car = document.getElementById("car");
+
+//Le añadimos los eventos
+        mayus.addEventListener("click", todoMayus);
+        minus.addEventListener("click", todoMinus);
+        prim.addEventListener("click", MostPrim);
+        ult.addEventListener("click", MostUlt);
+        car.addEventListener("click", MostrarCaracteres);
+
+
+        function todoMayus() {
+            let realText = texto.value;
+            res.value = realText.toUpperCase(); //Cogemos el texto y lo pasamos a mayuscula
+        }
+
+        function todoMinus() {
+            let realText = texto.value;
+            res.value = realText.toLowerCase(); //Lo mismo que la anterior pero lo pasamos a minuscula
+        }
+
+        function MostPrim() {
+            let realText = texto.value;
+            let palabraCort = realText.split(" ");
+
+            res.value = palabraCort[0]; // Separamos la frase en un array y mostramos el primer elemento
+        }
+
+        function MostUlt() {
+            let realText = texto.value;
+            let palabraCort = realText.split(" ");
+
+            res.value = palabraCort[palabraCort.length - 1]; //Lo mismo pero mostramos el ultimo (para obtener el ultimo array.length - 1)
+        }
+
+        function MostrarCaracteres() {
+            let realText = texto.value;
+            // El numero de caracteres es su longitud
+            let numeroCaracteres = realText.length;
+
+            res.value = numeroCaracteres; // lo mostramos
+        }
+    </script>
+</body>
+
+</html>
