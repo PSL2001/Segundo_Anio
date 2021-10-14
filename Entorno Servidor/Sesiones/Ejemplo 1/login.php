@@ -3,7 +3,7 @@
 session_start();
 $usuarios = [
     ["admin@correo.es", "secret0", 0],
-    ["usu1@correo.es", "secret0", 1],
+    ["usu1@correo.es", "secret1", 1],
     ["admin2@correo.es", "secret0", 0]
 ];
 
@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
     if ($perfil != -5) {
         //Validacion correcta, me interesa guardar el perfil
         $_SESSION['usuario'] = $email;
-        $_SESSION['perfil'] = $valor;
+        $_SESSION['perfil'] = $perfil;
         header("Location: index.php");
     } else {
         //Error al validar
@@ -77,7 +77,7 @@ if (isset($_POST['login'])) {
             <?php
             if (isset($_SESSION['error'])) {
                 echo <<< TEXTO
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <div class="alert alert-danger d-flex align-items-center" role="alert" style="width: 34rem;">
                 <i class="fas fa-exclamation-triangle"></i> 
                 <div>
                 {$_SESSION['error']}

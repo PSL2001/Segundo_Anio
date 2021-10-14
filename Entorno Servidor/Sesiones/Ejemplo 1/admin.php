@@ -3,6 +3,9 @@ session_start();
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     die();
+} else if ($_SESSION['perfil'] == 1) {
+    header("Location: index.php");
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -17,9 +20,17 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
-<body style="background-color: darkcyan;">
+<body style="background-color: dodgerblue;">
     <div class="container mt-4">
-        <a href="cerrarSesion.php" class="btn btn-danger"> Cerrar Sesion</a>
+    <ul class="nav justify-content-end">
+    <li class="nav-item">
+    <a href="cerrarSesion.php" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i></a>
+    </li>
+    <li class="nav-item">
+        <input type="text" class="form-control" disabled value="<?php echo $_SESSION['usuario']; ?>" style="width: 14rem;"/>
+    </li>
+    
+    </ul>
     </div>
 </body>
 </html>
