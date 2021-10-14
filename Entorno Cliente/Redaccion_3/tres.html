@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //Pedimos por prompt los valores necesarios
+    let precio = parseFloat(prompt("Introduce un precio en €"));
+    let descuento = parseFloat(prompt("Introduce su descuento"));
+
+    //Guardamos en una variable el descuento
+    let total = calcularDescuento(precio, descuento);
+
+    alert("El descuento de " + precio + "€ es " + total + "€"); //Lo mostramos
+
+    function calcularDescuento(precio, descuento) {
+        //Para hacer el descuento, cojemos el valor dado y lo dividimos entre 100
+        let realdesc = descuento / 100;
+        let desc_total = precio * realdesc; // Con esto nos da el valor que le quitamos al precio real
+        let total = precio - desc_total; //Restamos el precio al descuento y tenemos el valor rebajado
+
+        return total; //Devolvemos el total
+    }
+    </script>
+</body>
+</html>

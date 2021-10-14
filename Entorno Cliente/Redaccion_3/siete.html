@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejericicio 7</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let text = prompt("Introduce una frase"); //Pedimos el texto por prompt
+        text = text.trim(text); // Trimeamos el texto (Por si se nos dan espacios en blanco)
+
+        let i = 0; //Tenemos i como contador
+        let caracter = ''; //Caracter para las letras
+        let nuevo_Texto; // el nuevo texto a mostrar
+        do {
+            caracter = text.charAt(i); // Por cada caracter de i es un caracter en texto (Por ejemplo si tenemos "hola" entonces el 1er caracter es H)
+                if (caracter == caracter.toUpperCase()) { //Si es mayuscula
+                    nuevo_Texto = text.replace(caracter,'*'); //Lo reemplazamos 
+                    document.body.innerHTML += nuevo_Texto;
+                }
+                i++;
+        } while (i <= (text.length-1)); 
+        
+    </script>
+</body>
+
+</html>

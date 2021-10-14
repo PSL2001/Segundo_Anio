@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+
+<body>
+    <textarea id="texto" cols="30" rows="10"></textarea>
+    <br>
+    <button id="func">Contar Palabras con funciones</button>
+    <button id="sinfunc">Contar Palabras sin funciones</button>
+    <script type="text/javascript">
+        let texto = document.getElementById("texto");
+
+        let boton1 = document.getElementById("func");
+        let boton2 = document.getElementById("sinfunc");
+
+        boton1.addEventListener("click", contarPalabras);
+        boton2.addEventListener("click", contarPalabrasSin);
+
+        function contarPalabras() {
+            let textoArea = texto.value;
+
+            // El numero de caracteres es su longitud
+            let numeroCaracteres = textoArea.length;
+
+            // Eliminamos los caracteres en blanco del inicio y del final.
+            // Como no tenemos funciones del tipo trim, rtrim y ltrim usamos
+            // expresiones regulares
+            // El ^ indica principio de cadena
+            let inicioBlanco = /^ /;
+            // El $ indica final de cadena
+            let finBlanco = / $/;
+            // El global (g) es para obtener todas las posibles combinaciones
+            let variosBlancos = /[ ]+/g;
+
+            textoArea = textoArea.replace(inicioBlanco, "");
+            textoArea = textoArea.replace(finBlanco, "");
+            textoArea = textoArea.replace(variosBlancos, " ");
+
+            // Creamos un array con las diferentes palabras. Teniendo en 
+            // cuenta que la separación entre palabras es el espacio en blanco.
+            let textoAreaDividido = textoArea.split(" ");
+            let numeroPalabras = textoAreaDividido.length;
+
+            // Mostramos los datos.
+            // Tendremos en cuenta si hay que escribir en plural o en singular.
+            let tP = (numeroPalabras == 1) ? " palabra" : " palabras";
+
+            alert(numeroPalabras + tP);
+        }
+
+        function contarPalabrasSin() { //Esto no funciona
+            // Lo que queria hace es cojer el valor y que cuando encontrara un valor en blanco, me lo cuente como palabra
+            let textoArea = texto.value;
+
+            let numeroCaracteres = textoArea.length;
+
+            let contador = 0;
+
+            for (let i = 0; i < numeroCaracteres; i++) {
+                if (textoArea.indexOf(i) == " ") {
+                    let palabras = [];
+                    contador++;
+                    let numeroPalabras
+                }
+            }
+
+            let tP = (numeroPalabras == 1) ? " palabra" : " palabras";
+
+            alert(numeroPalabras + tP);
+        }
+    </script>
+</body>
+
+</html>
