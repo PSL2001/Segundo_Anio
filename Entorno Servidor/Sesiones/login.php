@@ -7,16 +7,14 @@ $usuarios = [
     ["admin2@correo.es", "secret0", 0]
 ];
 
-function comprobarUsuario($mail, $pass)
-{
+function comprobarUsuario($mail, $pass){
     global $usuarios;
     foreach ($usuarios as $v) {
-        if ($v[0] == $mail && $v[1] == $pass) {
+        if ($mail == $v[0] && $pass == $v[1]){
             return $v[2];
-        } else {
-            return -5;
         }
     }
+    return -5;
 }
 
 if (isset($_POST['login'])) {
