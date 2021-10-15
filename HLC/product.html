@@ -5,6 +5,7 @@
     <meta charset=’utf-8’>
     <title>Página de productos de la tienda de vídeos</title>
     <style>
+        /* Esto define el fondo, radio, color, fuentes y su alineacion */
         header,
         nav,
         section,
@@ -16,19 +17,20 @@
             font-size: 30px;
             text-align: center;
         }
-
+        /* Antes del contenido de la etiqueta se añade '<' */
         header:before,
         nav:before,
         footer:before {
             content: '<';
         }
-
+        /* Despues del contenido de la etiqueta se añade '>' */
         header:after,
         nav:after,
         footer:after {
             content: '>';
         }
 
+        /* Esto cambia el ESTILO DEL BORDE del header, nav, section y footer */
         header,
         nav,
         section,
@@ -37,12 +39,12 @@
             padding: 20px;
             margin-bottom: 25px;
         }
-
+        /* Esto genera el grid para los "productos", las columnas las hace dependiente del ancho y alto de pantalla */
         section {
             display: grid;
             grid-template-columns: auto auto auto auto;
         }
-
+        /* Esto cambia dentro de los divs en secciones su borde */
         section div {
             border: 2px solid white;
             padding: 30px;
@@ -52,8 +54,13 @@
 </head>
 
 <body>
+    <!-- Titulo de pagina -->
     <header>encabezamiento</header>
+    <!-- Fin Titulo de pagina -->
+    <!-- Inicio de navegacion -->
     <nav>navegación</nav>
+    <!-- Fin de navegacion -->
+    <!-- Secciones, para mostrar "productos" -->
     <section>
         <div>producto 1</div>
         <div>producto 2</div>
@@ -64,7 +71,10 @@
         <div>producto 7</div>
         <div>producto 8</div>
     </section>
+    <!-- Fin de secciones -->
+    <!-- Pie de Página -->
     <footer>pie de página</footer>
+    <!-- Fin Pie de Página -->
 </body>
 
 </html>
