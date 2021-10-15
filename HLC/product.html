@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=’utf-8’>
+    <title>Página de productos de la tienda de vídeos</title>
+    <style>
+        header,
+        nav,
+        section,
+        footer {
+            background: #659494;
+            border-radius: 5px;
+            color: white;
+            font-family: arial, sans-serif;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        header:before,
+        nav:before,
+        footer:before {
+            content: '<';
+        }
+
+        header:after,
+        nav:after,
+        footer:after {
+            content: '>';
+        }
+
+        header,
+        nav,
+        section,
+        footer {
+            border: 1px solid gray;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+        }
+
+        section div {
+            border: 2px solid white;
+            padding: 30px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>encabezamiento</header>
+    <nav>navegación</nav>
+    <section>
+        <div>producto 1</div>
+        <div>producto 2</div>
+        <div>producto 3</div>
+        <div>producto 4</div>
+        <div>producto 5</div>
+        <div>producto 6</div>
+        <div>producto 7</div>
+        <div>producto 8</div>
+    </section>
+    <footer>pie de página</footer>
+</body>
+
+</html>
