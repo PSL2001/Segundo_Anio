@@ -131,8 +131,8 @@ function calculoSegundoGrado(a,b,c) {
             x = -b/(2*a);
             return x;
         } else if (calc1 > 0) {
-          x1 = parseFloat((-(b) + Math.sqrt(calc1))/2*a);
-          x2 = parseFloat((-(b) - Math.sqrt(calc1))/2*a); 
+          x1 = parseFloat(-b + Math.sqrt(calc1)/2*a);
+          x2 = parseFloat((-b - Math.sqrt(calc1))/2*a); 
           let soluciones = [x1,x2];
           return soluciones;
           //alert("Solucion 1 " + x1 + "\n Solucion 2 " + x2);

@@ -17,9 +17,11 @@
 
     if (res == false) {
         alert("No se puede hacer la equacion por que b es igual a 0");
-    } else if (res) {
+    } else if (res[1] == null) {
         alert("La solucion unica a la equacion "+ a + "x²" + b + "x + " + c + "= " + res);
-    } 
+    } else {
+        alert("La solucion doble a la equacion "+ a + "x² +" + b + "x + " + c + "= " + res[0] + " y " + res[1]);
+    }
     </script>
 </body>
 </html>
