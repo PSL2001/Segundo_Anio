@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <script type="text/javascript">
+    let a = parseInt(prompt("Introduce un numero para a"));
+    let b = parseInt(prompt("Introduce un numero para b"));
+    let c = parseInt(prompt("Introduce un numero para c"));
+
+    let res = calculoSegundoGrado(a,b,c);
+
+    if (res == false) {
+        alert("No se puede hacer la equacion por que b es igual a 0");
+    } else if (res) {
+        alert("La solucion unica a la equacion "+ a + "x²" + b + "x + " + c + "= " + res);
+    } 
+    </script>
+</body>
+</html>

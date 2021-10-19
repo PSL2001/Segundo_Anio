@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <script type="text/javascript">
+    let num1 = parseInt(prompt("Introduce un numero"));
+    let num2 = parseInt(prompt("Introduce otro numero"));
+
+    let res = mcdE(num1, num2);
+    if (res == false) {
+        alert("Has introducido texto en vez de numeros");
+    } else {
+        alert("El Maximo Comun divisor entre " + num1 + " y " + num2 + " es: " + res);
+    }
+    </script>
+</body>
+</html>

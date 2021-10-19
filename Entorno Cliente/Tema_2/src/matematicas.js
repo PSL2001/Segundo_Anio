@@ -3,9 +3,9 @@ function calcularPotencia(r, e) { // E: Un numero real y un numero entero S: La 
         alert("Has escrito un numero entero negativo");
     } else {
         let resultado = 1; //El resultado debe empezar en 1 por que si empezamos
-        for(let i = 0; i < e; i++){ // Para hacer la potencia sin el pow, hacemos un bucle en el que multiplicamos ese numero las mismas veces que un entero
+        for (let i = 0; i < e; i++) { // Para hacer la potencia sin el pow, hacemos un bucle en el que multiplicamos ese numero las mismas veces que un entero
             resultado = resultado * r; // haciendo esto, el resultado que ahora tiene el mismo valor que el real va a multiplicarse por si mismo hasta llegar a e
-        }  
+        }
         return resultado; // Y devolvemos el resultado que ahora esta elevado a su potencia
     }
 }
@@ -29,7 +29,7 @@ function esPrimo(n) { // E: Un numero entero S:Booleano true o false si el numer
     for (let i = 2; i < n; i++) {
         if (n % i == 0) { // Si algun numero entre n e i da de resto 0 significa que no es primo porque los primos son solo divisibles entre 1 y la unidad
             return false;
-        } 
+        }
     }
     return true; // Si la funcion no se cumple significa que el numero es primo
 }
@@ -39,10 +39,10 @@ function esPerfecto(n) { //E: Un entero S: Booleano que dice si es verdadero o f
     for (let i = 0; i < n; i++) { // i son los divisores que van desde i hasta el anterior de n (n - 1)
         if (n % i == 0) { //Si el resto da 0 entonces es que es un divisor
             suma = suma + i;
-        } 
+        }
     }
     if (suma == n) { // Si al final la suma es igual a n, entonces el numero es perfecto
-        return true; 
+        return true;
     } else {
         return false;
     }
@@ -53,7 +53,7 @@ function esAbundante(n) { //E: Numero entero S: booleano que dice si es abundant
     for (let i = 0; i < n; i++) { // i son los divisores que van desde i hasta el anterior de n (n - 1)
         if (n % i == 0) { //Si el resto da 0 entonces es que es un divisor
             suma = suma + i;
-        } 
+        }
     }
     if (suma > n) { // Si la suma es mayor a n entonces es un abundante
         return true;
@@ -67,11 +67,76 @@ function sonAmigos(n1, n2) {
     for (let i = 0; i < n1; i++) { // i son los divisores que van desde i hasta el anterior de n (n - 1)
         if (n1 % i == 0) { //Si el resto da 0 entonces es que es un divisor
             suma = suma + i;
-        } 
+        }
     }
     if (suma == n2) { // Si la suma vale lo mismo que el numero 2, entonces son amigos
         return true;
     } else {
         return false;
+    }
+}
+
+function mcd(n1, n2) { //E: 2 numeros enteros, S:Booleano si no encuentra divisores o el divisor
+    if (isNaN(n1) || isNaN(n2)) {
+        return false;
+    } else {
+        let divisor = 0; //Guardamos el divisor como el 2do numero
+        for (let i = n2; i > 1; i--) { //En el bucle for vamos quitando el valor en 1 
+            if (n1 % i == 0 && n2 % i == 0) { //Si tanto n1 % i == 0 y n2 % i == 0, entonces tenemos un divisor
+                divisor = i; //Guardamos ese divisor
+            }
+        }
+        if (divisor == 0) { //Si el divisor fuera 0, entonces es que no ha encontrado ninguno
+            return false;
+        } else {
+            return divisor; //Si fuera otro valor, entonces ha encontrado el maximo comun divisor
+        }
+    }
+
+}
+
+function mcdE(n1, n2) { //E: Entero S:Booleano si alguno de los valores no es un numero o un entero siendo este el mcd
+    if (isNaN(n1) || isNaN(n2)) { // Si alguna de las 2 variables no es un numero, nos vamos
+        return false;
+    } else {
+        if (n2 != 0) { // En caso contrario, si n2 no es 0, se vuelve a llamar la funcion utilizando n2 como n1 y el resto de n1 y n2
+            return mcdE(n2, n1 % n2);
+        } else { // Si n2 es cero, entonces n1 es nuestro mdc, lo devolvemos
+            return n1;
+        }
+    }
+}
+
+function calculoPrimerGrado(b,c) { // E: Dos numeros enteros S: El resultado de la equacion bx + c = 0 o booleano si b == 0
+    let x; //Inicializamos x
+    if (b == 0) { //Si b == 0, la ecuacion no se podria hacer, ya que no se puede dividir entre 0
+        return false;
+    } else { //Si b no es 0                                             -c
+        x = -c/b; // Hacemos la equacion que quedaria tal que asi: x = 
+        return x;
+    }
+}
+
+function calculoSegundoGrado(a,b,c) {
+    let x;
+    let x1;
+    let x2;
+    if (a == 0) {
+        return false;
+    } else {
+        let calc1 = (Math.pow(b,2)) - (4*a*c);
+        if (calc1 < 0) {
+            return "Solucion irreal";
+        } else if (calc1 == 0) {
+            x = -b/(2*a);
+            return x;
+        } else if (calc1 > 0) {
+          x1 = parseFloat((-(b) + Math.sqrt(calc1))/2*a);
+          x2 = parseFloat((-(b) - Math.sqrt(calc1))/2*a); 
+          let soluciones = [x1,x2];
+          return soluciones;
+          //alert("Solucion 1 " + x1 + "\n Solucion 2 " + x2);
+        } 
+
     }
 }
