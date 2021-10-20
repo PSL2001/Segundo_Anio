@@ -16,8 +16,8 @@
     let res = calculoSegundoGrado(a,b,c);
 
     if (res == false) {
-        alert("No se puede hacer la equacion por que b es igual a 0");
-    } else if (res[1] == null) {
+        alert("No se puede hacer la equacion por que a es igual a 0 / b2 - 4ac es menor a 0 ");
+    } else if (res[1] == null) { // Si la 2da posicion del array no existe, entonces le ha llegado una sola solucion
         alert("La solucion unica a la equacion "+ a + "x²" + b + "x + " + c + "= " + res);
     } else {
         alert("La solucion doble a la equacion "+ a + "x² +" + b + "x + " + c + "= " + res[0] + " y " + res[1]);

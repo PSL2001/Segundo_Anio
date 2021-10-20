@@ -117,24 +117,24 @@ function calculoPrimerGrado(b,c) { // E: Dos numeros enteros S: El resultado de 
     }
 }
 
-function calculoSegundoGrado(a,b,c) {
+function calculoSegundoGrado(a,b,c) { //E: 3 enteros S:Sin Solucion, 1 respuesta o 2 respuestas
     let x;
     let x1;
     let x2;
-    if (a == 0) {
+    if (a == 0) { // Si a es 0 entonces no es una equacion de 2ºdo grado
         return false;
     } else {
-        let calc1 = (Math.pow(b,2)) - (4*a*c);
-        if (calc1 < 0) {
-            return "Solucion irreal";
-        } else if (calc1 == 0) {
+        let calc1 = (Math.pow(b,2)) - (4*a*c); // En caso contrario calculamos b² - 4ac
+        if (calc1 < 0) { //Si ese calculo es menor a 0 entonces la solucion es irreal
+            return false;
+        } else if (calc1 == 0) { // Si el calculo es igual a 0, entonces tiene una unica solucion
             x = -b/(2*a);
-            return x;
-        } else if (calc1 > 0) {
+            return x; // Devolvemos esa solucion
+        } else if (calc1 > 0) { //Si el calculo es mayor a 0 entonces tiene una solucion doble
           x1 = parseFloat(-b + Math.sqrt(calc1)/2*a);
-          x2 = parseFloat((-b - Math.sqrt(calc1))/2*a); 
-          let soluciones = [x1,x2];
-          return soluciones;
+          x2 = parseFloat(-b - Math.sqrt(calc1)/2*a); 
+          let soluciones = [x1,x2]; //Guardamos las soluciones en un array
+          return soluciones; // devolvemos dicho array
           //alert("Solucion 1 " + x1 + "\n Solucion 2 " + x2);
         } 
 

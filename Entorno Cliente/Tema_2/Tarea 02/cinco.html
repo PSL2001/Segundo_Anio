@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    //Inicializamos a variables
+        let contador = 0; //Cuenta las notas
+        let notamax; //Guarda la variable maxima
+        let auxmax = 0; // Creo variables auxiliares, ya que utilizare estas en el codigo
+        let sumanota = 0; //Suma las notas
+        let suspensos = 0; //Contador de suspensos
+        let aprovados = 0; //Contador de aprovados
+        let nota = 0; // La nota, en un principio igualada a 0 (para que entre en el bucle while)
+        let notamin; //Guarda la nota mas baja
+        let auxmin = 100; //La auxiliar de min, que utilizo en el codigo
+        while (nota >= 0 && nota <= 100) { //Mientras que la nota este entre 0 y 100
+            //Pedimos al usuario la nota correspondiente
+            nota = parseInt(prompt("Introduce una nota entre 0 y 100. Escribe otro numero fuera del rango para salir"));
+            if (nota < auxmin && nota >= 0) { //Si la nota que pasamos es menor a la auxiliar de min y mayor a 0
+                auxmin = nota; //Esa nota pasa a ser nuestro nota mas baja
+            } else if (nota > auxmax && nota <= 100) { // Y si su nota es mayor a la auxiliar y menor a 100
+                auxmax = nota; //Entonces la nota es el nuevo maximo
+            }
+
+            if (nota < 50 && nota >= 0) { //Si la nota es mayor igual a 0 y menor a 50, entonces es una nota suspensa
+                suspensos++; // Sumamos en 1 el contador de suspensos, el contador de notas y sumamos la nota al total
+                contador++; 
+                sumanota += nota;
+            }
+
+            if (nota >= 50 && nota <= 100) { //Si la nota es mayor o igual a 50 y menor o igual a 100
+                aprovados++; //Sumamos en 1 el contador de aprovados, el contador de notas y sumamos la nota al total
+                contador++;
+                sumanota += nota;
+            }
+
+        }
+        //Fin de while
+        //Fuera del bucle, teniendo en las variables auxiliares la nota minima y maxima, les pasamos sus valores
+        notamin = auxmin;
+        notamax = auxmax;
+        let media = sumanota / contador; // Hacemos la media de las notas
+
+        //Y mostramos el resultado al usuario, pero solo si el contador es mayor a 0
+        if (contador == 0) {
+            alert("No puedo hacer los calculos por que no tengo datos suficientes");
+        } else {
+        alert("Hay un total de: " + contador + " notas de las cuales la nota maxima es: " + notamax + " y la minima es: " + notamin);
+        alert("Hay " + suspensos + " notas por debajo de 50 y " + aprovados + " notas por encima o igual a 50");
+        alert("La media de las notas es: " + media);
+        }
+    </script>
+</body>
+
+</html>

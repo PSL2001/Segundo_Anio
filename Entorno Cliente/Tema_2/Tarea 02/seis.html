@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //Inicializamos las variables
+    let r;
+    //voto1,2,3 y 4 son los contadores
+    let voto1 = 0;
+    let voto2 = 0;
+    let voto3 = 0;
+    let voto4 = 0;
+    while (r != 0) { //Mientras que r sea distinto de 0
+        //Le pedimos datos al usuario, del 1 al 4
+        r = parseInt(prompt("Introduce un numero entre 1 y 4 para elegir candidato"));
+        switch (r) { //Dependiendo de cual se ha votado se le suma a su contador correspondiente
+            case 1:
+                voto1++;
+                break;
+            case 2:
+                voto2++;
+                break;
+            case 3:
+                voto3++;
+                break;
+            case 4:
+                voto4++;
+                break;
+        }
+    }
+    let total = voto1 + voto2 + voto3 + voto4; // Para tener el total se suman los contadores
+    //Y para hacer el porcentaje, se divide el voto entre el total por 100
+    let porc1 = parseInt((voto1 / total) * 100);
+    let porc2 = parseInt((voto2 / total) * 100);
+    let porc3 = parseInt((voto3 / total) * 100);
+    let porc4 = parseInt((voto4 / total) * 100);
+
+    if (total == 0) { //Si el total es 0 es que no hemos introducido todos los datos
+        alert("No tengo los datos suficientes para hacer los porcentajes");
+    } else { //En caso contrario mostramos los resultados
+        alert("Porcentaje de votos de Juan: " + porc1 + "%" + "\nPorcentaje de votos de Federico: " + porc2 + "%" + "\nPorcentaje de votos de Teodoro : " + porc3 + "%" + "\nPorcentaje de votos de Gabriel: " + porc4 + "%");
+    }
+
+    </script>
+</body>
+</html>
