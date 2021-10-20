@@ -1,6 +1,7 @@
 <?php
     class Persona1 {
         // Si tu variable es protected o private hay que crear su getter y setter correspondiente
+        private $username;
         private static $contador1;
         public static $contador;
         public $nombre;
@@ -87,5 +88,14 @@
         public static function setContador1($contador1)
         {
                 self::$contador1 = $contador1;
+        }
+
+        //Metodos getter y setter (metodo magico)
+        public function __get($attribute) { //Esto manda "advertencias" mientras evita lanzar un fatal error
+         echo "Intento de lectura no autorizado de un atributo $attribute <br>";
+        }
+
+        public function __set($attributo, $valor) { //Estas funciones pueden ir vacias, y darle el funcionamiento que deseas
+         echo "Intento de escritura no autorizado en $attributo con el valor de $valor <br>"; 
         }
     }
