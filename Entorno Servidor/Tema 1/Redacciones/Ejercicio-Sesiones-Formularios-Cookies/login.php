@@ -23,7 +23,8 @@ function comprobarUsuario($u, $p) {
         }
     }
     //Si en caso de despues de recorrer el array, no se ha devuelto nada, entonces es que ha ido mal la validacion
-    return "Error";
+    //Nota: No poner strings, peta la validacion
+    return -10;
 }
 
 //Aqui comprobamos si el usuario ha pulsado "Borrar Cookies" o no
@@ -35,10 +36,11 @@ if (isset($_POST['delCookies'])) {
 if (isset($_POST['login'])) {
     //Le hemos dado al boton, procesamos el formulario
     //Primero trimeamos las variables de $_POST del usuario y contraseña
-    $usuario = trim($_POST['usuario']);
+    $usuario = ucfirst(trim($_POST['usuario']));
     $pass = trim($_POST['pass']);
     $perfil = comprobarUsuario($usuario, $pass);
-    if ($perfil != "Error") {
+
+    if ($perfil != -10) {
         # Si perfil es distinto de error, entonces hemos hecho la validacion correctamente, guardamos el usuario y el perfil en sesiones
         //Pero antes de mandar los datos, comprobamos si el usuario ha pulsado "Recordar Usuario"
         if (isset($_POST['recordar'])) {
