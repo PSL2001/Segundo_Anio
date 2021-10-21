@@ -9,11 +9,13 @@ if(!isset($_SESSION['usuario'])) {
 //Vamos a hacer una variable color, la cual dependiendo del usuario, cambiara el color de fondo
 $color;
 if ($_SESSION['perfil'] == 0) {
-    # Si el perfil es 0 utilizamos este color
+    # Si el perfil es 0 utilizamos este color (Perfil 0 es administrador)
     $color = "#FF1E90";
 } else if ($_SESSION['perfil'] == 1) {
+    //Si el perfil es 1 utilizamos este color (Perfil 1 es usuario por defecto)
     $color = "#1E90FF";
 } else {
+    //Si no es ninguno de los anteriores utilizamos este (Perfil 2 es usuario avanzado)
     $color = "#90FF1E";
 }
 ?>
@@ -32,17 +34,44 @@ if ($_SESSION['perfil'] == 0) {
 <body style="background-color:<?php echo $color ?>;">
 <!-- Barra de navegacion -->
 <ul class="nav justify-content-end">
+
     <li class="nav-item">
     <a href="cerrarSesion.php" class="btn btn-danger"><i class="fas fa-sign-in-alt"></i></a>
     </li>
     <li class="nav-item">
-        <input type="text" class="form-control" disabled value="<?php echo $_SESSION['usuario']; ?>" style="width: 14rem;"/>
-    </li>
-    
+        <?php
+        //Comprobamos el perfil para mostrar su tipo (admin, normal, avanzado)
+        $tipo;
+        if ($_SESSION['perfil'] == 0) {
+            # Si el perfil es 0 mostramos "Administrador" (Perfil 0 es administrador)
+            $tipo = "Administrador";
+        } else if ($_SESSION['perfil'] == 1) {
+            //Si el perfil es 1 mostramos "Usuario Normal" (Perfil 1 es usuario por defecto)
+            $tipo = "Usuario Normal";
+        } else {
+            //Si no es ninguno de los anteriores mostramos "Usuario Avanzado" (Perfil 2 es usuario avanzado)
+            $tipo = "Usuario Avanzado";
+        }
+        ?>
+        <input type="text" class="form-control" disabled value="<?php echo $_SESSION['usuario']; ?>, <?php echo $tipo ?>" style="width: 14rem;"/>
+    </li>   
     </ul>
     <!-- Fin Barra de navegacion -->
     <div class="container mt-4">
-        
+        <?php
+        //Aqui vamos a comprobar que, dependiendo del perfil, se nos muestren mas o menos botones
+        if ($_SESSION['perfil'] == 0) {
+            # Si el perfil es 0 entonces es Administrador, mostramos todas las paginas
+            echo <<< TEXTO
+            <a href="pagina3.php" class="btn btn-success"><i class="fas fa-file-alt"></i> Página 3</a>
+            <a href="pagina2.php" class="btn btn-primary"><i class="fas fa-sticky-note"></i> Página 2</a>
+            TEXTO;
+        } else if ($_SESSION['perfil'] == 2) {
+            # Si el perfil es 2, mostramos solo pagina2
+            echo "<a href='pagina2.php' class='btn btn-primary'><i class='fas fa-sticky-note'></i> Página 2</a>";
+        }
+        ?>
+        <a href="pagina.php" class="btn btn-secondary"><i class="fas fa-copy"></i> Pagina 1</a>
     </div>
 </body>
 </html>

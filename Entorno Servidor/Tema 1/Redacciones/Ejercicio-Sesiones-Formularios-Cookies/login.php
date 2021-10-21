@@ -2,9 +2,9 @@
 //Voy a trabajar con sesiones, usamos session_start
 session_start();
 $usuarios = [
-    ["Administrador", "secret0", 0],
-    ["Usuario","secret1", 1],
-    ["Avanzado", "secret2", 2]
+    ["Admin", "secret0", 0],
+    ["User","secret1", 1],
+    ["Adv_user", "secret2", 2]
 ];
 
 /*E: 2 strings con un Usuario y contraseña
