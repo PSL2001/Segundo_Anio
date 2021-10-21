@@ -1,0 +1,18 @@
+{
+    "name": "usuario/proyecto_2",
+    "description": "Prueba 2 de composer",
+    "type": "project",
+    "license": "Free",
+    "autoload": {
+        "psr-4": {
+            "Source\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PSL2001",
+            "email": "pablitosanchezlopez@gmail.com"
+        }
+    ],
+    "require": {}
+}
