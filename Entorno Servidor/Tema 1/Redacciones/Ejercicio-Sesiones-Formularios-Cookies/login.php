@@ -35,7 +35,7 @@ if (isset($_POST['delCookies'])) {
 if (isset($_POST['login'])) {
     //Le hemos dado al boton, procesamos el formulario
     //Primero trimeamos las variables de $_POST del usuario y contraseña
-    $usuario = ucfirst(trim($_POST['usuario']));
+    $usuario = trim($_POST['usuario']);
     $pass = trim($_POST['pass']);
     $perfil = comprobarUsuario($usuario, $pass);
     if ($perfil != "Error") {
