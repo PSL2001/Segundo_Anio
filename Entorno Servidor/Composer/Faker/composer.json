@@ -1,0 +1,20 @@
+{
+    "name": "usuario/faker",
+    "description": "Proyecto de Ejemplo usando Faker",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PSL2001",
+            "email": "pablitosanchezlopez@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.16"
+    }
+}
