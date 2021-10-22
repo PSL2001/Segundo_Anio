@@ -11,6 +11,90 @@
             box-sizing: border-box;
             font-family: 'Arial', 'Helvetica', 'sans-serif';
             font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav a {
+            color: black;
+            font-weight: bold;
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color:blue;
+            text-decoration: underline;
+
+        }
+
+        .breadcrumb {
+            display: flex;
+            list-style: none;
+        }
+
+        .breadcrumb li {
+            padding: 10px;
+        }
+
+        .breadcrumb li:after {
+            content: '/';
+            margin-left: 20px;
+        }
+
+        .breadcrumb li:last-child:after {
+            content: '';
+        }
+
+        .breadcrumb a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .product-card {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 15px;
+        }
+
+        .product-card img {
+            width: 100%;
+        }
+
+        .product-card h2 {
+            margin: 30px 0 15px;
+        }
+
+        .product-card a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .product-card p {
+            line-height: 1.5;
+        }
+
+        .original-price {
+            color: gray;
+            text-transform: uppercase;
+        }
+
+        .current-price span {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .saving {
+            color: green;
         }
 
         #pageWrapper {
@@ -32,18 +116,54 @@
 
 <body>
     <div id="pageWrapper" class="full-page">
-        <h1>Lorem Ipsum</h1>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis scelerisque mauris. Curabitur aliquam
-            ligula in erat placerat finibus. Mauris leo neque, malesuada et augue at, consectetur rhoncus libero.
-            Suspendisse vitae dictum dolor. Vestibulum hendrerit iaculis ipsum, ac ornare ligula. Vestibulum efficitur
-            mattis urna vitae ultrices. Nunc condimentum blandit tellus ut mattis. Morbi eget gravida leo. Mauris ornare
-            lorem a mattis ultricies. Nullam convallis tincidunt nunc, eget rhoncus nulla tincidunt sed.
-
-            Nulla consequat tellus lectus, in porta nulla facilisis eu. Donec bibendum nisi felis, sit amet cursus nisl
-            suscipit ut. Pellentesque bibendum id libero at cursus. Donec ac viverra tellus. Proin sed dolor quis justo
-            convallis auctor sit amet nec orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus."</p>
+        <nav>
+            <ul>
+              <li><img src="https://dummyimage.com/200x100/000/fff&text=Logo" alt="" /></li>
+              <li><a href="#" rel="noopener noreferrer">Vídeos para alquilar</a></li>
+              <li><a href="#" rel="noopener noreferrer">Vídeos para comprar</a></li>
+              <li><a href="#" rel="noopener noreferrer">DVDs usados</a></li>
+              <li><a href="#" rel="noopener noreferrer">Ofertas</a></li>
+            </ul>
+          </nav>
+          <ol class="breadcrumb">
+            <li><a href="">Inicio</a></li>
+            <li><a href="">DVDs usados</a></li>
+            <li><a href="">Menos de 10€</a></li>
+          </ol>
+          <section class="intro">
+            <h1>Vídeos de menos de 10€ </h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum non purus quis vestibulum. Pellentesque ultricies quam lacus, ut tristique sapien tristique et.</p>
+        </section>
+        <div class="product-card">
+            <img src="https://dummyimage.com/300x300/7EC0EE/000&text=Product+Image+1" alt="Imagen del Producto 1" />
+            <h2><a href="">Vídeo título 1</a></h2>
+            <p class="original-price">Precio original: 18.99€</p>
+            <p class="current-price">Precio que usted paga:  <span>9.99€</span></p>
+            <p class="saving">Se ahorra 9€</p>
+          </div>
+          <div class="product-card">
+            <img src="https://dummyimage.com/300x300/7EC0EE/000&text=Product+Image+2" alt="Imagen del Producto 1" />
+            <h2><a href="">Vídeo título 1</a></h2>
+            <p class="original-price">Precio original: 18.99€</p>
+            <p class="current-price">Precio que usted paga:  <span>9.99€</span></p>
+            <p class="saving">Se ahorra 9€</p>
+          </div>
+          <div class="product-card">
+            <img src="https://dummyimage.com/300x300/7EC0EE/000&text=Product+Image+3" alt="Imagen del Producto 1" />
+            <h2><a href="">Vídeo título 1</a></h2>
+            <p class="original-price">Precio original: 18.99€</p>
+            <p class="current-price">Precio que usted paga:  <span>9.99€</span></p>
+            <p class="saving">Se ahorra 9€</p>
+          </div>
+          <div class="product-card">
+            <img src="https://dummyimage.com/300x300/7EC0EE/000&text=Product+Image+4" alt="Imagen del Producto 1" />
+            <h2><a href="">Vídeo título 1</a></h2>
+            <p class="original-price">Precio original: 18.99€</p>
+            <p class="current-price">Precio que usted paga:  <span>9.99€</span></p>
+            <p class="saving">Se ahorra 9€</p>
+          </div>
     </div>
+    
 </body>
 
 </html>
