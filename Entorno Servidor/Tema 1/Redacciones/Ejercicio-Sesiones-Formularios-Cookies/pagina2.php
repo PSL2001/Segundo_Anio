@@ -5,6 +5,12 @@ if(!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     die();
 }
+//Estamos en Pagina 2, solo los usuarios Avanzados y Administradores pueden entrar
+if ($_SESSION['perfil'] == 1) {
+    # Perfil 1 es el usuario por defecto, si intentara entrar, lo mandamos a menu
+    header("Location: menu.php");
+    die();
+}
 
 //Vamos a hacer una variable color, la cual dependiendo del usuario, cambiara el color de fondo
 $color;
@@ -29,7 +35,7 @@ if ($_SESSION['perfil'] == 0) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- CDN de Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Menu Principal</title>
+    <title>Pagina 1</title>
 </head>
 <body style="background-color:<?php echo $color ?>;">
 <!-- Barra de navegacion -->
@@ -53,26 +59,13 @@ if ($_SESSION['perfil'] == 0) {
             $tipo = "Usuario Avanzado";
         }
         ?>
+        <!-- El usuario se guarda en la sesion, mientras que tipo depende del perfil que utilizes -->
         <input type="text" class="form-control" disabled value="<?php echo $_SESSION['usuario']; ?>, <?php echo $tipo ?>" style="width: 14rem;"/>
     </li>   
     </ul>
     <!-- Fin Barra de navegacion -->
     <div class="container mt-4">
-        <?php
-        //Aqui vamos a comprobar que, dependiendo del perfil, se nos muestren mas o menos botones
-        if ($_SESSION['perfil'] == 0) {
-            # Si el perfil es 0 entonces es Administrador, mostramos todas las paginas
-            echo <<< TEXTO
-            <a href="pagina3.php" class="btn btn-success"><i class="fas fa-file-alt"></i> Página 3</a>
-            <a href="pagina2.php" class="btn btn-primary"><i class="fas fa-sticky-note"></i> Página 2</a>
-            TEXTO;
-        } else if ($_SESSION['perfil'] == 2) {
-            # Si el perfil es 2, mostramos solo pagina2
-            echo "<a href='pagina2.php' class='btn btn-primary'><i class='fas fa-sticky-note'></i> Página 2</a>";
-        }
-        ?>
-        <!-- El usuario se guarda en la sesion, mientras que tipo depende del perfil que utilizes -->
-        <a href="pagina.php" class="btn btn-secondary"><i class="fas fa-copy"></i> Página 1</a>
+    <a href="menu.php" class="btn btn-secondary"><i class="far fa-hand-point-left"></i> Volver al Menu</a>
     </div>
 </body>
 </html>
