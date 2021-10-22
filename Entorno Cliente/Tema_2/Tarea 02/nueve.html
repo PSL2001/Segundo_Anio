@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<body>
+    <script type="text/javascript">
+    let n = parseInt(prompt("Introduce un numero entero positivo"));
+    let aux;
+    let max = 0;
+    if (isNaN(n) || n < 0) {
+        alert("Debes introducir un numero entero positivo");
+    } else {
+        for (let i = 0; i < n; i++) {
+            aux = parseInt(prompt("Introduce un numero positivo. Has escrito hasta ahora " + i + " numero/numeros"));
+            if (aux > max) {
+                max = aux;
+            }
+        }
+        alert("El numero mas alto es: " + max);
+    }
+    </script>
+</body>
+</html>

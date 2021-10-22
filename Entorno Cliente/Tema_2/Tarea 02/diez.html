@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10</title>
+</head>
+<body>
+    <script type="text/javascript">
+    let nombre;
+    let auxmaxnom;
+    let auxminnom;
+    let salario;
+    let max;
+    let auxmax = 0;
+    let min;
+    let auxmin = 1000000;
+
+    while (salario != 0) {
+        nombre = prompt("Introduce un nombre");
+        salario = parseFloat(prompt("Introduce un salario, escribe 0 para salir"));
+        if (salario > auxmax && salario != 0) {
+            auxmax = salario;
+            auxmaxnom = nombre;
+        } else if (salario < auxmin && salario != 0) {
+            auxmin = salario;
+            auxminnom = nombre;
+        }
+    }
+
+    alert("El salario mas alto es de " + auxmaxnom + "que cobra un total de " + auxmax + "€");
+    alert("El salario mas bajo es de " + auxminnom + "que cobra un total de " + auxmin + "€")
+
+    </script>
+</body>
+</html>

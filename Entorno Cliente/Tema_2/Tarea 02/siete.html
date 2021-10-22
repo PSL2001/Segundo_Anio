@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 7</title>
 </head>
+
 <body>
     <script type="text/javascript">
-    
+    //Recogemos las variables por prompt, parseando el resultado a un entero
+        let horas = parseInt(prompt("Introduce la hora"));
+        let mins = parseInt(prompt("Introduce los minutos"));
+        let secs = parseInt(prompt("Introduce los segundos"));
+        //Ahora llamamos la funcion
+        let esCorrecta = horacorrecta(horas, mins, secs);
+
+        if (esCorrecta == false) { //Si en el caso de que no sea correcta la hora, mandamos un mensaje
+            alert("La hora no es correcta");
+        } else { //En el caso de que la hora sea correcta, tenemos que averiguar en que rango estan las horas (8 y 12; 12 y 20; > 20 respectivamente)
+            if (horas >= 8 && horas < 12) {
+                alert("Es por la mañana, ¡Buenos dias!");
+            } else if (horas >= 12 && horas < 20) {
+                alert("Es por la tarde, ¡Buenas Tardes!");
+            } else {
+                alert("Es de noche, ¡Buenas noches!");
+            }
+        }
+
+        /*
+        E: 3 enteros con las horas, minutos y segundos
+        S: Booleano que nos dice si la hora es o no correcto
+        */
+        function horacorrecta(h, m, s) {
+            if (isNaN(h) || isNaN(m) || isNaN(s)) {
+                return false
+            } else {
+                if (h < 0 || h > 24) {
+                    return false;
+                } else if (mins < 0 || mins > 59) {
+                    return false;
+                } else if (secs < 0 || secs > 59) {
+                    return false;
+                }
+            }
+            return true;
+        }
     </script>
 </body>
+
 </html>

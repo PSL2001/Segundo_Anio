@@ -140,3 +140,17 @@ function calculoSegundoGrado(a,b,c) { //E: 3 enteros S:Sin Solucion, 1 respuesta
 
     }
 }
+
+//E: 2 enteros positivos S: El valor de la hipotenusa
+function calculoHipotenusa(n1, n2) {
+    if (isNaN(n1) || isNaN(n2)) {
+        return false;
+    } else if (n1 < 0 || n2 < 0) {
+        return false;
+    } else {
+        let calculo = (n1*n1) + (n2*n2);
+        let resu = Math.sqrt(calculo);
+        let res = Math.round(resu * 100) / 100;
+        return res;
+    }
+}
