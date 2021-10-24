@@ -99,11 +99,12 @@ function mcdE(n1, n2) { //E: Entero S:Booleano si alguno de los valores no es un
     if (isNaN(n1) || isNaN(n2)) { // Si alguna de las 2 variables no es un numero, nos vamos
         return false;
     } else {
-        if (n2 != 0) { // En caso contrario, si n2 no es 0, se vuelve a llamar la funcion utilizando n2 como n1 y el resto de n1 y n2
-            return mcdE(n2, n1 % n2);
-        } else { // Si n2 es cero, entonces n1 es nuestro mdc, lo devolvemos
-            return n1;
+        while (n2 != 0) { // En otro caso, mientras que n2 sea distinto de 0 calculamos el resto de los numeros, sabremos que tenemos su mcd cuando n2 = 0;
+            let aux = n1;
+            n1 = n2;
+            n2 = aux % n2
         }
+        return n1; //Devolvemos n1 que tiene nuestro divisor
     }
 }
 
