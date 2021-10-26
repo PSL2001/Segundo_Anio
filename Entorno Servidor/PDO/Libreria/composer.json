@@ -1,0 +1,20 @@
+{
+    "name": "usuario/libreria",
+    "description": "Projecto PDO con composer",
+    "type": "project",
+    "license": "GNU",
+    "autoload": {
+        "psr-4": {
+            "Libreria\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PSL2001",
+            "email": "pablitosanchezlopez@gmail.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.16"
+    }
+}
