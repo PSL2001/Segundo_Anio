@@ -155,3 +155,7 @@ function calculoHipotenusa(n1, n2) {
         return res;
     }
 }
+
+function random(min, max) { //La funcion elige entre un minimo y maximo un numero aleatorio
+    return Math.floor((Math.random() * (max - min + 1)) + min); //Se utilizan max y min porque Math.random elige un numero entre 1 y 0
+}

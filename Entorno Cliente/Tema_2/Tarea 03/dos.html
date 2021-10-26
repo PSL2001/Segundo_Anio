@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 2</title>
+</head>
+
+<body>
+    <form>
+    <input type="button" id="flip" value="Lanzar una moneda">
+    </form>
+    <script type="text/javascript">
+        let boton = document.getElementById("flip");
+        let contadorcara = 0;
+        let contadorcruz = 0;
+        boton.addEventListener("click", caraCruz);
+
+        function caraCruz() {
+            let res = random(0, 1);
+    
+            if (res == 0) {
+                alert("Ha salido cara");
+                contadorcara++;
+            } else {
+                alert("Ha salido cruz");
+                contadorcruz++;
+            }
+
+            let total = contadorcruz + contadorcara;
+            let porcara = (contadorcara/total) * 100;
+            let porcruz = (contadorcruz/total) * 100;
+
+            document.write(document.body.innerHTML + "<p>Porcentaje de salir cara " + porcara + "<br> Porcentaje de salir cruz " + porcruz);
+
+        }
+        
+    </script>
+</body>
+
+</html>

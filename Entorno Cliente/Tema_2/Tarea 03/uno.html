@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <table border="2" cellpadding = "5rm">
+        <thead>
+            <th> </th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+        </thead>
+        <tbody>
+            <script type="text/javascript">
+                let j = 1;
+                while (j <= 10) { //Mientras que j sea menor o igual a 10
+                    document.write("<tr>");
+                    document.write("<th>" + j + "</th>"); //Esto crea las columnas hacia abajo
+                    for (let i = 1; i <= 10; i++) {
+                        let res = j * i;
+                        document.write("<td>" + res + "</td>"); //Muestra el resultado en la columna correspondiente
+                    }
+                    document.write("</tr>"); //Cerramos la fila
+                    j++;
+                }
+            </script>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
