@@ -144,11 +144,11 @@ function calculoSegundoGrado(a,b,c) { //E: 3 enteros S:Sin Solucion, 1 respuesta
 
 //E: 2 enteros positivos S: El valor de la hipotenusa
 function calculoHipotenusa(n1, n2) {
-    if (isNaN(n1) || isNaN(n2)) {
+    if (isNaN(n1) || isNaN(n2)) { //Primero comprobamos que los 2 enteros son numeros
         return false;
-    } else if (n1 < 0 || n2 < 0) {
+    } else if (n1 < 0 || n2 < 0) { //Luego comprobamos que n1 y n2 son mayor a 0
         return false;
-    } else {
+    } else { //Si son numeros y mayores a 0 calculamos la hipotenusa
         let calculo = (n1*n1) + (n2*n2);
         let resu = Math.sqrt(calculo);
         let res = Math.round(resu * 100) / 100;
