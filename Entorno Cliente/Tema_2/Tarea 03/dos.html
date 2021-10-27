@@ -12,17 +12,29 @@
 <body>
     <form>
     <input type="button" id="flip" value="Lanzar una moneda">
+    <br>
+    <label for="cara"> Porcentaje de sacar cara
+        <input type="text" name="" id="cara" disabled>
+    </label>
+    <br>
+    <label for="cruz"> Porcentaje de sacar cruz
+        <input type="text" name="" id="cruz" disabled>
+    </label>
     </form>
     <script type="text/javascript">
+    //Primero cojemos los elementos del HTML
         let boton = document.getElementById("flip");
+        let probcara = document.getElementById("cara");
+        let probcruz = document.getElementById("cruz");
+        //Inicializamos los contadores a 0
         let contadorcara = 0;
         let contadorcruz = 0;
-        boton.addEventListener("click", caraCruz);
+        boton.addEventListener("click", caraCruz); //Creamos un evento que llama a la funcion de cara o cruz
 
         function caraCruz() {
-            let res = random(0, 1);
+            let res = random(0, 1); //Generamos un aleatorio entre 0 y 1
     
-            if (res == 0) {
+            if (res == 0) { //Para mi caso, vamos a hacer que 0 sea cara y 1 sea cruz, si recivimos 0 entonces es cara
                 alert("Ha salido cara");
                 contadorcara++;
             } else {
@@ -30,11 +42,12 @@
                 contadorcruz++;
             }
 
-            let total = contadorcruz + contadorcara;
-            let porcara = (contadorcara/total) * 100;
+            let total = contadorcruz + contadorcara; //Para sacar el total de lanzadas, sumamos los contadores
+            let porcara = (contadorcara/total) * 100; // Y para hacer los porcentajes divdimos el contador entre el total por 100
             let porcruz = (contadorcruz/total) * 100;
 
-            document.write(document.body.innerHTML + "<p>Porcentaje de salir cara " + porcara + "<br> Porcentaje de salir cruz " + porcruz);
+            probcara.value = porcara; //Transferimos los resultados a los inputs
+            probcruz.value = porcruz;
 
         }
         

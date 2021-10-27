@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <form>
+        <input type="button" id="tira" value="Tirar los dados">
+        <br>
+        <label for="cont"> Nº de veces que se han tirado los dados
+            <input type="text" name="" id="cont" disabled>
+        </label>
+        <br>
+        <label for="suma"> Porcentaje de la suma de los dados sea igual a 7
+            <input type="text" name="" id="suma" disabled>
+        </label>
+        </form>
+    <script type="text/javascript">
+    //Primero cojemos los elementos del HTML
+    let boton = document.getElementById("tira");
+        let contdados = document.getElementById("cont");
+        let porcsuma = document.getElementById("suma");
+        //Inicializamos los contadores
+        let cont = 0;
+        let contsiete = 0;
+        boton.addEventListener("click", tirarDados); //Creamos un evento que llama a la funcion de tirar los dados
+
+        function tirarDados() {
+            //Generamos los numeros aleatorios, del rango del 1 al 6
+            let dado1 = random(1, 6);
+            let dado2 = random(1, 6);
+
+            //Como da igual si el valor es 7 o no, sumamos el contador en 1, ya que hemos hecho una tirada
+            cont++;
+            //Le mostramos al usuario el resultado
+            alert("El primer dado ha salido un " + dado1 + "\nEn el segundo dado un " + dado2);
+
+            if ((dado1 + dado2) == 7) { //Si la suma de estos es igual a 7, se lo decimos al usuario y aumentamos en 1 el contador correspondiente
+                alert("La suma de los dados da 7");
+                contsiete++;
+            } else {
+                alert("La suma de los dados no es igual a 7");
+            }
+
+
+            let total = cont; // El total de tiradas vale lo mismo que el contador en el momento
+            let porsiete = (contsiete/total) * 100; //Para sacar el porcentaje, se suma el contador, entre el total por 100
+
+            //Devolvemos los resultados al input correspondiente
+            porcsuma.value = porsiete;
+            contdados.value = cont;
+
+        }
+    </script>
+</body>
+</html>
