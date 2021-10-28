@@ -7,8 +7,18 @@
     <title>Ejercicio 4</title>
 </head>
 <body>
+    <input type="button" id="tira" value="Tirar los dados">
     <script type="text/javascript">
-    
+     let boton = document.getElementById("tira");
+     boton.addEventListener("click", jugarPPT); //Creamos un evento que llama a la funcion de hacer piedra papel o tijera
+
+     function jugarPPT() {
+        let eleccion1 = random(1, 3);
+        let eleccion2 = random(1, 3);
+
+        
+
+     }
     </script>
 </body>
 </html>
