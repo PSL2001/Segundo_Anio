@@ -12,8 +12,7 @@ use Libreria\Autores;
 $id = $_GET['id'];
 $datosAutor = (new Autores)->read($id);
 
-function hayError($n, $a, $p)
-{
+function hayError($n, $a, $p) {
     $error = false;
     if (strlen($n) == 0) {
         $_SESSION['error_nombre'] = "Rellena el campo nombre";
