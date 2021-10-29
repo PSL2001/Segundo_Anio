@@ -2,24 +2,24 @@ function calcularPotencia(r, e) { // E: Un numero real y un numero entero S: La 
     if (e < 0) { // Si el entero fuera negativo
         alert("Has escrito un numero entero negativo");
     } else {
-        let resultado = 1; //El resultado debe empezar en 1 por que si empezamos
+        let total = 1; //El total debe empezar en 1 por que si empezamos
         for (let i = 0; i < e; i++) { // Para hacer la potencia sin el pow, hacemos un bucle en el que multiplicamos ese numero las mismas veces que un entero
-            resultado = resultado * r; // haciendo esto, el resultado que ahora tiene el mismo valor que el real va a multiplicarse por si mismo hasta llegar a e
+            total = total * r; // haciendo esto, el total que ahora tiene el mismo valor que el real va a multiplicarse por si mismo hasta llegar a e
         }
-        return resultado; // Y devolvemos el resultado que ahora esta elevado a su potencia
+        return total; // Y devolvemos el total que ahora esta elevado a su potencia
     }
 }
 
 function multiplicar(n1, n2) { // E: Dos numeros enteros S: numero multiplicado
     let res = 0; // Inicializamos la variable en 0
-    if (n1 == 0 || n2 == 0) { // en caso de que alguno de los numeros sea 0, dejamos el resultado en 0
+    if (n1 == 0 || n2 == 0) { // en caso de que alguno de los numeros sea 0, dejamos el total en 0
         res = 0;
     } else {
-        for (let i = 0; i < n2; i++) { // Ahora en el bucle sumamos el resultado con n1 hasta que i = n2
+        for (let i = 0; i < n2; i++) { // Ahora en el bucle sumamos el total con n1 hasta que i = n2
             res += n1;
         }
     }
-    return res; // Devolvemos el resultado
+    return res; // Devolvemos el total
 }
 
 function esPrimo(n) { // E: Un numero entero S:Booleano true o false si el numero es primo
@@ -36,7 +36,7 @@ function esPrimo(n) { // E: Un numero entero S:Booleano true o false si el numer
 
 function esPerfecto(n) { //E: Un entero S: Booleano que dice si es verdadero o falso
     let suma = 0;
-    for (let i = 0; i < n; i++) { // i son los divisores que van desde i hasta el anterior de n (n - 1)
+    for (let i = 0; i < n; i++) { // i son losfactorial divisores que van desde i hasta el anterior de n (n - 1)
         if (n % i == 0) { //Si el resto da 0 entonces es que es un divisor
             suma = suma + i;
         }
@@ -108,7 +108,7 @@ function mcdE(n1, n2) { //E: Entero S:Booleano si alguno de los valores no es un
     }
 }
 
-function calculoPrimerGrado(b,c) { // E: Dos numeros enteros S: El resultado de la equacion bx + c = 0 o booleano si b == 0
+function calculoPrimerGrado(b,c) { // E: Dos numeros enteros S: El total de la equacion bx + c = 0 o booleano si b == 0
     let x; //Inicializamos x
     if (b == 0) { //Si b == 0, la ecuacion no se podria hacer, ya que no se puede dividir entre 0
         return false;
@@ -158,4 +158,42 @@ function calculoHipotenusa(n1, n2) {
 
 function random(min, max) { //La funcion elige entre un minimo y maximo un numero aleatorio
     return Math.floor((Math.random() * (max - min + 1)) + min); //Se utilizan max y min porque Math.random elige un numero entre 1 y 0
+}
+
+/*
+E: 3 enteros
+S: El minimo comun multiplo entre n1 y n2
+*/
+function mcm(n1, n2, mcd) { //Para hacer el mcm es hacer el producto de n1 y n2 dividido su mcd
+    if (isNaN(n1) || isNaN(n2) || isNaN(mcd)) { //Si alguno de estos datos fuera NaN (Not a Number), entonces no hay un mcm
+        return false;
+    } else if (n1 < 0 || n2 < 0 || mcd < 0) { //Si estos numeros fuesen menor a 0, entonces no habria un mcm
+        return false;
+    } else { //Si los numeros fuesen enteros y ademas mayores a 0, entonces podemos calcular el mcm
+        let mcm = (n1*n2) / mcd
+        return mcm;
+    }
+}
+/*
+E: 1 entero
+S: El factorial de ese numero
+*/
+function factorial (n) {
+	let total = 1; //Inicializamos la variable total en 1 (en caso de que recivamos 0, 1 o menor a este)
+	for (let i = 1; i <= n; i++) {
+		total = total * i; //Para calcular el factorial, el total se calcula a si mismo por i 
+	}
+	return total; //Devolvemos el total
+}
+
+/*
+E: 2 enteros
+S: Exponencial de e^x
+*/
+function exp(x, n) {
+    let res = 0;
+    for (let i = 0; i <= n; i++) {
+        res += calcularPotencia(x,i) / factorial(i);
+    }
+    return res;
 }

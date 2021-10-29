@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <script type="text/javascript">
+    //Le pedimos al usuario 2 numeros
+    let num1 = parseInt(prompt("Introduce un numero entero positivo"));
+    let num2 = parseInt(prompt("Introduce otro numero entero positivo"));
+
+    //Calculamos su Máximo Comun Divisor
+    let mcdres = mcd(num1, num2);
+
+    if (mcdres == false) { //Si el resultado de este es false, entonces es que no hay Maximo comun divisor y por defecto tampoco minimo comun multiplo
+        alert("No se ha encontrado un maximo comun divisor entre " + num1 + " y " + num2);
+    } else {
+        let resultado = mcm(num1, num2, mcdres); //Si hay un maximo comun divisor, hacemos el minimo comun multiplo
+        if (resultado == false) { //Si el resultado es false, entonces no hay un mcm entre los numeros
+            alert("No se ha encontrado el minimo comun multiplo de " + num1 + " y " + num2);
+        } else { //En caso contrario, lo mostramos al usuario
+            alert("El minimo comun multiplo de " + num1 + " y " + num2 + " es: " + resultado);
+        }
+    }
+    </script>
+</body>
+</html>

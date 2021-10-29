@@ -4,20 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
     <title>Ejercicio 4</title>
 </head>
 <body>
-    <input type="button" id="tira" value="Tirar los dados">
+    <input type="button" id="tira" value="Jugar a Piedra, Papel o Tijera">
     <script type="text/javascript">
      let boton = document.getElementById("tira");
      boton.addEventListener("click", jugarPPT); //Creamos un evento que llama a la funcion de hacer piedra papel o tijera
 
-     function jugarPPT() {
+     /*
+     E: Nada
+     S: Simulacion de 2 personas, jugando a piedra papel o tijera
+     */
+     function jugarPPT() { 
+         //Primero generamos unos numeros aleatorios del 1 al 3
         let eleccion1 = random(1, 3);
         let eleccion2 = random(1, 3);
 
-        
+        switch (eleccion1) { //Depende de la eleccion, esta se traduce a piedra(1), papel(2) o tijera(3)
+            case 1:
+                eleccion1 = "Piedra";
+                break;
+            case 2:
+                eleccion1 = "Papel";
+                break;
+            case 3:
+                eleccion1 = "Tijera";
+                break;
+            default:
+                break;
+        }
 
+        switch (eleccion2) { //repetimos lo mismo para la 2da eleccion
+            case 1:
+                eleccion2 = "Piedra";
+                break;
+            case 2:
+                eleccion2 = "Papel";
+                break;
+            case 3:
+                eleccion2 = "Tijera";
+                break;
+            default:
+                break;
+        }
+        //Le mostramos al usuario cuales han sido las elecciones
+        alert("El jugador 1 ha sacado: " + eleccion1 + "\nEl jugador 2 ha sacado: " +eleccion2);
+
+        if (eleccion1 == "Piedra" && eleccion2 == "Piedra") { //Dependiendo del resultado, se mostrará un mensaje diferente
+            alert("Ha habido un empate");
+        } else if(eleccion1 == "Piedra" && eleccion2 == "Papel") {
+            alert("El jugador 2 ha ganado");
+        } else if (eleccion1 == "Piedra" && eleccion2 == "Tijera") {
+            alert("El jugador 1 ha ganado");
+        }
+
+        if (eleccion1 == "Papel" && eleccion2 == "Piedra") {
+            alert("El jugador 1 ha ganado");
+        } else if(eleccion1 == "Papel" && eleccion2 == "Papel") {
+            alert("Ha habido un empate");
+        } else if (eleccion1 == "Papel" && eleccion2 == "Tijera") {
+            alert("El jugador 2 ha ganado");
+        }
+
+        if (eleccion1 == "Tijera" && eleccion2 == "Piedra") {
+            alert("El jugador 2 ha ganado");
+        } else if(eleccion1 == "Tijera" && eleccion2 == "Papel") {
+            alert("El jugador 1 ha ganado");
+        } else if (eleccion1 == "Tijera" && eleccion2 == "Tijera") {
+            alert("Ha habido un empate");
+        }
      }
     </script>
 </body>
