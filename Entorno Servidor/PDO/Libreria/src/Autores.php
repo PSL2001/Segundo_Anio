@@ -3,6 +3,7 @@ namespace Libreria;
 
 use PDOException;
 use Faker;
+use PDO;
 
 class Autores extends Conexion {
     private $id;
@@ -32,14 +33,49 @@ class Autores extends Conexion {
         parent::$conexion == null; //Cerramos la conexion;
     }
 
-    public function read() {
+    public function read($id) {
+        $q = "select * from autores where id=:i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer un autor: " .$ex->getMessage());
+        }
+        parent::$conexion == null;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
     public function update() {
+        $q = "update autores set nombre=:n, apellidos=:a, pais=:p where id=:i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':n'=>$this->nombre,
+                ':a'=>$this->apellidos,
+                ':p'=>$this->pais,
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar el autor ".$ex->getMessage());
+        }
+        parent::$conexion == null;
     }
-    public function delete() {
+    public function delete($id) {
+        $q = "delete from autores where id=:i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al borrar el Autor: " .$ex->getMessage());
+        }
+        parent::$conexion == null;
 
     }
     //----------------Otros Metodos-------------

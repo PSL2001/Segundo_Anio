@@ -1,9 +1,43 @@
 <?php
+//Trabajamos con sesiones, empezamos poniendo session_start()
 session_start();
 require dirname(__DIR__, 2)."/vendor/autoload.php";
 use Libreria\Autores;
+
+function Hayerror($n, $a, $p) {
+    $error = false;
+    if (strlen($n) == 0) {
+        $_SESSION['error_nombre'] = "Rellena el campo nombre";
+        $error = true;
+    }
+    if (strlen($a) == 0) {
+        $_SESSION['error_apellidos'] = "Rellena el campo apellidos";
+        $error = true;
+    }
+    if (strlen($p) == 0) {
+        $_SESSION['error_pais'] = "Rellena el campo pais";
+        $error = true;
+    }
+
+    return $error;
+}
 if (isset($_POST['crear'])) {
     # Procesamos el formulario
+    $nombre = trim(ucwords($_POST['nombre']));
+    $apellidos = trim(ucwords($_POST['apellidos']));
+    $pais = trim(ucwords($_POST['pais']));
+    if (!Hayerror($nombre, $apellidos, $pais)) {
+        # Podemos hacer el insert
+        (new Autores)->setNombre($nombre)
+        ->setApellidos($apellidos)
+        ->setPais($pais)
+        ->create();
+        //Mandamos un mensaje al index, diciendo que se ha creado con exito
+        $_SESSION['mensaje'] = "Autor Creado con exito";
+        header("Location: index.php");
+        die();
+    }
+    header("Location: {$_SERVER['PHP_SELF']}");
 } else {
     # Pintamos el formulario
 
@@ -29,14 +63,44 @@ if (isset($_POST['crear'])) {
             <div class="mb-3">
                 <label for="nombreAutor" class="form-label">Nombre Autor</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Nombre">
+                <?php
+                if (isset($_SESSION['error_nombre'])) {
+                    echo <<< TEXTO
+                    <div class="mt-2 text-danger ft-bold" style="font-size:small">
+                    {$_SESSION['error_nombre']}
+                    </div>
+                    TEXTO;
+                    unset($_SESSION['error_nombre']);
+                }
+                ?>
             </div>
             <div class="mb-3">
                 <label for="ApllidosAutor" class="form-label">Apellidos Autor</label>
                 <input type="text" class="form-control" id="ape" name="apellidos" required placeholder="Apellidos">
+                <?php
+                if (isset($_SESSION['error_apellidos'])) {
+                    echo <<< TEXTO
+                    <div class="mt-2 text-danger ft-bold" style="font-size:small">
+                    {$_SESSION['error_apellidos']}
+                    </div>
+                    TEXTO;
+                    unset($_SESSION['error_apellidos']);
+                }
+                ?>
             </div>
             <div class="mb-3">
                 <label for="PaisAutor" class="form-label">Pais Autor</label>
                 <input type="text" class="form-control" id="pais" name="pais" required placeholder="Pais">
+                <?php
+                if (isset($_SESSION['error_pais'])) {
+                    echo <<< TEXTO
+                    <div class="mt-2 text-danger fw-bold" style="font-size:small">
+                    {$_SESSION['error_pais']}
+                    </div>
+                    TEXTO;
+                    unset($_SESSION['error_pais']);
+                }
+                ?>
             </div>
             <button type="submit" class="btn btn-primary" name="crear"><i class="far fa-save"></i> Crear</button>
             <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>

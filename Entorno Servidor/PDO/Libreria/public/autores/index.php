@@ -22,6 +22,16 @@ $datosAutores = (new Autores)->readAll(); //Leemos los datos de la tabla (es nue
 <body style="background-color:silver">
     <h3 class="text-center">Gestion Autores</h3>
     <div class="container mt-2">
+        <?php
+        if (isset($_SESSION['mensaje'])) {
+            echo <<< TEXTO
+            <div class="alert alert-primary" role="alert">
+                {$_SESSION['mensaje']}
+            </div>
+            TEXTO;
+            unset($_SESSION['mensaje']);
+        }
+        ?>
         <a href="cautor.php" class="btn btn-primary mb-2"><i class="fas fa-user-plus"></i> Nuevo Autor </a>
         <table class="table table-dark table-striped">
             <thead>
@@ -48,7 +58,13 @@ $datosAutores = (new Autores)->readAll(); //Leemos los datos de la tabla (es nue
                     <td>{$filas->nombre}</td>
                     <td>{$filas->apellidos}</td>
                     <td>{$filas->pais}</td>
-                    <td></td>
+                    <td>
+                    <form name="borrar" action="bautor.php" method="POST">
+                    <input type="hidden" name="id" value="{$filas->id}"/>
+                    <a href="uautor.php?id={$filas->id}" class="btn btn-warning"><i class="fas fa-user-edit"></i></a>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea borrar el autor?')"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                    </td>
                 </tr>
                 TXT;
                 }
