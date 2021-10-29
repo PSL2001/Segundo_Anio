@@ -1,6 +1,7 @@
 <?php
 //Trabajamos con sesiones, empezamos poniendo session_start()
 session_start();
+//Cargamos el Autoload de composer
 require dirname(__DIR__, 2)."/vendor/autoload.php";
 use Libreria\Autores;
 

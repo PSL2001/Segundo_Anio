@@ -4,12 +4,15 @@ if (!isset($_GET['id'])) {
     header("Location:index.php");
     die();
 }
+//Vamos a usar sesiones, ponemos session_start()
 session_start();
+//Cargamos el autoload de composer
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
-
+//Cargamos la clase Autores
 use Libreria\Autores;
-
+//Para no andar cogiendo la id del Get constantemente, la guardamos en una variable
 $id = $_GET['id'];
+//Hacemos un read con la id como parametro
 $datosAutor = (new Autores)->read($id);
 
 function hayError($n, $a, $p) {
@@ -31,6 +34,7 @@ function hayError($n, $a, $p) {
 
 if (isset($_POST['update'])) {
     # Procesamos el formulario
+    //trimeamos los campos
     $nombre = trim(ucwords($_POST['nombre']));
     $apellidos = trim(ucwords($_POST['apellidos']));
     $pais = trim(ucwords($_POST['pais']));
@@ -39,12 +43,14 @@ if (isset($_POST['update'])) {
         (new Autores)->setNombre($nombre)
             ->setApellidos($apellidos)
             ->setPais($pais)
+            //Nota: Haciendo un update, seteamos la id
             ->setId($id)
             ->update();
         $_SESSION['mensaje'] = "Autor Actualizado con Exito";
         header("Location:index.php");
         die();
     }
+    //Nota: lo mismo que en formulario, le pasamos el id al header tambien
     header("Location:{$_SERVER['PHP_SELF']}?id=$id");
 } else {
     # Mostramos el formulario
