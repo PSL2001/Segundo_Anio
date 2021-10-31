@@ -1,0 +1,20 @@
+{
+    "name": "usuario/tarea_composer-packagist",
+    "description": "Tarea de composer utilizando una libreria de packagist",
+    "type": "project",
+    "license": "Free",
+    "autoload": {
+        "psr-4": {
+            "source\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PSL2001",
+            "email": "65461723+PSL2001@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "giggsey/libphonenumber-for-php": "^8.12"
+    }
+}
