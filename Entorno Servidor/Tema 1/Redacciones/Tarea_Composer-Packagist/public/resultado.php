@@ -59,9 +59,9 @@ if (isset($_GET['enviar'])) {
         die("Algo salio mal: " . $ex->getMessage());
     }
 
-    $regiones = $phoneNumberUtil->getSupportedRegions();
+    $regiones = $phoneNumberUtil->getSupportedRegions(); //Esto nos devuelve las regiones en la que se puede llamar el telefono
 
-    asort($regiones);
+    asort($regiones); //Las ordenamos
 } else {
     header("Location:index.php");
 }
@@ -91,10 +91,18 @@ if (isset($_GET['enviar'])) {
                 </thead>
                 <tbody>
                     <?php
+                    /*
+                    * getCountryCode() devuelve el codigo del pais
+                    * getNationalNumber() devuelve el numero en formato nacional
+                    * getExtension() devuelve, si tiene, una extension del telefono
+                    * getCountryCodeSource() devuelve la fuente de la que probiene el telefono, es decir, si es fijo, movil, etc.
+                    * isItalianLeadingZero() devuelve un booleano que nos dice si el telefono es italiano empezando por 0
+                    * getRawinput() devuelve el telefono tal cual lo hemos escrito
+                    */
                     echo <<< TEXTO
                 <tr>
                     <th><code>getCountryCode()</code></th>
-                    <td>{$telefono->getCountryCode()}</td>
+                    <td>{$telefono->getCountryCode()}</td> 
                 </tr>
                 <tr>
                     <th><code>getNationalNumber()</code></th>
@@ -157,9 +165,9 @@ if (isset($_GET['enviar'])) {
                         </th>
                         <td>
                             <?php
-                            if ($posibleNumero == false) {
+                            if ($posibleNumero == false) { //Si el telefono que pasamos no es real, comprobamos si al menos podria existir
 
-                                if ($EsPosibleNumeroEnRazon == 0) {
+                                if ($EsPosibleNumeroEnRazon == 0) { //Depende del resultado que nos de la variable, puede tener varios significados (0 al 4)
                                     echo "No es Real, pero podria existir";
                                 } else if ($EsPosibleNumeroEnRazon == 1) {
                                     echo "Codigo de Pais no valido";
@@ -169,7 +177,7 @@ if (isset($_GET['enviar'])) {
                                     echo "El telefono es demasiado largo";
                                 }
                             } else {
-                                echo "TRUE";
+                                echo "El telefono es real";
                             }
                             ?>
                     <tr>
@@ -178,7 +186,7 @@ if (isset($_GET['enviar'])) {
                                 <code title="PhoneNumberUtil->isValidNumber(PhoneNumber $number)" data-toggle="tooltip">isValidNumber()</code>
                             </a>
                         </th>
-                        <td><?php echo ($numeroValido) ? "TRUE" : "FALSE"; ?></td>
+                        <td><?php echo ($numeroValido) ? "El numero es valido" : "El Numero no es valido"; //Nos dice si el telefono es valido ?></td>
                     </tr>
                     <tr>
                         <th>
@@ -186,7 +194,7 @@ if (isset($_GET['enviar'])) {
                                 <code title="PhoneNumberUtil->isValidNumberForRegion(PhoneNumber $number, String $region)" data-toggle="tooltip">isValidNumberForRegion()</code>
                             </a>
                         </th>
-                        <td><?php echo ($numeroValidoParaRegion) ? "TRUE" : "FALSE"; ?></td>
+                        <td><?php echo ($numeroValidoParaRegion) ? "Es Valido para la region" : "No es Valido para la region";  //Si vale para la region o no?></td>
                     </tr>
                     <tr>
                         <th>
@@ -196,8 +204,8 @@ if (isset($_GET['enviar'])) {
                         </th>
                         <td>
                             <?php
-                            if ($InformacionNumTel) {
-                                echo "<span class='flag-icon flag-icon-{{ phoneNumberRegion|lower }}' title='{$InformacionNumTel}' data-toggle='tooltip'>$InformacionNumTel</span>";
+                            if ($InformacionNumTel) { //Si existiera la informacion del telefono (si $InformacionNumTel != null)
+                                echo "<span title='{$InformacionNumTel}' data-toggle='tooltip'>$InformacionNumTel</span>";
                             ?>
                         </td>
                         </td>
@@ -210,7 +218,7 @@ if (isset($_GET['enviar'])) {
                         </th>
                         <td>
                             <?php
-                                switch ($tipoTel) {
+                                switch ($tipoTel) { //Depende de lo que valga tipoTel, cambia el tipo de telefono
                                     case 0:
                                         echo "Linea Fija";
                                         break;
@@ -256,16 +264,13 @@ if (isset($_GET['enviar'])) {
                                     case 30:
                                         echo "Linea de rate Estandar";
                                         break;
-                                    default:
-                                        # code...
-                                        break;
                                 }
 
                             ?>
                         </td>
                     </tr>
                 <?php
-                            }
+                            } // fin del if
                 ?>
                 </tbody>
             </table>
@@ -296,8 +301,8 @@ if (isset($_GET['enviar'])) {
                         <th title="libphonenumber\PhoneNumberFormat::E164" data-toggle="tooltip">E164</th>
                         <td>
                             <?php
-                            if ($numeroValido == true) {
-                                echo $phoneNumberUtil->format($telefono, libphonenumber\PhoneNumberFormat::E164);
+                            if ($numeroValido == true) { //comprobamos si es valido el telefono
+                                echo $phoneNumberUtil->format($telefono, libphonenumber\PhoneNumberFormat::E164); //Si lo es, lo parseamos
                             } else {
                                 echo "<em>Numero invalido</em>";
                             }
@@ -308,6 +313,7 @@ if (isset($_GET['enviar'])) {
                         <th title="libphonenumber\PhoneNumberFormat::NATIONAL" data-toggle="tooltip">Nacional</th>
                         <td>
                             <?php
+                            //Hacemos lo mismo para el resto de formatos
                             if ($numeroValido == true) {
                                 echo $phoneNumberUtil->format($telefono, libphonenumber\PhoneNumberFormat::NATIONAL);
                             } else {
@@ -345,12 +351,12 @@ if (isset($_GET['enviar'])) {
         </div>
     </div>
     <?php
-    if ($numeroValido == true) {
+    if ($numeroValido == true) { //Si el telefono es valido mostramos la tabla de formatos
     ?>
         <h4>
-            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#formatoutofcountrycallingnumber" target="_blank">Format Out of Country Calling Number</a>
+            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#formatoutofcountrycallingnumber" target="_blank">Formato del número de llamada fuera del país</a>
             /
-            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#formatoutofcountrycallingnumber" target="_blank">Format Number for Mobile Dialing</a>
+            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#formatoutofcountrycallingnumber" target="_blank">Formato del número para la marcación móvil</a>
         </h4>
         <div class="row">
             <div class="col-4 overflow-auto" id="country-list">
@@ -404,62 +410,35 @@ if (isset($_GET['enviar'])) {
                     </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#ispossibleshortnumber"
-                           target="_blank">
-                            <code>isPossibleShortNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo ($shortNumberInfo->isPossibleShortNumber($telefono)) ? "Es un posible numero corto" : "No es un posible numero corto" ; ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#ispossibleshortnumber" target="_blank">
+                                <code>isPossibleShortNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo ($shortNumberInfo->isPossibleShortNumber($telefono)) ? "Es un posible numero corto" : "No es un posible numero corto"; //Si el telefono es corto o no ?></td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#isvalidshortnumberforregion"
-                           target="_blank">
-                            <code>isValidShortNumberForRegion()</code>
-                        </a>
-                    </th>
-                    <td><?php echo ($shortNumberInfo->isPossibleShortNumberForRegion($telefono, $InformacionNumTel)) ? "Es un posible numero corto para la region" : "No es un posible numero corto para la region" ; ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#isvalidshortnumberforregion" target="_blank">
+                                <code>isValidShortNumberForRegion()</code>
+                            </a>
+                        </th>
+                        <td><?php echo ($shortNumberInfo->isPossibleShortNumberForRegion($telefono, $InformacionNumTel)) ? "Es un posible numero corto para la region" : "No es un posible numero corto para la region"; //Si el telefono es corto o no ?></td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexpectedcost"
-                           target="_blank">
-                            <code>getExpectedCost()</code>
-                        </a>
-                    </th>
-                    <td>
-                    <?php
-                     $costeEsperado = $shortNumberInfo->getExpectedCost($telefono);
-
-                     if ($costeEsperado == 3 ) {
-                         echo "No hay coste";
-                     } else if ($costeEsperado == 4) {
-                         echo "Tasa Premium";
-                     } else if ($costeEsperado == 30) {
-                         echo "Coste estandar";
-                     } else if ($costeEsperado == 10) {
-                         echo "Coste desconocido";
-                     }
-                    ?>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexpectedcostforregion"
-                           target="_blank">
-                            <code>getExpectedCostForRegion()</code>
-                        </a>
-                    </th>
-                    <td>
-                        <?php
-                            $costeEsperadoReg = $shortNumberInfo->getExpectedCostForRegion($telefono, $InformacionNumTel);
-
-                            if ($costeEsperado == 3 ) {
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexpectedcost" target="_blank">
+                                <code>getExpectedCost()</code>
+                            </a>
+                        </th>
+                        <td>
+                            <?php
+                            $costeEsperado = $shortNumberInfo->getExpectedCost($telefono);
+                            //Cuanto valdria llamar al telefono
+                            if ($costeEsperado == 3) {
                                 echo "No hay coste";
                             } else if ($costeEsperado == 4) {
                                 echo "Tasa Premium";
@@ -468,28 +447,50 @@ if (isset($_GET['enviar'])) {
                             } else if ($costeEsperado == 10) {
                                 echo "Coste desconocido";
                             }
-                           ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#isemergencynumber"
-                           target="_blank">
-                            <code>isEmergencyNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo ($shortNumberInfo->isEmergencyNumber($input['telefono'], $input['pais'])) ? "Es un telefono de emergencia" : "No es un telefono de emergencia" ; ?></td>
-                </tr>
+                            ?>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#connectstoemergencynumber"
-                           target="_blank">
-                            <code>connectsToEmergencyNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo ($shortNumberInfo->connectsToEmergencyNumber($input['telefono'], $input['pais'])) ? "Conecta a un telefono de emergencia" : "No conecta a un telefono de emergencia" ; ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexpectedcostforregion" target="_blank">
+                                <code>getExpectedCostForRegion()</code>
+                            </a>
+                        </th>
+                        <td>
+                            <?php
+                            //Cuanto valdria llamar al telefono dentro de la region
+                            $costeEsperadoReg = $shortNumberInfo->getExpectedCostForRegion($telefono, $InformacionNumTel);
+
+                            if ($costeEsperado == 3) {
+                                echo "No hay coste";
+                            } else if ($costeEsperado == 4) {
+                                echo "Tasa Premium";
+                            } else if ($costeEsperado == 30) {
+                                echo "Coste estandar";
+                            } else if ($costeEsperado == 10) {
+                                echo "Coste desconocido";
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#isemergencynumber" target="_blank">
+                                <code>isEmergencyNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo ($shortNumberInfo->isEmergencyNumber($input['telefono'], $input['pais'])) ? "Es un telefono de emergencia" : "No es un telefono de emergencia"; //Si es un telefono de emergencia o no (112/016, etc.) ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#connectstoemergencynumber" target="_blank">
+                                <code>connectsToEmergencyNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo ($shortNumberInfo->connectsToEmergencyNumber($input['telefono'], $input['pais'])) ? "Conecta a un telefono de emergencia" : "No conecta a un telefono de emergencia"; //Si el telefono conecta a un telefono de emergencia ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -501,43 +502,37 @@ if (isset($_GET['enviar'])) {
         <div class="col-5">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Funcion</th>
-                    <th>Valor</th>
-                </tr>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Valor</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#getexamplenumber"
-                           target="_blank">
-                            <code title="libphonenumber\PhoneNumberUtil->getExampleNumber(string $regionCode)"
-                                  data-toggle="tooltip">getExampleNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo $phoneNumberUtil->getExampleNumber($input['pais']); ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#getexamplenumber" target="_blank">
+                                <code title="libphonenumber\PhoneNumberUtil->getExampleNumber(string $regionCode)" data-toggle="tooltip">getExampleNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo $phoneNumberUtil->getExampleNumber($input['pais']); //Devuelve un telefono que seria valido para el pais ?></td>
+                    </tr>
 
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#getexamplenumberfortype"
-                           target="_blank">
-                            <code title="libphonenumber\PhoneNumberUtil->getExampleNumberForType()"
-                                  data-toggle="tooltip">getExampleNumberForType()</code>
-                        </a>
-                    </th>
-                    <td><?php echo $phoneNumberUtil->getExampleNumberForType($input['pais'], $tipoTel); ?></td>
-                </tr>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexampleshortnumber"
-                           target="_blank">
-                            <code title="libphonenumber\ShortNumberUtil->getExampleShortNumber()"
-                                  data-toggle="tooltip">getExampleShortNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo $shortNumberInfo->getExampleShortNumber($input['pais']); ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberUtil.html#getexamplenumberfortype" target="_blank">
+                                <code title="libphonenumber\PhoneNumberUtil->getExampleNumberForType()" data-toggle="tooltip">getExampleNumberForType()</code>
+                            </a>
+                        </th>
+                        <td><?php echo $phoneNumberUtil->getExampleNumberForType($input['pais'], $tipoTel); //devuelve un telefono valido para el pais segun el tipo de telefono ?></td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/ShortNumberInfo.html#getexampleshortnumber" target="_blank">
+                                <code title="libphonenumber\ShortNumberUtil->getExampleShortNumber()" data-toggle="tooltip">getExampleShortNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo $shortNumberInfo->getExampleShortNumber($input['pais']); //Obtienes un ejemplo de telefono corto segun el pais ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -549,22 +544,20 @@ if (isset($_GET['enviar'])) {
         <div class="col-3">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Funcion</th>
-                    <th>Valor</th>
-                </tr>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Valor</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberOfflineGeocoder.html#getdescriptionfornumber"
-                           target="_blank">
-                            <code title="PhoneNumberOfflineGeocoder->getDescriptionForNumber(PhoneNumber $phoneNumber, String $language, String $region)"
-                                  data-toggle="tooltip">getDescriptionForNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo $geolocalizacion; ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberOfflineGeocoder.html#getdescriptionfornumber" target="_blank">
+                                <code title="PhoneNumberOfflineGeocoder->getDescriptionForNumber(PhoneNumber $phoneNumber, String $language, String $region)" data-toggle="tooltip">getDescriptionForNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo $geolocalizacion; ?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -576,22 +569,20 @@ if (isset($_GET['enviar'])) {
         <div class="col-3">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Function</th>
-                    <th>Value</th>
-                </tr>
+                    <tr>
+                        <th>Function</th>
+                        <th>Value</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberToCarrierMapper.html#getnamefornumber"
-                           target="_blank">
-                            <code title="PhoneNumberToCarrierMapper->getNameForNumber(PhoneNumber $phoneNumber, String $language)"
-                                  data-toggle="tooltip">getNameForNumber()</code>
-                        </a>
-                    </th>
-                    <td><?php echo $nombreTel ?></td>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberToCarrierMapper.html#getnamefornumber" target="_blank">
+                                <code title="PhoneNumberToCarrierMapper->getNameForNumber(PhoneNumber $phoneNumber, String $language)" data-toggle="tooltip">getNameForNumber()</code>
+                            </a>
+                        </th>
+                        <td><?php echo $nombreTel  //Devuelve el nombre de la compañia que da el telefono?></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -604,29 +595,28 @@ if (isset($_GET['enviar'])) {
         <div class="col-3">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Funcion</th>
-                    <th>Valor</th>
-                </tr>
+                    <tr>
+                        <th>Funcion</th>
+                        <th>Valor</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberToTimeZonesMapper.html#gettimezonesfornumber"
-                           target="_blank">
-                            <code title="PhoneNumberToTimeZonesMapper->getTimeZonesForNumber(PhoneNumber $phoneNumber)"
-                                  data-toggle="tooltip">getTimeZonesForNumber()</code>
-                        </a>
-                    </th>
-                    <td>
-                        <ul>
-                            <?php
-                            foreach ($zonaHoraria as $zona) {
-                                echo "<li>$zona</li>";
-                            }
-                            ?>
-                        </ul>
-                </tr>
+                    <tr>
+                        <th>
+                            <a href="https://giggsey.github.io/libphonenumber-for-php/docs/PhoneNumberToTimeZonesMapper.html#gettimezonesfornumber" target="_blank">
+                                <code title="PhoneNumberToTimeZonesMapper->getTimeZonesForNumber(PhoneNumber $phoneNumber)" data-toggle="tooltip">getTimeZonesForNumber()</code>
+                            </a>
+                        </th>
+                        <td>
+                            <ul>
+                                <?php
+                                //Devolvemos las zonas horarias del telefono
+                                foreach ($zonaHoraria as $zona) {
+                                    echo "<li>$zona</li>";
+                                }
+                                ?>
+                            </ul>
+                    </tr>
                 </tbody>
             </table>
         </div>
