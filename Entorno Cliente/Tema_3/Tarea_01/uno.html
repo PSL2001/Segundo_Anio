@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <script type="text/javascript">
+        function iniciar() {
+            document.getElementById("crearVentana").addEventListener("click", crearVentana); //Creamos el evento para abrir la ventana
+        }
+        //Para este ejemplo he cojido el Ejercicio 10 del Tema 2 de la 1era redaccion
+        let num1 = parseInt(prompt("Introduce un numero positivo"));
+        let num2 = parseInt(prompt("Introduce un segundo numero positivo"));
+        let mensaje; //Adicionalmente creamos una variable mensaje
+        if (sonAmigos(num1, num2)) { //Depende del resultado, se muestra un mensaje diferente
+         mensaje = "Los numeros " + num1 + " y " + num2 + " son amigos";
+        } else {
+         mensaje = "Los numeros " + num1 + " y " + num2 + " son amigos";
+        }
+        var nuevaVentana = null; //Nos creamos una variable de ventana
+
+        function crearVentana() {
+            if (nuevaVentana != null) { //Si la ventana fuera distinta de null
+                nuevaVentana.close(); //La cerramos
+                nuevaVentana = null; //Y la seteamos a null
+            }
+            nuevaVentana = window.open(); //Abrimos la ventana: recuerda no dejar "" dentro
+            nuevaVentana.document.write(mensaje); //Escribimos en el body de la ventana el mensaje
+        }
+    </script>
+    <title>Ejercicio 1</title>
+</head>
+<body onload="iniciar()">
+    <button id="crearVentana"> Crear Ventana</button>
+</body>
+</html>
