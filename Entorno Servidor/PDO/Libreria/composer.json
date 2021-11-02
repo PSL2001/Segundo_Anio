@@ -15,6 +15,7 @@
         }
     ],
     "require": {
-        "fakerphp/faker": "^1.16"
+        "fakerphp/faker": "^1.16",
+        "milon/barcode": "^8.0"
     }
 }

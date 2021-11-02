@@ -108,6 +108,23 @@ class Autores extends Conexion {
         }
     }
 
+    public function devolverID() {
+        $q = "select id from autores order by id";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al leer la id de los autores: ".$ex->getMessage());
+        }
+        $id = []; //Creamos un array
+        while ($fila = $stmt->fetch(PDO::FETCH_OBJ)) { //Mientras haya datos en el stmt
+            $id[] = $fila->id; //Pasamos los ids de filas al array
+        }
+        parent::$conexion = null; //Cerramos conexion
+        return $id; //Devolvemos el array
+    }
+
     public function hayAutores() {
         $q = "select * from autores";
         $stmt = parent::$conexion->prepare($q);
