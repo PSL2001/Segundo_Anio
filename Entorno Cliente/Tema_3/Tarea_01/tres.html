@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <script type="text/javascript">
+    function iniciar() {
+        document.getElementById("crearVentana").addEventListener("click", crearVentana);
+        document.getElementById("cambiarTamanio").addEventListener("click", cambiaTamanio);
+        let texto = document.getElementById("texto");
+    }
+
+    var nuevaVentana = null;
+    function crearVentana() {
+        if (nuevaVentana != null) {
+            nuevaVentana.close();
+            nuevaVentana = null
+        }
+        nuevaVentana = window.open();
+        nuevaVentana.name = "Nueva ventana";
+        let mensaje = "Nombre de la ventana: "+ nuevaVentana.name + "\n Localizacion de la ventana: " + nuevaVentana.location;
+        nuevaVentana.document.write(mensaje);
+    }
+
+    function cambiaTamanio() {
+        let size = random(8, 40);
+        texto.style = "font-size:" + size + "px;";
+    }
+    </script>
+    <title>Ejercicio 3</title>
+</head>
+<body onload="iniciar()">
+    <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+    <p id="texto">Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+        Quae voluptate sapiente exercitationem voluptatem, 
+        ratione laborum, 
+        iusto error et quia saepe, assumenda sit ad nihil dolor. 
+        In assumenda repudiandae doloremque explicabo.</p>
+    <button id="crearVentana">Crear una Nueva Ventana</button>
+    <button id="cambiarTamanio">Cambiar Tamaño del parrafo</button>
+</body>
+</html>

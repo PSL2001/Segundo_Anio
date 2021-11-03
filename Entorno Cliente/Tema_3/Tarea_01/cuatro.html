@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        function iniciar() {
+            document.getElementById("ejercicio1").addEventListener("click", abrirEjercicio);
+            document.getElementById("ejercicio2").addEventListener("click", abrirEjercicio);
+            document.getElementById("ejercicio3").addEventListener("click", abrirEjercicio);
+            document.getElementById("ejercicio4").addEventListener("click", abrirEjercicio);
+            document.getElementById("ejercicio5").addEventListener("click", abrirEjercicio);
+        }
+        var nuevaVentana = null;
+        function abrirEjercicio() {
+            let e = event.target.id;
+            console.log(e);
+
+            if (nuevaVentana != null) {
+                nuevaVentana.close();
+                nuevaVentana = null;
+            }
+            switch (e) {
+                case "ejercicio1":
+                    nuevaVentana = window.open("../../Tema_2/Tarea_03/uno.html");
+                    break;
+                case "ejercicio2":
+                    nuevaVentana = window.open("../../Tema_2/Tarea_03/dos.html");
+                    break;
+                case "ejercicio3":
+                    nuevaVentana = window.open("../../Tema_2/Tarea_03/tres.html");
+                    break;
+                case "ejercicio4":
+                    nuevaVentana = window.open("../../Tema_2/Tarea_03/cuatro.html");
+                case "ejercicio5":
+                    nuevaVentana = window.open("../../Tema_2/Tarea_03/cinco.html");
+                    break;
+            }
+        }
+    </script>
+    <title>Ejercicio 4</title>
+</head>
+
+<body onload="iniciar()">
+    <button id="ejercicio1">Ejercicio 1</button>
+    <button id="ejercicio2">Ejercicio 2</button>
+    <button id="ejercicio3">Ejercicio 3</button>
+    <button id="ejercicio4">Ejercicio 4</button>
+    <button id="ejercicio5">Ejercicio 5</button>
+</body>
+
+</html>
