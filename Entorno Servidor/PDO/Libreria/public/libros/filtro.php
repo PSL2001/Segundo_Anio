@@ -1,13 +1,17 @@
 <?php
-    session_start();
+if (!isset($_GET['value']) || !isset($_GET['campo'])) {
+    header("Location:index.php");
+    die();
+}
     require dirname(__DIR__, 2)."/vendor/autoload.php";
+
     use Libreria\Libros;
     use \Milon\Barcode\DNS1D;
+
     $cb = new DNS1D();
     $cb->setStorPath(__DIR__.'/cache/');
-    (new Libros)->generarLibros(150);
-    $stmt = (new Libros)->ReadAll();
 
+    $libros = (new Libros)->librosxCampos($_GET['value'], $_GET['campo']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,17 +27,7 @@
 <body style="background-color:silver">
     <h3 class="text-center">Gestion de Libros</h3>
     <div class="container mt-2">
-      <?php
-       if (isset($_SESSION['mensaje'])) {
-         echo <<< TXT
-          <div class="alert alert-primary" role="alert">
-          {$_SESSION['mensaje']}
-          </div>
-          TXT;
-         unset($_SESSION['mensaje']);
-       }
-      ?>
-        <a href="clibro.php" class="btn btn-primary mb-2"><i class="fas fa-book-medical"></i> Nuevo Libro</a>
+        <a href="javascript:history.back()" class="btn btn-primary mb-2"><i class="fas fa-backward"></i> Volver</a>
     <table class="table table table-info table-striped">
   <thead>
     <tr>
@@ -45,20 +39,14 @@
   </thead>
   <tbody>
       <?php
-      while ($filas = $stmt->fetch(PDO::FETCH_OBJ)) {
+      while ($filas = $libros->fetch(PDO::FETCH_OBJ)) {
           $item = $filas->isbn;
           echo <<< TXT
             <tr>
                 <th scope="row"><a href="dlibro.php?id={$filas->id}" style="text-decoration:none;">{$cb->getBarcodeHTML("$item","EAN13",1,33,'blue',true)}</a></th>
                 <td>{$filas->titulo}</td>
                 <td>{$filas->autor_id}</td>
-                <td>
-                <form name="borrar" action="blibro.php" method="POST">
-                    <input type="hidden" name="id" value="{$filas->id}"/>
-                    <a href="ulibro.php?id={$filas->id}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea borrar el libro?')"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
+                <td>botones</td>
             </tr>
           TXT;
       }

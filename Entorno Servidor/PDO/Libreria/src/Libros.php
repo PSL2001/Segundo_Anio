@@ -3,6 +3,7 @@ namespace Libreria;
 
 use PDOException;
 use Faker;
+use PDO;
 
 class Libros extends Conexion {
     private $id;
@@ -33,16 +34,37 @@ class Libros extends Conexion {
         }
         parent::$conexion = null;
     }
-    public function read() {
-        # code...
-    }
+    //---------------------------------------------------------------------------
+    public function read($id) {
+        $q = "select libros.*, nombre, apellidos, pais from (libros, autores) where autor_id = autores.id AND libros.id = :i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer el libro: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    //---------------------------------------------------------------------------
     public function update() {
         # code...
     }
 
-    public function delete() {
-        # code...
+    public function delete($id) {
+        $q = "delete from libros where id=:i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al borrar el libro: ".$ex->getMessage());
+        }
     }
     //---------------Otros Metodos----------------------
     public function generarLibros($cantidad) {
@@ -86,6 +108,28 @@ class Libros extends Conexion {
             $stmt->execute();
         } catch (PDOException $ex) {
             die("Error al devolver los libros: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt;
+    }
+
+    function librosxCampos($v, $c) {
+        if ($c == "autor_id") {
+            $q = "select * from libros where autor_id=:parametro order by titulo";
+        }
+
+        if ($c == "pais") {
+            $q = "select libros.* from libros, autores where autor_id=autores.id AND pais=:parametro order by titulo";
+        }
+        
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':parametro'=>$v
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al devolver los campos de los libros: ".$ex->getMessage());
         }
         parent::$conexion = null;
         return $stmt;
