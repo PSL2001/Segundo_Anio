@@ -138,6 +138,19 @@ class Autores extends Conexion {
         return $stmt->rowCount(); //Devuelve las filas que hay en la tabla
     }
 
+    public function devolverAutores() {
+        $q = "select apellidos, nombre, id from autores order by apellidos";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al devolver autores: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt->fetchAll(PDO::FETCH_OBJ); //fetchAll se puede utilizar tambien, devuelve los datos en un array
+    }
+
     //----------------Getters y Setters-------------------
 
     /**

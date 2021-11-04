@@ -134,6 +134,21 @@ class Libros extends Conexion {
         parent::$conexion = null;
         return $stmt;
     }
+
+    public function existeISBN($i) {
+        $q = "select * from libros where isbn = :i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$i
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al comprobar si existe el ISBN: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return ($stmt->rowCount() == 1);
+    }
     //--------------Getters y Setters--------------------
 
     /**

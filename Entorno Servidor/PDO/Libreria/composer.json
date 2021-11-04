@@ -16,6 +16,7 @@
     ],
     "require": {
         "fakerphp/faker": "^1.16",
-        "milon/barcode": "^8.0"
+        "milon/barcode": "^8.0",
+        "fale/isbn": "^3.1"
     }
 }

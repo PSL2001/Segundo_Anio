@@ -30,6 +30,9 @@ $datosLibro = (new Libros)->read($_GET['id']);
         <p class="mt-3"><b>Autor:</b> 
             <a href="filtro.php?value=<?php echo $datosLibro->autor_id; ?>&campo=autor_id" class="p-1 rounded-pill bg-warning" style="text-decoration: none;"> <?php echo $datosLibro->nombre." ".$datosLibro->apellidos." (".$datosLibro->autor_id.")"; ?></a>
         </p>
+        <p class="mt-3"><b>ISBN:</b> 
+            <?php echo $datosLibro->isbn ?>
+        </p>
         <p class="mt-3"><b>Pais:</b> 
             <a href="filtro.php?value=<?php echo $datosLibro->pais ?>&campo=pais" class="p-1 rounded-pill bg-danger" style="text-decoration: none;"> <?php echo $datosLibro->pais ?></a>
         </p>

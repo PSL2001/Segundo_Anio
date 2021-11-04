@@ -103,8 +103,10 @@ if (isset($_POST['crear'])) {
                 }
                 ?>
             </div>
-            <button type="submit" class="btn btn-primary" name="crear"><i class="far fa-save"></i> Crear</button>
+            <div class="mb-3">
+            <button type="submit" class="btn btn-primary" name="crear"><i class="fas fa-save"></i> Crear</button>
             <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
+            </div>
         </div>
         </form>
     </div>
