@@ -50,10 +50,23 @@ class Libros extends Conexion {
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
     //---------------------------------------------------------------------------
-    public function update() {
-        # code...
-    }
+    public function update($id) {
+        $q = "update libros set titulo=:t, sipnosis=:s, autor_id=:a, isbn=:isbn where id = :i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':t'=>$this->titulo,
+                ':s'=>$this->sipnosis,
+                ':a'=>$this->autor_id,
+                ':isbn'=>$this->isbn,
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar el libro: ".$ex->getMessage());
+        }
+    }
+    //----------------------------------------------------------------------------
     public function delete($id) {
         $q = "delete from libros where id=:i";
         $stmt = parent::$conexion->prepare($q);
@@ -136,7 +149,11 @@ class Libros extends Conexion {
     }
 
     public function existeISBN($i) {
-        $q = "select * from libros where isbn = :i";
+        if (isset($this->id)) {
+            $q = "select * from libros where isbn = :i AND id != {$this->id}";
+        } else {
+            $q = "select * from libros where isbn = :i";
+        }
         $stmt = parent::$conexion->prepare($q);
 
         try {
