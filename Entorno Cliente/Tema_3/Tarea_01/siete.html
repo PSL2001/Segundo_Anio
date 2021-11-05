@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+    <script type="text/javascript">
+        function iniciar() {
+            document.getElementById("detallesNav").addEventListener("click",detallesNav);
+        }
+
+        function detallesNav() {
+            alert("Nombre en codigo del navegador: " + navigator.appCodeName + "\nNombre del cliente: "+ navigator.appName+ "\nVersion: "+navigator.appVersion+ "\n Cookies activas: "+ navigator.cookieEnabled);
+        }
+    </script>
+</head>
+<body onload="iniciar()">
+    <button id="detallesNav">Detalles de tu Navegador</button>
+</body>
+</html>

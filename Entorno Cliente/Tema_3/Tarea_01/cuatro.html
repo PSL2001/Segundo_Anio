@@ -7,22 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript">
         function iniciar() {
-            document.getElementById("ejercicio1").addEventListener("click", abrirEjercicio);
+            //Cojemos los elementos del documento
+            document.getElementById("ejercicio1").addEventListener("click", abrirEjercicio); 
             document.getElementById("ejercicio2").addEventListener("click", abrirEjercicio);
             document.getElementById("ejercicio3").addEventListener("click", abrirEjercicio);
             document.getElementById("ejercicio4").addEventListener("click", abrirEjercicio);
             document.getElementById("ejercicio5").addEventListener("click", abrirEjercicio);
         }
-        var nuevaVentana = null;
+        var nuevaVentana = null; //Creamos una nueva ventana
         function abrirEjercicio() {
-            let e = event.target.id;
+            let e = event.target.id; //Existe una variable event que devuelve los elementos del evento que ocurra
+            //En este caso, le estamos diciendo que nos devuelva la id del target que en nuestro caso son los botones
             console.log(e);
 
             if (nuevaVentana != null) {
                 nuevaVentana.close();
                 nuevaVentana = null;
             }
-            switch (e) {
+            switch (e) { //Y dependiento de lo que valga e (que es nuestro evento, abrimos el ejercicio correspondiente)
                 case "ejercicio1":
                     nuevaVentana = window.open("../../Tema_2/Tarea_03/uno.html");
                     break;
