@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10</title>
+    <script src="../src/matematicas.js"></script>
+    <script type="text/javascript">
+        function iniciar() {
+            //Creamos el evento 
+            document.getElementById("ventana").addEventListener("click", crearVentana)
+        }
+
+        let ventana = null;
+
+        function crearVentana() {
+            if (ventana != null) { //Si la ventana no es nula
+                ventana.close(); // la cerramos
+                ventana = null;
+            }
+            let ancho = random(200,
+                600); //Con la funcion matematicas nos hacemos 2 numeros del 200 al 600 (para el ancho y largo)
+            let alto = random(200, 600);
+            let top = random(0, window.screen
+            .height); //Para la posicion hay unos valores en window llamados top y left (estos valores determinan la posicion en la que aparece la ventana)
+            let left = random(0, window.screen
+            .width); // window.screen.height/width cojen el ancho y alto de la pantalla del equipo
+            ventana = window.open("", "", "width=" + ancho + ", height=" + alto + ", top=" + top + ", left=" +
+            left); //Creamos la ventana
+
+            //Esta parte no funciona
+            /*
+             La idea era que cuando el ancho y el alto lleguen a una cantidad propuesta, hiziera el efecto contrario
+            */
+            let incrementos = setInterval(incremento, 2000);
+            if (ancho <= 200 && alto <= 200) {
+                        parar();
+                    }
+            let decrementos = setInterval(decremento,2000);
+
+            function decremento() {
+                    ancho -= 50;
+                    alto -= 50;
+                    ventana.resizeTo(ancho, alto);
+                    if (ancho <= 0) {
+                        ancho = 0;
+                    }
+                    if (alto <= 0) {
+                        alto = 0;
+                    }
+                    console.log(ancho + " " + alto);
+                    
+            }
+
+            function incremento() {
+                ancho += 50;
+                alto += 50;
+                ventana.resizeBy(ancho, alto);
+                if (ancho >= 600) {
+                        ancho = 600;
+                }
+                if (alto >= 600) {
+                    alto = 600;
+                }
+                console.log(ancho + " " + alto);
+                if (ancho >= 600 && alto >= 600) {
+                    parar();
+                    decremento();
+                }
+            }
+
+            function parar() {
+                clearInterval(incrementos);
+                clearInterval(decrementos);
+            }
+
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <button id="ventana">Crear Ventana</button>
+</body>
+
+</html>

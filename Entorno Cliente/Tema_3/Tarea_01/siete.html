@@ -7,11 +7,12 @@
     <title>Ejercicio 7</title>
     <script type="text/javascript">
         function iniciar() {
+            //Cojemos los elementos del body y añadimos el evento correspondiente
             document.getElementById("detallesNav").addEventListener("click",detallesNav);
         }
 
-        function detallesNav() {
-            alert("Nombre en codigo del navegador: " + navigator.appCodeName + "\nNombre del cliente: "+ navigator.appName+ "\nVersion: "+navigator.appVersion+ "\n Cookies activas: "+ navigator.cookieEnabled);
+        function detallesNav() { //Mostramos los detalles del navegador
+            alert("Nombre en codigo del navegador: " + navigator.appCodeName + "\nNombre del cliente: "+ navigator.appName+ "\nVersion: "+navigator.appVersion+ "\n Cookies activas: "+ navigator.cookieEnabled + "\n Plataforma en la que se esta ejecutando: " + navigator.platform + "\n Cabecera: " + navigator.userAgent);
         }
     </script>
 </head>

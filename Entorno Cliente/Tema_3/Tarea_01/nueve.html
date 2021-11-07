@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+    <script type="text/javascript">
+        function iniciar() {
+            //Creamos el evento a escuchar
+            document.getElementById("consulta").addEventListener("click", consultaCookies);
+            //Creamos unas cookies nada mas cargar la pagina
+            document.cookie = "usuario=Juan Pedro";
+            document.cookie = "apodo=El Galletas";
+            document.cookie = "fecha_nacimiento=13 de Diciembre del 1998";
+        }
+
+
+        function consultaCookies() {
+            let buscar = prompt("¿Que cookie quieres buscar?"); // le pedimos al usuario el nombre de la cookie
+            let resbus = getCookie(buscar);
+            if (resbus == null) {
+                alert("No se ha encontrado la cookie que buscabas");
+            } else {
+                alert(resbus);
+            }
+        }
+
+        function getCookie(nombre) {
+            let cookie = nombre + "="; //Las cookies van en formato nombre=valor
+            let cookies = document.cookie.split(";"); //Cojemos todas las cookies del documento y las separamos por ;
+            for (let i = 0; i < cookies.length; i++) {
+                let c = cookies[i]; //Recorremos las posiciones del array
+                while (c.charAt(0) === " ") c = c.substring(1, c.length); //Si hubiera un espacio en blanco al principio, lo quitamos
+                if (c.indexOf(cookie) === 0) return c.substring(cookie.length, //Y si coincide que el indice de la cookie es igual a la cookie que buscamos (es decir que sea 0) lo devolvemos
+                    c.length);
+            }
+            return null; //Si no se encuentra la cookie devolvemos null
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <button id="consulta">Consulta las Cookies</button>
+</body>
+
+</html>

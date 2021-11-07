@@ -7,26 +7,27 @@
     <script src="../src/matematicas.js"></script>
     <script type="text/javascript">
     function iniciar() {
+        //Creamos los eventos y cojemos la id del texto
         document.getElementById("crearVentana").addEventListener("click", crearVentana);
         document.getElementById("cambiarTamanio").addEventListener("click", cambiaTamanio);
         let texto = document.getElementById("texto");
     }
-
+    // Creamos una nueva ventana
     var nuevaVentana = null;
     function crearVentana() {
         if (nuevaVentana != null) {
-            nuevaVentana.close();
+            nuevaVentana.close(); //La cerramos si nuevaventana no fuera null
             nuevaVentana = null
         }
         nuevaVentana = window.open();
-        nuevaVentana.name = "Nueva ventana";
+        nuevaVentana.name = "Nueva ventana"; // El nombre de la ventana
         let mensaje = "Nombre de la ventana: "+ nuevaVentana.name + "\n Localizacion de la ventana: " + nuevaVentana.location;
-        nuevaVentana.document.write(mensaje);
+        nuevaVentana.document.write(mensaje); //Escribimos el mensaje en la pagina
     }
 
     function cambiaTamanio() {
-        let size = random(8, 40);
-        texto.style = "font-size:" + size + "px;";
+        let size = random(8, 40); //Cojemos un random del 8 al 40
+        texto.style = "font-size:" + size + "px;"; //Lo aplicamos al estilo del texto
     }
     </script>
     <title>Ejercicio 3</title>

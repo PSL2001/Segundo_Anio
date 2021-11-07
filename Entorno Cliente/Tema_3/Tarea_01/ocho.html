@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+    <script type="text/javascript">
+        function iniciar() {
+            //Cojemos los eventos del documento
+            document.getElementById("escribe").addEventListener("click", escribeParrafo);
+        }
+
+        function escribeParrafo() {
+            let p = document.createElement("p"); //Primero creamos el evento
+            let texto = prompt("¿Que quieres instroducir en el texto?"); //Le pedimos al usuario que texto quiere escribir
+            let pTexto = document.createTextNode(texto); //Creamos un nodo de texto con el contenido del usuario
+            p.appendChild(pTexto); //Convinamos el parrafo con el contenido
+
+            document.body.appendChild(p); //Y el parrafo al documento
+
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <h2>Titulo Original</h2>
+    <button id="escribe">Escribir un Parrafo</button>
+</body>
+
+</html>
