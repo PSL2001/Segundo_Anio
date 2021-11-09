@@ -1,0 +1,7 @@
+;renombrar a .config
+;guarda tu configuracion
+[opciones]
+host=tu servidor
+user=usuario
+password=tu pass
+bbdd=tu base de datos
