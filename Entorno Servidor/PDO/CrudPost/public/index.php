@@ -12,7 +12,7 @@
 <body style="background-color:silver">
     <h4 class="text-center">Posts Al-Ándalus</h4>
     <div class="container mt-2">
-        <a href="" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
+        <a href="users/login.php" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
         <a href="users/cuser.php" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Registrarse</a>
     </div>
 </body>

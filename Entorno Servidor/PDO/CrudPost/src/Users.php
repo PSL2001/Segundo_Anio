@@ -1,6 +1,7 @@
 <?php
 namespace Posts;
 
+use PDO;
 use PDOException;
 
 class Users extends Conexion {
@@ -34,7 +35,17 @@ class Users extends Conexion {
     }
 
     public function read() {
-
+        $q="select * from users where username=:u";
+        $stmt=parent::$conexion->prepare($q);
+        try{
+            $stmt->execute([
+                ':u'=>$this->username
+            ]);
+        }catch(PDOException $ex){
+            die("Error al devolver usuario:".$ex->getMessage());
+        }
+        parent::$conexion=null;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
     public function update() {
@@ -56,6 +67,37 @@ class Users extends Conexion {
             ]);
         } catch (PDOException $ex) {
             die("Error al comprobar el campo: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return ($stmt->rowCount() != 0);
+    }
+    public function recuperarImagen($username) {
+        $q = "select img from users where username = :u";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':u'=>$username
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al recuperar imagen: ".$ex->getMessage());
+        }
+
+        parent::$conexion = null;
+        return $stmt->fetch(PDO::FETCH_OBJ)->img;
+    }
+
+    public function comprobarUsuario($u, $p) {
+        $q = "select * from users where username = :u AND password = :p";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':u'=>$u,
+                ':p'=>$p
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al comprobar el usuario: ".$ex->getMessage());
         }
         parent::$conexion = null;
         return ($stmt->rowCount() != 0);

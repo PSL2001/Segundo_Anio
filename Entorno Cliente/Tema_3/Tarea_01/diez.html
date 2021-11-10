@@ -20,13 +20,10 @@
                 ventana.close(); // la cerramos
                 ventana = null;
             }
-            let ancho = random(200,
-                600); //Con la funcion matematicas nos hacemos 2 numeros del 200 al 600 (para el ancho y largo)
+            let ancho = random(200, 600); //Con la funcion matematicas nos hacemos 2 numeros del 200 al 600 (para el ancho y largo)
             let alto = random(200, 600);
-            let top = random(0, window.screen
-            .height); //Para la posicion hay unos valores en window llamados top y left (estos valores determinan la posicion en la que aparece la ventana)
-            let left = random(0, window.screen
-            .width); // window.screen.height/width cojen el ancho y alto de la pantalla del equipo
+            let top = random(0, window.screen.height); //Para la posicion hay unos valores en window llamados top y left (estos valores determinan la posicion en la que aparece la ventana)
+            let left = random(0, window.screen.width); // window.screen.height/width cojen el ancho y alto de la pantalla del equipo
             ventana = window.open("", "", "width=" + ancho + ", height=" + alto + ", top=" + top + ", left=" +
             left); //Creamos la ventana
 
@@ -35,7 +32,7 @@
              La idea era que cuando el ancho y el alto lleguen a una cantidad propuesta, hiziera el efecto contrario
             */
             let incrementos = setInterval(incremento, 2000);
-            if (ancho <= 200 && alto <= 200) {
+            if (ancho >= 600 && alto >= 600) {
                         parar();
                     }
             let decrementos = setInterval(decremento,2000);
