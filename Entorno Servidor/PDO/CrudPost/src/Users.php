@@ -102,6 +102,22 @@ class Users extends Conexion {
         parent::$conexion = null;
         return ($stmt->rowCount() != 0);
     }
+
+    public function getIds() {
+        $q="select id from users";
+        $stmt=parent::$conexion->prepare($q);
+        try{
+            $stmt->execute();
+        }catch(PDOException $ex){
+            die("Error al devolver ids: ".$ex->getMessage());
+        }
+        parent::$conexion=null;
+        $ids=[];
+        while($fila=$stmt->fetch(PDO::FETCH_OBJ)){
+            $ids[]=$fila->id;
+        }
+        return $ids;
+    }
     //-----------------------------------------------------------
     /**
      * Set the value of id

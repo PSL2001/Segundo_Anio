@@ -8,11 +8,13 @@ CREATE TABLE users(
 	img varchar(100)
 );
 
-CREATE TABLE posts(
+create table posts(
 	id int auto_increment primary key,
 	titulo varchar(60) not null,
 	body text not null,
-	post_id int,
-	constraint fk_post_user foreign key(post_id) references users(id)
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	user_id int,
+	constraint fk_post_user foreign key(user_id) references users(id) 
 	on delete cascade on update cascade
 );

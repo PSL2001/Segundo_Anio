@@ -14,5 +14,7 @@
             "email": "pablitosanchezlopez@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "fakerphp/faker": "^1.16"
+    }
 }

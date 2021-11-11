@@ -25,7 +25,7 @@ $posts = (new Posts)->read($username);
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Usuario</title>
+    <title></title>
 </head>
 
 <body style="background-color:silver">
@@ -44,35 +44,6 @@ $posts = (new Posts)->read($username);
     </ul>
     <h5 class="text-center mt-2">Posts <b><?php echo $username; ?></b></h5>
     <div class="container mt-2">
-        <a href="../posts/cpost.php" class="btn btn-info mt-2"><i class="fas fa-plus"></i> Crear Post</a>
-        <table class="table table-primary table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Detalles</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($filas = $posts->fetch(PDO::FETCH_OBJ)) {
-                    $date = new DateTime($filas->updated_at);
-                    echo <<< TXT
-                    <tr>
-                        <th scope="row">
-                        <a href="../posts/dposts.php?id={$filas->id}" class="btn btn-info"> Detalles</a>
-                        </th>
-                        <td>{$filas->titulo}</td>
-                        <td>{$date->format('d-M-Y')}</td>
-                        <td>btn</td>
-                    </tr>
-                    TXT;
-                }
-                ?>
-            </tbody>
-        </table>
     </div>
 </body>
-
 </html>

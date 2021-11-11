@@ -1,3 +1,8 @@
+<?php
+ require dirname(__DIR__, 1)."/vendor/autoload.php";
+ use Posts\Posts;
+ (new Posts)->generarPosts(150);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
