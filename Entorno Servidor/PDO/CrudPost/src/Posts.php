@@ -45,10 +45,31 @@ class Posts extends Conexion{
         return $stmt;
     }
     public function update(){
+        $q = "update posts set titulo=:t, body=:b where id = :i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':t'=>$this->titulo,
+                ':b'=>$this->body,
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar el post. ".$ex->getMessage());
+        }
+        parent::$conexion = null;
     }
-    public function delete(){
+    public function delete($id){
+        $q = "delete from posts where id = :i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al borrar post: ".$ex->getMessage());
+        }
     }
     //------------------------ OTROS METODOS ------------------------
     public function generarPosts($cantidad){
@@ -75,6 +96,20 @@ class Posts extends Conexion{
         }
         parent::$conexion=null;
         return ($stmt->rowCount()!=0);
+    }
+    public function devolverPost($id) {
+        $q = "select * from posts where id = :i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al devolver el Post: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
     /**
      * Set the value of id

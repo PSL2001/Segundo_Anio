@@ -118,6 +118,20 @@ class Users extends Conexion {
         }
         return $ids;
     }
+    public function devolverID($username) {
+        $q = "select id from users where username = :u";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':u'=>$username
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer al devolver la id");
+        }
+        parent::$conexion = null;
+        return $stmt->fetch(PDO::FETCH_OBJ)->id;
+    }
     //-----------------------------------------------------------
     /**
      * Set the value of id

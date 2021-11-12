@@ -1,13 +1,19 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['username']) || !isset($_GET['id'])) {
     header("Location:../index.php");
 }
+$id = $_GET['id'];
 $username = $_SESSION['username'];
+
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Posts\{Users, Posts};
+
+$datosPost = (new Posts)->devolverPost($id);
+
 $error=false;
+
 function esValido($campo, $valor, $cant){
     global $error;
     if(strlen($valor)<$cant){
@@ -22,7 +28,7 @@ function esValido($campo, $valor, $cant){
 }
 
 $imagen = (new Users)->recuperarImagen($username);
-if(isset($_POST['btnCrear'])){
+if(isset($_POST['btnUpdate'])){
     //Procesamos el formulario
     $tit=trim(ucfirst($_POST['titulo']));
     $body=trim(ucfirst($_POST['body']));
@@ -30,17 +36,16 @@ if(isset($_POST['btnCrear'])){
     esValido("Body", $body, 5);
     if(!$error){
         //guardamos el posts
-        $id = (new Users)->devolverID($username);
-        (new Posts)->setTitulo($tit)
+        (new Posts)->setId($id)
+        ->setTitulo($tit)
         ->setBody($body)
-        ->setUser_id($id)
-        ->create();
-        $_SESSION['mensaje'] = "Post creado con éxito";
+        ->update();
+        $_SESSION['mensaje'] = "Post actualizado con éxito";
         header("Location: ../users");
 
     }
     else{
-        header("Location:{$_SERVER['PHP_SELF']}");
+        header("Location:{$_SERVER['PHP_SELF']}?id=$id");
     }
 }
 else{
@@ -81,14 +86,14 @@ else{
             </ul>
         </li>
     </ul>
-    <h5 class="text-center mt-2">Post Nuevo</h5>
+    <h5 class="text-center mt-2">Actualizar Post <?php echo $datosPost->id ?></h5>
     <div class="container mt-2">
         <div class="bg-success p-4 text-white rounded shadow-lg m-auto" style="width:35rem">
-            <form name="cpost" action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST'>
+            <form name="cpost" action="<?php echo $_SERVER['PHP_SELF']."?id=$id"; ?>" method='POST'>
 
                 <div class="mb-3">
                     <label for="n" class="form-label">Título</label>
-                    <input type="text" class="form-control" id="n" placeholder="Título" name="titulo" required>
+                    <input type="text" class="form-control" id="n" placeholder="Título" name="titulo" value="<?php echo $datosPost->titulo ?>" required>
                     <?php
                     if (isset($_SESSION['err_titulo'])) {
                         echo "<div class='text-danger'>{$_SESSION['err_titulo']}</div>";
@@ -99,7 +104,7 @@ else{
 
                 <div class="mb-3">
                     <label for="b" class="form-label">Contenido</label>
-                    <textarea class="form-control" placeholder="Escribe tu contenido" id="b" name="body"></textarea>
+                    <textarea class="form-control" placeholder="Escribe tu contenido" id="b" name="body"><?php echo $datosPost->body ?></textarea>
                     <?php
                     if (isset($_SESSION['err_body'])) {
                         echo "<div class='text-danger'>{$_SESSION['err_body']}</div>";
@@ -109,7 +114,7 @@ else{
                 </div>
 
                 <div>
-                    <button type='submit' name="btnCrear" class="btn btn-info"><i class="fas fa-save"></i> Crear</button>
+                    <button type='submit' name="btnUpdate" class="btn btn-info"><i class="fas fa-edit"></i> Editar</button>
                     <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
                     <a href="../users/" class="btn btn-danger"><i class="fas fa-backward"></i> Volver</a>
                 </div>

@@ -4,14 +4,20 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../index.php");
     die();
 }
+if (!isset($_GET['id'])) {
+    header("Location: ../index.php");
+    die();
+}
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
-use Posts\{Users,Posts};
+use Posts\{Users, Posts};
 
 $username = $_SESSION['username'];
 $imagen = (new Users)->recuperarImagen($username);
 
-$posts = (new Posts)->read($username);
+$datosPosts = (new Posts)->devolverPost($_GET['id']);
+$fecha_creacion = new DateTime($datosPosts->created_at);
+$fecha_edicion = new DateTime($datosPosts->updated_at);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,7 +31,7 @@ $posts = (new Posts)->read($username);
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Usuario</title>
+    <title>Detalles Post</title>
 </head>
 
 <body style="background-color:silver">
@@ -42,52 +48,18 @@ $posts = (new Posts)->read($username);
             </ul>
         </li>
     </ul>
-    <h5 class="text-center mt-2">Posts <b><?php echo $username; ?></b></h5>
+    <h5 class="text-center mt-2">Detalles Post <b><?php echo $datosPosts->id; ?></b></h5>
     <div class="container mt-2">
-        <?php
-        if (isset($_SESSION['mensaje'])) {
-            echo <<< TEXTO
-            <div class="alert alert-success" role="alert">
-                {$_SESSION['mensaje']}
+        <div class="card mx-auto" style="width: 18rem;">
+            <img src="<?php echo $imagen ?>" class="card-img-top rounded-circle" alt="..." >
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $datosPosts->titulo ?></h5>
+                <p class="card-text"><?php echo $datosPosts->body ?></p>
+                <p class="card-text"><?php echo $fecha_creacion->format('d-M-Y') ?></p>
+                <p class="card-text"><?php echo $fecha_edicion->format('d-M-Y') ?></p>
+                <a href="../users/index.php" class="btn btn-primary"><i class="fas fa-backwards"></i> Volver</a>
             </div>
-            TEXTO;
-            unset($_SESSION['mensaje']);
-        }
-        ?>
-        <a href="../posts/cpost.php" class="btn btn-info mt-2"><i class="fas fa-plus"></i> Crear Post</a>
-        <table class="table table-primary table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Detalles</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                while ($filas = $posts->fetch(PDO::FETCH_OBJ)) {
-                    $date = new DateTime($filas->updated_at);
-                    echo <<< TXT
-                    <tr>
-                        <th scope="row">
-                        <a href="../posts/dpost.php?id={$filas->id}" class="btn btn-info"> Detalles</a>
-                        </th>
-                        <td>{$filas->titulo}</td>
-                        <td>{$date->format('d-M-Y')}</td>
-                        <td>
-                        <form name="bpost" method="POST" action="../posts/bpost.php">
-                        <input type="hidden" name="id" value="{$filas->id}"/>
-                        <a href="../posts/upost.php?id={$filas->id}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Quieres borrar el post?')"><i class="fas fa-trash"></i></button>
-                        </form> 
-                        </td>
-                    </tr>
-                    TXT;
-                }
-                ?>
-            </tbody>
-        </table>
+        </div>
     </div>
 </body>
 
