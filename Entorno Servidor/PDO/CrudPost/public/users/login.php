@@ -4,6 +4,8 @@ require dirname(__DIR__, 2)."/vendor/autoload.php";
 use Posts\Users;
 
 $error = false;
+$INTENTOS = 5; //Intentos del usuario para iniciar sesion
+$TIEMPO = 30; //Tiempo de desactivacion del bton
 
 function estaVacio($c, $v) {
     if (strlen($v) <= 5) {
@@ -26,9 +28,19 @@ if (isset($_POST['Btnlogin'])) {
 
     if (!$error) {
         # creamos el registro
+        setcookie("error", 23, time()-10); //Si existiera la cookie y acertara eliminamos la cookie
         $_SESSION['username'] = $username;
         header("Location: index.php");
     } else {
+        if (!isset($_COOKIE['error'])) {
+            setcookie("error", $INTENTOS, time()+(60*60));
+        } else {
+            setcookie("error", $_COOKIE['error'] - 1, time()+(60*60));
+            if ($_COOKIE['error'] <= 1) {
+                setcookie("error_validacion", $TIEMPO, time()+($TIEMPO));
+                setcookie("error", 23, time()-10);
+            }
+        }
         $_SESSION['error_validacion'] = "Usuario o contraseña incorrectos";
         header("Location: {$_SERVER['PHP_SELF']}");
     }
@@ -51,13 +63,16 @@ if (isset($_POST['Btnlogin'])) {
     <h4 class="text-center">Entrar al Sitio</h4>
     <div class="container mt-2">
     <form name="cautor" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-    <?php
-        if (isset($_SESSION['error_validacion'])) {
+        <div class="bg-success text-white rounded p-4 shadow-lg m-auto" style="width:48rem">
+        <?php
+        if (isset($_SESSION['error_validacion']) && isset($_COOKIE['error'])) {
+            echo "<div class='mt-2 text-light bg-dark text-center'>{$_SESSION['error_validacion']}, te quedan {$_COOKIE['error']} intentos</div>";
+            unset($_SESSION['error_validacion']);
+        } else if (isset($_SESSION['error_validacion'])) {
             echo "<div class='mt-2 text-light bg-dark text-center'>{$_SESSION['error_validacion']}</div>";
             unset($_SESSION['error_validacion']);
         }
         ?>
-        <div class="bg-success text-white rounded p-4 shadow-lg m-auto" style="width:48rem">
             <div class="mb-3">
                 <label for="nombreUsuario" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required placeholder="Usuario">
@@ -68,7 +83,13 @@ if (isset($_POST['Btnlogin'])) {
                 
             </div>
             <div class="mb-3">
-            <button type="submit" class="btn btn-info" name="Btnlogin"><i class="fas fa-save"></i> Login</button>
+                <?php
+                if (isset($_COOKIE['error_validacion'])) {
+                    echo "<button type='submit' class='btn btn-info' name='Btnlogin' disabled><i class='fas fa-save'></i> Login (espere {$_COOKIE['error_validacion']} segundo/s)</button>";
+                } else {
+                    echo "<button type='submit' class='btn btn-info' name='Btnlogin'><i class='fas fa-save'></i> Login</button>";
+                }
+                ?>
             <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
             <a href="cuser.php" class="btn btn-danger"><i class="fas fa-save"></i> Registrar</a>
             </div>
