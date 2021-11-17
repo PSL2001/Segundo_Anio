@@ -17,7 +17,20 @@ function estaVacio($c, $v)
     }
     return false;
 }
-if (isset($_POST['btnCrear'])) {
+function isImagen($tipoArchivo){
+    $tipos=['image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp'];
+    return in_array($tipoArchivo, $tipos);
+}
+function chequearFichero(){
+    //compruebo si lo que he subido es una imagen
+    if(isImagen($_FILES['img']['type'])){
+        //he subido una imagen vamos a procesarlo
+    }else{
+        //NO he subido imagen mostraré el error
+    }
+}
+
+if (isset($_POST['btnEditar'])) {
     //procesamos el registro
     $un = trim($_POST['username']);
     $em = trim($_POST['email']);
@@ -38,6 +51,12 @@ if (isset($_POST['btnCrear'])) {
         }
     }
     if (estaVacio("password", $p)) $error = true;
+    if(is_uploaded_file($_FILES['img']['tmp_name'])){
+        //he subido un archivo
+        chequearFichero();
+    }else{
+        //NO he subido ningun fichero
+    }
     if (!$error) {
         //creamos el regsitro
         $pass = hash('sha256', $p);
@@ -81,7 +100,7 @@ if (isset($_POST['btnCrear'])) {
             <div class="text-center">
                 <img src="<?php echo $usuario->img ?>" width="80rem" height="80rem" class="rounded-circle" />
             </div>    
-            <form name="cautor" action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST'>
+            <form name="cautor" action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST' enctype="multipart/form-data">
 
                     <div class="mb-3">
                         <label for="n" class="form-label">Nombre Usuario</label>
@@ -123,7 +142,7 @@ if (isset($_POST['btnCrear'])) {
                     </div>
 
                     <div>
-                        <button type='submit' name="btnCrear" class="btn btn-info"><i class="fas fa-save"></i> Registrar</button>
+                        <button type='submit' name="btnEditar" class="btn btn-info"><i class="fas fa-edit"></i> Registrar</button>
                         <button type="reset" class="btn btn-warning"><i class="fas fa-broom"></i> Limpiar</button>
                     </div>
 
