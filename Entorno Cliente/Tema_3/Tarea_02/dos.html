@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script>
+        function iniciar() {
+            document.getElementById("buscarFun").addEventListener("click", buscarPosFun);
+            document.getElementById("buscarsinFun").addEventListener("click", buscarPosSinFun);
+        }
+
+        function buscarPosFun() {
+            let frase = document.getElementById("frase").value;
+            let caracter = document.getElementById("caracter").value;
+
+            let posCar = 0;
+            if (frase.indexOf(caracter) != -1) {
+                posCar = frase.indexOf(caracter);                
+            } else {
+                posCar = -1;
+            }
+
+            if (posCar = -1) {
+                alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " no se encuentra");
+            } else {
+                alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " se encuentra en la posicion: " +  posCar);
+            }
+            
+            
+        }
+
+        function buscarPosSinFun() {
+            let frase = document.getElementById("frase").value;
+            let caracter = document.getElementById("caracter").value;
+
+            let posCar = -1;
+
+            for (let i = 0; i < frase.length; i++) {
+                if (frase[i] == caracter) {
+                    posCar = i;
+                }
+            }
+
+            if (posCar == -1) {
+                alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " no se encuentra");
+            } else {
+                alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " se encuentra en la posicion: " +  posCar);
+            }
+        }
+
+    </script>
+</head>
+<body onload="iniciar()">
+    <label for="frase">Escribe la frase aqui</label>
+    <br>
+    <input type="text" id="frase">
+    <br>
+    <label for="caracter">Escribe el caracter que quieras buscar aqui</label>
+    <br>
+    <input type="text" id="caracter">
+    <br>
+    <button id="buscarFun">Buscar el caracter en la frase con funciones</button>
+    <button id="buscarsinFun">Buscar el caracter en la frase sin funciones</button>
+</body>
+</html>

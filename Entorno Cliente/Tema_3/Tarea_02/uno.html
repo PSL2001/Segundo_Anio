@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script>
+        function iniciar() {
+            //Inicializamos los eventos
+            document.getElementById("buscarFun").addEventListener("click", buscarFun);
+            document.getElementById("buscarsinFun").addEventListener("click", buscarsinFun);
+        }
+
+        function buscarFun() {
+            // cogemos los valores del documento
+            let frase = document.getElementById("frase").value;
+            let caracter = document.getElementById("caracter").value;
+
+            let encontrado = false; //Creamos una variable booleana para saber si se ha encontrado o no
+
+            if (frase.includes(caracter) == false) { //Si la frase no incluye el caracter, entonces no la hemos encontrado
+                alert("No se ha encontrado el caracter " + caracter + " en la frase: " + frase);
+            } else {
+                encontrado = true; //Pero en el caso contrario seteamos la variable a true
+                alert("Se ha encontrado el caracter " + caracter + " en la frase: " + frase);
+            }
+        }
+
+        function buscarsinFun() {
+            //Cojemos los valores
+            let frase = document.getElementById("frase").value
+            let caracter = document.getElementById("caracter").value;
+            
+            let encontrado = false; //Creamos una variable booleana para saber si se ha encontrado o no
+            for (let i = 0; i < frase.length; i++) { //Para la longitud de la frase
+                if (frase[i] == caracter) { //Si la posicion de la frase es igual al caracter
+                    encontrado = true; //entonces lo hemos encontrado
+                    alert("Se ha encontrado el caracter " + caracter + " en la frase: " + frase);
+                    return;
+                }
+            }
+            //Si eso nunca ocurre, entonces no se encuentra el caracter
+            alert("No se ha encontrado el caracter " + caracter + " en la frase: " + frase)
+            
+        }
+    </script>
+</head>
+<body onload="iniciar()">
+    <label for="frase">Escribe la frase aqui</label>
+    <br>
+    <input type="text" id="frase">
+    <br>
+    <label for="caracter">Escribe el caracter que quieras buscar aqui</label>
+    <br>
+    <input type="text" id="caracter">
+    <br>
+    <button id="buscarFun">Buscar el caracter en la frase con funciones</button>
+    <button id="buscarsinFun">Buscar el caracter en la frase sin funciones</button>
+</body>
+</html>
