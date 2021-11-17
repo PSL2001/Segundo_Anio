@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="../Examen/dos.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        function iniciar() {
+            document.getElementById("comprobar").addEventListener("click", comprobarDatos);
+            document.getElementById("calcula").addEventListener("click", calculaUlam);
+        }
+
+        var nuevaVentana = null;
+
+        function calculaUlam() {
+            let edad = parseInt(document.getElementById("edad").value);
+            let aux = 0;
+            if (isNaN(edad)) {
+                alert("No puedo calcular la edad");
+            } else {
+                while (edad != 1) {
+                    if (edad % 2 == 0) {
+                        aux = edad / 2;
+                        edad = aux;
+                        document.body.innerHTML += aux + " ";
+                    } else {
+                        aux = edad * 3 + 1
+                        edad = aux;
+                        document.body.innerHTML += aux + " ";
+                    }
+                }
+            }
+        }
+
+        function comprobarDatos() {
+            let nombre = document.getElementById("nombre");
+            let primerApe = document.getElementById("primerApe");
+            let segundoApe = document.getElementById("segundoApe");
+            let fecha = document.getElementById("fecha");
+            let edad = document.getElementById("edad");
+            let acceso = document.getElementsByName("acceso"); //los devuelve en un array
+            let error = false; //Suponemos que no hay errores
+
+            if (nombre.value.replace(/ /g, "") == "") {
+                nombre.style = "background-color: red;";
+                error = true;
+                return;
+            } else {
+                error = false;
+                nombre.style = "background-color: none;";
+            }
+
+            if (primerApe.value.replace(/ /g, "") == "") {
+                error = true;
+                primerApe.style = "background-color: red;";
+                return;
+            } else {
+                error = false;
+                primerApe.style = "background-color: none;";
+            }
+
+            if (segundoApe.value.replace(/ /g, "") == "") {
+                error = true;
+                segundoApe.style = "background-color: red;";
+                return;
+            } else {
+                error = false;
+                segundoApe.style = "background-color: none;";
+            }
+
+            if (fecha.value.replace(/ /g, "") == "") {
+                error = true;
+                fecha.style = "background-color: red;";
+                return;
+            } else if (!esFechaCorrecta(fecha.value)) {
+                error = true;
+                fecha.style = "background-color: red;";
+                return;
+            } else {
+                error = false;
+                fecha.style = "background-color: none;";
+            }
+
+            edad.value = calcularEdad(fecha.value);
+
+            acceso.checked = leerLogicoRadiobutton(acceso);
+
+            if (!error) {
+                crearNuevaventana();
+            }
+
+        }
+
+        function crearNuevaventana() {
+            if (nuevaVentana != null) {
+                nuevaVentana.close();
+                nuevaVentana = null;
+            }
+            nuevaVentana = window.open("../Examen/dos.html"); //No se porque pero si le pongo un brakpoint aqui la abre correctamente
+            let cuerpoElemento = document.body.innerHTML;
+            nuevaVentana.document.write(estableceMensaje(cuerpoElemento));
+
+        }
+
+        function estableceMensaje(m) {
+            let nombre = document.getElementById("nombre").value;
+            let primerApe = document.getElementById("primerApe").value;
+            let segundoApe = document.getElementById("segundoApe").value;
+            let fecha = document.getElementById("fecha").value;
+            let edad = document.getElementById("edad").value;
+            let acceso = document.getElementsByName("acceso").checked;
+
+            nombre = document.getElementById("nombre").value;
+            primerApe = document.getElementById("primerApe").value;
+            segundoApe = document.getElementById("segundoApe").value;
+            fecha = document.getElementById("fecha").value;
+            edad = document.getElementById("edad").value;
+            acceso = document.getElementsByName("acceso").checked;
+
+            nuevaVentana.document.body.innerHTML = m + nombre + primerApe + segundoApe + fecha + edad + acceso;
+        }
+
+
+        function esFechaCorrecta(fecha) {
+            let d = Date.parse(fecha); //Hay que pasar el formato en mm/dd/aaaa
+            if (isNaN(d)) {
+                return false;
+            }
+            return true;
+        }
+
+        function calcularEdad(fecha) {
+            let hoy = new Date();
+
+            let nuevafecha = fecha.split("/");
+
+            let mes = parseInt(nuevafecha[0]);
+            let dia = parseInt(nuevafecha[1]);
+            let anio = parseInt(nuevafecha[2]);
+
+            let mes_hoy = hoy.getMonth();
+            let dia_hoy = hoy.getDate();
+            let anio_hoy = hoy.getFullYear();
+
+            anio -= 1900;
+
+            edad = hoy.getYear() - anio - 1; //le quitamos 1 por que no sabemos si ha cumplido o no
+
+            //Si resto los meses y me da menor que 0 entonces no ha cumplido años. Si da mayor si ha cumplido
+            if (mes_hoy + 1 - mes < 0) { //+ 1 porque los meses empiezan en 0
+                return edad;
+            }
+            if (mes_hoy + 1 - mes > 0) {
+                return edad + 1;
+            }
+
+            //Entonces es que eran iguales. Miro los dias
+            //Si resto los dias y me da menor que 0 entonces no ha cumplido años. Si da mayor o igual si ha cumplido
+            if (hoy.getUTCDate() - dia >= 0) {
+                return edad + 1;
+            }
+
+            return edad;
+        }
+
+        function leerLogicoRadiobutton(elemento) { //Esta funcion la he sacado de tu funcion de ejemplo
+            for (i = 0; i < elemento.length; i++) {
+                if (elemento[i].checked) {
+                    n = elemento[i].value;
+                    return n;
+                    break;
+                }
+            }
+        }
+
+
+
+    </script>
+    <title>Ejercicio 1</title>
+</head>
+
+<body onload="iniciar()">
+    <h3>Formulario de entrada</h3>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre">
+    <br>
+    <label for="primerApe">Primer Apellido</label>
+    <input type="text" id="primerApe">
+    <br>
+    <label for="segundoApe">Segundo Apellido</label>
+    <input type="text" id="segundoApe">
+    <br>
+    <label for="fecha">Fecha de Nacimiento</label>
+    <input type="text" id="fecha">
+    <br>
+    <label for="edad">Edad</label>
+    <input type="text" id="edad" disabled>
+    <br>
+    <label for="acceso">Acceso al modulo</label>
+    <input type="radio" name="acceso" id="acceso" value="bachiller"> Bachillerato
+    <br>
+    <input type="radio" name="acceso" id="acceso" value="prueba"> Prueba de Acceso
+    <br>
+    <input type="radio" name="acceso" id="acceso" value="otro"> Otro Modulo
+    <br>
+    <button id="comprobar"> Comprobar los Datos</button>
+
+    <hr>
+
+    <h3>Conjetura de Ulam</h3>
+    <button id="calcula">Calcular conjetura de Ulam</button>
+    <br>
+    <br>
+</body>
+
+</html>
