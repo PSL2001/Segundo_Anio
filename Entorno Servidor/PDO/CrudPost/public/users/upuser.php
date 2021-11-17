@@ -5,10 +5,15 @@ if (!isset($_SESSION['username'])) {
 }
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
+const img = "/public_html/Entorno Servidor/PDO/CrudPost/public";
+
 use Posts\Users;
 $usuario=(new Users)->setUsername($_SESSION['username'])->read();
 
 $error = false;
+$image;
+$imagensubida = false;
+
 function estaVacio($c, $v)
 {
     if (strlen($v) < 5) {
@@ -22,11 +27,25 @@ function isImagen($tipoArchivo){
     return in_array($tipoArchivo, $tipos);
 }
 function chequearFichero(){
+    global $image;
+    global $usuario;
+    global $imagensubida;
     //compruebo si lo que he subido es una imagen
     if(isImagen($_FILES['img']['type'])){
         //he subido una imagen vamos a procesarlo
+        //Guardo el fichero con un nombre unico
+        $nombreimg = uniqid()." ".$_FILES['img']['type'];
+        if (move_uploaded_file($_FILES['img']['tmp_name'], dirname(__DIR__)."img/$nombreimg")) {
+            $image = img + "/img/$nombreimg";
+            if (str_contains($usuario->img, "via.placeholder.com")) {
+                
+            }
+        } else {
+            $_SESSION['img_error'] = "Hubo un error al subir el archivo";
+        }
     }else{
         //NO he subido imagen mostraré el error
+        $_SESSION['img_error'] = "El fichero debe ser de tipo imagen";
     }
 }
 
