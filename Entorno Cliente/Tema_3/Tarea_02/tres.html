@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function iniciar() {
+            document.getElementById("comprueba").addEventListener("click", comprueba);
+        }
+
+        function comprueba() {
+            let numero = document.getElementById("numero").value;
+
+            let numerosAceptados = /^[0-9]*(\.?)[0-9]+$/;
+
+            let conf = numero.match(numerosAceptados);
+            if (conf != null) {
+                alert("Es un numero real");
+            } else {
+                alert("No es un numero real");
+            }
+        }
+    </script>
+    <title>Ejercicio 3</title>
+</head>
+<body onload="iniciar()">
+    <label for="numero">Escribe un numero real</label>
+    <br>
+    <input type="text" id="numero">
+    <br>
+    <button id="comprueba">Comprobar si el numero real es correcto</button>
+</body>
+</html>
