@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['username'])) {
     header("Location:../index.php");
 }
-const APP_URL = "http://127.0.0.1/~pacofer71/pdo/posts/public/";
+const APP_URL = "http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/CrudPost/public/";
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Posts\Users;
