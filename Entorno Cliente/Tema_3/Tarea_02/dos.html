@@ -7,22 +7,19 @@
     <title>Ejercicio 2</title>
     <script>
         function iniciar() {
+            //creamos los eventos
             document.getElementById("buscarFun").addEventListener("click", buscarPosFun);
             document.getElementById("buscarsinFun").addEventListener("click", buscarPosSinFun);
         }
 
         function buscarPosFun() {
+            //Cojemos los valores del documento
             let frase = document.getElementById("frase").value;
             let caracter = document.getElementById("caracter").value;
+            //guardamos en una variable el indice del caracter en la frase
+            let posCar = frase.indexOf(caracter);
 
-            let posCar = 0;
-            if (frase.indexOf(caracter) != -1) {
-                posCar = frase.indexOf(caracter);                
-            } else {
-                posCar = -1;
-            }
-
-            if (posCar = -1) {
+            if (posCar == -1) { //Si la variable es -1, significa que no la ha encontrado
                 alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " no se encuentra");
             } else {
                 alert("El caracter " + " ' " + caracter + " ' " + " de la frase " + " ' " + frase + " ' " + " se encuentra en la posicion: " +  posCar);
@@ -32,9 +29,10 @@
         }
 
         function buscarPosSinFun() {
+            //cojemos los valores del documento
             let frase = document.getElementById("frase").value;
             let caracter = document.getElementById("caracter").value;
-
+            //Guardamos una variable con el numero -1
             let posCar = -1;
 
             for (let i = 0; i < frase.length; i++) {
