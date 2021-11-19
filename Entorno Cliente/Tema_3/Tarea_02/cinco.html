@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 4</title>
+    <title>Ejercicio 5</title>
     <script>
         function iniciar() {
             document.getElementById("comprueba").addEventListener("click", compruebaFecha);
@@ -19,8 +19,11 @@
             let conf = fecha.match(formato);
 
             if (conf != null) {
+                let formateo = fecha.split("/");
                 document.getElementById("fecha").style = "background: none;";
-                alert("La fecha es correcta");
+                document.getElementById("dia").value = formateo[0];
+                document.getElementById("mes").value = formateo[1];
+                document.getElementById("anio").value = formateo[2];
             } else {
                 document.getElementById("fecha").style = "background: red;";
                 alert("Fecha incorrecta. Revisa que el formato sea dd/mm/yyyy");
@@ -35,7 +38,19 @@
     <br>
     <input type="text" id="fecha">
     <br>
+    <label for="dia">Dia</label>
+    <br>
+    <input type="text" id="dia" disabled>
+    <br>
+    <label for="mes">Mes</label>
+    <br>
+    <input type="text" id="mes" disabled>
+    <br>
+    <label for="anio">Anio</label>
+    <br>
+    <input type="text" id="anio" disabled>
+    <br>
     <button id="comprueba">Comprobar si la fecha es correcta</button>
 </body>
 
-</html>
+</html> 
