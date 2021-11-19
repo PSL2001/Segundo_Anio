@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script>
+        // formato usuarios xx-xx-xxx-999
+        let usuarios = [];
+        function iniciar() {
+            document.getElementById("insertarPrin").addEventListener("click", insertarPrin);
+            document.getElementById("insertarFin").addEventListener("click", insertarFin);
+            document.getElementById("borrarPrin").addEventListener("click", borrarPrin);
+            document.getElementById("borrarFin").addEventListener("click", borrarFin);
+            document.getElementById("insertarPos").addEventListener("click", insertarPos);
+            document.getElementById("borrarPos").addEventListener("click", borrarPos);
+        }
+
+        function mostrarArray(usuarios) {
+            if (usuarios.length == 0) {
+                document.getElementById("usuarios").textContent = "Vacio";
+            } else {
+                document.getElementById("usuarios").textContent = usuarios;
+            }
+        }
+        function mostrarElemento(elemento) {
+            if (elemento.length == 0) {
+                document.getElementById("elemento").textContent = "Vacio";
+            } else {
+                document.getElementById("elemento").textContent = elemento;
+            }
+        }
+
+        function insertarPrin() {
+            let textoel = document.getElementById("num");
+            let textoValue = document.getElementById("num").value;
+
+            let validacion = /^[a-z]{7}\d{3}$/;
+
+            if (textoValue == "") {
+                textoel.style = "background-color: red;";
+                alert("No has escrito nada");
+            } else if (textoValue.match(validacion) == null) {
+                textoel.style = "background-color: red;";
+                alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
+            } else {
+                textoel.style = "background-color: none;";
+                usuarios.unshift(textoValue);
+            }
+            mostrarArray(usuarios);
+        }
+
+        function insertarFin() {
+            let textoel = document.getElementById("num");
+            let textoValue = document.getElementById("num").value;
+
+            let validacion = /^[a-z]{7}\d{3}$/;
+
+            if (textoValue == "") {
+                textoel.style = "background-color: red;";
+                alert("No has escrito nada");
+            } else if (textoValue.match(validacion) == null) {
+                textoel.style = "background-color: red;";
+                alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
+            } else {
+                textoel.style = "background-color: none;";
+                usuarios.push(textoValue);
+            }
+            mostrarArray(usuarios);
+        }
+
+        function borrarPrin() {
+            let nuevo_array = usuarios.shift();
+            mostrarElemento(nuevo_array);
+            mostrarArray(usuarios);
+        }
+
+        function borrarFin() {
+            let nuevo_array = usuarios.pop();
+            mostrarElemento(nuevo_array);
+            mostrarArray(usuarios);
+        }
+
+        function insertarPos() {
+            let textoel = document.getElementById("num");
+            let textoValue = document.getElementById("num").value;
+
+            let validacion = /^[a-z]{7}\d{3}$/;
+
+            if (textoValue == "") {
+                textoel.style = "background-color: red;";
+                alert("No has escrito nada");
+            } else if (textoValue.match(validacion) == null) {
+                textoel.style = "background-color: red;";
+                alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
+            } else {
+                let posicion = parseInt(prompt("¿En que posicion deseas insertar el valor?"));
+
+                if (isNaN(posicion)) {
+                    alert("No me has mandado una posicion");
+                } else {
+                    if (posicion > usuarios.length + 1) {
+                        alert("No puedes añadir este elemento a la posicion " + posicion + " por que el array tiene " + usuarios.length + " huecos ahora mismo");
+                    } else {
+                        usuarios.splice(posicion, 0, textoValue);
+                    }
+                }
+            }
+            mostrarArray(usuarios);
+        }
+
+        function borrarPos() {
+            let textoel = document.getElementById("num");
+            let textoValue = document.getElementById("num").value;
+
+            let validacion = /^[a-z]{7}\d{3}$/;
+
+            if (textoValue == "") {
+                textoel.style = "background-color: red;";
+                alert("No has escrito nada");
+            } else if (textoValue.match(validacion) == null) {
+                textoel.style = "background-color: red;";
+                alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
+            } else {
+                let posicion = parseInt(prompt("¿En que posicion deseas borrar el valor?"));
+
+                if (isNaN(posicion)) {
+                    alert("No me has mandado una posicion");
+                } else {
+                    if (posicion > usuarios.length + 1) {
+                        alert("No puedes borrar este elemento a la posicion " + posicion + " por que el array tiene " + usuarios.length + " huecos ahora mismo");
+                    } else {
+                        usuarios.splice(0, posicion, textoValue);
+                    }
+                }
+            }
+            mostrarArray(usuarios);
+        }
+
+        mostrarArray(usuarios);
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <label for="numarray">Introduce el elemento del Array usuarios aqui</label>
+    <br>
+    <input type="text" id="num">
+    <br>
+    <p>Contenido del Array usuarios: </p>
+    <p id="usuarios"> </p>
+    <p>Contenido del Array usuarios eliminado: </p>
+    <p id="elemento"> </p>
+    <button id="insertarPrin">Insertar en Array al principio</button>
+    <button id="insertarFin">Insertar en Array al final</button>
+    <button id="borrarPrin">Borrar el primer elemento del Array</button>
+    <button id="borrarFin">Borrar el ultimo elemento del Array</button>
+    <button id="insertarPos">Insertar en Array en una posicion</button>
+    <button id="insertarPos">Borrar en Array una posicion y mostrar posicion</button>
+</body>
+
+</html>
