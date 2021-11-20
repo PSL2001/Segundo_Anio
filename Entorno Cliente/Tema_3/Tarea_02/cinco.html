@@ -16,14 +16,15 @@
 
             let formato = /^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/;
 
-            let conf = fecha.match(formato);
+            let conf = fecha.match(formato); //Lo mismo del 4
 
-            if (conf != null) {
-                let formateo = fecha.split("/");
+            if (conf != null) { //Si es distinto de null
+                let formateo = fecha.split("/"); // Separamos la fecha por /
                 document.getElementById("fecha").style = "background: none;";
                 document.getElementById("dia").value = formateo[0];
                 document.getElementById("mes").value = formateo[1];
                 document.getElementById("anio").value = formateo[2];
+                //Y seteamos los valores a su valor correspondiente
             } else {
                 document.getElementById("fecha").style = "background: red;";
                 alert("Fecha incorrecta. Revisa que el formato sea dd/mm/yyyy");

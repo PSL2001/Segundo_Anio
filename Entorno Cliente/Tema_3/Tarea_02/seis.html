@@ -16,11 +16,11 @@
 
             let formato = /^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/;
 
-            let conf = fecha.match(formato);
+            let conf = fecha.match(formato); //Lo mismo que el 4
 
             if (conf != null) {
-                let correcta = fechaCorrecta(fecha);
-                if (!correcta) {
+                let correcta = fechaCorrecta(fecha); //Llamamos a una funcion que comprueba si es correcta
+                if (!correcta) { //Si devuelve false, entonces la fecha no es real
                     document.getElementById("fecha").style = "background: red;";
                     alert("Fecha incorrecta. Asegura que tu fecha sea real");
                 } else {

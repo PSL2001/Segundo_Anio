@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 7</title>
+    <title>Ejercicio 8</title>
     <script>
         function iniciar() {
             document.getElementById("comprueba").addEventListener("click", compruebaFecha);
@@ -16,7 +16,7 @@
 
             let formato = /^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/;
 
-            let conf = fecha.match(formato);
+            let conf = fecha.match(formato); //Lo mismo que el 4
 
             if (conf != null) {
                 let correcta = fechaCorrecta(fecha);
@@ -29,7 +29,7 @@
                     let dia = fechaf[0];
                     let mes = fechaf[1];
                     let anio = fechaf[2];
-                    document.body.innerHTML += ""
+                    document.body.innerHTML += escribirFecha(dia, mes, anio);
                 }
             } else {
                 document.getElementById("fecha").style = "background: red;";
@@ -38,14 +38,15 @@
         }
 
         function fechaCorrecta(fecha) {
-            let fechaf = fecha.split("/");
+            let fechaf = fecha.split("/"); //Separamos la fecha por /
 
             let dia = parseInt(fechaf[0]);
             let mes = parseInt(fechaf[1]);
             let anio = parseInt(fechaf[2]);
+            //parseamos los campos del array
 
-            if (dia < 1) {
-                return false;
+            if (dia < 1) { //Si dia es menor a 1, la fecha no es correcta
+                return false; 
             }
 
             switch (mes) {
@@ -56,30 +57,78 @@
                 case 8:
                 case 10:
                 case 12:
-                    if (dia > 31)
+                    if (dia > 31) //Para los meses Enero, Marzo, Mayo, Julio, Agosto, Octubre y Diciembre; si el dia es mayor a 31, la fecha es falsa
                         return false;
                     break;
                 case 4:
                 case 6:
                 case 9:
                 case 11:
-                    if (dia > 30)
+                    if (dia > 30) //Para los meses restantes (exceptuando febrero) si dia es mayor que 30, la fecha es falsa
                         return false;
                     break;
                 case 2:
-                    if (anio % 4 == 0 && !(anio % 100 == 0 && anio % 400 != 0)) {
-                        if (dia > 29)
+                    if (anio % 4 == 0 && !(anio % 100 == 0 && anio % 400 != 0)) { //Si el resto entre el anio y 4 es 0 y el resto entre 100 es 0, siendo un resto distinto a 400
+                        if (dia > 29) //Entonces es un año bisiesto y no debe pasar de 29
                             return false;
                     } else {
-                        if (dia > 28)
+                        if (dia > 28) //En caso contrario, el año no es bisiesto y no debe pasar de 28
                             return false;
                     }
                     break;
                 default:
                     return false;
             }
+            //Si no salta ninguna excepcion, entonces la fecha es correcta
             return true;
 
+        }
+
+        function escribirFecha(d, m, y) {
+            let resultado = d + " de ";
+
+            switch (m) { //dependiendo del mes, escribiremos un mensaje diferente
+                case "01":
+                    resultado += "Enero";
+                    break;
+                case "02":
+                    resultado += "Febrero";
+                    break;
+                case "03":
+                    resultado += "Marzo";
+                    break;
+                case "04":
+                    resultado += "Abril";
+                    break;
+                case "05":
+                    resultado += "Mayo";
+                    break;
+                case "06":
+                    resultado += "Junio";
+                    break;
+                case "07":
+                    resultado += "Julio";
+                    break;
+                case "08":
+                    resultado += "Agosto";
+                    break;
+                case "09":
+                    resultado += "Septiembre";
+                    break;
+                case "10":
+                    resultado += "Octubre";
+                    break;
+                case "11":
+                    resultado += "Noviembre";
+                    break;
+                case "12":
+                    resultado += "Diciembre";
+                    break;
+            }
+
+            resultado += " de " + y;
+
+            return resultado; //Devolvemos el resultado
         }
     </script>
 </head>
@@ -92,4 +141,4 @@
     <button id="comprueba">Comprobar si la fecha es correcta</button>
 </body>
 
-</html> 
+</html>

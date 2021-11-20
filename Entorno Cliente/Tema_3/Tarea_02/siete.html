@@ -34,14 +34,15 @@
         }
 
         function fechaCorrecta(fecha) {
-            let fechaf = fecha.split("/");
+            let fechaf = fecha.split("/"); //Separamos la fecha por /
 
             let dia = parseInt(fechaf[0]);
             let mes = parseInt(fechaf[1]);
             let anio = parseInt(fechaf[2]);
+            //parseamos los campos del array
 
-            if (dia < 1) {
-                return false;
+            if (dia < 1) { //Si dia es menor a 1, la fecha no es correcta
+                return false; 
             }
 
             switch (mes) {
@@ -52,28 +53,29 @@
                 case 8:
                 case 10:
                 case 12:
-                    if (dia > 31)
+                    if (dia > 31) //Para los meses Enero, Marzo, Mayo, Julio, Agosto, Octubre y Diciembre; si el dia es mayor a 31, la fecha es falsa
                         return false;
                     break;
                 case 4:
                 case 6:
                 case 9:
                 case 11:
-                    if (dia > 30)
+                    if (dia > 30) //Para los meses restantes (exceptuando febrero) si dia es mayor que 30, la fecha es falsa
                         return false;
                     break;
                 case 2:
-                    if (anio % 4 == 0 && !(anio % 100 == 0 && anio % 400 != 0)) {
-                        if (dia > 29)
+                    if (anio % 4 == 0 && !(anio % 100 == 0 && anio % 400 != 0)) { //Si el resto entre el anio y 4 es 0 y el resto entre 100 es 0, siendo un resto distinto a 400
+                        if (dia > 29) //Entonces es un año bisiesto y no debe pasar de 29
                             return false;
                     } else {
-                        if (dia > 28)
+                        if (dia > 28) //En caso contrario, el año no es bisiesto y no debe pasar de 28
                             return false;
                     }
                     break;
                 default:
                     return false;
             }
+            //Si no salta ninguna excepcion, entonces la fecha es correcta
             return true;
 
         }

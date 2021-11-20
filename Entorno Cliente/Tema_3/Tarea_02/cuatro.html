@@ -8,17 +8,19 @@
     <title>Ejercicio 4</title>
     <script>
         function iniciar() {
+            //Creamos los eventos
             document.getElementById("comprueba").addEventListener("click", compruebaFecha);
         }
 
         function compruebaFecha() {
+            //Cojemos el valor de la fecha
             let fecha = document.getElementById("fecha").value;
-
+            //Formato: Espera un numero del 0 al 9 o espera un 1 o 2, seguido de 0 o 9, o espera un 3 seguido de 0 o 1: esto luego espera - o /: seguido de esto espera 0 seguido de 1 a 9 o un 1 seguido de 1 o 2: Y finalmente 4 numeros del 0 al 9
             let formato = /^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/;
 
-            let conf = fecha.match(formato);
+            let conf = fecha.match(formato); //Comprobamos que sigue el formato
 
-            if (conf != null) {
+            if (conf != null) { //Si es distinto de null, la fecha es correcta
                 document.getElementById("fecha").style = "background: none;";
                 alert("La fecha es correcta");
             } else {

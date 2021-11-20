@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10</title>
+    <script>
+        function iniciar() {
+            document.getElementById("comprueba").addEventListener("click", compruebaHora);
+        }
+
+        function compruebaHora() {
+            //Cogemos los elemento
+            let horaEl = document.getElementById("hora");
+            let horaVal = document.getElementById("hora").value;
+
+            let correcion = /^([0,1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/; //Formato: Empieza con 0 o 1, seguido de 0 a 9 o empiza con 2 de 0 a 3, seguido de :
+            // que espera 2 numeros uno del 0 al 5 y otro del 0 al 9
+
+            let conf = horaVal.match(correcion);
+            if (conf != null) {
+               horaEl.style = "background: none;";
+               alert("La hora es correcta");
+            } else {
+                horaEl.style = "background: red;";
+                alert("La hora no es correcta");
+            }
+        }
+
+        
+    </script>
+</head>
+<body onload="iniciar()">
+    <label for="fecha">Escribe una Hora</label>
+        <br>
+        <input type="text" id="hora">
+        <br>
+        <button id="comprueba">Comprobar si la hora es correcta</button>
+</body>
+</html>

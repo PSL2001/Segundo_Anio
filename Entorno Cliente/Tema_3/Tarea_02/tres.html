@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         function iniciar() {
+            //Creamos los eventos
             document.getElementById("comprueba").addEventListener("click", comprueba);
         }
 
         function comprueba() {
+            //Cojemos el value
             let numero = document.getElementById("numero").value;
-
+            //Expresion regular: espera multiples numeros del 0 al 9, comprueba si hay o no un . y si la hay espera varios numeros del 0 al 9
             let numerosAceptados = /^[0-9]*(\.?)[0-9]+$/;
 
-            let conf = numero.match(numerosAceptados);
-            if (conf != null) {
+            let conf = numero.match(numerosAceptados); //match comprueba que el numero sigue los parametros de la expresion
+            if (conf != null) { //Si no es nulo, entonces es un numero real
                 alert("Es un numero real");
             } else {
                 alert("No es un numero real");
