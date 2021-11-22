@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script>
+        function iniciar() {
+            document.getElementById("gen").addEventListener("click", generarArray);
+            document.getElementById("visMayor").addEventListener("click", mostrarMayor);
+            document.getElementById("orden").addEventListener("click", ordenarArray);
+            document.getElementById("buscar").addEventListener("click", buscarenArray);
+            document.getElementById("borrar").addEventListener("click", borrarEl);
+            document.getElementById("invert").addEventListener("click", invertirOrden);
+            document.getElementById("rotar").addEventListener("click", rotarEl);
+            document.getElementById("nuevoSinRepe").addEventListener("click", nuevoArraysinRepe);
+        }
+
+        function generarArray() {
+            let cant = parseInt(prompt("¿De que tamaño quieres el array?"));
+        }
+    </script>
+</head>
+<body onload="iniciar()">
+    <button id="gen">Generar Array</button>
+    <br>
+    <button id="visMayor">Mostrar el mayor elemento</button>
+    <p id="maxEl"></p>
+    <br>
+    <button id="orden">Ordenar Array</button>
+    <p id="orArray"></p>
+    <br>
+    <button id="buscar">Buscar en el Array</button>
+    <p id="enArray"></p>
+    <br>
+    <button id="borrar">Borrar elemento del Array</button>
+    <p id="borrarArray"></p>
+    <br>
+    <button id="invert">Invertir Orden Array</button>
+    <p id="invArray"></p>
+    <br>
+    <button id="rotar">Rotar elemento</button>
+    <p id="rotar"></p>
+    <br>
+    <button id="nuevoSinRepe">Nuevo array sin repetir numeros</button>
+    <p id="nuevoArray"></p>
+</body>
+</html>
