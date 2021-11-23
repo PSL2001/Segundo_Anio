@@ -129,7 +129,7 @@
                 if (isNaN(posicion)) {
                     alert("No me has mandado una posicion");
                 } else {
-                    if (posicion > usuarios.length + 1) {
+                    if (posicion > usuarios.length) {
                         alert("No puedes borrar este elemento a la posicion " + posicion + " por que el array tiene " + usuarios.length + " huecos ahora mismo");
                     } else {
                         usuarios.splice(0, posicion, textoValue);

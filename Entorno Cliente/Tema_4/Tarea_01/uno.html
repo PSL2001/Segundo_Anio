@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
     <title>Ejercicio 1</title>
     <script>
+        let array = [];
         function iniciar() {
             document.getElementById("gen").addEventListener("click", generarArray);
             document.getElementById("visMayor").addEventListener("click", mostrarMayor);
@@ -18,10 +21,100 @@
         }
 
         function generarArray() {
-            let cant = parseInt(prompt("¿De que tamaño quieres el array?"));
+            if (array.length == 0) {
+                let cant = parseInt(prompt("¿De que tamaño quieres el array?"));
+
+                for (let i = 0; i < cant; i++) {
+                    array[i] = random(1, 50);
+                }
+
+                alert("Array de tamanio " + cant + " creado");
+            } else {
+                alert("Ya se ha creado el array");
+            }
+        }
+
+        function mostrarMayor() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                let max = 0;
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] > max) {
+                        max = array[i];
+                    }
+                }
+
+                document.getElementById("maxEl").textContent = max;
+            }
+        }
+
+        function ordenarArray() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                array.sort(function (n1, n2) {
+                    return n1 - n2;
+                });
+
+                document.getElementById("orArray").textContent = array;
+            }
+        }
+
+        function buscarenArray() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                let busqueda = parseInt(prompt("¿Que valor quieres buscar?"));
+
+                for (let i = 0; i < array.length; i++) {
+                    if (busqueda == array[i]) {
+                        document.getElementById("enArray").textContent += " Posicion: " + i;
+                    }
+                }
+            }
+        }
+
+        function borrarEl() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                let posicion = parseInt(prompt("Introduce la posicion que quieres borrar"));
+                if (isNaN(posicion)) {
+                    alert("No me has pasado un numero");
+                } else {
+                    if (posicion > array.length - 1) {
+                        alert("Esta posicion no existe");
+                    } else {
+                        array.splice(posicion, 1);
+                        alert(array);
+                    }
+                }
+            }
+        }
+
+        function invertirOrden() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                array.reverse(function (n1, n2) {
+                    return n2 - n1;
+                });
+
+                document.getElementById("invArray").textContent = array;
+            }
+        }
+
+        function rotarEl() {
+            if (array.length == 0) {
+                alert("No se ha generado el array");
+            } else {
+                
+            }
         }
     </script>
 </head>
+
 <body onload="iniciar()">
     <button id="gen">Generar Array</button>
     <br>
@@ -46,4 +139,5 @@
     <button id="nuevoSinRepe">Nuevo array sin repetir numeros</button>
     <p id="nuevoArray"></p>
 </body>
+
 </html>
