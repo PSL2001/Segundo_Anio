@@ -23,13 +23,17 @@
 
         function generarArray() {
             if (array.length == 0) {
+                //Preguntamos al usuario el tamaño
                 let cant = parseInt(prompt("¿De que tamaño quieres el array?"));
 
-                for (let i = 0; i < cant; i++) {
-                    array[i] = random(1, 50);
+                if (isNaN(cant)) {
+                    alert("No me has pasado numero");
+                } else {
+                    for (let i = 0; i < cant; i++) {
+                        array[i] = random(1, 50); // a cada posicion hasta cantidad hacemos un random (sacado de libreria matematicas)
+                    }
+                    alert("Array de tamanio " + cant + " creado");
                 }
-
-                alert("Array de tamanio " + cant + " creado");
             } else {
                 alert("Ya se ha creado el array");
             }
@@ -40,8 +44,8 @@
                 alert("No se ha generado el array");
             } else {
                 let max = 0;
-                for (let i = 0; i < array.length; i++) {
-                    if (array[i] > max) {
+                for (let i = 0; i < array.length; i++) { //recorremos el array
+                    if (array[i] > max) { //Si el valor es mayor que el maximo le ponemos ese valor
                         max = array[i];
                     }
                 }
@@ -55,7 +59,7 @@
                 alert("No se ha generado el array");
             } else {
                 array.sort(function (n1, n2) {
-                    return n1 - n2;
+                    return n1 - n2; //Se hace esta funcion por que sort ordena alfabeticamente
                 });
 
                 document.getElementById("orArray").textContent = array;
@@ -66,13 +70,21 @@
             if (array.length == 0) {
                 alert("No se ha generado el array");
             } else {
+                //Le preguntamos al usuario que valor busca
                 let busqueda = parseInt(prompt("¿Que valor quieres buscar?"));
-
-                for (let i = 0; i < array.length; i++) {
+                if (isNaN(busqueda)) {
+                    alert("No me has pasado un numero valido");
+                } else {
+                    for (let i = 0; i < array.length; i++) {
                     if (busqueda == array[i]) {
                         document.getElementById("enArray").textContent += " Posicion: " + i;
                     }
                 }
+                if (document.getElementById("enArray").textContent == '') { //Si no encontrara nada, escribimos que no se ha encontrado nada en el array
+                    document.getElementById("enArray").textContent = "No se ha encontrado lo que buscabas en el array";
+                }
+                }
+                
             }
         }
 
@@ -80,11 +92,12 @@
             if (array.length == 0) {
                 alert("No se ha generado el array");
             } else {
+                //Si se ha generado el array, pedimos la posicion
                 let posicion = parseInt(prompt("Introduce la posicion que quieres borrar"));
                 if (isNaN(posicion)) {
                     alert("No me has pasado un numero");
                 } else {
-                    if (posicion > array.length - 1) {
+                    if (posicion > array.length - 1) { //Si nos da una posicion que no existe en el array se lo decimos al usuario
                         alert("Esta posicion no existe");
                     } else {
                         array.splice(posicion, 1);
@@ -99,7 +112,7 @@
                 alert("No se ha generado el array");
             } else {
                 array.reverse(function (n1, n2) {
-                    return n2 - n1;
+                    return n2 - n1; //Lo mismo que sort, pero con reverse
                 });
 
                 document.getElementById("invArray").textContent = array;
@@ -110,10 +123,11 @@
             if (array.length == 0) {
                 alert("No se ha generado el array");
             } else {
+                //Le pedimos al usuario el numero de rotaciones
                 let rotaciones = parseInt(prompt("¿Cuantas veces quieres rotar el array?"));
 
                 for (let i = 0; i < rotaciones; i++) {
-                    array.unshift(array, array.splice(1, array.length))
+                    array.unshift(array, array.splice(1, array.length)) //Esto añade al principio, el array entero y luego elimina los valores del array menos el 1ero
                 }
                 document.getElementById("rotarArray").textContent = array
             }
@@ -123,14 +137,14 @@
             if (array.length != 0) {
                 array.sort(function (n1, n2) {
                     return n1 - n2;
-                });
+                }); //Primero lo ordenamos para que los valores iguales esten juntos (si hay 2 '49' los ordenamos para que esten separadas por 1 posicion)
 
                 let i = 0;
                 while (i < array.length) {
-                    if (array[i + 1] == array[i]) {
-                        array.splice(i, 1);
-                    } else {
-                        i++;
+                    if (array[i + 1] == array[i]) { //Si el siguiente valor es el mismo que el actual
+                        array.splice(i, 1); //Lo borramos
+                    } else { //Si no
+                        i++; //Vamos a la siguiente posicion
                     }
                 }
                 document.getElementById("nuevoArray").textContent = array;

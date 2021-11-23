@@ -8,8 +8,10 @@
     <title>Ejercicio 2</title>
     <script>
         // formato usuarios xx-xx-xxx-999
+        //creamos el array
         let usuarios = [];
         function iniciar() {
+            //Creamos los eventos
             document.getElementById("insertarPrin").addEventListener("click", insertarPrin);
             document.getElementById("insertarFin").addEventListener("click", insertarFin);
             document.getElementById("borrarPrin").addEventListener("click", borrarPrin);
@@ -19,14 +21,14 @@
         }
 
         function mostrarArray(usuarios) {
-            if (usuarios.length == 0) {
+            if (usuarios.length == 0) { // Si la longitud es 0, es que no se ha creado nada
                 document.getElementById("usuarios").textContent = "Vacio";
             } else {
                 document.getElementById("usuarios").textContent = usuarios;
             }
         }
         function mostrarElemento(elemento) {
-            if (elemento.length == 0) {
+            if (elemento.length == 0) { // Si la longitud es 0, es que no se ha creado nada
                 document.getElementById("elemento").textContent = "Vacio";
             } else {
                 document.getElementById("elemento").textContent = elemento;
@@ -34,18 +36,19 @@
         }
 
         function insertarPrin() {
+            //Cojemos el elemento y su valor
             let textoel = document.getElementById("num");
             let textoValue = document.getElementById("num").value;
 
-            let validacion = /^[a-z]{7}\d{3}$/;
+            let validacion = /^[a-z]{7}\d{3}$/; //Parseo de validacion
 
-            if (textoValue == "") {
+            if (textoValue == "") { //Si salta alguna alerta, cambia el fondo a rojo
                 textoel.style = "background-color: red;";
                 alert("No has escrito nada");
             } else if (textoValue.match(validacion) == null) {
                 textoel.style = "background-color: red;";
                 alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
-            } else {
+            } else { //Si no lo añade al principio
                 textoel.style = "background-color: none;";
                 usuarios.unshift(textoValue);
             }
@@ -53,10 +56,11 @@
         }
 
         function insertarFin() {
+            //Cojemos el elemento y su valor
             let textoel = document.getElementById("num");
             let textoValue = document.getElementById("num").value;
 
-            let validacion = /^[a-z]{7}\d{3}$/;
+            let validacion = /^[a-z]{7}\d{3}$/; //Formato de validacion
 
             if (textoValue == "") {
                 textoel.style = "background-color: red;";
@@ -64,7 +68,7 @@
             } else if (textoValue.match(validacion) == null) {
                 textoel.style = "background-color: red;";
                 alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
-            } else {
+            } else { //Si salta alguna alerta se pone en rojo, en caso contrario añadimos al final
                 textoel.style = "background-color: none;";
                 usuarios.push(textoValue);
             }
@@ -72,22 +76,23 @@
         }
 
         function borrarPrin() {
-            let nuevo_array = usuarios.shift();
-            mostrarElemento(nuevo_array);
+            let nuevo_array = usuarios.shift(); //Al usar shift, quita el primer valor del array y nos devuelve la posicion
+            mostrarElemento(nuevo_array); // De ahi el mostrarElemento
             mostrarArray(usuarios);
         }
 
         function borrarFin() {
-            let nuevo_array = usuarios.pop();
+            let nuevo_array = usuarios.pop(); //Lo mismo que shift pero al final
             mostrarElemento(nuevo_array);
             mostrarArray(usuarios);
         }
 
         function insertarPos() {
+            //Cojemos valor y elemento
             let textoel = document.getElementById("num");
             let textoValue = document.getElementById("num").value;
 
-            let validacion = /^[a-z]{7}\d{3}$/;
+            let validacion = /^[a-z]{7}\d{3}$/; //Formato
 
             if (textoValue == "") {
                 textoel.style = "background-color: red;";
@@ -95,15 +100,16 @@
             } else if (textoValue.match(validacion) == null) {
                 textoel.style = "background-color: red;";
                 alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
-            } else {
+            } else { //Si no hubiese error
+                //Preguntamos la posicion al usuario
                 let posicion = parseInt(prompt("¿En que posicion deseas insertar el valor?"));
 
-                if (isNaN(posicion)) {
+                if (isNaN(posicion)) { //Si no es un numero no hacemos nada
                     alert("No me has mandado una posicion");
                 } else {
-                    if (posicion > usuarios.length + 1) {
+                    if (posicion > usuarios.length + 1) { //Mientras que la posicion no sea 2 veces mayor a la longitud del array
                         alert("No puedes añadir este elemento a la posicion " + posicion + " por que el array tiene " + usuarios.length + " huecos ahora mismo");
-                    } else {
+                    } else { //Podemos insertar el valor en el array
                         usuarios.splice(posicion, 0, textoValue);
                     }
                 }
@@ -112,10 +118,11 @@
         }
 
         function borrarPos() {
+            //Cojemos elemento y valor
             let textoel = document.getElementById("num");
             let textoValue = document.getElementById("num").value;
 
-            let validacion = /^[a-z]{7}\d{3}$/;
+            let validacion = /^[a-z]{7}\d{3}$/; //formato
 
             if (textoValue == "") {
                 textoel.style = "background-color: red;";
@@ -123,13 +130,13 @@
             } else if (textoValue.match(validacion) == null) {
                 textoel.style = "background-color: red;";
                 alert("Formato incorrecto, debes tener 7 letras minusculas y 3 numeros");
-            } else {
+            } else { //Si no nos saltan errores,  preguntamos la posicion
                 let posicion = parseInt(prompt("¿En que posicion deseas borrar el valor?"));
 
                 if (isNaN(posicion)) {
                     alert("No me has mandado una posicion");
                 } else {
-                    if (posicion > usuarios.length) {
+                    if (posicion > usuarios.length) { //Si la posicion es mayor a la longitud, no le dejamos eliminar
                         alert("No puedes borrar este elemento a la posicion " + posicion + " por que el array tiene " + usuarios.length + " huecos ahora mismo");
                     } else {
                         usuarios.splice(0, posicion, textoValue);
