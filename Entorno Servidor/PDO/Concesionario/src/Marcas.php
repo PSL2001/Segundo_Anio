@@ -42,8 +42,21 @@ class Marcas extends Conexion{
         return $stmt;
     }
 
-    public function update(){
+    public function update($id) {
+        $q = "update marcas set nombre=:n, img=:i, pais=:p where id=:id";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':n'=>$this->nombre,
+                ':i'=>$this->img,
+                ':p'=>$this->pais,
+                ':id'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al actualizar la marca: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
     }
     public function delete($id){
         $q="delete from marcas where id=:id";
@@ -60,7 +73,7 @@ class Marcas extends Conexion{
     }
     //_______________  OTROS METODOS _______________________
     public function crearMarcas($cant){
-        $URL_APP="http://127.0.0.1/~pacofer71/pdo/concesionario/public/";
+        $URL_APP="http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public/";
         if(!$this->hayMarcas()){
             $faker=Faker\Factory::create('es_ES');
 
@@ -88,6 +101,39 @@ class Marcas extends Conexion{
         return ($stmt->rowCount()!=0);
     }
 
+    public function leerMarca() {
+        $q = "select * from marcas where id = :i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al leer la marca: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function devolverId() {
+        $q = "select id from marcas";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al devolver la id: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+
+        $ids = [];
+        while ($fila = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $ids[] = $fila->id;
+        }
+        return $ids;
+    }
+    //---------------------------------------------------------
     /**
      * Set the value of id
      *

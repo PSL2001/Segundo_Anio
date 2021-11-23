@@ -30,7 +30,7 @@
             if((new Imagen)->isImagen($_FILES['img']['type'])){
                 //he subido la imagen
                 $imagen=new Imagen;
-                $imagen->setAppUrl("http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public");
+                $imagen->setAppUrl("http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public/");
                 $imagen->setDirStorage(dirname(__DIR__)."/img/marcas/");
                 $imagen->setNombreF($_FILES['img']['name']);
                 if($imagen->guardarImagen($_FILES['img']['tmp_name'])){
@@ -90,6 +90,7 @@
     <h4 class="text-center">Nueva Marca</h4>
     <div class="container mt-2">
         <div class="my-2 p-4 mx-auto" style="background-color:#c0ca33; width:40rem">
+        
             <form name="s" action='<?php echo $_SERVER['PHP_SELF']; ?>' method='POST' enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="n" class="form-label">Nombre Marca</label>
