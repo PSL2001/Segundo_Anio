@@ -9,6 +9,7 @@
     <title>Ejercicio 1</title>
     <script>
         let array = [];
+
         function iniciar() {
             document.getElementById("gen").addEventListener("click", generarArray);
             document.getElementById("visMayor").addEventListener("click", mostrarMayor);
@@ -87,7 +88,7 @@
                         alert("Esta posicion no existe");
                     } else {
                         array.splice(posicion, 1);
-                        alert(array);
+                        document.getElementById("borrayArray").textContent = array;
                     }
                 }
             }
@@ -109,7 +110,32 @@
             if (array.length == 0) {
                 alert("No se ha generado el array");
             } else {
-                
+                let rotaciones = parseInt(prompt("¿Cuantas veces quieres rotar el array?"));
+
+                for (let i = 0; i < rotaciones; i++) {
+                    array.unshift(array, array.splice(1, array.length))
+                }
+                document.getElementById("rotarArray").textContent = array
+            }
+        }
+
+        function nuevoArraysinRepe() {
+            if (array.length != 0) {
+                array.sort(function (n1, n2) {
+                    return n1 - n2;
+                });
+
+                let i = 0;
+                while (i < array.length) {
+                    if (array[i + 1] == array[i]) {
+                        array.splice(i, 1);
+                    } else {
+                        i++;
+                    }
+                }
+                document.getElementById("nuevoArray").textContent = array;
+            } else {
+                alert("Ya se ha creado el array");
             }
         }
     </script>
@@ -134,7 +160,7 @@
     <p id="invArray"></p>
     <br>
     <button id="rotar">Rotar elemento</button>
-    <p id="rotar"></p>
+    <p id="rotarArray"></p>
     <br>
     <button id="nuevoSinRepe">Nuevo array sin repetir numeros</button>
     <p id="nuevoArray"></p>
