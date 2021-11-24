@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 3</title>
+    <script type="text/javascript">
+        var array = [];
+
+        function iniciar() {
+            for (let i = 0; i < 20; i++) {
+                array[i] = random(-50, 50);
+            }
+            document.getElementById("array").textContent += array.toString();
+
+            let pares = array.filter(num => num % 2 == 0)
+            document.getElementById("pares").textContent += pares.toString();
+
+            let num = prompt("Introduce un numero");
+            let mayorN = array.filter(n => n > num);
+            document.getElementById("mayorN").textContent ="¿Es mayor a " + num + "? " + mayorN.toString();
+
+            let raizInt = array.filter(n => Number.isInteger(Math.sqrt(n)));
+            document.getElementById("raizInt").textContent += raizInt.toString();
+
+            let mayorMedia = array.filter(n => n > media);
+            document.getElementById("mayorMedia").textContent += mayorMedia.toString();
+
+            let incremento = array.map(function (n) {
+                return n + 1;
+            });
+            document.getElementById("incremento").textContent += incremento.toString();
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <h2>Filter: </h2>
+    <br>
+    <p id="array">Array:  </p>
+    <p id="pares">Pares:  </p>
+    <p id="mayorN">¿Es mayorN? </p>
+    <p id="raizInt">Raiz es entero: </p>
+    <p id="mayorMedia">Mayor que media: </p>
+    <p id="incremento">Array + 1: </p>
+</body>
+<script type="text/javascript">
+</script>
+
+</html>

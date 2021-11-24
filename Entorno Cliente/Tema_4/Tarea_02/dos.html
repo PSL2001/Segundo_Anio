@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 2</title>
+    <script type="text/javascript">
+        var array = [];
+
+        function iniciar() {
+            for (let i = 0; i < 20; i++) {
+                array[i] = random(-50, 50);
+            }
+            array.forEach(e => {
+                document.getElementById("array").textContent += e + " ";
+            });
+
+            let suma = 0;
+            array.forEach(e => {
+                suma = suma + e;
+            });
+            document.getElementById("suma").textContent += suma;
+
+            let max = Number.MIN_VALUE; //Number.MIN_VALUE coje el numero mas pequeño
+            array.forEach(e => {
+                if (e > max) {
+                    max = e;
+                }
+            });
+            document.getElementById("maximo").textContent += max;
+
+            array.forEach(e => {
+                if (e >= 0) {
+                    document.getElementById("positivos").textContent += e + " ";
+                }
+            });
+
+            array.forEach(e => {
+                if (e > 30) {
+                    let p = document.createElement("p");
+                    let pTexto = document.createTextNode("Numero: " + e);
+                    p.appendChild(pTexto);
+
+                    document.body.appendChild(p);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <h2>Foreach: </h2>
+    <br>
+    <p id="array">Array: </p>
+    <p id="suma">Suma: </p>
+    <p id="maximo">Maximo: </p>
+    <p id="positivos">Valores positivos: </p>
+</body>
+<script type="text/javascript">
+</script>
+
+</html>
