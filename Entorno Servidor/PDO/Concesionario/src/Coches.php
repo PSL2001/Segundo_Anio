@@ -19,7 +19,7 @@ class Coches extends Conexion {
 
     //------------------------CRUD-----------------------
     public function create() {
-        $q="insert into coches(modelo, kms, tipo, color, img, marca_id) values(:m, :k, :t, :c, :i, :mi)";
+        $q="insert into coches(modelo, kilometros, tipo, color, img, marca_id) values(:m, :k, :t, :c, :i, :mi)";
         $stmt=parent::$conexion->prepare($q);
         try{
             $stmt->execute([
@@ -37,8 +37,16 @@ class Coches extends Conexion {
         parent::$conexion=null;
     }
 
-    public function read() {
-
+    public function read(){
+        $q="select * from coches order by marca_id, modelo";
+        $stmt=parent::$conexion->prepare($q);
+        try{
+            $stmt->execute();
+        }catch(PDOException $ex){
+            die("Error al devolver hay coches: ".$ex->getMessage());
+        }
+        parent::$conexion=null;
+        return $stmt;
     }
 
     public function update() {
@@ -58,7 +66,7 @@ class Coches extends Conexion {
             for ($i=0; $i < $cant; $i++) { 
                 (new Coches)->setModelo($faker->words(4, true))
                 ->setKilometros($faker->numberBetween(0, 600))
-                ->setTipo($faker->randomElement(['Electrico', 'Hibrido', 'Gasolina', 'Gasoil', 'GLP'. 'Gas']))
+                ->setTipo($faker->randomElement(['Electrico', 'Hibrido', 'Gasolina', 'Gasoil', 'GLP', 'Gas']))
                 ->setColor($faker->hexColor())
                 ->setImg($URL_APP."img/coches/default.png")
                 ->setMarca_id($id[random_int(0, count($id)-1)])
