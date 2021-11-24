@@ -26,13 +26,18 @@
             let raizInt = array.filter(n => Number.isInteger(Math.sqrt(n)));
             document.getElementById("raizInt").textContent += raizInt.toString();
 
-            let mayorMedia = array.filter(n => n > media);
-            document.getElementById("mayorMedia").textContent += mayorMedia.toString();
-
-            let incremento = array.map(function (n) {
-                return n + 1;
+            let suma = 0;
+            array.forEach(e => {
+                suma = suma + e;
             });
-            document.getElementById("incremento").textContent += incremento.toString();
+
+            let media = suma / array.length;
+
+            let mayorMedia = array.filter(n => n > media);
+            document.getElementById("mayorMedia").textContent = "Mayor que "+ media + ": " + mayorMedia.toString();
+
+            let positivos = array.filter(n => n >= 0)
+            document.getElementById("positivos").textContent += positivos.toString();
         }
     </script>
 </head>
@@ -45,7 +50,7 @@
     <p id="mayorN">¿Es mayorN? </p>
     <p id="raizInt">Raiz es entero: </p>
     <p id="mayorMedia">Mayor que media: </p>
-    <p id="incremento">Array + 1: </p>
+    <p id="positivos">Positivos: </p>
 </body>
 <script type="text/javascript">
 </script>
