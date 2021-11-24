@@ -2,6 +2,7 @@
 namespace Concesionario;
 
 use Faker;
+use PDO;
 use PDOException;
 
 class Coches extends Conexion {
@@ -87,6 +88,38 @@ class Coches extends Conexion {
         parent::$conexion = null;
 
         return ($stmt->rowCount() != 0);
+    }
+
+    public function detallesCoche($id) {
+        $q = "Select * from coches, marcas where marcas.id = coches.marca_id AND coches.id = :i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al mostrar los detalles del coche: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function filtro($c, $t) {
+        $q = "select * from coches where $c=:valor order by modelo";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':valor'=>$t
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al filtrar los detalles del coche: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+
+        return $stmt;
     }
     //---------------------------------------------------
     /**

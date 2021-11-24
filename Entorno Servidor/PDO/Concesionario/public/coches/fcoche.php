@@ -4,8 +4,11 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Concesionario\Coches;
 
-(new Coches)->crearCoches(150);
-$stmt = (new Coches)->read()
+if (!isset($_GET['campo']) && !isset($_GET['valor'])) {
+    header("Location:index.php");
+    die();
+}
+$stmt = (new Coches)->filtro($_GET['campo'], $_GET['valor']);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,7 +41,7 @@ $stmt = (new Coches)->read()
             unset($_SESSION['mensaje']);
         }
         ?>
-        <a href="ccoche.php" class="btn btn-info my-2"><i class="fas fa-plus"></i> Nuevo</a>
+        <a href="cmarca.php" class="btn btn-info my-2"><i class="fas fa-plus"></i> Nuevo</a>
         <table class="table table-striped">
             <thead>
                 <tr>

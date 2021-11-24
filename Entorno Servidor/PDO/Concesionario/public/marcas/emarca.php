@@ -9,7 +9,7 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
 use Concesionario\{Marcas, Imagen};
 
-$URL_APP = "http://127.0.0.1/~pacofer71/pdo/concesionario/public/";
+$URL_APP = "http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public/";
 $error = false;
 //recojo totos los datos de la marca a editar
 $estaMarca = (new Marcas)->leerMarca($id);
@@ -42,7 +42,7 @@ if (isset($_POST['editar'])) {
         if ((new Imagen)->isImagen($_FILES['img']['type'])) {
             //he subido la imagen
             $imagen = new Imagen;
-            $imagen->setAppUrl("http://127.0.0.1/~pacofer71/pdo/concesionario/public/");
+            $imagen->setAppUrl("http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public/");
             $imagen->setDirStorage(dirname(__DIR__) . "/img/marcas/");
             $imagen->setNombreF($_FILES['img']['name']);
             if ($imagen->guardarImagen($_FILES['img']['tmp_name'])) {
