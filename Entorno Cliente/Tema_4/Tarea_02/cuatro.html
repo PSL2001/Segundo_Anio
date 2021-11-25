@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 4</title>
+    <script type="text/javascript">
+        var array = [];
+
+        function iniciar() {
+            for (let i = 0; i < 20; i++) {
+                array[i] = random(-50, 50);
+            }
+            document.getElementById("array").textContent += array.toString();
+
+            let total = array.reduce(((anterior, actual) => anterior + actual), 0);
+            document.getElementById("total").textContent += total.toString();
+
+            let totalpos = array.reduce(function (anterior, actual) {
+                if (actual >= 0) {
+                    return anterior+actual;
+                } else {
+                    return anterior;
+                }
+            }, 0);
+            document.getElementById("totalpos").textContent += totalpos.toString();
+
+            let totalposFilt = array.filter(n => n >= 0).reduce((anterior, actual) => anterior + actual, 0);
+            document.getElementById("totalposFilt").textContent += totalposFilt.toString(); 
+
+            let media = array.reduce((anterior, actual) => anterior + actual, 0) / array.length;
+            document.getElementById("media").textContent += media.toString();
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <h2>Reduce: </h2>
+    <br>
+    <p id="array">Array:  </p>
+    <p id="total">Total:  </p>
+    <p id="totalpos">Total solo positivos:  </p>
+    <p id="totalposFilt">Total solo positivos con filter: </p>
+    <p id="media">Media: </p>
+</body>
+<script type="text/javascript">
+</script>
+
+</html>
