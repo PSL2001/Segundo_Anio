@@ -55,7 +55,17 @@ class Coches extends Conexion {
     }
 
     public function delete() {
+        $q = "delete from coches where id = :i";
+        $stmt = parent::$conexion->prepare($q);
 
+        try {
+            $stmt->execute([
+                ':i'=>$this->id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al borrar el coche: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
     }
     //-----------------------Otros Metodos---------------
     public function crearCoches($cant) {
@@ -103,6 +113,21 @@ class Coches extends Conexion {
         }
         parent::$conexion = null;
 
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function mostrarCoche($id) {
+        $q = "select * from coche where id = :i";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':i'=>$id
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al mostrar el coche: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 

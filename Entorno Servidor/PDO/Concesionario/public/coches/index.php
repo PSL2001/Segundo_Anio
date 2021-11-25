@@ -63,7 +63,7 @@ $stmt = (new Coches)->read()
                     <td><img src='{$fila->img}' width='40rem' height='40rem' class='img-thumbnail'></td>
                     <td>{$fila->tipo}</td>
                     <td>
-                        <form name='a' method='POST' action='bcoches.php'>
+                        <form name='a' method='POST' action='bcoche.php'>
                         <input type='hidden' name='obj' value='$i'>
                         <a href='ecoche.php?id={$fila->id}' class='btn btn-warning'><i class='fas fa-edit'></i></a>
                         <button type='submit' class='btn btn-danger'><i class='fas fa-trash'></i></button>

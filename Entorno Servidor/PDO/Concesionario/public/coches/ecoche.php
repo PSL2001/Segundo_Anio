@@ -1,4 +1,10 @@
 <?php
+if (!isset($_GET['id'])) {
+    header("Location:index.php");
+    die();
+}
+$id = $_GET['id'];
+
 session_start();
 require dirname(__DIR__, 2) . "/vendor/autoload.php";
 
@@ -6,6 +12,7 @@ use Concesionario\{Marcas, Imagen, Coches};
 
 $marcas = (new Marcas)->devolverMarcas();
 $tipos = ['Electrico', 'Hibrido', 'Gasolina', 'Gasoil', 'GLP', 'Gas'];
+$detallesCoche = (new Coches)->mostrarCoche($id);
 
 $URL_APP = "http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public";
 $error = false;
@@ -69,7 +76,7 @@ if (isset($_POST['enviar'])) {
         header("Location:index.php");
     } else {
         //muestro
-        header("Location:{$_SERVER['PHP_SELF']}");
+        header("Location:{$_SERVER['PHP_SELF']}?id=$id");
     }
 } else {
 
@@ -94,7 +101,7 @@ if (isset($_POST['enviar'])) {
         <div class="container mt-2">
             <div class="my-2 p-4 mx-auto" style="background-color:#c0ca33; width:40rem">
 
-                <form name="s" action='<?php echo $_SERVER['PHP_SELF']; ?>' method='POST' enctype="multipart/form-data">
+                <form name="s" action='<?php echo $_SERVER['PHP_SELF'] . "?id=$id"; ?>' method='POST' enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="n" class="form-label">Modelo</label>
                         <input type="text" class="form-control" id="n" required placeholder="Modelo Coche" name="modelo">
@@ -127,23 +134,27 @@ if (isset($_POST['enviar'])) {
                     </div>
 
                     <div class="mb-3">
-                    <label for="i" class="form-label">Tipo</label>
+                        <label for="i" class="form-label">Tipo</label>
                         <select class="form-select" aria-label="Default select example" required name="tipo">
                             <?php
-                             foreach ($tipos as $v) {
-                                 echo "<option>$v</option>";
-                             }
+                            foreach ($tipos as $v) {
+                                if ($v == $detallesCoche->tipo) {
+                                    echo "<option selected>$v</option>";
+                                } else {
+                                    echo "<option>$v</option>";
+                                }
+                            }
                             ?>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                    <label for="i" class="form-label">Marca</label>
+                        <label for="i" class="form-label">Marca</label>
                         <select class="form-select" aria-label="Default select example" required name="marca_id">
                             <?php
-                             foreach ($marcas as $item) {
-                                 echo "<option value='{$item->id}'>{$item->nombre}</option>";
-                             }
+                            foreach ($marcas as $item) {
+                                echo "<option value='{$item->id}'>{$item->nombre}</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -161,7 +172,7 @@ if (isset($_POST['enviar'])) {
 
 
                     <div class="mb-3">
-                        <button type="submit" name="enviar" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                        <button type="submit" name="enviar" class="btn btn-success"><i class="fas fa-edit"></i> editar</button>
                         <button type="reset" class="btn btn-warning"><i class="fas fa-brush"></i> Limpiar</button>
                         <a href="index.php" class="btn btn-primary"><i class="fas fa-home"></i> Inicio</a>
                     </div>

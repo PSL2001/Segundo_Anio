@@ -141,6 +141,19 @@ class Marcas extends Conexion
         }
         return $ids;
     }
+
+    public function devolverMarcas() {
+        $q = "select id, nombre from marcas order by nombre";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("Error al leer las marcas: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
     //---------------------------------------------------------
     /**
      * Set the value of id
