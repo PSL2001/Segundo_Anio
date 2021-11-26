@@ -8,26 +8,26 @@
     <script src="../src/matematicas.js"></script>
     <title>Ejercicio 1</title>
     <script type="text/javascript">
-        var array = [];
+        var array = []; //Creamos el array
 
         function iniciar() {
             for (let i = 0; i < 20; i++) {
-                array[i] = random(-50, 50);
+                array[i] = random(-50, 50); //Cada posicion genera un valor aleatorio entre -50 y 50
             }
-            document.getElementById("array").textContent += array.toString();
+            document.getElementById("array").textContent += array.toString(); //Lo mostramos al usuario
 
             let resto = array.map(function (n) {
-                return n % 2;
+                return n % 2; //devuelve el resto de dividir el valor entre 2
             });
             document.getElementById("resto").textContent += resto.toString();
 
             let positivos = array.map(function (n) {
-                return (n >= 0);
+                return (n >= 0); //Devuelve los valores mayores a 0
             });
             document.getElementById("positivo").textContent += positivos.toString();
 
             let reales = array.map(function (n) {
-                if (n >= 0) {
+                if (n >= 0) { //Devuelve la raiz del valor si es positivo, 0 en otro caso
                     return Math.sqrt(n) + "\n";
                 } else {
                     return 0 + "\n";
@@ -36,12 +36,12 @@
             document.getElementById("real").textContent += reales.toString();
 
             let cadena = array.map(function (n) {
-                return "Numero: " + n;
+                return "Numero: " + n; //Devuelve la cadena "Numero: Valor"
             });
             document.getElementById("cadena").textContent += cadena.toString();
 
             let incremento = array.map(function (n) {
-                return n + 1;
+                return n + 1; //Devuelve el valor sumado a 1
             });
             document.getElementById("incremento").textContent += incremento.toString();
         }

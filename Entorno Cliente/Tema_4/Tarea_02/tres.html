@@ -8,22 +8,22 @@
     <script src="../src/matematicas.js"></script>
     <title>Ejercicio 3</title>
     <script type="text/javascript">
-        var array = [];
+        var array = []; //Creamos el array
 
         function iniciar() {
             for (let i = 0; i < 20; i++) {
-                array[i] = random(-50, 50);
+                array[i] = random(-50, 50); //Generamos los numeros
             }
             document.getElementById("array").textContent += array.toString();
 
-            let pares = array.filter(num => num % 2 == 0)
+            let pares = array.filter(num => num % 2 == 0) //Filtramos los numeros que sean pares
             document.getElementById("pares").textContent += pares.toString();
 
-            let num = prompt("Introduce un numero");
-            let mayorN = array.filter(n => n > num);
+            let num = prompt("Introduce un numero"); //Pedimos un numero
+            let mayorN = array.filter(n => n > num); //Mostramos el array donde n sea mayor a num
             document.getElementById("mayorN").textContent ="¿Es mayor a " + num + "? " + mayorN.toString();
 
-            let raizInt = array.filter(n => Number.isInteger(Math.sqrt(n)));
+            let raizInt = array.filter(n => Number.isInteger(Math.sqrt(n))); //Mostramos los numeros cuya raiz sea un entero
             document.getElementById("raizInt").textContent += raizInt.toString();
 
             let suma = 0;
@@ -31,12 +31,12 @@
                 suma = suma + e;
             });
 
-            let media = suma / array.length;
+            let media = suma / array.length; //La media se calcula haciendo total/cantidad
 
-            let mayorMedia = array.filter(n => n > media);
+            let mayorMedia = array.filter(n => n > media); //Filtramos aquellos que sean mayor a la media
             document.getElementById("mayorMedia").textContent = "Mayor que "+ media + ": " + mayorMedia.toString();
 
-            let positivos = array.filter(n => n >= 0)
+            let positivos = array.filter(n => n >= 0) //Filtramos los positivos
             document.getElementById("positivos").textContent += positivos.toString();
         }
     </script>

@@ -8,38 +8,38 @@
     <script src="../src/matematicas.js"></script>
     <title>Ejercicio 2</title>
     <script type="text/javascript">
-        var array = [];
+        var array = []; //Creamos el array
 
         function iniciar() {
             for (let i = 0; i < 20; i++) {
-                array[i] = random(-50, 50);
+                array[i] = random(-50, 50); //Generamos el array
             }
-            array.forEach(e => {
-                document.getElementById("array").textContent += e + " ";
+            array.forEach(e => { //Para cada elemento del array
+                document.getElementById("array").textContent += e + " "; //Lo mostramos
             });
 
-            let suma = 0;
-            array.forEach(e => {
-                suma = suma + e;
+            let suma = 0; //Creamos una variable de suma
+            array.forEach(e => { //para cada elemento
+                suma = suma + e; //sumamos el acumulador (suma) con el elemento
             });
             document.getElementById("suma").textContent += suma;
 
-            let max = Number.MIN_VALUE; //Number.MIN_VALUE coje el numero mas pequeño
-            array.forEach(e => {
-                if (e > max) {
-                    max = e;
+            let max = Number.MIN_VALUE; //Number.MIN_VALUE coje el numero mas pequeño posible
+            array.forEach(e => { //Para cada elemento del array
+                if (e > max) { //Si e es mayor al maximo,
+                    max = e; //Guardamos el valor
                 }
             });
             document.getElementById("maximo").textContent += max;
 
-            array.forEach(e => {
-                if (e >= 0) {
+            array.forEach(e => { //Para cada elemento
+                if (e >= 0) { //Si e > 0, lo mostramos
                     document.getElementById("positivos").textContent += e + " ";
                 }
             });
 
-            array.forEach(e => {
-                if (e > 30) {
+            array.forEach(e => { //Para cada elemento
+                if (e > 30) { //Si e > 30, creamos un parrafo
                     let p = document.createElement("p");
                     let pTexto = document.createTextNode("Numero: " + e);
                     p.appendChild(pTexto);

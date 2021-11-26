@@ -8,30 +8,30 @@
     <script src="../src/matematicas.js"></script>
     <title>Ejercicio 4</title>
     <script type="text/javascript">
-        var array = [];
+        var array = []; //Creamos el array
 
         function iniciar() {
             for (let i = 0; i < 20; i++) {
-                array[i] = random(-50, 50);
+                array[i] = random(-50, 50); //Por cada posicion, generamos un aleatorio entre -50 y 50
             }
             document.getElementById("array").textContent += array.toString();
 
-            let total = array.reduce(((anterior, actual) => anterior + actual), 0);
+            let total = array.reduce(((anterior, actual) => anterior + actual), 0); //Reducimos el array a la suma total
             document.getElementById("total").textContent += total.toString();
 
-            let totalpos = array.reduce(function (anterior, actual) {
+            let totalpos = array.reduce(function (anterior, actual) { //Reducimos aquellos que sean positivos
                 if (actual >= 0) {
                     return anterior+actual;
                 } else {
-                    return anterior;
+                    return anterior; //Devolvemos el anterior si es negativo (asi no perdemos el valor del acumulador)
                 }
             }, 0);
             document.getElementById("totalpos").textContent += totalpos.toString();
 
-            let totalposFilt = array.filter(n => n >= 0).reduce((anterior, actual) => anterior + actual, 0);
+            let totalposFilt = array.filter(n => n >= 0).reduce((anterior, actual) => anterior + actual, 0); //Filtramos los positivos y reducimos estos al total
             document.getElementById("totalposFilt").textContent += totalposFilt.toString(); 
 
-            let media = array.reduce((anterior, actual) => anterior + actual, 0) / array.length;
+            let media = array.reduce((anterior, actual) => anterior + actual, 0) / array.length; //Reducimos el array al total y lo dividimos entre la longitud del array
             document.getElementById("media").textContent += media.toString();
         }
     </script>
