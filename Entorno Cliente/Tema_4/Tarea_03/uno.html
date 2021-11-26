@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/arrays.js"></script>
+    <script src="../src/matematicas.js"></script>
+    <script type="text/javascript">
+
+        function iniciar() {
+            document.getElementById("generar").addEventListener("click", generarTabla);
+        }
+    </script>
+    <title>Ejercicio 1</title>
+</head>
+
+<body onload="iniciar()">
+    <div id="tabla">
+
+    </div>
+    <br>
+    <button id="generar">Generar Tabla</button>
+    <button id="max">Buscar Maximo</button>
+    <button id="sumafila">Sumar las filas</button>
+    <button id="mediacolumna">Media de las columnas</button>
+    <button id="genTras">Generar Matriz traspuesta</button>
+</body>
+<script type="text/javascript">
+    alert("Antes de usar los botones, debes generar un array multidimensional");
+    let primdis = prompt("¿De cuantos campos quieres la primera dimension?");
+    let segdis = prompt("¿De cuantos campos quieres la segunda dimension?");
+    let array = generarArray(primdis, segdis);
+
+    function generarTabla() {
+            let tabla = document.createElement("table");
+            let tblBody = document.createElement("tbody");
+            for (let i = 0; i < array.length; i++) {
+                let hilera = document.createElement("tr");
+                //Bucle que recorre el array que está en la posición i
+                for (let j = 0; j < array[0].length; j++) {
+                    let celda = document.createElement("td");
+                    let textoCelda = document.createTextNode(array[i][j]);
+                    celda.appendChild(textoCelda);
+                    hilera.appendChild(celda);
+                }
+                // agrega la hilera al final de la tabla (al final del elemento tblbody)
+                tblBody.appendChild(hilera);
+            }
+            // posiciona el <tbody> debajo del elemento <table>
+            tabla.appendChild(tblBody);
+            // juntamos <table> con <body>
+            document.getElementById("tabla").appendChild(tabla);
+            // modifica el atributo "border" de la tabla y lo fija a "2";
+            tabla.setAttribute("border", "2");
+        }
+</script>
+
+</html>
