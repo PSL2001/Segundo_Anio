@@ -117,7 +117,7 @@ class Coches extends Conexion {
     }
 
     public function mostrarCoche($id) {
-        $q = "select * from coche where id = :i";
+        $q = "select * from coches where id = :i";
         $stmt = parent::$conexion->prepare($q);
 
         try {

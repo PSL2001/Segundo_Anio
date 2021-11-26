@@ -104,7 +104,7 @@ if (isset($_POST['enviar'])) {
                 <form name="s" action='<?php echo $_SERVER['PHP_SELF'] . "?id=$id"; ?>' method='POST' enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="n" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="n" required placeholder="Modelo Coche" name="modelo">
+                        <input type="text" class="form-control" id="n" required placeholder="Modelo Coche" value="<?php echo $detallesCoche->modelo ?>" name="modelo">
                         <?php
                         if (isset($_SESSION['modelo'])) {
                             echo "<p class='text-danger mt-1'>{$_SESSION['modelo']}</p>";
@@ -114,7 +114,7 @@ if (isset($_POST['enviar'])) {
                     </div>
                     <div class="mb-3">
                         <label for="p" class="form-label">Kilometros</label>
-                        <input type="number" class="form-control" id="p" placeholder="Km" required name="kilometros" min="0">
+                        <input type="number" class="form-control" id="p" placeholder="Km" required name="kilometros" value="<?php echo $detallesCoche->kilometros ?>" min="0">
                         <?php
                         if (isset($_SESSION['kilometros'])) {
                             echo "<p class='text-danger mt-1'>{$_SESSION['kilometros']}</p>";
@@ -124,7 +124,7 @@ if (isset($_POST['enviar'])) {
                     </div>
                     <div class="mb-3">
                         <label for="p" class="form-label">Color</label>
-                        <input type="text" class="form-control" id="p" placeholder="Color" required name="color">
+                        <input type="text" class="form-control" id="p" placeholder="Color" required name="color" value="<?php echo $detallesCoche->color ?>">
                         <?php
                         if (isset($_SESSION['color'])) {
                             echo "<p class='text-danger mt-1'>{$_SESSION['color']}</p>";
@@ -153,7 +153,12 @@ if (isset($_POST['enviar'])) {
                         <select class="form-select" aria-label="Default select example" required name="marca_id">
                             <?php
                             foreach ($marcas as $item) {
-                                echo "<option value='{$item->id}'>{$item->nombre}</option>";
+                                if ($item->id == $detallesCoche->marca_id) {
+                                    echo "<option value='{$item->id}' selected>{$item->nombre}</option>";
+                                } else {
+                                    echo "<option value='{$item->id}'>{$item->nombre}</option>";
+                                }
+                                
                             }
                             ?>
                         </select>
