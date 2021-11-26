@@ -16,6 +16,7 @@ $detallesCoche = (new Coches)->mostrarCoche($id);
 
 $URL_APP = "http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public";
 $error = false;
+$subeImagen = false; //Booleano para comprobar si he subido imagen o no
 
 function comprobarCampos($n, $v)
 {
@@ -52,6 +53,11 @@ if (isset($_POST['enviar'])) {
             if ($imagen->guardarImagen($_FILES['img']['tmp_name'])) {
                 //genero la url a ese fichero para guararla en la base de datos
                 $coche->setImg($imagen->getUrlImagen('coches'));
+                //Borramos la imagen, pero solo si es distinta a default.png
+                if (basename($detallesCoche->img) != "default.png") {
+                    $imagen->borrarFichero(basename($detallesCoche->img));
+                }
+                $subeImagen = true;
             } else {
                 $error = true;
                 $_SESSION['err_img'] = "No se pudo guardar la imagen";
@@ -61,18 +67,19 @@ if (isset($_POST['enviar'])) {
             $error = true;
             $_SESSION['err_img'] = "El fichero debe ser de tipo imagen";
         }
-    } else {
-        //NO he subido nada
-        $imagen = new Imagen;
-        $imagen->setAppUrl("http://127.0.0.1/~usuario/Entorno%20Servidor/PDO/Concesionario/public/");
-        $coche->setImg($imagen->guardarDefault('coches'));
     }
 
     //fin
     if (!$error) {
         //guardamos la coche
-        $coche->setModelo($m)->setKilometros($k)->setColor($c)->setTipo($t)->setMarca_id($marca_id)->create();
-        $_SESSION['mensaje'] = "Coche guardado.";
+        if (!$subeImagen) { //Si no hemos subido imagen, entonces estamos usando la anterior
+            $coche->setModelo($m)->setKilometros($k)->setColor($c)->setTipo($t)->setMarca_id($marca_id)
+            ->setImg($detallesCoche->img);
+        } else {
+            $coche->setModelo($m)->setKilometros($k)->setColor($c)->setTipo($t)->setMarca_id($marca_id);
+        }
+        $coche->update($id);
+        $_SESSION['mensaje'] = "Coche editado.";
         header("Location:index.php");
     } else {
         //muestro
@@ -93,13 +100,16 @@ if (isset($_POST['enviar'])) {
         <!-- FONTAWESOME -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <title>Crear Coche</title>
+        <title>Editar Coche</title>
     </head>
 
     <body style="background-color:#ff9800">
-        <h4 class="text-center">Nuevo Coche</h4>
+        <h4 class="text-center">Editar Coche</h4>
         <div class="container mt-2">
             <div class="my-2 p-4 mx-auto" style="background-color:#c0ca33; width:40rem">
+                <div class="d-flex justify-content-center mb-1">
+                    <img src="<?php echo $detallesCoche->img; ?>" width='100rem' height='100rem' class='img-thumbnail d-block' />
+                </div>
 
                 <form name="s" action='<?php echo $_SERVER['PHP_SELF'] . "?id=$id"; ?>' method='POST' enctype="multipart/form-data">
                     <div class="mb-3">
@@ -158,7 +168,6 @@ if (isset($_POST['enviar'])) {
                                 } else {
                                     echo "<option value='{$item->id}'>{$item->nombre}</option>";
                                 }
-                                
                             }
                             ?>
                         </select>
@@ -177,8 +186,7 @@ if (isset($_POST['enviar'])) {
 
 
                     <div class="mb-3">
-                        <button type="submit" name="enviar" class="btn btn-success"><i class="fas fa-edit"></i> editar</button>
-                        <button type="reset" class="btn btn-warning"><i class="fas fa-brush"></i> Limpiar</button>
+                        <button type="submit" name="enviar" class="btn btn-success"><i class="fas fa-edit"></i> Editar</button>
                         <a href="index.php" class="btn btn-primary"><i class="fas fa-home"></i> Inicio</a>
                     </div>
                 </form>

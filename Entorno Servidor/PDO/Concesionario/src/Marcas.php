@@ -56,7 +56,7 @@ class Marcas extends Conexion
                 ':n' => $this->nombre,
                 ':i' => $this->img,
                 ':p' => $this->pais,
-                ':id' => $this->id
+                ':id' => $id
             ]);
         } catch (PDOException $ex) {
             die("Error al actualizar la marca: " . $ex->getMessage());
