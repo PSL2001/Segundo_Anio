@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/matematicas.js"></script>
+    <script src="../src/arrays.js"></script>
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <button onclick="sumarArrays(array, arrayDos)">Sumar los arrays</button>
+    <button onclick="sonIgual(array, arrayDos)">Comparar si las matrices son iguales</button>
+    <button onclick="multiplicacion(array, arrayDos)">Calcular el producto</button>
+    <button onclick="sumaDiagonales(array, arrayDos)">Sumar la diagonal</button>
+    <button onclick="sonSimetricas(array, arrayDos)">Comprobar si es simetrica</button>
+</body>
+<script>
+    alert("Antes de usar los botones, debes generar dos arrays multidimensionales");
+    let primdis = prompt("¿De cuantos campos quieres la primera dimension?");
+    let segdis = prompt("¿De cuantos campos quieres la segunda dimension?");
+    let array = generarArray10(primdis, segdis);
+    let arrayDos = generarArray10(primdis, segdis);
+    mostrarArray(array);
+    mostrarArray(arrayDos);
+
+    function sumarArrays(a1, a2) {
+        let suma = sumaArray(a1, a2);
+        alert("La suma es: " + suma);
+    }
+
+    function sonIgual(a1, a2) {
+        let res = sonIguales(a1, a2);
+        if (res == false) {
+            alert("No son iguales");
+        } else {
+            alert("Son iguales");
+        }
+    }
+
+    function multiplicacion(a1, a2) {
+        let res = multiplicarArrays(a1, a2);
+        if (res == false) {
+            alert("No se pueden multiplicar las matrices");
+        } else {
+            mostrarArray(res);
+        }
+    }
+
+    function sumaDiagonales(a1, a2) {
+        let suma_a1 = sumarDiagonal(a1);
+        let suma_a2 = sumaDiagonal(a2);
+    }
+
+    function sonSimetricas(a1, a2) {
+        let res1 = esSimetrica(a1);
+        let res2 = esSimetrica(a2);
+
+        if (res1 == false) {
+            alert("El primer array no es simetrico")
+        } else {
+            alert("El primer array es simetrico");
+        }
+
+        if (res2 == false) {
+            alert("El segundo array no es simetrico");
+        } else {
+            alert("El segundo array no es simetrico");
+        }
+    }
+
+</script>
+</html>

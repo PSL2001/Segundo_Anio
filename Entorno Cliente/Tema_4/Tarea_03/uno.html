@@ -20,12 +20,14 @@
     <button id="suma" onclick="sumaFila()">Sumar las filas</button>
     <button id="media" onclick="media()">Media del Array</button>
     <button id="genTras" onclick="genTras()">Generar Matriz traspuesta</button>
+    <br>
 </body>
 <script type="text/javascript">
     alert("Antes de usar los botones, debes generar un array multidimensional");
     let primdis = prompt("¿De cuantos campos quieres la primera dimension?");
     let segdis = prompt("¿De cuantos campos quieres la segunda dimension?");
     let array = generarArray(primdis, segdis);
+    mostrarArray(array);
 
     function buscarMaximo() {
         let max = buscarMax(array); // Llamamos a la funcion
