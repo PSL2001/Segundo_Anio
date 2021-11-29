@@ -7,25 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../src/arrays.js"></script>
     <script src="../src/matematicas.js"></script>
-    <script type="text/javascript">
-
-        function iniciar() {
-            document.getElementById("generar").addEventListener("click", generarTabla);
-        }
-    </script>
     <title>Ejercicio 1</title>
 </head>
 
-<body onload="iniciar()">
+<body>
     <div id="tabla">
 
     </div>
     <br>
-    <button id="generar">Generar Tabla</button>
-    <button id="max">Buscar Maximo</button>
-    <button id="sumafila">Sumar las filas</button>
-    <button id="mediacolumna">Media de las columnas</button>
-    <button id="genTras">Generar Matriz traspuesta</button>
+    <button id="generar" onclick="generarTabla(array)">Generar Tabla</button>
+    <button id="max" onclick="buscarMaximo()">Buscar Maximo</button>
+    <button id="suma" onclick="sumaFila()">Sumar las filas</button>
+    <button id="media" onclick="media()">Media del Array</button>
+    <button id="genTras" onclick="genTras()">Generar Matriz traspuesta</button>
 </body>
 <script type="text/javascript">
     alert("Antes de usar los botones, debes generar un array multidimensional");
@@ -33,28 +27,26 @@
     let segdis = prompt("¿De cuantos campos quieres la segunda dimension?");
     let array = generarArray(primdis, segdis);
 
-    function generarTabla() {
-            let tabla = document.createElement("table");
-            let tblBody = document.createElement("tbody");
-            for (let i = 0; i < array.length; i++) {
-                let hilera = document.createElement("tr");
-                //Bucle que recorre el array que está en la posición i
-                for (let j = 0; j < array[0].length; j++) {
-                    let celda = document.createElement("td");
-                    let textoCelda = document.createTextNode(array[i][j]);
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                // agrega la hilera al final de la tabla (al final del elemento tblbody)
-                tblBody.appendChild(hilera);
-            }
-            // posiciona el <tbody> debajo del elemento <table>
-            tabla.appendChild(tblBody);
-            // juntamos <table> con <body>
-            document.getElementById("tabla").appendChild(tabla);
-            // modifica el atributo "border" de la tabla y lo fija a "2";
-            tabla.setAttribute("border", "2");
-        }
+    function buscarMaximo() {
+        let max = buscarMax(array); // Llamamos a la funcion
+        alert("El Maximo es: " + max); //mostramos el resultado
+    }
+
+    function sumaFila() {
+        let sumaFilas = sumarFilas(array); //Llamamos a la funcion
+        alert("La suma de las filas es: " + sumaFilas); //Mostramos el resultado
+    }
+
+    function media() {
+        let media = mediaArray(array); //Llamamos a la funcion
+        alert("La media es: " + media); //Mostramos el resultado
+    }
+
+
+    function genTras() {
+        let arrayTras = generarArrayTras(array); // Generamos un nuevo array
+        generarTabla(arrayTras); //Lo mostramos en una tabla
+    }
 </script>
 
 </html>
