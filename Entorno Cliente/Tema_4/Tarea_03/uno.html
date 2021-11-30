@@ -13,6 +13,7 @@
 <body>
     <br>
     <button id="generar" onclick="generarTabla(array)">Generar Tabla</button>
+    <button id="suma" onclick="sumaFila()">Sumar el total</button>
     <button id="max" onclick="buscarMaximo()">Buscar Maximo</button>
     <button id="suma" onclick="sumaFila()">Sumar las filas</button>
     <button id="media" onclick="media()">Media del Array</button>
@@ -31,9 +32,12 @@
         alert("El Maximo es: " + max); //mostramos el resultado
     }
 
+    function suma() {
+        let suma = sumar(array); //Llamamos a la funcion
+        alert("La suma total es: " + sumaFilas); //Mostramos el resultado
+    }
     function sumaFila() {
-        let sumaFilas = sumarFilas(array); //Llamamos a la funcion
-        alert("La suma de las filas es: " + sumaFilas); //Mostramos el resultado
+        let sumaFila = sumarFilas(array);
     }
 
     function media() {

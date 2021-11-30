@@ -67,7 +67,7 @@ function buscarMax(array) {
     return max; //Devolvemos maximo
 }
 
-function sumarFilas(array) {
+function sumar(array) {
     let suma = 0; //Tenemos acumulador
     for (let i = 0; i < array.length; i++) { //Recorremos la primera dimension del array
         for (let j = 0; j < array[0].length; j++) { // Recorremos la segunda dimension
@@ -75,6 +75,16 @@ function sumarFilas(array) {
         }
     }
     return suma; //Devolvemos suma
+}
+
+function sumarFilas(array) {
+    for (let i = 0; i < array.length; i++) { //Por cada fila
+        let suma_fila = 0; //declaramos una variable igual a 0
+        for (let j = 0; j < array[i].length; j++) { // y en las columnas
+            suma_fila += array[i][j]; //Sumamos el total con el valor
+        }
+        document.body.innerHTML += "La suma de la fila " + i + " es igual a " + suma_fila + "<br>"; //Imprimimos el resultado por el doc
+    }
 }
 
 function mediaArray(array) {

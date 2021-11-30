@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script type="text/javascript">
+        function iniciar() {
+            document.getElementById("validar").addEventListener("click", validar);
+        }
+
+        function validar() {
+            let nombre = document.getElementById("nom").value;
+            let apellidos = document.getElementById("ape").value;
+            let dni = document.getElementById("dni").value;
+            let fecha_nac = document.getElementById(fecha_nac).value;
+
+            if (nombre == "") {
+                document.getElementById("nom").style = "background-color: red;";
+                alert("El nombre no puede estar vacio");
+            } else {
+                document.getElementById("nom").style = "background-color: green;";
+            }
+
+            if (apellidos == "") {
+                document.getElementById("ape").style = "background-color: red;";
+                alert("Los apellidos no pueden estar vacios");
+            } else {
+                document.getElementById("ape").style = "background-color: green;";
+            }
+
+            if (dni == "") {
+                document.getElementById("dni").style = "background-color: red;";
+                alert("El dni no puede estar vacio");
+            } else if (!dni.match(/^[0-9]{8}[A-Z]{1}/)) {
+                document.getElementById("dni").style = "background-color: red;";
+                alert("El dni no coincide con la expresion, asegurate que tenga 8 numeros y 1 letra");
+            } else if (!esLetraCorrecta(dni)) {
+                document.getElementById("dni").style = "background-color: red;";
+                alert("La letra del DNI no es correcta");
+            } else {
+                document.getElementById("dni").style = "background-color: green;";
+            }
+
+            
+        }
+    </script>
+</head>
+<body onload="iniciar()">
+    <label for="nombre">Nombre: </label>
+    <br>
+    <input type="text" id="nom">
+    <br>
+    <label for="apellidos">Apellidos: </label>
+    <br>
+    <input type="text" id="ape">
+    <br>
+    <label for="dni">Dni: </label>
+    <br>
+    <input type="text" id="dni">
+    <br>
+    <label for="fecha_nac">Fecha de Nacimiento: </label>
+    <br>
+    <input type="text" id="fecha_nac">
+    <br>
+    <button id="validar">Guardar y Validar</button>
+</body>
+</html>
