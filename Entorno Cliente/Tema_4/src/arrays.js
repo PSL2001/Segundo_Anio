@@ -50,7 +50,7 @@ function generarTabla(array) {
     // posiciona el <tbody> debajo del elemento <table>
     tabla.appendChild(tblBody);
     // juntamos <table> con <body>
-    document.getElementById("tabla").appendChild(tabla);
+    document.body.appendChild(tabla);
     // modifica el atributo "border" de la tabla y lo fija a "2";
     tabla.setAttribute("border", "2");
 }
@@ -91,45 +91,46 @@ function generarArrayTras(array) {
 }
 
 function sumaArray(a1, a2) {
-    let total = 0;
-    for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-            total += a1[i][j] + a2[i][j];
+    let total = 0; //Creamos una variable que acumule el resultado
+    for (let i = 0; i < array.length; i++) { // Recorremos la primera dimension
+        for (let j = 0; j < array[i].length; j++) { // Recorremos la segunda dimension
+            total += a1[i][j] + a2[i][j]; //Sumamos los valores
         }
     }
-    return total;
+    return total; //devolvemos el total
 }
 
 function sonIguales(a1, a2) {
-    let i = a1.length;
-    if (i != a2.length) return false;
+    let i = a1.length; //Guardamos la longitud del primer array
+    if (i != a2.length) return false; //Si el 2do array no tuviera la misma longitud, no son iguales
 
-   while (i--) {
-     if (a1[i] !== a2[i]) return false;
-   }
-   return true;
+    while (i--) { //Mientras reducimos i
+        if (a1[i] !== a2[i]) return false; // Si el resultado de a1[i] es distinto del a2[i], no son iguales
+    }
+    return true; //Si nada salta entonces son iguales
 }
 
 function multiplicarArrays(a1, a2) {
+    //Guardamos las filas y columnas de los arrays
     let fila_a1 = a1.length;
     let col_a1 = a1[0].length;
 
     let fila_a2 = a2.length;
     let col_a2 = a2[0].length;
 
-    if (col_a1 != fila_a2) {
+    if (col_a1 != fila_a2) { //Si la columna del primer array es distinta a la fila de la segunda, no podemos multiplicar
         return false;
     }
 
-    let multiplicacion = new Array(fila_a1);
-    for (x=0; x<multiplicacion.length;x++) {
-        multiplicacion[x] = new Array(col_a2).fill(0);
+    let multiplicacion = new Array(fila_a1); //Creamos un tercer array
+    for (x = 0; x < multiplicacion.length; x++) {
+        multiplicacion[x] = new Array(col_a2).fill(0); //Llenamos el array con 0
     }
 
-    for (let i = 0; i < multiplicacion.length; i++) {
-        for (let j = 0; j < multiplicacion[i].length; j++) { 
+    for (let i = 0; i < multiplicacion.length; i++) { //Ahora recorremos los arrays
+        for (let j = 0; j < multiplicacion[i].length; j++) {
             for (let z = 0; z < col_a1; z++) {
-                multiplicacion [i][j] = multiplicacion [i][j] + a1[i][z]*a2[z][j]; 
+                multiplicacion[i][j] = multiplicacion[i][j] + a1[i][z] * a2[z][j]; //Siendo el resultado la multiplicacion de a1[i][z] * a2[z][j]
             }
         }
     }
@@ -137,16 +138,21 @@ function multiplicarArrays(a1, a2) {
 }
 
 function sumarDiagonal(array) {
-    //Preguntar profe a que direccion (rriba a la izquierda a abajo a la derecha) o (De abajo a la izquierda a arriba a la derecha)
+    //Principal: arriba izquierda a abajo derecha
+    let suma = 0; //tenemos una variable suma
+    for (let i = 0; i < array.length; i++) { //Recorriendo la primera dimension
+        suma += array[i][i]; //Sumamos solo aquellos que tengan las mismas coordenadas (0,0 1,1 2,2....)
+    }
+    return suma; //Devolvemos la suma
 }
 
 function esSimetrica(array) {
-    for (let fila = 1; fila < array.length; fila++) {
-        for (let columna = 0; columna < fila; columna++) {
-            if (array[fila][columna] != array[columna][fila]) {
-                return false;
+    for (let fila = 1; fila < array.length; fila++) { //Recorremos el array por filas
+        for (let columna = 0; columna < fila; columna++) { // Y recorremos estas por columnas
+            if (array[fila][columna] != array[columna][fila]) { //Si el resultado de fila y columna, es distinto del resultado de columna fila,
+                return false; //Entonces no es simetrica
             }
         }
     }
-    return true;
+    return true; //Si no saltara la condicion, entonces es simetrica
 }

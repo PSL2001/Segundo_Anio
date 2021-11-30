@@ -21,8 +21,8 @@
     let segdis = prompt("¿De cuantos campos quieres la segunda dimension?");
     let array = generarArray10(primdis, segdis);
     let arrayDos = generarArray10(primdis, segdis);
-    mostrarArray(array);
-    mostrarArray(arrayDos);
+    generarTabla(array);
+    generarTabla(arrayDos);
 
     function sumarArrays(a1, a2) {
         let suma = sumaArray(a1, a2);
@@ -43,13 +43,16 @@
         if (res == false) {
             alert("No se pueden multiplicar las matrices");
         } else {
-            mostrarArray(res);
+            generarTabla(res);
         }
     }
 
     function sumaDiagonales(a1, a2) {
         let suma_a1 = sumarDiagonal(a1);
-        let suma_a2 = sumaDiagonal(a2);
+        let suma_a2 = sumarDiagonal(a2);
+
+        alert("La suma de la diagonal 1 es: " +suma_a1);
+        alert("La suma de la diagonal 2 es: " + suma_a2);
     }
 
     function sonSimetricas(a1, a2) {
