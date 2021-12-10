@@ -30,6 +30,7 @@
                 this.#dni = dni;
                 this.#fechanac = fechanac;
                 this.#edad = calcularEdad(fechanac);
+                this.numeroAsignaturas = [];
             }
 
             //ATENCION, SI NO SE UTILIZA THIS.#PROPIEDAD EN UN METODO GET
@@ -72,6 +73,11 @@
 
             set edad(edad) {
                 this.#edad = edad;
+            }
+
+            toString() {
+                let cadena = "DNI: " + this.dni + "\nNombre: " + this.apellidos + ", " + this.nombre + "\nNumero de asignaturas: " + this.numeroAsignaturas.length + "\n";
+                return cadena;
             }
         }
          //Definimos el metodo de calcularEdad
@@ -151,9 +157,81 @@
             } else {
                 //Si todo va bien, guardamos los datos en persona
                 document.getElementById("fecha_nac").style = "background-color: green;";
+                if (existeDni(dni)) {
+                    document.getElementById("dni").style = "background-color: red;";
+                    alert("Este DNI ya existe");
+                    return;
+                } else {
                 persona = new Persona(nombre, apellidos, dni, fecha_nac);
                 personas.push(persona);
                 alert("Persona creada con exito");
+                }
+            }
+        }
+
+        function matricular() {
+            if (personas.length == 0) { //Comprobamos que se crea al menos 1 persona
+                alert("No has creado persona");
+            } else {
+                let dni = prompt("Introduce el dni");
+                let matricula = prompt("¿Donde se va a matricular?");
+                for (let i = 0; i < personas.length; i++) {
+                if (personas[i].dni == dni) { //Recorremos array hasta que sean igualeslos dnis
+                    personas[i].numeroAsignaturas.push(matricula); //Ponemos esa asignatura
+                }
+            }
+            }
+        }
+
+        function existeDni(dni) {
+            let comprobar = personas.map( function(n) {
+                return n.dni;
+            }).filter(n => n.includes(dni)); //Mapeamos los dnis del array y filtramos si son iguales al que pasamos
+
+            if (comprobar.length == 0) { //Si la longitud es 0 entonces es que no existe
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+        function mostrar() {
+            let texarea = document.getElementById("mostrar");
+            for (let i = 0; i < personas.length; i++) {
+                texarea.innerHTML += personas[i].toString() + "\n";//Muestra los datos
+            }
+        }
+
+        function mostrarPorDni() {
+            if (personas.length == 0) {
+                alert("Crea al menos 1 persona");
+            } else {
+            let dni = prompt("Introduce el dni");
+            for (let i = 0; i < personas.length; i++) {
+                if (personas[i].dni == dni) { //Lo mismo que mostrar pero solo muestra cuando el dni es igual
+                    document.getElementById("mostrar").innerHTML += personas[i].toString();
+                }
+            }
+            }
+        }
+
+        function mostrarPorAsignatura() {
+            if (personas.length == 0) {
+                alert("Crea al menos 1 persona");
+            } else {
+                let asig = prompt("Introduce la asingnatura");
+                let personasAsig = personas.filter(n => n.numeroAsignaturas == asig); //Filtramos aquellos cuya asignatura sea igual
+                document.getElementById("mostrar").innerHTML += personasAsig.toString();
+            }
+        }
+
+        function mostrarAsignaturasSin() {
+            if (persona.length == 0) {
+                alert("Crea al menos una persona")
+            } else {
+                let personasAsig = personas.filter(n => n.numeroAsignaturas.length != 0); //Filtramos por la longitud de las asignaturas sea distinto de 0 (que esten matriculados)
+                document.getElementById("mostrar").innerHTML += personasAsig.toString();
             }
         }
 
@@ -178,8 +256,13 @@
     <br>
     <input type="text" id="fecha_nac">
     <br>
+    <textarea  id="mostrar" cols="30" rows="10"></textarea>
     <button id="validar" onclick="validar()">Guardar y Validar</button>
     <button onclick="matricular()">Matricular Persona</button>
+    <button onclick="mostrar()">Mostrar Personas</button>
+    <button onclick="mostrarPorDni()">Mostrar persona segun DNI</button>
+    <button onclick="mostrarPorAsignatura()">Mostrar persona segun Asignatura</button>
+    <button onclick="mostrarAsignaturasSin()">Mostrar personas y Asignaturas sin repetir</button>
 </body>
 
 </html>
