@@ -46,7 +46,7 @@
             get estudios() {
                 return this.#estudios;
             }
-            
+
             set estudios(estudios) {
                 this.#estudios = estudios;
             }
@@ -76,8 +76,10 @@
             }
 
             toString() {
-                let cadena = "Identificador: " + this.identificador + "\nNombre Completo: " + this.apellidos + ", " + this.nombre + "\nEstudios: "
-                + this.estudios + "\nPuntuacion: " + this.puntuacion + "\nNivel: " + this.nivel + "\n";
+                let cadena = "Identificador: " + this.identificador + "\nNombre Completo: " + this.apellidos +
+                    ", " + this.nombre + "\nEstudios: " +
+                    this.estudios + "\nPuntuacion: " + this.puntuacion + "\nNivel: " + this.nivel + "\n";
+                return cadena;
             }
 
             static existeIdentificador(identificador) {
@@ -93,7 +95,7 @@
             añadirPuntos(puntos) {
                 this.puntuacion += puntos;
 
-                if (Math.round(this.puntuacion / (puntos + 1)) == this.nivel + 1) {
+                while (Math.round(this.puntuacion / (puntos + 1)) != this.nivel) {
                     this.nivel += 1;
                 }
             }
@@ -104,7 +106,7 @@
             let apellidos = document.getElementById("ape").value.trim();
             let identificador = document.getElementById("ident").value.trim();
 
-            if (nombre == "") { 
+            if (nombre == "") {
                 document.getElementById("nom").style = "background-color: red;";
                 alert("El nombre no puede estar vacio");
                 return;
@@ -124,11 +126,12 @@
                 document.getElementById("ident").style = "background-color: red";
                 alert("El identificador no puede estar vacio");
                 return;
-            } else if(!identificador.match(/[A-Z]{1}[.\-_\d]{7}/)) {
+            } else if (!identificador.match(/[A-Z]{1}[.\-_\d]{7}/)) {
                 document.getElementById("ident").style = "background-color: red";
-                alert("El identificador no sigue la expresion: Asegurate de que el identificador tiene 8 caracteres sean .; -; _; cualquier numero y que el 1er caracter sea una mayuscula");
+                alert(
+                    "El identificador no sigue la expresion: Asegurate de que el identificador tiene 8 caracteres sean .; -; _; cualquier numero y que el 1er caracter sea una mayuscula");
                 return;
-            } else if(Jugador.existeIdentificador(identificador)) {
+            } else if (Jugador.existeIdentificador(identificador)) {
                 document.getElementById("ident").style = "background-color: red";
                 alert("El identificador ya existe");
                 return;
@@ -138,19 +141,76 @@
                 jugadores.push(jugador);
                 alert("Jugador creado con exito");
             }
+        }
 
-            function sumar() {
-                let ident = prompt("Introduce el identificador del jugador a sumar puntos");
+        function sumar() {
+            let ident = prompt("Introduce el identificador del jugador a sumar puntos");
 
-                if (Jugador.existeIdentificador(ident)) {
-                    let jugador = jugadores.filter(n => n.identificador == ident);
-                    console.log(jugador);
+            if (Jugador.existeIdentificador(ident)) {
+                let jugador = jugadores.filter(n => n.identificador == ident);
+                let puntos = parseInt(prompt("¿Cuantos puntos quieres añadir?"));
+                if (isNaN(puntos)) {
+                    alert("No has escrito un numero");
                 } else {
-                    alert("El identificador de este jugador no existe");
+                    jugador[0].añadirPuntos(puntos);
+                    alert("Puntos añadidos");
+                }
+                
+            } else {
+                alert("El identificador de este jugador no existe");
+            }
+        }
+
+        function mostrar() {
+            let texarea = document.getElementById("mostrar");
+            for (let i = 0; i < jugadores.length; i++) {
+                texarea.innerHTML += jugadores[i].toString() + "\n";//Muestra los datos
+            }
+        }
+
+        function mostrarPorIdent() {
+            let ident = prompt("Introduce el identificador del jugador que quieras mostrar");
+
+            if (Jugador.existeIdentificador(ident)) { 
+                let jugador = jugadores.filter(n => n.identificador == ident);
+                document.getElementById("mostrar").innerHTML = jugador[0].toString() + "\n";
+            } else {
+                alert("El identificador no existe");
+            }
+        }
+
+        function cambiarIdentificador() {
+            let ident = prompt("Introduce el identificador del jugador que quieras mostrar");
+
+            if (Jugador.existeIdentificador(ident)) { 
+                let jugador = jugadores.filter(n => n.identificador == ident);
+                let identificadores = jugadores.map(n => n.identificador);
+                let contador = 0;
+                let nuevoIdent = prompt("Introduce el nuevo identificador, asegurate que siga las mismas pautas que el anterior");
+                if (nuevoIdent == "") {
+                alert("El identificador no puede estar vacio");
+                return;
+            } else if (!nuevoIdent.match(/[A-Z]{1}[.\-_\d]{7}/)) {
+                alert("El identificador no sigue la expresion: Asegurate de que el identificador tiene 8 caracteres sean .; -; _; cualquier numero y que el 1er caracter sea una mayuscula");
+                return;
+            } else {
+                identificadores.forEach(element => {
+                    if (jugador[0].identificador == element) {
+                        contador++;
+                    }
+                });
+                if (contador == 2) {
+                    alert("No se puede añadir este identificador por que ya existe");
+                } else {
+                    jugador[0].identificador = nuevoIdent;
                 }
             }
-            
+            } else {
+                alert("El identificador no existe");
+            }
         }
+
+
     </script>
 </head>
 
@@ -167,10 +227,13 @@
     <br>
     <input type="text" id="ident">
     <br>
-    <textarea  id="mostrar" cols="30" rows="10" disabled></textarea>
+    <textarea id="mostrar" cols="30" rows="10" disabled></textarea>
     <br>
     <button onclick="validar()">Validar y Guardar</button>
     <button onclick="sumar()">Sumar Puntos</button>
+    <button onclick="mostrar()">Mostrar Todos los jugadores</button>
+    <button onclick="mostrarPorIdent()">Mostrar jugador por Identificacion</button>
+    <button onclick="cambiarIdentificador()">Cambiar identificacion de jugador</button>
 </body>
 
 </html>
