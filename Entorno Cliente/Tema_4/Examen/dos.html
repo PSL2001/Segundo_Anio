@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/fechas.js"></script>
+    <script src="../src/arrays.js"></script>
+    <script src="../src/matematicas.js"></script>
+    <title>Ejercicio 2</title>
+    <script>
+        var pregunta = null;
+        var preguntas = [];
+        var arrayTabla = generarArray10(10, 10); //Para el ejercicio 2 ya que no pude generar la tabla con las preguntas
+
+        class Pregunta { //Creamos la clase
+            #identificador = "";
+            #titulo = "";
+            #respuesta = "";
+            #profesor = "";
+            #fecha = "";
+
+            constructor (identificador, titulo, respuesta, profesor, fecha) {
+                this.#identificador = identificador;
+                this.#titulo = titulo;
+                this.#respuesta = respuesta;
+                this.#profesor = profesor;
+                this.#fecha = fecha;
+            }
+
+            get identificador() {
+                return this.#identificador;
+            }
+
+            set identificador(identificador) {
+                this.#identificador = identificador;
+            }
+
+            get titulo() {
+                return this.#titulo;
+            }
+
+            set titulo(titulo) {
+                this.#titulo = titulo;
+            }
+
+            get respuesta() {
+                return this.#respuesta;
+            }
+
+            set respuesta(respuesta) {
+                this.#respuesta = respuesta;
+            }
+            
+            get profesor() {
+                return this.#profesor;
+            }
+
+            set profesor(profesor) {
+                this.#profesor = profesor;
+            }
+
+            get fecha() {
+                return this.#fecha;
+            }
+
+            set fecha(fecha) {
+                this.#fecha = fecha;
+            }
+
+            toString() {
+                let cadena = "Identificador: " + this.identificador + "\nPregunta: " + this.titulo + "\nRespuesta: " + this.respuesta
+                + "\nProfesor: " + this.profesor + "\nFecha: " + this.fecha + "\n";
+
+                return cadena;
+            }
+
+            static existeIdentificador(ident) {
+                let existe = preguntas.filter(n => n.identificador == ident);
+
+                if (existe.length == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        //Generamos las preguntas de por defecto
+        pregunta = new Pregunta("DWES-T1-P10", "¿Lenguaje lado servidor?", "PHP", "Francisco Fernández", "25/11/2021");
+        preguntas.push(pregunta);
+        pregunta = null;
+        pregunta = new Pregunta("DAW-T2-P9", "Protocolo seguro de transferencia de hipertexto", "HTTPS", "Jose Manuel Fernández", "25/10/2020");
+        preguntas.push(pregunta);
+        pregunta = null;
+        pregunta = new Pregunta("DIW-T02-P06", "¿Extensión hojas de estilo?", "CSS", "Isabel Cayuela", "16/11/2020");
+        preguntas.push(pregunta);
+        pregunta = null;
+        pregunta = new Pregunta("DWEC-T1-P1", "¿Lenguaje lado cliente?", "Javascript", "Carmen Mari", "12/12/2021");
+        preguntas.push(pregunta);
+        pregunta = null;
+
+
+        function crear() {
+            let identificador = document.getElementById("identificador").value.trim();
+            let titulo = document.getElementById("titulo").value.trim();
+            let respuesta = document.getElementById("respuesta").value.trim().toUpperCase();
+            let profesor = document.getElementById("profesor").value.trim();
+            let fecha = document.getElementById("fecha").value.trim();
+            //cojemos valores y cambiamos el estilo (para que no se quede verde en caso de que se cree otro)
+            document.getElementById("identificador").style = "background-color: none;";
+            document.getElementById("titulo").style = "background-color: none;";
+            document.getElementById("respuesta").style = "background-color: none;";
+            document.getElementById("profesor").style = "background-color: none;";
+            document.getElementById("fecha").style = "background-color: none;";
+
+
+            if (identificador == "") {
+                document.getElementById("output").value = "El identificador no puede estar vacio";
+                return null;
+            } else if(!identificador.match(/^[A-Z]{3,4}\-[T]([0][1-9]|[0-9])\-[P]([0][1-9]|[1]\d|[0-9])$/)) {
+                document.getElementById("output").value = "El identificador no sigue la expresion";
+                return null;
+            } else if(Pregunta.existeIdentificador(identificador)) {
+                document.getElementById("output").value = "El identificador ya existe";
+                return null;
+            } else {
+                document.getElementById("identificador").style = "background-color: green;";
+            }
+
+            if (titulo == "") {
+                document.getElementById("output").value = "El titulo no puede estar vacio";
+                return null;
+            } else {
+                document.getElementById("titulo").style = "background-color: green;";
+            }
+
+            if (respuesta == "") {
+                document.getElementById("output").value = "La respuesta no puede estar vacia";
+                return null;
+            } else {
+                document.getElementById("respuesta").style = "background-color: green;";
+            }
+            
+            if (profesor == "") {
+                document.getElementById("output").value = "El profesor no puede estar vacia";
+                return null;
+            } else {
+                document.getElementById("profesor").style = "background-color: green;";
+            }
+
+            if (fecha == "") {
+                document.getElementById("output").value = "La fecha no puede estar vacia";
+                return null;
+            } else if(!fecha.match(/^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/)) {
+                document.getElementById("output").value = "La fecha no sigue la expresion de dd/mm/aaaa";
+                return null;
+            } else if (!esFecha(fecha)) {
+                document.getElementById("output").value = "El dato introducido no es una fecha valida";
+                return null;
+            } else {
+                document.getElementById("fecha").style = "background-color: green;";
+                pregunta = new Pregunta(identificador, titulo, respuesta, profesor, fecha);
+                preguntas.push(pregunta);
+                pregunta = null;
+                document.getElementById("output").value = "Pregunta Creada";
+            }
+        }
+
+        function consultaIdent() {
+            let ident = document.getElementById("consulta").value.trim();
+            document.getElementById("consulta").style = "background-color: none;";
+
+            if (ident == "") {
+                document.getElementById("output").value = "El identificador no puede estar vacio";
+                return null;
+            } else if(!ident.match(/^[A-Z]{3,4}\-[T]([0][1-9]|[0-9])\-[P]([0][1-9]|[1]\d|[0-9])$/)) {
+                document.getElementById("output").value = "El identificador no sigue la expresion";
+                return null;
+            } else if(!Pregunta.existeIdentificador(ident)) {
+                document.getElementById("output").value = "El identificador introducido no existe";
+                return null;
+            } else {
+                document.getElementById("consulta").style = "background-color: green;";
+                let pregunta = preguntas.filter(n => n.identificador == ident);
+                document.getElementById("salida").innerHTML = pregunta[0].toString();
+            }
+        }
+
+        function borrarPregunta() {
+            let ident = document.getElementById("consulta").value.trim();
+            document.getElementById("consulta").style = "background-color: none;";
+
+            if (ident == "") {
+                document.getElementById("output").value = "El identificador no puede estar vacio";
+                return null;
+            } else if(!ident.match(/^[A-Z]{3,4}\-[T]([0][1-9]|[0-9])\-[P]([0][1-9]|[1]\d|[0-9])$/)) {
+                document.getElementById("output").value = "El identificador no sigue la expresion";
+                return null;
+            } else if(!Pregunta.existeIdentificador(ident)) {
+                document.getElementById("output").value = "El identificador introducido no existe";
+                return null;
+            } else {
+                document.getElementById("consulta").style = "background-color: green;";
+                let pregunta = preguntas.filter(n => n.identificador == ident);
+                let confirmacion = confirm(pregunta[0].toString() + "¿Desea borrar esta pregunta?");
+
+                if (confirmacion == true) {
+                    for (let i = 0; i < preguntas.length; i++) {
+                        if (preguntas[i] == pregunta[0]) {
+                            preguntas.splice(i, 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        function editarPreg() {
+            let ident = document.getElementById("consulta").value.trim();
+            let nuevaFecha = document.getElementById("nuevaFecha").value.trim();
+            document.getElementById("consulta").style = "background-color: none;";
+            document.getElementById("nuevaFecha").style = "background-color: none;";
+
+            if (ident == "") {
+                document.getElementById("output").value = "El identificador no puede estar vacio";
+                return null;
+            } else if(!ident.match(/^[A-Z]{3,4}\-[T]([0][1-9]|[0-9])\-[P]([0][1-9]|[1]\d|[0-9])$/)) {
+                document.getElementById("output").value = "El identificador no sigue la expresion";
+                return null;
+            } else if(!Pregunta.existeIdentificador(ident)) {
+                document.getElementById("output").value = "El identificador introducido no existe";
+                return null;
+            } else {
+                document.getElementById("consulta").style = "background-color: green;";
+            }
+            
+            if (nuevaFecha == "") {
+                document.getElementById("output").value = "La fecha no puede estar vacia";
+                return null;
+            } else if(!nuevaFecha.match(/^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/)) {
+                document.getElementById("output").value = "La fecha no sigue la expresion de dd/mm/aaaa";
+                return null;
+            } else if (!esFecha(nuevaFecha)) {
+                document.getElementById("output").value = "El dato introducido no es una fecha valida";
+                return null;
+            } else {
+                let pregunta = preguntas.filter(n => n.identificador == ident);
+                if (!EsFechaMayor(pregunta[0].fecha, nuevaFecha)) {
+                    document.getElementById("output").value = "La fecha introducida es menor que la existente";
+                    return null;
+                } else {
+                    document.getElementById("nuevaFecha").style = "background-color: green;";
+                    pregunta[0].fecha = nuevaFecha;
+                    document.getElementById("output").value = "Fecha Actualizada";
+                }
+            }
+        }
+
+        function mostrarPreguntas() {
+            let ident = document.getElementById("consulta").value.trim();
+            document.getElementById("consulta").style = "background-color: none;";
+
+            if (ident == "") {
+                document.getElementById("output").value = "El identificador no puede estar vacio";
+                return null;
+            } else if(!ident.match(/^[A-Z]{3,4}\-[T]([0][1-9]|[0-9])\-[P]([0][1-9]|[1]\d|[0-9])$/)) {
+                document.getElementById("output").value = "El identificador no sigue la expresion";
+                return null;
+            } else if(!Pregunta.existeIdentificador(ident)) {
+                document.getElementById("output").value = "El identificador introducido no existe";
+                return null;
+            } else {
+                document.getElementById("consulta").style = "background-color: green;";
+                if (ident[3] == "-") {
+                    let modulo = ident.substring(0, 3);
+                    let pregMod = preguntas.filter(n => n.identificador.substring(0, 3) == modulo);
+                    for (let i = 0; i < pregMod.length; i++) {
+                        document.getElementById("salida").innerHTML += "Pregunta: " + pregMod[i].titulo + "\nRespuesta: " + pregMod[i].respuesta + "\n";                        
+                    }
+                } else {
+                    let modulo = iden.substring(0, 4);
+                    let pregMod = preguntas.filter(n => n.identificador.substring(0, 4) == modulo);
+                    for (let i = 0; i < pregMod.length; i++) {
+                        document.getElementById("salida").innerHTML += "Pregunta: " + pregMod[i].titulo + "\nRespuesta: " + pregMod[i].respuesta + "\n";                        
+                    }
+                }
+            }
+        }
+
+        function cantidadPreguntas() {
+            let profesores = preguntas.map(n => n.profesor);
+            console.log(profesores);
+
+            for (let i = 0; i < profesores.length; i++) {
+                if (preguntas[i].profesor == profesores[i]) {
+
+                }
+            }
+            console.log(profesores);
+        }
+
+        function generarTablaPreg() {
+            //El array es un random entre 0 y 10
+            generarTabla(arrayTabla);
+        }
+
+        function cantidadPregArr(){
+            sumarFilas(arrayTabla);
+        }
+
+        function porcentajeArr() {
+            let suma = sumar(arrayTabla);
+
+            let resultado = suma / arrayTabla.length;
+
+            document.getElementById("salida").innerHTML = "El porcentaje de preguntas es: " + resultado;
+        }
+
+        function intercambiarFilas() {
+            let fila1 = parseInt(document.getElementById("fila1").value.trim());
+            let fila2 = parseInt(document.getElementById("fila2").value.trim());
+            let aux;
+            for (let i = 0; i < arrayTabla.length; i++) {
+                aux = arrayTabla[fila1 - 1][i];
+                arrayTabla[fila1-1][i] = arrayTabla[fila2-1][i];
+                arrayTabla[fila2-1][i] = aux;
+            }
+            generarTabla(arrayTabla);
+        }
+
+    </script>
+</head>
+
+<body>
+    <label for="identificador">Identificador: </label>
+    <br>
+    <input type="text" id="identificador" placeholder="XXX(X)-T(X)X-P(X)X(X)">
+    <br>
+    <label for="titulo">Titulo: </label>
+    <br>
+    <input type="text" id="titulo">
+    <br>
+    <label for="respuesta">Respuesta: </label>
+    <br>
+    <input type="text" id="respuesta">
+    <br>
+    <label for="profesor">Profesor: </label>
+    <br>
+    <input type="text" id="profesor">
+    <br>
+    <label for="fecha">Fecha del Examen: </label>
+    <br>
+    <input type="text" id="fecha">
+    <br>
+    <label for="output">Output: </label>
+    <br>
+    <input type="text" id="output" disabled style="color: red; width: 25rem;">
+    <br>
+    <button onclick="crear()">Crear Pregunta</button>
+    <br>
+    <label for="consulta">Identificador de consulta: </label>
+    <br>
+    <input type="text" id="consulta">
+    <br>
+    <label for="fecha">Nueva fecha del Examen (usar solo si vas a editar una Pregunta): </label>
+    <br>
+    <input type="text" id="nuevaFecha">
+    <br>
+    <button onclick="consultaIdent()">Consulta Por identificador</button>
+    <br>
+    <button onclick="editarPreg()">Edita la fecha de una Pregunta por identificador</button>
+    <br>
+    <button onclick="mostrarPreguntas()">Mostrar las preguntas segun el modulo</button>
+    <br>
+    <textarea id="salida" cols="30" rows="10" disabled></textarea>
+    <br>
+    <button onclick="borrarPregunta()">Borrar Pregunta por identificador</button>
+    <br>
+    <button onclick="cantidadPreguntas()">Mostrar la cantidad de preguntas de cada Profesor</button>
+    <br>
+    <button onclick="generarTablaPreg()">Generar Tabla con preguntas (genera numeros aleatorios)</button>
+    <br>
+    <button onclick="cantidadPregArr()">Muestra la cantidad de preguntas</button>
+    <br>
+    <button onclick="porcentajeArr()">Porcentaje de preguntas que hay de cada numero</button>
+    <br>
+    <label for="fila1">La fila que quieres intercambiar: </label>
+    <br>
+    <input type="text" id="fila1">
+    <br>
+    <label for="fila2">La segunda fila que quieres intercambiar: </label>
+    <br>
+    <input type="text" id="fila2">
+    <br>
+    <button onclick="intercambiarFilas()">Intercambia Filas del array</button>
+    
+</body>
+
+</html>

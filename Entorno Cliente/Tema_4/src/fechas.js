@@ -12,9 +12,14 @@ function esFecha(frase)
     dia = parseInt(dia);
     mes = parseInt(mes);
     anio = parseInt(anio);
-    if (esFechaCorrecta (dia, mes, anio))
+    if (EsMayorHoy(dia, mes, anio)) {
+        return false;
+    } else {
+        if (esFechaCorrecta (dia, mes, anio))
         return true;
     return false;
+    }
+    
 }
 
 function esFechaCorrecta (dia, mes, anio) 
@@ -59,4 +64,39 @@ function dividirFecha (frase)
         a[i] = parseInt(a[i]);
     }
     return a;
+}
+function EsMayorHoy(dia, mes, anio) {
+    let hoy = new Date();
+
+    let dia_hoy = hoy.getDate();
+    let mes_hoy = hoy.getMonth();
+    let anio_hoy = hoy.getFullYear();
+
+    let mes_actual = mes - 1;
+
+    if (anio <= anio_hoy && mes_actual <= mes_hoy) {
+        return false;
+    } else {
+        if (anio == anio_hoy && mes_actual == mes_hoy && dia <= dia_hoy) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+
+function EsFechaMayor(fecha1, fecha2) {
+    let primera = dividirFecha(fecha1);
+    let segunda = dividirFecha(fecha2);
+
+    if (segunda[2] <= primera[2] && segunda[1] <= primera[1]) {
+        return false;
+    } else {
+        if (segunda[2] == primera[2] && segunda[1] == primera[1] && segunda[0] <= primera[0]) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
