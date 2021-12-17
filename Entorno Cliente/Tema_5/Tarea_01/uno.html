@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/fechas.js"></script>
+    <title>Ejercicio 1</title>
+    <script type="text/javascript">
+        var persona = null;
+
+        //Definicion de clase Persona
+
+        class Persona {
+            // Haciendo las variables privadas, se pone una almohadilla (#) delante, pero ademas hay que definirlas
+            #nombre = "";
+            #apellidos = "";
+            #dni = "";
+            #fechanac = "";
+
+            //para acceder a estas propiedades, se pone siempre this.#propiedad
+            //porque si no se pone # es como si estuvieramos llamando a los métodos
+            //get o set, dependiendo del contexto
+            constructor(nombre, apellidos, dni, fechanac) {
+                this.#nombre = nombre;
+                this.#apellidos = apellidos;
+                this.#dni = dni;
+                this.#fechanac = fechanac;
+            }
+
+            /////////////ATENCION, SI NO SE UTILIZA THIS.#PROPIEDAD EN UN METODO GET
+            //////////////ES COMO SI LLAMAMOS AL PROPIO METODO GET
+            //////////////Y SE TRATARÍA DE UN PROCESO RECURSIVO QUE SE QUEDA EN BUCLE
+            get nombre() {
+                return this.#nombre;
+            }
+
+            set nombre(nombre) {
+                this.#nombre = nombre;
+            }
+
+            get apellidos() {
+                return this.#apellidos;
+            }
+
+            set apellidos(apellidos) {
+                this.#apellidos = apellidos;
+            }
+
+            get dni() {
+                return this.#dni;
+            }
+
+            set dni(dni) {
+                this.#dni = dni;
+            }
+
+            get fechanac() {
+                return this.#fechanac;
+            }
+
+            set fechanac(fechanac) {
+                this.#fechanac = fechanac;
+            }
+
+            //////////////////EN EL RESTO DE METODOS PODEMOS OMITIR #
+            /////////////////Y ESTARIAMOS LLAMANDO AL METODO GET
+            //es decir
+            //poner this.#propiedad accede a la propiedad
+            //poner this.propiedad es una llamada al metodo set o get (depende del contexto)
+
+            ///////////////se define el metodo esLetraCorrecta
+            esLetraCorrecta() {
+                let letras = "TRWAGMYFPDXBNJZSQVHLCKE"; //Tenemos una cadena con las letras del dni
+                let letra = this.dni[8]; //Sabemos que el dni tiene la letra en la 8va posicion
+                let numeros = Number.parseInt(this.dni.substring(0, 8)); //Parseamos el resto de la cadena a enteros
+                let resto = numeros % 23; //Para averiguar si la letra es correcta, hay que sacar el resto de la parte entera
+                return(letras[resto] == letra); //Y dependiendo del resto lo comparamos con la letra que nos pasan en la persona
+            }
+
+            //Definimos el metodo calcularEdad
+            calcularEdad() {
+                let fecha = dividirFecha(this.fechanac); //Dividimos la fecha en un array
+                let hoy = new Date(); //Cojemos la fecha de hoy
+                let edad = hoy.getFullYear() - fecha[2]; //Calculamos la edad restando el año actual y el valor que nos pasan
+
+                if (hoy.getMonth() < fecha[1] - 1) { //Si el mes de hoy es menor que el actual-1 (se pone menos 1 porque los meses son de 0 a 11)
+                    edad--; //Quitamos en 1 la edad
+                } else { //En caso contrario
+                    if (hoy.getMonth() == fecha[1]-1 && hoy.getDate() < fecha[0]) { //Si tanto el mes y el dia son menores a los datos que nos pasan
+                        edad--; //Restamos en 1 la edad
+                    }
+                }
+                return edad; //devolvemos la edad
+            }
+
+            //Definimos metodo toString
+            toString() {
+                let cadena = "Nombre: " +this.apellidos + ", " + this.nombre + "\nDNI: " +this.dni.substring(0, 2)+ "." + this.dni.substring(2, 5)
+                + "." + this.dni.substring(5, 8) + "-" + this.dni[8] + "\nFecha de Nacimiento: " + this.fechanac + "\nEdad: " + this.calcularEdad() + " años";
+                
+                return cadena;
+            }
+
+        }
+
+        function validar() {
+            //Cojemos los elementos
+            let nombre = document.getElementById("nom").value.trim();
+            let apellidos = document.getElementById("ape").value.trim();
+            let dni = document.getElementById("dni").value.trim();
+            let fecha_nac = document.getElementById("fecha_nac").value.trim();
+
+            //Validamos los datos del documento
+            if (nombre == "") { 
+                document.getElementById("nom").style = "background-color: red;";
+                alert("El nombre no puede estar vacio");
+                return;
+            } else {
+                document.getElementById("nom").style = "background-color: green;";
+            }
+
+            if (apellidos == "") {
+                document.getElementById("ape").style = "background-color: red;";
+                alert("Los apellidos no pueden estar vacios");
+                return;
+            } else {
+                document.getElementById("ape").style = "background-color: green;";
+            }
+
+            if (dni == "") {
+                document.getElementById("dni").style = "background-color: red;";
+                alert("El dni no puede estar vacio");
+                return;
+            } else if (!dni.match(/^[0-9]{8}[A-Z]{1}/)) { //El DNI sigue el formato de 8 numeros y 1 letra
+                document.getElementById("dni").style = "background-color: red;";
+                alert("El dni no coincide con la expresion, asegurate que tenga 8 numeros y 1 letra");
+                return;
+            } else {
+                document.getElementById("dni").style = "background-color: green;";
+            }
+
+            if (fecha_nac == "") {
+                document.getElementById("fecha_nac").style = "background-color: red;";
+                alert("La fecha no puede estar vacia");
+                return;
+            } else if (fecha_nac.match(/^([1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/) == null) { //La fecha sigue el formato de dd/mm/aaaa
+                document.getElementById("fecha_nac").style = "background-color: red;";
+                alert("La fecha debe cumplir el formato dd/mm/aaaa");
+                return;
+            } else if (!esFecha(fecha_nac)) {
+                document.getElementById("fecha_nac").style = "background-color: red;";
+                alert("La fecha no es correcta");
+                return;
+            } else {
+                //Si todo va bien, guardamos los datos en persona
+                document.getElementById("fecha_nac").style = "background-color: green;";
+                persona = new Persona(nombre, apellidos, dni, fecha_nac);
+                alert("Persona creada con exito");
+            }
+        }
+
+        function comprobarDni() {
+            if (persona == null) {
+                alert("Primero debes crear una persona");
+                return;
+            }
+
+            if (persona.esLetraCorrecta()) { //Llamamos la funcion de la clase persona
+                alert("El Dni es correcto");
+            } else {
+                alert("El Dni no es correcto");
+            }
+        }
+
+        function calcularedad() {
+            if (persona == null) {
+                alert("Primero debes crear una persona")
+            }
+
+            let edad = persona.calcularEdad(); //Llamamos metodo de la clase
+            alert("Tiene " + edad + " años");
+        }
+
+        function visualizar() {
+            if (persona == null) {
+                alert("Primero debes crear una persona");
+            }
+
+            alert(persona.toString()); //Llamamos los metodos de la clase
+        }
+    </script>
+</head>
+
+<body>
+    <label for="nombre">Nombre: </label>
+    <br>
+    <input type="text" id="nom">
+    <br>
+    <label for="apellidos">Apellidos: </label>
+    <br>
+    <input type="text" id="ape">
+    <br>
+    <label for="dni">Dni: </label>
+    <br>
+    <input type="text" id="dni">
+    <br>
+    <label for="fecha_nac">Fecha de Nacimiento: </label>
+    <br>
+    <input type="text" id="fecha_nac">
+    <br>
+    <button id="validar" onclick="validar()">Guardar y Validar</button>
+    <button id="validarDni" onclick="comprobarDni()">Comprobar Dni</button>
+    <button id="calcularEdad" onclick="calcularedad()">Calcular la Edad</button>
+    <button id="mostrar" onclick="visualizar()">Mostrar informacion</button>
+</body>
+
+</html>
