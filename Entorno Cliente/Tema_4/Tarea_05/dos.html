@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
     <script>
         var jugador = null;
         var jugadores = [];
@@ -15,7 +15,7 @@
             #nombre = "";
             #apellidos = "";
             #estudios = null;
-            #puntuacion = 0;
+            #puntuacion = null;
             #nivel = 1;
 
             constructor(identificador, nombre, apellidos) {
@@ -23,8 +23,9 @@
                 this.#nombre = nombre;
                 this.#apellidos = apellidos;
                 this.#estudios = new Array();
-                this.#puntuacion = 0;
+                this.#puntuacion = new Array();
                 this.#nivel = 1;
+                this.#fecha = new Date();
             }
 
             get nombre() {
@@ -152,7 +153,7 @@
                 if (isNaN(puntos)) {
                     alert("No has escrito un numero");
                 } else {
-                    jugador[0].añadirPuntos(puntos);
+                    jugador[0].añadirPuntos([puntos]); //Esto peta, pero no caigo el porque
                     alert("Puntos añadidos");
                 }
                 
