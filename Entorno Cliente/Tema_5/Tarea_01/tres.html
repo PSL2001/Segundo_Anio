@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../src/fechas.js"></script>
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 3</title>
     <script type="text/javascript">
         var persona = null;
 
@@ -216,10 +216,10 @@
     <button id="mostrar">Mostrar informacion</button>
 </body>
 <script>
-    document.getElementById("validar").onclick = validar;
-    document.getElementById("validarDni").onclick = comprobarDni;
-    document.getElementById("calcularEdad").onclick = calcularedad;
-    document.getElementById("mostrar").onclick = visualizar;
+    document.getElementById("validar").attachEvent("onclick", validar);
+    document.getElementById("validarDni").attachEvent("onclick", comprobarDni);
+    document.getElementById("calcularEdad").attachEvent("onclick", calcularedad);
+    document.getElementById("mostrar").attachEvent("onclick", visualizar);
 
 </script>
 
