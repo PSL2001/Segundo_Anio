@@ -1,0 +1,4 @@
+vendor
+composer.lock
+.conf
+node_modules

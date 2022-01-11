@@ -1,0 +1,19 @@
+{
+    "name": "usuario/crud-poblaciones",
+    "type": "project",
+    "license": "Free",
+    "autoload": {
+        "psr-4": {
+            "Examen\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PSL2001",
+            "email": "65461723+PSL2001@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.16"
+    }
+}
