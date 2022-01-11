@@ -5,8 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../src/fechas.js"></script>
+    <script src="../src/fechas_copy.js"></script>
     <title>Ejercicio 2</title>
+    <script>
+        function iniciar() { //Al cargar el body se llama esta funcion
+            //Y genera los eventos de los botones usando el modelo de registro de eventos de la W3C
+            document.getElementById("validar").addEventListener("click", validar);
+            document.getElementById("validarDni").addEventListener("click", comprobarDni);
+            document.getElementById("calcularEdad").addEventListener("click", calcularedad);
+            document.getElementById("mostrar").addEventListener("click", visualizar);
+        }
+    </script>
     <script type="text/javascript">
         var persona = null;
 
@@ -76,7 +85,7 @@
                 let letra = this.dni[8]; //Sabemos que el dni tiene la letra en la 8va posicion
                 let numeros = Number.parseInt(this.dni.substring(0, 8)); //Parseamos el resto de la cadena a enteros
                 let resto = numeros % 23; //Para averiguar si la letra es correcta, hay que sacar el resto de la parte entera
-                return(letras[resto] == letra); //Y dependiendo del resto lo comparamos con la letra que nos pasan en la persona
+                return (letras[resto] == letra); //Y dependiendo del resto lo comparamos con la letra que nos pasan en la persona
             }
 
             //Definimos el metodo calcularEdad
@@ -88,7 +97,7 @@
                 if (hoy.getMonth() < fecha[1] - 1) { //Si el mes de hoy es menor que el actual-1 (se pone menos 1 porque los meses son de 0 a 11)
                     edad--; //Quitamos en 1 la edad
                 } else { //En caso contrario
-                    if (hoy.getMonth() == fecha[1]-1 && hoy.getDate() < fecha[0]) { //Si tanto el mes y el dia son menores a los datos que nos pasan
+                    if (hoy.getMonth() == fecha[1] - 1 && hoy.getDate() < fecha[0]) { //Si tanto el mes y el dia son menores a los datos que nos pasan
                         edad--; //Restamos en 1 la edad
                     }
                 }
@@ -97,9 +106,9 @@
 
             //Definimos metodo toString
             toString() {
-                let cadena = "Nombre: " +this.apellidos + ", " + this.nombre + "\nDNI: " +this.dni.substring(0, 2)+ "." + this.dni.substring(2, 5)
-                + "." + this.dni.substring(5, 8) + "-" + this.dni[8] + "\nFecha de Nacimiento: " + this.fechanac + "\nEdad: " + this.calcularEdad() + " años";
-                
+                let cadena = "Nombre: " + this.apellidos + ", " + this.nombre + "\nDNI: " + this.dni.substring(0, 2) + "." + this.dni.substring(2, 5)
+                    + "." + this.dni.substring(5, 8) + "-" + this.dni[8] + "\nFecha de Nacimiento: " + this.fechanac + "\nEdad: " + this.calcularEdad() + " años";
+
                 return cadena;
             }
 
@@ -113,7 +122,7 @@
             let fecha_nac = document.getElementById("fecha_nac").value.trim();
 
             //Validamos los datos del documento
-            if (nombre == "") { 
+            if (nombre == "") {
                 document.getElementById("nom").style = "background-color: red;";
                 alert("El nombre no puede estar vacio");
                 return;
@@ -193,7 +202,7 @@
     </script>
 </head>
 
-<body>
+<body onload="iniciar()">
     <label for="nombre">Nombre: </label>
     <br>
     <input type="text" id="nom">
@@ -215,11 +224,5 @@
     <button id="calcularEdad">Calcular la Edad</button>
     <button id="mostrar">Mostrar informacion</button>
 </body>
-<script>
-   document.getElementById("validar").addEventListener("click", validar);
-   document.getElementById("validarDni").addEventListener("click", comprobarDni);
-   document.getElementById("calcularEdad").addEventListener("click", calcularedad);
-   document.getElementById("mostrar").addEventListener("click", visualizar);
-</script>
 
 </html>

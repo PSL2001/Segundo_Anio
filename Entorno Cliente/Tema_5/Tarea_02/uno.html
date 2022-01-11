@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script type="text/javascript">
+        var botones = document.getElementsByTagName("button");
+        var parrafos = document.getElementsByTagName("p");
+
+        function iniciar() {
+            for (let i = 0; i < botones.length; i++) {
+                botones[i].id = "btn"+i;
+                parrafos[i].id = "p"+i;
+                botones[i].addEventListener("click", mostrar);
+            }
+        }
+
+        function mostrar(event) {
+            for (let i = 0; i < parrafos.length; i++) {
+                if (event.currentTarget.id.substring(3) == parrafos[i].id.substring(1)) {
+                    if (parrafos[i].style.color == "white") {
+                        parrafos[i].style.color = "black";
+                    } else {
+                        parrafos[i].style.color = "white";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="iniciar()">
+    <table border="1">
+        <thead>
+            <tr>
+                <th colspan="2">Eventos en Javascript</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p>Cada elemento XHTML tiene definida su propia lista de posibles eventos que se le pueden asignar. 
+                        Un mismo tipo de evento (por ejemplo, pinchar el botón izquierdo del ratón) puede estar definido 
+                        para varios elementos XHTML y un mismo elemento XHTML puede tener asociados diferentes eventos.</p>
+                </td>
+                <td>
+                    <button>Mostrar/Ocultar Texto</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Un evento de JavaScript por sí mismo carece de utilidad. 
+                        Para que los eventos resulten útiles, se deben asociar funciones 
+                        o código JavaScript a cada evento. De esta forma, 
+                        cuando se produce un evento se ejecuta el código indicado, 
+                        por lo que la aplicación puede responder ante cualquier evento 
+                        que se produzca durante su ejecución.
+                    </p>
+                </td>
+                <td>
+                    <button>Mostrar/Ocultar Texto</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>El orden en el que se ejecutan los eventos asignados a cada elemento de la página 
+                        es lo que constituye el flujo de eventos. 
+                        Además, existen muchas diferencias en el flujo de eventos de cada navegador.</p>
+                </td>
+                <td>
+                    <button>Mostrar/Ocultar Texto</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
