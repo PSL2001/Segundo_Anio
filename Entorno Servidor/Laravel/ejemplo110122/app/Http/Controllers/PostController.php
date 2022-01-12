@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        //$post = Post::orderBy('id', 'DESC')->get();
+        $post = Post::orderBy('id', 'DESC')->paginate(5);
+        return view('posts.index', compact('post'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -35,7 +37,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        //1- Validamos el form
+        $request->validate([
+            'titulo' => ['required', 'string', 'min:5', 'unique:posts,titulo'],
+            'resumen' => ['required', 'string', 'min:5'],
+            'contenido' => ['required', 'string', 'min:15']
+        ]);
     }
 
     /**

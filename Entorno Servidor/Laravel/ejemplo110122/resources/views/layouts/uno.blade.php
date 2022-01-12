@@ -12,6 +12,6 @@
 </head>
 <body style="background-color: cadetblue;">
     <div class="text-center mt-4 text-2xl text-gray-800">@yield('cabecera')</div>
-    <div class="">@yield('contenido')</div>
+    <div class="max-w-7xl mx-auto px-2 mt-2">@yield('contenido')</div>
 </body>
 </html>
