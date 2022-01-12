@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/eventos.js"></script>
+    <title>Ejercicio 3</title>
+    <script>
+        function iniciar() {
+            let formulario = document.getElementById("form1");
+            let inputs = document.getElementsByTagName("input");
+            let botones = document.getElementsByTagName("button");
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].id = "in"+i;
+                botones[i].id = "btn"+i;
+                inputs[i].addEventListener("mouseover", cambiarColor);
+                inputs[i].addEventListener("mouseout", cambiarColor);
+                botones[i].addEventListener("click", mostrarId);
+            }
+
+        }
+    </script>
+</head>
+
+<body onload="iniciar()">
+    <form action="#" method="post" id="form1">
+        <table border="2">
+            <thead>
+                <tr>
+                    <th colspan="2">Eventos en un formulario</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <label>Introduce texto en este input</label>
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Haz lo mismo aqui</label>
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td>
+                        <button onclick="return false;">Mostrar id de este boton</button>
+                    </td>
+                    <td>
+                        <button onclick="return false;">Mostrar id de este boton</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

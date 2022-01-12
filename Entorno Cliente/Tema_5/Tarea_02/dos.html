@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
     <script type="text/javascript">
-        //Primero cojemos los botones y parrafos
-        var botones = document.getElementsByTagName("button");
+        //Primero cojemos los enlaces y parrafos
+        var enlaces = document.getElementsByTagName("a");
         var parrafos = document.getElementsByTagName("p");
 
         function iniciar() { //Cuando el body termina de cargar, se llama esta funcion
-            for (let i = 0; i < botones.length; i++) { //La cual recorre todos los botones y parrafos y les añade un id y unn evento
-                botones[i].id = "btn"+i;
+            for (let i = 0; i < enlaces.length; i++) { //La cual recorre todos los enlaces y parrafos y les añade un id y unn evento
+                enlaces[i].id = "btn"+i;
                 parrafos[i].id = "p"+i;
-                botones[i].addEventListener("click", mostrar);
+                enlaces[i].addEventListener("click", mostrar);
             }
         }
 
@@ -35,43 +35,43 @@
     <table border="1">
         <thead>
             <tr>
-                <th colspan="2">Eventos en Javascript</th>
+                <th colspan="2">Eventos en Javascript (Edicion botones y enlaces)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
-                    <p>Cada elemento XHTML tiene definida su propia lista de posibles eventos que se le pueden asignar. 
+                    <p>Cada elemento de HTML tiene definida su propia lista de posibles eventos que se le pueden asignar. 
                         Un mismo tipo de evento (por ejemplo, pinchar el botón izquierdo del ratón) puede estar definido 
-                        para varios elementos XHTML y un mismo elemento XHTML puede tener asociados diferentes eventos.</p>
+                        para varios elementos HTML y un mismo elemento puede tener asociados diferentes eventos.</p>
                 </td>
                 <td>
-                    <button>Mostrar/Ocultar Texto</button>
+                    <a href="https://www.google.com/" onclick="return false;">Mostrar/Ocultar Texto</a>
                 </td>
             </tr>
             <tr>
                 <td>
                     <p>
-                        Un evento de JavaScript por sí mismo carece de utilidad. 
-                        Para que los eventos resulten útiles, se deben asociar funciones 
-                        o código JavaScript a cada evento. De esta forma, 
-                        cuando se produce un evento se ejecuta el código indicado, 
-                        por lo que la aplicación puede responder ante cualquier evento 
-                        que se produzca durante su ejecución.
+                        La diferencia entre un boton y un enlace es que el boton no desencadena ninguna accion por defecto, mientras
+                        que un enlace sin importar el evento que se le de, al pulsar con click izquierdo, se te lleva a la pagina que tenga el enlace
+                        en este caso, el boton a la derecha de este parrafo, te llevaria a youtube.com
                     </p>
                 </td>
                 <td>
-                    <button>Mostrar/Ocultar Texto</button>
+                    <a href="https://www.youtube.com/?gl=ES" onclick="return false;">Mostrar/Ocultar Texto</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p>El orden en el que se ejecutan los eventos asignados a cada elemento de la página 
-                        es lo que constituye el flujo de eventos. 
-                        Además, existen muchas diferencias en el flujo de eventos de cada navegador.</p>
+                    <p>
+                        Y, sin embargo, al pulsar con el click izquierdo, te quedas en esta pagina, y esto se repite para los otros enlaces.
+                        La forma en la que se consigue esto es en el mismo enlace escribir lo siguiente: onclick="return false;"
+                        De esta forma, le decimos al enlace que no nos lleve a la pagina de dicho enlace y solo oculta y muestra el texto.
+                        
+                    </p>
                 </td>
                 <td>
-                    <button>Mostrar/Ocultar Texto</button>
+                    <a href="https://www.w3schools.com/" onclick="return false;">Mostrar/Ocultar Texto</a>
                 </td>
             </tr>
         </tbody>
