@@ -20,5 +20,6 @@ function cambiarColor(event) {
 }
 
 function mostrarId(event) {
-    
+    let boton = event.target; //cogemos el evento
+    alert("La id de este elemento es: " + boton.id); //mostramos en una alerta la id de este
 }
