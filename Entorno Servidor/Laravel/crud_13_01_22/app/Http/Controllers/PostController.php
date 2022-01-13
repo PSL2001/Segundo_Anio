@@ -14,9 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //$post = Post::orderBy('id', 'DESC')->get();
-        $post = Post::orderBy('id', 'DESC')->paginate(5);
-        return view('posts.index', compact('post'));
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -37,16 +35,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-        //1- Validamos el form
-        $request->validate([
-            'titulo' => ['required', 'string', 'min:5', 'unique:posts,titulo'],
-            'resumen' => ['required', 'string', 'min:5'],
-            'contenido' => ['required', 'string', 'min:15']
-        ]);
-        //Si llego aqui la validacion ha ido bien, guardamos los datos
-        Post::create($request->all());
-        return redirect()->route('post.index')->with("mensaje", "Post Creado");
+        //
     }
 
     /**
@@ -68,7 +57,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.edit', compact('post'));
+        //
     }
 
     /**
@@ -80,16 +69,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-         //1- Validamos el form
-         $request->validate([
-            'titulo' => ['required', 'string', 'min:5', 'unique:posts,titulo,'.$post->id],
-            'resumen' => ['required', 'string', 'min:5'],
-            'contenido' => ['required', 'string', 'min:15']
-        ]);
-        //Si llego aqui la validacion ha ido bien, guardamos los datos
-        $post->update($request->all());
-        return redirect()->route('post.index')->with("mensaje", "Post Actualizado");
-
+        //
     }
 
     /**
@@ -100,7 +80,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
-        return redirect()->route('post.index')->with("mensaje", "Post Eliminado");
+        //
     }
 }
