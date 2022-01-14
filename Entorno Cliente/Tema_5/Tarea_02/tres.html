@@ -9,10 +9,12 @@
     <title>Ejercicio 3</title>
     <script>
         function iniciar() {
-            let formulario = document.getElementById("form1");
+            //Cojemos elementos del formulario
             let inputs = document.getElementsByTagName("input");
             let botones = document.getElementsByTagName("button");
+            //Aqui deberiamos de tener 2 inputs y 2 botones, recorremos uno de los arrays
             for (let i = 0; i < inputs.length; i++) {
+                //Añadimos los id's y los eventos
                 inputs[i].id = "in"+i;
                 botones[i].id = "btn"+i;
                 inputs[i].addEventListener("mouseover", cambiarColor);
