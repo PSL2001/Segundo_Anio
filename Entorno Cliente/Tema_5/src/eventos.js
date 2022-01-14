@@ -23,3 +23,13 @@ function mostrarId(event) {
     let boton = event.target; //cogemos el evento
     alert("La id de este elemento es: " + boton.id); //mostramos en una alerta la id de este
 }
+
+function siguienteCampo(event) {
+    let input = event.target;
+    let tecla = event.key;
+
+    if (tecla == "Enter") {
+        input.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
+        console.log(input.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling);
+    }
+}
