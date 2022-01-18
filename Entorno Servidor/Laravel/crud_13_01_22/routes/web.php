@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('post', PostController::class);
-Route::resource('category', CategoryController::class);
+Route::resource('categories', CategoryController::class);
+Route::get('post1/{id}', "App\Http\Controllers\PostController@index1")->name("post.index1");

@@ -36,7 +36,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //1. Validamos los datos del formulario
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'unique:categories,nombre'],
+            'descripcion' =>['required', 'string', 'min:5']
+        ]);
+        //Si las validaciones estan bien guardamos los datos
+        Category::create($request->all());
+        return redirect()->route('categories.index')->with('mensaje', "Categoria Creada");
     }
 
     /**
@@ -58,7 +65,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -70,7 +77,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //1. Validamos los datos del formulario
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'unique:categories,nombre,'.$category->id],
+            'descripcion' =>['required', 'string', 'min:5']
+        ]);
+        $category->update($request->all());
+        return redirect()->route('categories.index')->with('mensaje', "Categoría Modificada");
     }
 
     /**
@@ -81,6 +94,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->with('mensaje', "Categoría Borrada");
+
     }
 }

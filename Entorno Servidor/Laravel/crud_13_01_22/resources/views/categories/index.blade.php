@@ -6,7 +6,12 @@ Inicio Categorias
 Listado de Categorias
 @endsection
 @section('contenido')
-<div class="mb-4"><a href="{{route('category.create')}}"
+@if (session('mensaje'))
+<x-alerta1>
+    {{session('mensaje')}}
+</x-alerta1>
+@endif
+<div class="mb-4"><a href="{{route('categories.create')}}"
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     <i class="fas fa-plus"></i> Nueva Categoria</a>
 </div>
@@ -31,7 +36,7 @@ Listado de Categorias
                 @foreach ($category as $item)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        {{$item->id}}
+                        <a href="{{route('post.index1', $item->id)}}" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Posts</a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         {{$item->nombre}}
@@ -39,11 +44,15 @@ Listado de Categorias
                     <td class="px-6 py-4 whitespace-nowrap">
                         {{$item->descripcion}}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        Editar
+                    <td class="px-6 py-4">
+                        <a href="{{route('categories.edit', $item)}}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></a>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        Borrar
+                    <td class="px-6 py-4">
+                        <form action="{{route('categories.destroy', $item)}}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-trash"></i></button>
+                        </form>
                     </td>
                   </tr>
 

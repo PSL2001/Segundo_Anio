@@ -17,6 +17,11 @@ class PostController extends Controller
         $post = Post::orderBy('id', 'DESC')->paginate(5);
         return view('posts.index', compact('post'));
     }
+    public function index1($id) {
+        $post = Post::where('category_id', $id)->orderBy('id', 'DESC')->paginate(5);
+        $flag = true;
+        return view('posts.index', compact('post', 'flag', 'id'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
