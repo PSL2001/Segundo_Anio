@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Category::orderBy('nombre')->get();
+        return view('posts.create', compact('categorias'));
     }
 
     /**
@@ -41,7 +43,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //1. Hacemos la validaciones
+        $request->validate([
+            'titulo'=>['required', 'string', 'min:3', 'max:40' ,'unique:posts,titulo'],
+            'resumen'=>['required', 'string', 'min:5'],
+            'contenido'=>['required', 'string', 'min:10'],
+        ]);
+        //2. Guardo los datos
+        Post::create($request->all());
+        //Mostramos un mensaje
+        return redirect()->route('post.index')->with('mensaje', "Post Creado");
     }
 
     /**
@@ -63,7 +74,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categorias = Category::orderBy('nombre')->get();
+        return view('posts.edit', compact('post', 'categorias'));
     }
 
     /**
@@ -75,7 +87,15 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        //Validamos
+        $request->validate([
+            'titulo'=>['required', 'string', 'min:3', 'max:40' ,'unique:posts,titulo,'.$post->id],
+            'resumen'=>['required', 'string', 'min:5'],
+            'contenido'=>['required', 'string', 'min:10'],
+        ]);
+        //Actualizamos
+        $post->update($request->all());
+        return redirect()->route('post.index')->with('mensaje', "Post Editado");
     }
 
     /**
@@ -86,6 +106,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('post.index')->with('mensaje', "Post Borrado");
     }
 }

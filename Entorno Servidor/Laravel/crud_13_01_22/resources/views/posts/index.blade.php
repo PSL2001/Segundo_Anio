@@ -6,6 +6,9 @@ Inicio Posts
 Listado de @if (isset($flag)) Categoria: {{$id}} @endif
 @endsection
 @section('contenido')
+@if (session('mensaje'))
+<x-alerta1>{{session('mensaje')}}</x-alerta1>
+@endif
 <div class="mb-4"><a href="{{route('post.create')}}"
     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     <i class="fas fa-plus"></i> Nuevo Post</a>
@@ -44,10 +47,14 @@ Listado de @if (isset($flag)) Categoria: {{$id}} @endif
                         {{$item->resumen}}
                     </td>
                     <td class="px-6 py-4">
-                        Editar
+                        <a href="{{route('post.edit', $item)}}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></a>
                     </td>
                     <td class="px-6 py-4">
-                        Borrar
+                        <form action="{{route('post.destroy', $item)}}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-trash"></i></button>
+                        </form>
                     </td>
                   </tr>
 
