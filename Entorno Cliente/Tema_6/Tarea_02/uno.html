@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        //Cuando carga la pagina llamamos la funcion iniciar
+        window.onload = iniciar;
+
+        function iniciar() {
+            //Le damos eventos de click a los botones
+            document.getElementById("enlaces").addEventListener("click", totalEnlaces);
+            document.getElementById("penlace").addEventListener("click", penultA);
+            document.getElementById("prueba").addEventListener("click", EnlacesDe);
+            document.getElementById("atres").addEventListener("click", enlacesenP);
+        }
+
+        //Estas funciones no hacen nada salvo pasar los datos a las funciones que manejan la logica y el resultado de estas
+        function totalEnlaces() {
+            let enlaces = numeroEnlaces();
+            alert("Hay un total de " + enlaces + " enlaces en este documento");
+        }
+
+        function penultA() {
+            let enlace = penultimoA();
+            alert("El penultimo enlace es: " + enlace);
+        }
+
+        function EnlacesDe() {
+            let enlace = "http://prueba/";
+            let cant = numeroEnlacesA(enlace);
+            alert("Hay un total de " + cant + " de enlaces que llevan a http://prueba/");
+        }
+
+        function enlacesenP() {
+            let cant = enlacesEnParrafo(3);
+            alert("Hay un total de " + cant + " enlaces en el 3er parrafo");
+        }
+    </script>
+</head>
+
+<body>
+    <p>
+        Lorem ipsum dolor sit amet,
+        <a href="http://prueba">consectetuer adipiscing elit</a>
+        . Sed mattis enim vitae orci.
+        <a href="http://prueba2">Fusce porta</a>
+        . Duis pellentesque.
+    </p>
+    <p>
+        Aenean at nisl. Maecenas egestas dapibus odio.
+        <a href="http://prueba">Ut bibendum blandit est</a>
+        . Curabitur vestibulum.
+        <a href="http://prueba3">consequat sem quis massa</a>
+        . Donec aliquam euismod.
+    </p>
+    <p>
+        Donec sagittis,
+        <a href="http://prueba">aliquam leo odio sed sem</a>
+        . Quisque eget.
+        <a href="http://prueba4">egestas</a>
+        adipiscing ligula.
+        <a href="http://prueba5">Sed non lectus non est pellentesque</a>
+        auctor.
+    </p>
+    <button id="enlaces">Numero de enlaces</button>
+    <button id="penlace">Mostrar Penultimo enlace</button>
+    <button id="prueba">Numero de enlaces que llevan a http://prueba</button>
+    <button id="atres">Enlaces del 3er parrafo</button>    
+</body>
+
+</html>

@@ -25,11 +25,10 @@ function mostrarId(event) {
 }
 
 function siguienteCampo(event) {
-    let input = event.target;
-    let tecla = event.key;
+    let input = event.target; //Cojemos el objeto
+    let tecla = event.key; //Cojemos la clave que se haya pulsado
 
-    if (tecla == "Enter") {
+    if (tecla == "Enter") { //Si es enter, se va al siguiente input
         input.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
-        console.log(input.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling);
     }
 }
