@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -25,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Category::orderBy('nombre')->get();
+        $tags = Tag::orderBy('nombre')->get();
+        return view('posts.create', compact('categorias', 'tags'));
     }
 
     /**
@@ -36,7 +41,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //1. Validamos los datos que recibimos
+        $request->validate([
+            'titulo'=>['required', 'string', 'min:3', 'unique:posts,titulo'],
+            'resumen'=>['required', 'string', 'min:6'],
+            'contenido'=>['required', 'string', 'min:10'],
+            'imagen'=>['required', 'image', 'max:1024'],
+            'tags'=>['required']
+        ]);
+        //Si llegamos aqui hemos hecho todas las correcciones, guardamos
+        //2. Guardamos el post con la imagen
+        if ($request->file('imagen')) {
+            #Se ha subido la imagen la almaceno fisicamente
+            $url = Storage::put('public/posts', $request->file('image'));
+        }
+        //Guardo el post en la base de datos
+        $post = Post::create($request->all());
+        $post->update([
+            'imagen'=>$url
+        ]);
+        //Almacenamos en la tabla post_tag los tags de este post
+        $post->tags()->attach($request->tags);
+        //-------
+        return redirect()->route('posts.index')->with('mensaje', 'Post Creado');
     }
 
     /**

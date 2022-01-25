@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejericio 1</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            document.getElementById("crearLink").addEventListener("click", creaA);
+            document.getElementById("añadirBr").addEventListener("click", aniadirBr);
+        }
+
+        function creaA() {
+            let enlace = prompt("¿Donde quieres que lleve al enlace? (inserta la url completa si es posible)");
+            let mensaje = prompt("¿Quieres que tenga un texto? (deja esto vacio si no)");
+            let a = createLink(enlace, mensaje);
+            let parrafo = document.getElementsByTagName("p")[1];
+            parrafo.appendChild(a);
+        }
+
+        function aniadirBr() {
+            let parrafos = document.getElementsByTagName("p");
+            for (let i = 0; i < parrafos.length; i++) {
+                let nuevoTexto = createBr(parrafos[i].innerText);
+                parrafos[i].innerHTML = nuevoTexto;
+            }  
+        }
+    </script>
+</head>
+<body>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Adipisci quis necessitatibus dolores. 
+        Magni voluptate est recusandae libero repellendus adipisci, 
+        possimus eligendi, magnam ducimus facilis iure vero distinctio 
+        minus id corporis.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Delectus veritatis magnam quas odit id quod suscipit perferendis, 
+        necessitatibus fuga, voluptate, enim obcaecati commodi consequuntur 
+        ab accusamus! Sapiente nihil ducimus laudantium.
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Unde pariatur delectus ad, cum harum similique, 
+        vitae mollitia aspernatur obcaecati perferendis 
+        quod rerum alias est possimus illum quis praesentium. 
+        Possimus, culpa.
+    </p>
+    <button id="crearLink">Crear un Enlace despues de segundo parrafo</button>
+    <button id="añadirBr">Añadir espacios despues de punto</button>
+</body>
+</html>

@@ -75,3 +75,30 @@ function crearParrafo(texto) { //Hice esta funcion extra para crear parrafos
     }
     return p;
 }
+
+function createLink(link, msg) {
+    let a = document.createElement("a");
+    if (link) {
+        a.setAttribute("href", "http://www." + link);
+    } else {
+        a.setAttribute("href", "#");
+    }
+    if (msg) {
+        let texto = document.createTextNode(msg);
+        a.appendChild(texto); 
+    } else {
+        let texto = document.createTextNode("Texto por defecto");
+        a.appendChild(texto);
+    }
+    return a;
+    
+}
+
+function createBr(texto) {
+    let frases = texto.split(".");
+    let textoBr = "";
+    for (let i = 0; i < frases.length; i++) {
+        textoBr += frases[i] + "<br>";
+    }
+    return textoBr;
+}

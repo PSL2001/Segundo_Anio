@@ -32,3 +32,18 @@ function siguienteCampo(event) {
         input.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.focus();
     }
 }
+
+function cambiaColor(input, color) {
+   input.style = "background-color: " + color + ";"; 
+}
+
+function rotate(event) {
+    let imagen = event.target;
+    let tipo = event.type;
+
+    if (tipo == "click") {
+        console.log("es click");
+    } else if (tipo == "contextmenu") {
+        console.log("Es click derecho");
+    }
+}

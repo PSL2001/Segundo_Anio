@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        window.onload = iniciar;
+
+        function iniciar() {
+            let imagenes = document.getElementsByTagName("img");
+            for (let i = 0; i < imagenes.length; i++) {
+                imagenes[i].addEventListener("click", rotar);
+                imagenes[i].addEventListener("contextmenu", rotar);
+            }
+        }
+
+
+        function rotar() {
+            rotate(event);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/YouTube_social_white_square_%282017%29.svg/800px-YouTube_social_white_square_%282017%29.svg.png" alt="Imagen de youtube" style="width: 15rem; height: 15rem;">
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/640px-Unofficial_JavaScript_logo_2.svg.png" alt="Imagen de Javascript" style="width: 15rem; height: 15rem;">
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="Imagen PHP" style="width: 15rem; height: 15rem;">
+    </div>
+</body>
+</html>

@@ -8,6 +8,31 @@
     <title>Ejercicio 2</title>
     <script src="../src/eventos.js"></script>
     <script>
+        window.onload = iniciar;
+
+        function iniciar() {
+            document.getElementById("color").addEventListener("change", cambiarColor);
+            let th = document.getElementsByTagName("th");
+            let td = document.getElementsByTagName("td");
+            for (let i = 0; i < th.length; i++) {
+                th[i].addEventListener("click", cambiarFondo);
+            }
+            for (let j = 0; j < td.length; j++) {
+                td[j].addEventListener("click", cambiarFondo);
+            }
+        }
+
+        function cambiarColor() {
+            let input = document.getElementById("color_act");
+            let color = document.getElementById("color").value;
+            cambiaColor(input, color);
+        }
+
+        function cambiarFondo() {
+            let fila = event.target;
+            let color = document.getElementById("color").value;
+            cambiaColor(fila, color);
+        }
     </script>
 </head>
 
@@ -60,7 +85,6 @@
     </table>
     <br>
     <input type="color" id="color">
-    <br>
     <input type="text" disabled id="color_act">
 </body>
 

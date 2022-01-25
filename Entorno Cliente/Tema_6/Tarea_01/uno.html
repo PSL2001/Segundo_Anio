@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo 1</title>
+    <style>
+        #id {
+            border: 25rem;
+            border-color: yellowgreen;
+        }
+
+        .clase {
+            font-family: "fantasy";
+            color: blue;
+        }
+    </style>
+    <script>
+        window.onload = iniciar;
+
+        function iniciar() {
+            document.getElementById("id").addEventListener("click", queUsa);
+            document.getElementsByClassName("clase")[0].addEventListener("click", queUsa);
+            document.getElementsByTagName("p")[2].addEventListener("click", cuantoParrafo);
+        }
+
+        function queUsa() {
+            let parrafo = event.target;
+
+           if (parrafo.id != "") {
+               alert("Esta usando un id con el nombre de: " + parrafo.id);
+           }
+
+           if(parrafo.className != "") {
+               alert("esta usando una clase con el nombre de: " + parrafo.className);
+           }
+
+           if (parrafo.id == "" && parrafo.className == "") {
+               alert("No esta usando ids o clases");
+           }
+        }
+
+        function cuantoParrafo() {
+            let parrafos = document.getElementsByTagName("p");
+            alert("Hay un total de " + parrafos.length + " parrafos");
+        }
+    </script>
+</head>
+<body>
+    <p id="id">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quis inventore accusantium, fugiat fuga excepturi fugit voluptate. Deleniti id voluptates modi nihil error atque, earum accusamus tempora commodi excepturi numquam!
+    </p>
+    <p class="clase">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, iusto dolore illum aspernatur perferendis voluptatibus, in nulla commodi, hic illo aliquam cupiditate. Ea obcaecati eveniet aliquid adipisci natus optio quod!
+    </p>
+    <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam nulla possimus excepturi eum nesciunt sunt odio dolorum fugiat debitis autem voluptates odit laborum, cupiditate in repudiandae illum nihil inventore perspiciatis?
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet cupiditate illum fugit aliquid incidunt, accusamus saepe excepturi. Deserunt blanditiis molestias quod tempore praesentium inventore aut minus obcaecati explicabo debitis? Quidem!
+    </p>
+    <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias esse unde officia ullam accusamus cupiditate architecto aliquam animi omnis assumenda quasi, dolores non vitae quas ex doloremque sit amet dolorum!
+    </p>
+</body>
+</html>
