@@ -9,11 +9,13 @@
     <script src="../src/eventos.js"></script>
     <title>Ejercicio 1</title>
     <script>
+        //Cuando carga la ventana, llamamos a la funcion
         window.onload = iniciar;
         
         var inputs = document.getElementsByTagName("input");
         function iniciar() {
             for (let i = 0; i < inputs.length; i++) {
+                //le damos eventos a los inputs
                 inputs[i].addEventListener("keypress", siguienteCampo);
             }
         }

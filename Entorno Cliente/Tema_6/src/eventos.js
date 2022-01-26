@@ -33,6 +33,23 @@ function siguienteCampo(event) {
     }
 }
 
+function cambiaColor(input, color) {
+    //La funcion recoje tanto el input como el color y cambia el color de fondo
+   input.style = "background-color: " + color + ";"; 
+}
+
+function rotate(event) {
+    //Guardamos el elemento y el tipo de evento que han llamado a la funcion
+    let imagen = event.target;
+    let tipo = event.type;
+
+    if (tipo == "click") { //Si el tipo de evento era un click (click izquierdo)
+        imagen.style.transform += "rotate(90deg)"; //Rotamos 90º
+    } else if (tipo == "contextmenu") { //Pero si se ha abierto el menu de contexto (funcion default del click derecho)
+        imagen.style.transform += "rotate(-90deg)"; //Rotamos en el sentido contrario
+    }
+}
+
 
 function numeroEnlaces() {
     let enlaces = document.getElementsByTagName("a"); //Primero cojemos los elementos de enlace del documento
@@ -77,28 +94,38 @@ function crearParrafo(texto) { //Hice esta funcion extra para crear parrafos
 }
 
 function createLink(link, msg) {
+    //Primero creamos el elemento de enlace
     let a = document.createElement("a");
-    if (link) {
+    if (link) { //Si nos han pasado un enlace
+        //Añadimos el atributo href con dicho enlace (ten en cuenta que link tiene que llevar .com al final de este)
         a.setAttribute("href", "http://www." + link);
-    } else {
+    } else { //Si no nos llegara el enlace
+        //Añadimos un #
         a.setAttribute("href", "#");
     }
-    if (msg) {
+    if (msg) { //Si nos ha llegado un mensaje
+        //Añadimos el texto y lo añadimos al enlace
         let texto = document.createTextNode(msg);
         a.appendChild(texto); 
-    } else {
+    } else { //En otro caso
+        //Añadimos entonces un texto por defecto y lo añadimos al enlace
         let texto = document.createTextNode("Texto por defecto");
         a.appendChild(texto);
     }
+    //Por ultimo devolvemos el enlace
     return a;
     
 }
 
 function createBr(texto) {
+    //La frase espera un texto en string, cuando recive el texto lo separa en un array por puntos
     let frases = texto.split(".");
+    //Creamos otra variable que es una cadena vacia
     let textoBr = "";
     for (let i = 0; i < frases.length; i++) {
+        //Para cada posicion del array, le añadimos la frase misma mas un <br>
         textoBr += frases[i] + "<br>";
     }
+    //Devolvemos el texto
     return textoBr;
 }

@@ -8,9 +8,11 @@
     <title>Ejercicio 2</title>
     <script src="../src/eventos.js"></script>
     <script>
+        //Cargamos los eventos al cargar la pagina
         window.onload = iniciar;
 
         function iniciar() {
+            //Damos los eventos a toda la tabla y a los botones
             document.getElementById("color").addEventListener("change", cambiarColor);
             let th = document.getElementsByTagName("th");
             let td = document.getElementsByTagName("td");
@@ -23,14 +25,17 @@
         }
 
         function cambiarColor() {
+            //Guardamos tanto el input como el color y mandamos los datos a la funcion manejadora
             let input = document.getElementById("color_act");
             let color = document.getElementById("color").value;
             cambiaColor(input, color);
         }
 
         function cambiarFondo() {
+            //Guardamos tanto la fila como el color
             let fila = event.target;
             let color = document.getElementById("color").value;
+            //Y se lo pasamos a la funcion manejadora
             cambiaColor(fila, color);
         }
     </script>

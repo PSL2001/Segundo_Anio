@@ -7,19 +7,26 @@
     <title>Ejercicio 3</title>
     <script src="../src/eventos.js"></script>
     <script>
+        //Cuando carga la ventana iniciamos
         window.onload = iniciar;
 
         function iniciar() {
+            //Guardamos las imagenes
             let imagenes = document.getElementsByTagName("img");
             for (let i = 0; i < imagenes.length; i++) {
+                //Les añadimos eventos
                 imagenes[i].addEventListener("click", rotar);
-                imagenes[i].addEventListener("contextmenu", rotar);
+                //imagenes[i].addEventListener("contextmenu", rotar);
+                imagenes[i].oncontextmenu = rotar;
             }
         }
 
 
         function rotar() {
+            //Esta funcion llama a la funcion que maneja la logica
             rotate(event);
+            //Retornamos falso en caso de que al pulsar click derecho (cotexmenu), no habra el menu de contexto
+            return false;
         }
     </script>
 </head>

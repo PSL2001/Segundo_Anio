@@ -34,16 +34,18 @@ function siguienteCampo(event) {
 }
 
 function cambiaColor(input, color) {
+    //La funcion recoje tanto el input como el color y cambia el color de fondo
    input.style = "background-color: " + color + ";"; 
 }
 
 function rotate(event) {
+    //Guardamos el elemento y el tipo de evento que han llamado a la funcion
     let imagen = event.target;
     let tipo = event.type;
 
-    if (tipo == "click") {
-        console.log("es click");
-    } else if (tipo == "contextmenu") {
-        console.log("Es click derecho");
+    if (tipo == "click") { //Si el tipo de evento era un click (click izquierdo)
+        imagen.style.transform += "rotate(90deg)"; //Rotamos 90º
+    } else if (tipo == "contextmenu") { //Pero si se ha abierto el menu de contexto (funcion default del click derecho)
+        imagen.style.transform += "rotate(-90deg)"; //Rotamos en el sentido contrario
     }
 }
