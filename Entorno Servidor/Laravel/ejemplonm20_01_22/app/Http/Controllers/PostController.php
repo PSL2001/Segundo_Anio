@@ -53,7 +53,7 @@ class PostController extends Controller
         //2. Guardamos el post con la imagen
         if ($request->file('imagen')) {
             #Se ha subido la imagen la almaceno fisicamente
-            $url = Storage::put('public/posts', $request->file('image'));
+            $url = Storage::put('public/posts', $request->file('imagen'));
         }
         //Guardo el post en la base de datos
         $post = Post::create($request->all());

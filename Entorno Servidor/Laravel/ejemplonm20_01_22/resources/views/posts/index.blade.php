@@ -7,6 +7,9 @@
 @endsection
 @section('contenido')
     <!-- This example requires Tailwind CSS v2.0+ -->
+    @if (session('mensaje'))
+    <x-alerta1>{{session('mensaje')}}</x-alerta1>
+    @endif
     <div class="mb-4">
         <a href="{{route('posts.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <i class="fas fa-plus"></i> Nuevo</a>
