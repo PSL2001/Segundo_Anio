@@ -85,7 +85,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categorias = Category::orderBy('nombre')->get();
+        $tags = Tag::orderBy('nombre')->get();
+        return view('posts.edit', compact('post', 'tags', 'categorias'));
     }
 
     /**
@@ -108,6 +110,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        //1. Borro la imagen asociada al post
+        Storage::delete("public/".$post->imagen);
+        //2. Borro el post
+        $post->delete();
+        //3. Redireccionamos
+        return redirect()->route('posts.index')->with('mensaje', 'Post Borrado');
     }
 }
