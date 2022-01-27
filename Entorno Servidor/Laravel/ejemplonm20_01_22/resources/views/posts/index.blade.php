@@ -14,6 +14,31 @@
         <a href="{{route('posts.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <i class="fas fa-plus"></i> Nuevo</a>
     </div>
+    <form action="{{route('posts.index')}}" name="as" method="GET">
+    <div class="flex mb-4">
+        <div class="w-1/2">
+            <input type="search" value="{{$request->titulo}}" name="titulo" placeholder="Buscar" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 py-2 sm:text-sm border-gray-300 rounded-md">
+        </div>
+        <div class="ml-2 w-1/4">
+            <select name="category_id"
+                    class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 py-2 sm:text-sm border-gray-300 rounded-md">
+                    <option value="-10" @if($request->category_id == "-10") selected @endif>Cualquiera</option>
+                    @foreach ($categorias as $item)
+                        <option value="{{ $item->id }}" @if ($item->id == $request->category_id) selected  @endif>{{ $item->nombre }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="ml-4">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="ml-4">
+            <button type="reset" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-brush"></i></button>
+        </div>
+    </div>
+    </form>
+    @if (count($posts) == 0)
+    <x-alerta1>No se ha encontrado ningun post</x-alerta1>
+    @else
     <x-tabla1>
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
@@ -77,7 +102,8 @@
             </tbody>
         </table>
     </x-tabla1>
+    @endif
     <div class="mt-2">
-        {{ $posts->links() }}
+        {{$posts->appends($request->except('page'))->links()}}
     </div>
 @endsection

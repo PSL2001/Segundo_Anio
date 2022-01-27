@@ -15,10 +15,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(6);
-        return view('posts.index', compact('posts'));
+        $categorias = Category::orderBy('nombre')->get();
+        $posts = Post::orderBy('id', 'desc')
+        ->titulo($request->titulo)
+        ->category_id($request->category_id)
+        ->paginate(6);
+        return view('posts.index', compact('posts', 'categorias' ,'request'));
     }
 
     /**
@@ -74,7 +78,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -87,7 +91,8 @@ class PostController extends Controller
     {
         $categorias = Category::orderBy('nombre')->get();
         $tags = Tag::orderBy('nombre')->get();
-        return view('posts.edit', compact('post', 'tags', 'categorias'));
+        $array = $post->tags->pluck('id')->toArray();
+        return view('posts.edit', compact('post', 'tags', 'categorias', 'array'));
     }
 
     /**
@@ -99,7 +104,33 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+         //1. Validamos los datos que recibimos
+         $request->validate([
+            'titulo'=>['required', 'string', 'min:3', 'unique:posts,titulo,'.$post->id],
+            'resumen'=>['required', 'string', 'min:6'],
+            'contenido'=>['required', 'string', 'min:10'],
+            'imagen'=>['nullable', 'image', 'max:1024'],
+            'tags'=>['required']
+        ]);
+        if ($request->file('imagen')) {
+            # Queremos cambiar la imagen
+            //Debemos borrar la imagen antigua
+            Storage::delete("public/".$post->imagen);
+            //La almacenamos y guardamos la url
+            $url = Storage::put('public/posts', $request->file('imagen'));
+            $post->update($request->all());
+            //Cambiamos la url por la url buena
+            $post->update([
+                'imagen' => $url
+            ]);
+        } else {
+            # No queremos cambiar la imagen
+            $post->update($request->all());
+        }
+        //Ahora guardamos los tags de los post
+        $post->tags()->sync($request->tags);
+        //Volvemos al index
+        return redirect()->route('posts.index')->with('mensaje', 'Post Actualizado');
     }
 
     /**

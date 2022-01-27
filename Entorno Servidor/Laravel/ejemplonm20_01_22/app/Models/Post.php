@@ -19,4 +19,22 @@ class Post extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
+
+
+    //Scope para la barra de busqueda de index
+    public function scopeTitulo($query, $v) {
+        if (isset($v)) {
+            return $query->where('titulo', 'like', "%$v%");
+        }
+        return $query->where('titulo', 'like', '%');
+
+    }
+
+    //Scope para el select de Category_Id de index
+    public function scopeCategory_id($query, $v) {
+        if ($v == "-10") {
+            return $query->where('category_id', 'like', '%');
+        }
+        return $query->where('category_id', $v);
+    }
 }

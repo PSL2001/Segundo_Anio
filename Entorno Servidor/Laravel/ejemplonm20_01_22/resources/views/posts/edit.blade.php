@@ -52,12 +52,11 @@ Modificando Registro {{$post->id}}
         </div>
         <div class="mr-2 font">
             <p class="block text-sm font-medium text-gray-700 mb-2">Etiquetas</p>
-            @php $array = $post->tags->pluck('id')->toArray() @endphp
             @foreach ($tags as $tag)
                 &nbsp;
                 <label for="{{ $tag->id }}"></label>
                 <input type="checkbox" id="{{ $tag->id }}" name="tags[]"
-                    value="{{ $tag->id }}">{{ $tag->nombre }} @if(in_array($tag->id, $array)) checked @endif>
+                    value="{{ $tag->id }}" @if(in_array($tag->id, $array)) checked @endif>{{ $tag->nombre }}
             @endforeach
             @error('tags')
             <p class="text-sm text-red-500 mt-3">{{ $message }}</p>
