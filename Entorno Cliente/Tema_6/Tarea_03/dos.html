@@ -14,6 +14,8 @@
             //Añadimos los eventos correspondientes
             document.getElementById("crearLink").addEventListener("click", creaA);
             document.getElementById("añadirBr").addEventListener("click", aniadirBr);
+            document.getElementById("contar").addEventListener("click", cuentaPalabras);
+            document.getElementById("cambiar").addEventListener("click", cambiarColor);
         }
 
         function creaA() {
@@ -37,6 +39,33 @@
                 //Modificamos el innerHTML que añade estos br
                 parrafos[i].innerHTML = nuevoTexto;
             }  
+        }
+
+        function cuentaPalabras() {
+            //Guardamos los parrafos
+            let parrafos = document.getElementsByTagName("p");
+            //Guardamos los resultados en un array
+            let totalPalabras = [];
+            for (let i = 0; i < parrafos.length; i++) { //Para cada parrafo
+                //Guardamos su texto
+                let texto = parrafos[i].textContent;
+                //Y contamos sus palabras
+                let total = countWords(texto);
+                //Guardamos el resultado en el array vacio
+                totalPalabras[i] = "Hay un total de " + total + " palabras en el parrafo " + (i+1);
+            }
+            //Por ultimo creamos una lista y añadimos esta al documento
+            let lista = crearLista(totalPalabras, true);
+            document.body.appendChild(lista);
+        }
+
+        function cambiarColor() {
+            //Guardamos el parrafo
+            let parrafo = document.getElementsByTagName("p")[1];
+            //Le cambiamos el color a rojo
+            let color = cambioFondo(parrafo, "red");
+            //Y cambiamos el estilo
+            parrafo.style.backgroundColor = color;
         }
     </script>
 </head>
@@ -63,5 +92,7 @@
     </p>
     <button id="crearLink">Crear un Enlace despues de segundo parrafo</button>
     <button id="añadirBr">Añadir espacios despues de punto</button>
+    <button id="contar">Contar Palabras</button>
+    <button id="cambiar">Camibar Color del segundo parrafo</button>
 </body>
 </html>

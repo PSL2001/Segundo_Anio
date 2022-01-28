@@ -35,7 +35,7 @@ function siguienteCampo(event) {
 
 function cambiaColor(input, color) {
     //La funcion recoje tanto el input como el color y cambia el color de fondo
-   input.style = "background-color: " + color + ";"; 
+    input.style = "background-color: " + color + ";";
 }
 
 function rotate(event) {
@@ -58,7 +58,7 @@ function numeroEnlaces() {
 
 function penultimoA() {
     let enlaces = document.getElementsByTagName("a"); //Primero guardamos todos los enlaces del documento
-    let penultimo = enlaces[enlaces.length-2]; //Y para obtener el penultimo le quitamos 2 a la longitud (Si quitando 1 devuelve la posicion, quitando 2 devuelve el penultimo)
+    let penultimo = enlaces[enlaces.length - 2]; //Y para obtener el penultimo le quitamos 2 a la longitud (Si quitando 1 devuelve la posicion, quitando 2 devuelve el penultimo)
     return penultimo; //Devolvemos el enlace
 }
 
@@ -86,7 +86,7 @@ function enlacesEnParrafo(numPar) {
 
 function crearParrafo(texto) { //Hice esta funcion extra para crear parrafos
     let p = document.createElement("p"); //Primero crea el elemento p
-    if(texto){ //Si fuera a pasar texto a introducir el parrafo
+    if (texto) { //Si fuera a pasar texto a introducir el parrafo
         let pText = document.createTextNode(texto); //Creamos una variable que tiene el texto
         p.appendChild(pText);
     }
@@ -106,7 +106,7 @@ function createLink(link, msg) {
     if (msg) { //Si nos ha llegado un mensaje
         //Añadimos el texto y lo añadimos al enlace
         let texto = document.createTextNode(msg);
-        a.appendChild(texto); 
+        a.appendChild(texto);
     } else { //En otro caso
         //Añadimos entonces un texto por defecto y lo añadimos al enlace
         let texto = document.createTextNode("Texto por defecto");
@@ -114,7 +114,7 @@ function createLink(link, msg) {
     }
     //Por ultimo devolvemos el enlace
     return a;
-    
+
 }
 
 function createBr(texto) {
@@ -128,4 +128,52 @@ function createBr(texto) {
     }
     //Devolvemos el texto
     return textoBr;
+}
+
+function countWords(texto) {
+    //Separa el texto por espacios siendo la longitud del nuevo array, las palabras que existen
+    let palabras = texto.split(" ");
+    return palabras.length;
+}
+
+/*
+* E: Texto (normalmente en un array) string
+* E2: Boolean, que me dicta si el usuario quiere la lista ordenada o no
+* S: Una lista tanto ordenada como desordenada
+*/
+function crearLista(textoArr, ordenada) {
+    if (!ordenada) { //Si el usuario no la quiere ordenada (ordenada = false)
+        let ul = document.createElement("ul"); //Creamos una lista desordenada (ul)
+        for (let i = 0; i < textoArr.length; i++) { // Y para cada texto que exista en el array
+            let li = document.createElement("li"); //Creamos una etiqueta li
+            let textLi = document.createTextNode(textoArr[i]); //Le añadimos el texto
+            li.appendChild(textLi); //Y combinamos tanto texto como li al ul
+            ul.appendChild(li);
+        } //Fin de For
+        return ul; //Por ultimo devolvemos la lista desordenada
+    } else { //Si se da el caso contrario
+        let ol = document.createElement("ol"); //Creamos una lista ordenada (ol)
+        for (let i = 0; i < textoArr.length; i++) { // Y Para cada texto que exista en el array
+            let li = document.createElement("li"); //Creamos una etiqueta li
+            let textLi = document.createTextNode(textoArr[i]); //Le añadimos el texto correspondiente
+            li.appendChild(textLi); //Y combinamos texto con la lista ordenada
+            ol.appendChild(li);
+        } //Fin de For
+        return ol; //Devolvemos la lista
+    } //Fin de If
+} //Fin de Funcion
+
+/*
+*
+*/
+function cambioFondo(etiqueta,nuevoColor) {
+    //Guardamos el color de fondo de la etiqueta
+    let color = etiqueta.style.backgroundColor;
+    if (color == nuevoColor) { //Si el color de la etiqueta es el mismo al color
+        color = "white"; //Lo ponemos blanco
+    } else if (color = "" || color != nuevoColor) { //Pero si este esta vacio o son distintos al color de la etiqueta
+        color = nuevoColor; //Le asignamos ese valor
+    }
+    //Y devolvemos el color
+    return color;
 }
