@@ -32,7 +32,7 @@ class Post extends Model
 
     //Scope para el select de Category_Id de index
     public function scopeCategory_id($query, $v) {
-        if ($v == "-10") {
+        if ($v == "-10"|| !isset($v)) {
             return $query->where('category_id', 'like', '%');
         }
         return $query->where('category_id', $v);

@@ -21,3 +21,5 @@ Route::get('/', 'App\Http\Controllers\InicioController@index');
 Route::resource('posts', PostController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('tags', TagController::class);
+//Ruta para post que llevan tags (para cuando vengamos del show)
+Route::get('post1/{tag}', 'App\Http\Controllers\PostController@index1')->name('post.index1');

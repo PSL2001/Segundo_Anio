@@ -21,8 +21,19 @@ class PostController extends Controller
         $posts = Post::orderBy('id', 'desc')
         ->titulo($request->titulo)
         ->category_id($request->category_id)
-        ->paginate(6);
-        return view('posts.index', compact('posts', 'categorias' ,'request'));
+        ->paginate(6)->withQueryString(); //withQueryString() hace la paginaciones de query en el controller
+        $hayTag = false;
+        return view('posts.index', compact('posts', 'categorias' ,'request', 'hayTag'));
+    }
+
+    public function index1(Request $request, Tag $tag) {
+        $categorias = Category::orderBy('nombre')->get();
+        $posts = $tag->posts()->orderBy('id', 'desc')
+        ->titulo($request->titulo)
+        ->category_id($request->category_id)
+        ->paginate(6)->withQueryString();
+        $hayTag = true;
+        return view('posts.index', compact('posts', 'categorias' ,'request', 'hayTag', 'tag'));
     }
 
     /**
@@ -78,7 +89,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
+        $tags = Tag::orderBy('nombre')->get();
+        $array = $post->tags->pluck('id')->toArray();
+        $categorias = Category::orderBy('nombre')->get();
+        return view('posts.show', compact('post', 'categorias', 'tags', 'array'));
     }
 
     /**

@@ -14,7 +14,11 @@
         <a href="{{route('posts.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <i class="fas fa-plus"></i> Nuevo</a>
     </div>
-    <form action="{{route('posts.index')}}" name="as" method="GET">
+    <form @if (!$hayTag)
+    action="{{route('posts.index')}}"
+    @else
+    action="{{route('post.index1', $tag)}}"
+    @endif name="as" method="GET">
     <div class="flex mb-4">
         <div class="w-1/2">
             <input type="search" value="{{$request->titulo}}" name="titulo" placeholder="Buscar" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 py-2 sm:text-sm border-gray-300 rounded-md">
@@ -104,6 +108,6 @@
     </x-tabla1>
     @endif
     <div class="mt-2">
-        {{$posts->appends($request->except('page'))->links()}}
+        {{$posts->links()}}
     </div>
 @endsection

@@ -14,7 +14,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::orderBy('id', 'desc')->paginate(4);
+        return view('tags.index', compact('tags'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('tags.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'unique:tags,nombre'],
+            'descripcion'=>['required', 'string', 'min:3'],
+            'color'=>['required']
+        ]);
+        Tag::create($request->all());
+        return redirect()->route('tags.index')->with('mensaje', 'Tag Creado');
     }
 
     /**
