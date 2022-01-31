@@ -177,3 +177,7 @@ function cambioFondo(etiqueta,nuevoColor) {
     //Y devolvemos el color
     return color;
 }
+
+function changeSize(etiqueta, tamanio) {
+    etiqueta.style = "font-size:"+ tamanio + "px;";
+}

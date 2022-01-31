@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            document.getElementById("titulo").addEventListener("click", cambiarTamanio);
+            document.getElementById("prop").addEventListener("click", aniadirLista);
+            document.getElementById("meth").addEventListener("click", aniadirLista);
+
+        }
+
+        function cambiarTamanio() {
+            let titulo = document.getElementById("titulo");
+            let tamanio = parseInt(prompt("¿Cual es el nuevo tamaño que vas a añadir? Ten en cuenta que el tamaño actual es " + titulo.style.fontSize));
+            changeSize(titulo, tamanio);
+        }
+
+        function aniadirLista() {
+            let lista = event.target
+            let contenido = lista.nextElementSibling.firstElementChild.textContent;
+            let terminado = false;
+            let nuevoContenidos = [];
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1 id="titulo" style="font-size: 12mm;">Propiedades y metodos del document</h1>
+    <table border="2" style="width: 15rem; height: 15rem;">
+        <thead>
+            <tr>
+                <td id="prop">
+                    Propiedades
+                </td>
+                <td>
+                    <ul>
+                        <li>cookie</li>
+                        <li>domain</li>
+                        <li>URL</li>
+                    </ul>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Métodos
+                </td>
+                <td id="meth">
+                    <ul>
+                        <li>getElementById()</li>
+                        <li>getElementsByName()</li>
+                        <li>write()</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
