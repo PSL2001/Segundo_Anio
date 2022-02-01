@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <h1>Formulario con DOM y eventos Javascript</h1>
+    <form name="as" id="formulario" method="post">
+        <label for="nom">Nombre</label>
+        <input type="text" id="nom">
+        <br>
+        <label for="ape">Apellidos</label>
+        <input type="text" id="ape">
+        <br>
+        <label for="dir">Direccion</label>
+        <input type="text" id="dir">
+        <br>
+        <label for="ciu">Ciudad</label>
+        <select name="Ciudad" id="ciu">
+            <option value="1">Almería</option>
+            <option value="2">Granada</option>
+            <option value="3">Málaga</option>
+        </select>
+        <br>
+        <!-- poblacion va aqui crear con js -->
+        <label for="cod">Codigo Postal</label>
+        <input type="text" disabled>
+        <br>
+        <label for="telefono">Telefonos</label>
+        <input type="tel" id="telefono">
+        <!-- Aqui van otros 2 telefonos (crear con js) -->
+        <br>
+        <label for="mail">Correo Electronico</label>
+        <input type="email" id="mail">
+        <br>
+        <label for="fecha">Fecha de Nacimiento</label>
+        <input type="date" name="fecha" id="fecha">
+        <br>
+        <label for="lugar">Lugar de Nacimiento</label>
+        <input type="text" name="lugar" id="lugar">
+        <br>
+        <button type="submit">Validar</button>
+        <button type="reset">Cancelar</button>
+
+    </form>
+</body>
+</html>
