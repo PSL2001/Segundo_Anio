@@ -164,7 +164,8 @@ function crearLista(textoArr, ordenada) {
 } //Fin de Funcion
 
 /*
-*
+* E: La etiqueta
+* S: El nuevo color
 */
 function cambioFondo(etiqueta,nuevoColor) {
     //Guardamos el color de fondo de la etiqueta
@@ -173,11 +174,12 @@ function cambioFondo(etiqueta,nuevoColor) {
         color = "white"; //Lo ponemos blanco
     } else if (color = "" || color != nuevoColor) { //Pero si este esta vacio o son distintos al color de la etiqueta
         color = nuevoColor; //Le asignamos ese valor
-    }
+    } //Fin de If
     //Y devolvemos el color
     return color;
-}
+} //Fin de funcion
 
 function changeSize(etiqueta, tamanio) {
+    //Cambiamos el estilo de la etiqueta y aniadimos el tamanio en pixeles
     etiqueta.style = "font-size:"+ tamanio + "px;";
 }

@@ -7,26 +7,53 @@
     <title>Ejercicio 3</title>
     <script src="../src/eventos.js"></script>
     <script>
+        //Cuando carga la pagina, llamamos a la funcion
         window.addEventListener("load", iniciar);
 
         function iniciar() {
+            //Aniadimos los eventos
             document.getElementById("titulo").addEventListener("click", cambiarTamanio);
             document.getElementById("prop").addEventListener("click", aniadirLista);
             document.getElementById("meth").addEventListener("click", aniadirLista);
-
         }
 
         function cambiarTamanio() {
+            //Primero guardamos la etiqueta del titulo
             let titulo = document.getElementById("titulo");
+            //Y le preguntamos al usuario por el nuevo tamanio
             let tamanio = parseInt(prompt("¿Cual es el nuevo tamaño que vas a añadir? Ten en cuenta que el tamaño actual es " + titulo.style.fontSize));
             changeSize(titulo, tamanio);
         }
 
         function aniadirLista() {
-            let lista = event.target
-            let contenido = lista.nextElementSibling.firstElementChild.textContent;
+            //Guardamos la columna que ha activado el elemento
+            let columna = event.target
+            //Guardamos el contenido de la otra columna la cual contiene la lista actual
+            let contenido = columna.nextElementSibling.firstElementChild.innerText.split("\n");
             let terminado = false;
             let nuevoContenidos = [];
+            for (let j = 0; j < contenido.length; j++) {
+                //Guardamos los contenidos actuales en un array vacio
+                nuevoContenidos[j] = contenido[j];   
+            }
+            //Guardamos la longitud del nuevo array que usaremos para posicionarnos en el mismo
+            let i = nuevoContenidos.length;
+            while (terminado == false ) { //Mientras que no nos escriban 0, preguntaremos al usuario por mas valores
+                let nuevoElemento = prompt("Introduce un nuevo contenido para añadir a la lista.\nIntroduce 0 para terminar");
+                if (nuevoElemento == "0") { //Si el elemento dado es 0 entonces terminamos el loop
+                    terminado = true;
+                } else { //Pero si no se da ese caso escribimos el elemento en el array
+                    nuevoContenidos[i] = nuevoElemento;
+                    //Y sumamos i
+                    i++;
+                } //fin de if
+            } //Fin de while
+            //Creamos una nueva lista desordenada con los contenidos del array
+            let nuevaLista = crearLista(nuevoContenidos, false);
+            //Borramos la antigua lista del HTML
+            columna.nextElementSibling.removeChild(columna.nextElementSibling.firstElementChild);
+            //Y añadimos la nueva lista en su lugar
+            columna.nextElementSibling.appendChild(nuevaLista);
         }
 
 
@@ -51,10 +78,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td id="meth">
                     Métodos
                 </td>
-                <td id="meth">
+                <td>
                     <ul>
                         <li>getElementById()</li>
                         <li>getElementsByName()</li>
