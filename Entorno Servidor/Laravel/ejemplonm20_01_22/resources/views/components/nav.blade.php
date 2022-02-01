@@ -16,8 +16,11 @@
         <a href="{{route('tags.index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
           Etiquetas
         </a>
-        <a href="{{route('categories.index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+        <a href="{{route('categories.index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
           Categorias
+        </a>
+        <a href="{{route('contacto.index')}}" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white">
+            Contactanos
         </a>
       </div>
     </div>

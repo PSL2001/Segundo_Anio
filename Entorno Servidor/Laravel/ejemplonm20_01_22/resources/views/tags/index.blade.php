@@ -34,7 +34,7 @@ Listado de Etiquetas
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach ($tags as $item)
             <tr>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4" style="background-color: {{$item->color}};">
                     {{$item->id}}
                 </td>
                 <td class="px-6 py-4">
@@ -44,10 +44,14 @@ Listado de Etiquetas
                   {{$item->descripcion}}
                 </td>
                 <td class="px-6 py-4">
-                  Edit
+                    <a href="{{route('tags.edit', $item)}}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></a>
                 </td>
                 <td class="px-6 py-4">
-                  Delete
+                    <form action="{{route('tags.destroy', $item)}}" method="post">
+                        @csrf
+                        @method("DELETE")
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-trash"></i></button>
+                    </form>
                 </td>
               </tr>
             @endforeach

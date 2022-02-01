@@ -64,7 +64,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit', compact('tag'));
     }
 
     /**
@@ -76,7 +76,13 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $request->validate([
+            'nombre'=>['required', 'string', 'min:3', 'unique:tags,nombre,'.$tag->id],
+            'descripcion'=>['required', 'string', 'min:3'],
+            'color'=>['required']
+        ]);
+        $tag->update($request->all());
+        return redirect()->route('tags.index')->with('mensaje', 'Tag Actualizado');
     }
 
     /**
@@ -87,6 +93,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('tags.index')->with('mensaje', 'Tag Borrado');
     }
 }
