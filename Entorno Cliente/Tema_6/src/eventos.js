@@ -183,3 +183,27 @@ function changeSize(etiqueta, tamanio) {
     //Cambiamos el estilo de la etiqueta y aniadimos el tamanio en pixeles
     etiqueta.style = "font-size:"+ tamanio + "px;";
 }
+
+function capitalize(texto) {
+    let mayus = texto.charAt(0).toUpperCase();
+    let minus = texto.slice(1);
+    let capitalizado = mayus + minus;
+    return capitalizado;
+}
+
+function createSelect(opciones, id) {
+    let select = document.createElement("select");
+    for (let i = 0; i < opciones.length; i++) {
+        let option = document.createElement("option");
+        option.setAttribute("value", i+1);
+        let optionTexto = document.createTextNode(opciones[i]);
+        option.appendChild(optionTexto);
+        select.appendChild(option);
+    }
+    if (id == "") {
+        return select;   
+    } else {
+        select.setAttribute("id", id);
+        return select;
+    }
+}

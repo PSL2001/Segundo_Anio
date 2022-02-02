@@ -6,6 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            document.getElementById("nom").addEventListener("change", aniadirMayus);
+            document.getElementById("ape").addEventListener("change", aniadirMayus);
+            document.getElementById("ciu").addEventListener("change", mostrarPob);
+        }
+
+        function aniadirMayus() {
+            let texto = event.target
+            if (texto.id == "nom") {
+                let nombre = document.getElementById("nom").value;
+                let mayusNombre = capitalize(nombre);
+                document.getElementById("nom").value = mayusNombre;
+            } else {
+                let apellidos = document.getElementById("ape").value.split(" ");
+                for (let i = 0; i < apellidos.length; i++) {
+                    apellidos[i] = capitalize(apellidos[i]);
+                }
+                document.getElementById("ape").value = apellidos;
+            }
+        }
+
+        function mostrarPob() {
+            //let poblaciones = ["Huércal de Almeria", "Vícar", "El Ejido"];
+            //let poblaciones = ["Loja", "Montefrío", "Almuñécar"];
+            //let poblaciones = ["Marbella", "Mijas", "Fuengirola"];
+            //let select = createSelect(poblaciones, "pob");
+            let valor = event.target.value;
+            switch (valor) {
+                case 1:
+                    let poblaciones = ["Huércal de Almeria", "Vícar", "El Ejido"];
+                    let select = createSelect(poblaciones, "pob");
+                    break;
+                case 2:
+                    poblaciones = ["Loja", "Montefrío", "Almuñécar"];
+                    select = createSelect(poblaciones, "pob");
+                    break;
+                case 3:
+                    poblaciones = ["Marbella", "Mijas", "Fuengirola"];
+                    select = createSelect(poblaciones);
+                    break;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -39,6 +86,7 @@
         <div>
             <label for="telefono">Telefonos</label>
             <input type="tel" id="telefono">
+            <button id="aniadir">Añadir otro telefono</button>
         </div>
         <!-- Aqui van otros 2 telefonos (crear con js) -->
         <div>
