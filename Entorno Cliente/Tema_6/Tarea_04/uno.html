@@ -14,6 +14,7 @@
             document.getElementById("nom").addEventListener("change", aniadirMayus);
             document.getElementById("ape").addEventListener("change", aniadirMayus);
             document.getElementById("ciu").addEventListener("change", mostrarPob);
+            document.getElementById("aniadir").addEventListener("click", aniadirTel);
         }
 
         function aniadirMayus() {
@@ -36,19 +37,47 @@
             //let poblaciones = ["Loja", "Montefrío", "Almuñécar"];
             //let poblaciones = ["Marbella", "Mijas", "Fuengirola"];
             //let select = createSelect(poblaciones, "pob");
+            if (document.getElementById("pob") != null) {
+                document.getElementById("city").removeChild(document.getElementById("pob"))
+            }
             let valor = event.target.value;
+            let label = createLabel("Poblacion");
             switch (valor) {
-                case 1:
-                    let poblaciones = ["Huércal de Almeria", "Vícar", "El Ejido"];
-                    let select = createSelect(poblaciones, "pob");
+                case "1":
+                    let poblaciones1 = ["Huércal de Almeria", "Vícar", "El Ejido"];
+                    let select1 = createSelect(poblaciones1, "pob1");
+                    select1.addEventListener("change", aniadirCod);
+                    let div1 = createDiv([label, select1], "pob");
+                    document.getElementById("city").appendChild(div1);
                     break;
-                case 2:
-                    poblaciones = ["Loja", "Montefrío", "Almuñécar"];
-                    select = createSelect(poblaciones, "pob");
+                case "2":
+                    let poblaciones2 = ["Loja", "Montefrío", "Almuñécar"];
+                    let select2 = createSelect(poblaciones2, "pob2");
+                    select2.addEventListener("change", aniadirCod);
+                    let div2 = createDiv([label, select2], "pob");
+                    document.getElementById("city").appendChild(div2);
                     break;
-                case 3:
-                    poblaciones = ["Marbella", "Mijas", "Fuengirola"];
-                    select = createSelect(poblaciones);
+                case "3":
+                    let poblaciones3 = ["Marbella", "Mijas", "Fuengirola"];
+                    let select3 = createSelect(poblaciones3, "pob3");
+                    select3.addEventListener("change", aniadirCod);
+                    let div3 = createDiv([label, select3], "pob");
+                    document.getElementById("city").appendChild(div3);
+                    break;
+            }
+        }
+
+        function aniadirCod() {
+            let select = event.target;
+            switch (select.id) {
+                case "pob1":
+                    rellenarInput(select, document.getElementById("cod"), ["04230", "04738", "04700"]);
+                    break;
+                case "pob2":
+                    rellenarInput(select, document.getElementById("cod"), ["18300", "18270", "18690"]);
+                    break;
+                case "pob3":
+                    rellenarInput(select, document.getElementById("cod"), ["29600", "29650", "29640"]);
                     break;
             }
         }
@@ -70,7 +99,7 @@
             <label for="dir">Direccion</label>
             <input type="text" id="dir">
         </div>
-        <div>
+        <div id="city">
             <label for="ciu">Ciudad</label>
             <select name="Ciudad" id="ciu">
                 <option value="1">Almería</option>
@@ -81,7 +110,7 @@
         <!-- poblacion va aqui crear con js -->
         <div>
             <label for="cod">Codigo Postal</label>
-            <input type="text" disabled>
+            <input type="text" disabled id="cod">
         </div>
         <div>
             <label for="telefono">Telefonos</label>

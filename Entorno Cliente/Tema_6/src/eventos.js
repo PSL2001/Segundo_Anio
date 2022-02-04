@@ -207,3 +207,40 @@ function createSelect(opciones, id) {
         return select;
     }
 }
+
+function createLabel(texto) {
+    let label = document.createElement("label");
+    label.innerHTML = texto;
+
+    return label;
+}
+
+function createDiv(contenido, id) {
+    let div = document.createElement("div");
+    for (let i = 0; i < contenido.length; i++) {
+        div.appendChild(contenido[i]);
+    }
+
+    if (id == "") {
+        return div;
+    } else {
+        div.setAttribute("id", id);
+        return div;
+    }
+}
+
+function rellenarInput(etiqueta, input, valores) {
+    switch (etiqueta.value) {
+        case "1":
+            input.value = valores[0];
+            break;
+        case "2":
+            input.value = valores[1];
+            break;
+        case "3":
+            input.value = valores[2];
+            break;
+        default:
+            break;
+    }
+}
