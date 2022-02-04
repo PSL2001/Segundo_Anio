@@ -20,4 +20,11 @@ class ShowPosts extends Component
         ->orWhere('contenido', 'like', "%{$this->search}%")->paginate(3);
         return view('livewire.show-posts', compact('posts'));
     }
+
+    public function ordenar(String $campo) {
+        if ($campo == $this->campo) {
+            $this->orden =($this->orden=='desc')?'asc':'desc';
+        }
+        $this->campo = $campo;
+    }
 }

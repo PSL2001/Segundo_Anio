@@ -4,7 +4,7 @@
             <x-jet-input type="search" placeholder="Buscar..." wire:model="search" /><i class="fas fa-search"></i>
         </div>
         <div>
-            Boton crear
+            @livewire('create-post')
         </div>
     </div>
     @if ($posts->count())
@@ -12,15 +12,15 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col"
+                        <th scope="col" wire:click="ordenar('id')"
                             class="cursor-pointer whitespace-nowrap px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             ID <i class="fas fa-sort"></i>
                         </th>
-                        <th scope="col"
+                        <th scope="col" wire:click="ordenar('titulo')"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Título <i class="fas fa-sort"></i>
                         </th>
-                        <th scope="col"
+                        <th scope="col" wire:click="ordenar('contenido')"
                             class="cursor-pointer px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Contenido <i class="fas fa-sort"></i>
                         </th>
@@ -35,7 +35,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $item->id }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
                                         <img class="h-10 w-10 rounded-full" src="{{ Storage::url($item->imagen) }}"
