@@ -40,13 +40,13 @@ function cambiaColor(input, color) {
 
 function rotate(event) {
     //Guardamos el elemento y el tipo de evento que han llamado a la funcion
-    let imagen = event.target;
+    let elemento = event.target;
     let tipo = event.type;
 
     if (tipo == "click") { //Si el tipo de evento era un click (click izquierdo)
-        imagen.style.transform += "rotate(90deg)"; //Rotamos 90º
+        elemento.style.transform += "rotate(90deg)"; //Rotamos 90º
     } else if (tipo == "contextmenu") { //Pero si se ha abierto el menu de contexto (funcion default del click derecho)
-        imagen.style.transform += "rotate(-90deg)"; //Rotamos en el sentido contrario
+        elemento.style.transform += "rotate(-90deg)"; //Rotamos en el sentido contrario
     }
 }
 
@@ -229,6 +229,27 @@ function createDiv(contenido, id) {
     }
 }
 
+function createSpan(mensaje, id) {
+    let span = document.createElement("span");
+    if (mensaje) {
+        let SText = document.createTextNode(mensaje);
+        span.appendChild(SText);
+    }
+    if (id != "") {
+        span.setAttribute("id", id);
+    }
+    return span;
+}
+
+function createInput(tipo, id) {
+    let input = document.createElement("input");
+    input.setAttribute("type", tipo);
+    if (id) {
+        input.setAttribute("id", id);
+    }
+    return input;
+}
+
 function rellenarInput(etiqueta, input, valores) {
     switch (etiqueta.value) {
         case "1":
@@ -243,4 +264,14 @@ function rellenarInput(etiqueta, input, valores) {
         default:
             break;
     }
+}
+
+function eliminarElemento(id){
+	elemento = document.getElementById(id);	
+	if (!elemento){
+		return false;
+	} else {
+		padre = elemento.parentNode;
+		padre.removeChild(elemento);
+	}
 }
