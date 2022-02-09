@@ -1,5 +1,3 @@
-
-
 function cambiarColor(event) {
     let input = event.target; //Primero cojemos el objeto del evento
     let trigger = event.type; //Cojemos ademas, el tipo de evento
@@ -137,10 +135,10 @@ function countWords(texto) {
 }
 
 /*
-* E: Texto (normalmente en un array) string
-* E2: Boolean, que me dicta si el usuario quiere la lista ordenada o no
-* S: Una lista tanto ordenada como desordenada
-*/
+ * E: Texto (normalmente en un array) string
+ * E2: Boolean, que me dicta si el usuario quiere la lista ordenada o no
+ * S: Una lista tanto ordenada como desordenada
+ */
 function crearLista(textoArr, ordenada) {
     if (!ordenada) { //Si el usuario no la quiere ordenada (ordenada = false)
         let ul = document.createElement("ul"); //Creamos una lista desordenada (ul)
@@ -164,10 +162,10 @@ function crearLista(textoArr, ordenada) {
 } //Fin de Funcion
 
 /*
-* E: La etiqueta
-* S: El nuevo color
-*/
-function cambioFondo(etiqueta,nuevoColor) {
+ * E: La etiqueta
+ * S: El nuevo color
+ */
+function cambioFondo(etiqueta, nuevoColor) {
     //Guardamos el color de fondo de la etiqueta
     let color = etiqueta.style.backgroundColor;
     if (color == nuevoColor) { //Si el color de la etiqueta es el mismo al color
@@ -181,7 +179,7 @@ function cambioFondo(etiqueta,nuevoColor) {
 
 function changeSize(etiqueta, tamanio) {
     //Cambiamos el estilo de la etiqueta y aniadimos el tamanio en pixeles
-    etiqueta.style = "font-size:"+ tamanio + "px;";
+    etiqueta.style = "font-size:" + tamanio + "px;";
 }
 
 function capitalize(texto) {
@@ -195,13 +193,13 @@ function createSelect(opciones, id) {
     let select = document.createElement("select");
     for (let i = 0; i < opciones.length; i++) {
         let option = document.createElement("option");
-        option.setAttribute("value", i+1);
+        option.setAttribute("value", i + 1);
         let optionTexto = document.createTextNode(opciones[i]);
         option.appendChild(optionTexto);
         select.appendChild(option);
     }
     if (id == "") {
-        return select;   
+        return select;
     } else {
         select.setAttribute("id", id);
         return select;
@@ -266,12 +264,12 @@ function rellenarInput(etiqueta, input, valores) {
     }
 }
 
-function eliminarElemento(id){
-	elemento = document.getElementById(id);	
-	if (!elemento){
-		return false;
-	} else {
-		padre = elemento.parentNode;
-		padre.removeChild(elemento);
-	}
+function eliminarElemento(id) {
+    elemento = document.getElementById(id);
+    if (!elemento) {
+        return false;
+    } else {
+        padre = elemento.parentNode;
+        padre.removeChild(elemento);
+    }
 }

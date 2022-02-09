@@ -84,21 +84,34 @@
         }
 
         function aniadirTel() {
-            let telefonoValor = document.getElementById("telefono").value;
-            let telefono = document.getElementById("telefono");
-            //regex vale para telefonos tipo (XXX XX XX XX)
-            let regex = /[0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}/gm;
-            let correcto = validateExpresion(telefonoValor, regex);
-            eliminarElemento("mensaje");
-            if (!correcto) {
-                mostrarError(telefono, "El Telefono no sigue la expresion regular dada. Asegurate de que el telefono sigue la siguiente estructura (XXX XX XX XX)");
-            } else {
-                mostrarCorrecto(telefono, "El telefono es correcto");
-                let input = createInput("tel", "telefono2");
-                //revisar esto
-                telefono.insertAdjacentElement("beforeend", input);
+            let div = document.getElementsByTagName("div")[5];
+            let telefonos = div.getElementsByTagName("input");
+            let correctos = [];
+
+            for (let i = 0; i < telefonos.length; i++) {
+                let telefonoValor = telefonos[i].value;
+                let telefono = telefonos[i];
+                //regex vale para telefonos tipo (XXX XX XX XX)
+                let regex = /[0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}/gm;
+                correctos[i] = validateExpresion(telefonoValor, regex);
             }
-            
+            for (let j = 0; j < correctos.length; j++) {
+                eliminarElemento("mensaje");
+                if (!correctos[j]) {
+                    mostrarError(telefonos[j],
+                        "El telefono no sigue la expresion regular dada. Asegurate de que el telefono sigue la siguiente estructura (XXX XX XX XX)"
+                    );
+                } else {
+                    mostrarCorrecto(telefonos[j], "El telefono es correcto");
+                    if (correctos.length != 3) {
+                        if (j == correctos.length - 1) {
+                            let input = createInput("tel", "telefono" + (j + 1));
+                            let btn = document.getElementById("aniadir");
+                            btn.parentNode.insertBefore(input, btn);
+                        }
+                    }
+                }
+            }
         }
     </script>
 </head>
@@ -134,7 +147,7 @@
         <div>
             <label for="telefono">Telefonos</label>
             <input type="tel" id="telefono" placeholder="XXX XX XX XX">
-            <input type="button" id="aniadir" value="Añadir otro telefono">
+            <button type="button" id="aniadir"> Añadir otro telefono</button>
         </div>
         <!-- Aqui van otros 2 telefonos (crear con js) -->
         <div>
