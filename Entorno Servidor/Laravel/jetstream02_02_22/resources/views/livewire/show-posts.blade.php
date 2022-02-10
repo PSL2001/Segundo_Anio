@@ -1,3 +1,13 @@
+@if (session('correo'))
+<script>
+    Swal.fire({
+    icon: 'success',
+    title: "{{session('correo')}}",
+    showConfirmButton: false,
+    timer: 1500
+})
+</script>
+@endif
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
     <div class="my-2 flex">
         <div class="flex-1 w-80">

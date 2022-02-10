@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('posts.show') }}" :active="request()->routeIs('posts.show')">
                         {{ __('Posts') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('contacto.index') }}" :active="request()->routeIs('contacto.index')">
+                        {{ __('Contáctanos') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
