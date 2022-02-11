@@ -8,6 +8,7 @@
     <title>Ejercicio 1</title>
     <script src="../src/eventos.js"></script>
     <script src="../src/validaciones.js"></script>
+    <script src="../src/fechas.js"></script>
     <script>
         window.addEventListener("load", iniciar);
 
@@ -16,6 +17,7 @@
             document.getElementById("ape").addEventListener("change", aniadirMayus);
             document.getElementById("ciu").addEventListener("change", mostrarPob);
             document.getElementById("aniadir").addEventListener("click", aniadirTel);
+            document.getElementById("validar").addEventListener("click", validar);
         }
 
         function aniadirMayus() {
@@ -116,8 +118,60 @@
                 }
             }
         }
-
         
+        function validar() {
+            let error = false;
+            let nombre = document.getElementById("nom").value
+            let apellidos = document.getElementById("ape").value;
+            let direccion = document.getElementById("dir").value;
+            let ciudad = document.getElementById("ciu").value;
+            let poblacion = document.getElementsByTagName("select")[1].value;
+            let divTelefonos = document.getElementsByTagName("div")[5];
+            let telefonos = divTelefonos.getElementsByTagName("input");
+            let correo = document.getElementById("mail").value;
+            let fecha = document.getElementById("fecha").value;
+            let lugar = document.getElementById("lugar").value;
+
+            if (nombre == "") {
+                error = true;
+                mostrarError(document.getElementById("nom"), "Este campo esta vacio");
+            }
+            if (apellidos == "") {
+                error = true;
+                mostrarError(document.getElementById("ape"), "Este campo esta vacio");
+            }
+            if (direccion == "") {
+                error = true;
+                mostrarError(document.getElementById("dir"), "Este campo esta vacio");
+            }
+            if (ciudad == "") {
+                error = true;
+                mostrarError(document.getElementById("ciu"), "No has elegido una ciudad");
+            }
+            if (poblacion == "" || poblacion == undefined) {
+                error = true;
+                mostrarError(document.getElementById("ciu"), "No has elegido una poblacion");
+            }
+            for (let i = 0; i < telefonos.length; i++) {
+                let telefonoValor = telefonos[i].value;
+                let telefono = telefonos[i];
+                //regex vale para telefonos tipo (XXX XX XX XX)
+                let regex = /[0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}/gm;
+                correctos[i] = validateExpresion(telefonoValor, regex);
+                if (correctos[i] == false) {
+                    mostrarError(telefono[i], "Este telefono no es correcto");
+                }
+            }
+            if (correo == "" || validateExpresion(correo, /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i) == false) {
+                error = true
+                mostrarError(document.getElementById("mail"), "El correo no es correcto")
+            }
+            if (fecha == "" || !esFecha(fecha)) {
+                error = true;
+                mostrarError(document.getElementById("mail"), "La fecha no es Correcta")
+            }
+
+        }
     </script>
 </head>
 
@@ -168,7 +222,7 @@
             <input type="text" name="lugar" id="lugar">
         </div>
         <div>
-            <button type="submit">Validar</button>
+            <button type="submit" id="validar">Validar</button>
             <button type="reset">Cancelar</button>
         </div>
     </form>

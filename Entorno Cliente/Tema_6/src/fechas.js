@@ -74,7 +74,7 @@ function EsMayorHoy(dia, mes, anio) {
 
     let mes_actual = mes - 1;
 
-    if (anio <= anio_hoy && mes_actual <= mes_hoy) {
+    if (anio < anio_hoy || (anio == anio_hoy && mes <= mes_hoy) || (anio == anio_hoy && mes == mes_hoy && dia <= dia_hoy)) {
         return false;
     } else {
         if (anio == anio_hoy && mes_actual == mes_hoy && dia <= dia_hoy) {
