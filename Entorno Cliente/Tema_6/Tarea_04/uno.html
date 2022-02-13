@@ -17,7 +17,7 @@
             document.getElementById("ape").addEventListener("change", aniadirMayus);
             document.getElementById("ciu").addEventListener("change", mostrarPob);
             document.getElementById("aniadir").addEventListener("click", aniadirTel);
-            document.getElementById("validar").addEventListener("click", validar);
+            document.getElementById("formulario").addEventListener("submit", validar);
         }
 
         function aniadirMayus() {
@@ -86,7 +86,7 @@
         }
 
         function aniadirTel() {
-            let div = document.getElementsByTagName("div")[5];
+            let div = document.getElementById("telefonos");
             let telefonos = div.getElementsByTagName("input");
             let correctos = [];
 
@@ -119,14 +119,15 @@
             }
         }
         
-        function validar() {
+        function validar(event) {
+            event.preventDefault();
             let error = false;
             let nombre = document.getElementById("nom").value
             let apellidos = document.getElementById("ape").value;
             let direccion = document.getElementById("dir").value;
             let ciudad = document.getElementById("ciu").value;
             let poblacion = document.getElementsByTagName("select")[1].value;
-            let divTelefonos = document.getElementsByTagName("div")[5];
+            let divTelefonos = document.getElementById("telefonos");
             let telefonos = divTelefonos.getElementsByTagName("input");
             let correo = document.getElementById("mail").value;
             let fecha = document.getElementById("fecha").value;
@@ -157,8 +158,8 @@
                 let telefono = telefonos[i];
                 //regex vale para telefonos tipo (XXX XX XX XX)
                 let regex = /[0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}/gm;
-                correctos[i] = validateExpresion(telefonoValor, regex);
-                if (correctos[i] == false) {
+                let correcto = validateExpresion(telefonoValor, regex);
+                if (correcto == false) {
                     mostrarError(telefono[i], "Este telefono no es correcto");
                 }
             }
@@ -169,6 +170,10 @@
             if (fecha == "" || !esFecha(fecha)) {
                 error = true;
                 mostrarError(document.getElementById("mail"), "La fecha no es Correcta")
+            }
+            if (lugar == "") {
+                error = true;
+                mostrarError(document.getElementById("lugar"), "Este campo esta vacio")
             }
 
         }
@@ -203,7 +208,7 @@
             <label for="cod">Codigo Postal</label>
             <input type="text" disabled id="cod">
         </div>
-        <div>
+        <div id="telefonos">
             <label for="telefono">Telefonos</label>
             <input type="tel" id="telefono" placeholder="XXX XX XX XX">
             <button type="button" id="aniadir"> Añadir otro telefono</button>
