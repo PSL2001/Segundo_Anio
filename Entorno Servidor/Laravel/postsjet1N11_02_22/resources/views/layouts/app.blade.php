@@ -19,6 +19,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <!-- Sweet Alerts 2 CDN -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -44,5 +46,14 @@
         @stack('modals')
 
         @livewireScripts
+        <script>
+            Livewire.on('borrar', function(txt) {
+                Swal.fire({
+                icon: 'error',
+                title: 'Informacion',
+                text: txt,
+})
+            })
+        </script>
     </body>
 </html>
