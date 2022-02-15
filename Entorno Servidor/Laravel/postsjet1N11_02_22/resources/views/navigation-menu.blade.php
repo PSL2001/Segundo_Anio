@@ -15,6 +15,9 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         <i class="fa-solid fa-house-chimney"></i>&nbsp;{{ __('Inicio') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
+                        <i class="fa-solid fa-gears"></i>&nbsp;{{ __('Gestionar Posts') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

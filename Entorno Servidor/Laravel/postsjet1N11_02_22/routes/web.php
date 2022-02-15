@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\ShowUserPosts;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $posts = Post::where('status', 2)->orderBy('id', 'DESC')->paginate(5);
     return view('dashboard', compact('posts'));
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('userposts', ShowUserPosts::class)->name('posts.index');
