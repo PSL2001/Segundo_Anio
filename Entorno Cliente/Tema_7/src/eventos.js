@@ -222,7 +222,8 @@ function createLabel(texto) {
     return label;
 }
 /*
-*
+* E: Contenido (array), id (opcional)
+* S: Objeto Div
 */
 function createDiv(contenido, id) {
     let div = document.createElement("div");
@@ -294,5 +295,21 @@ function eliminarElemento(id) {
 }
 
 /*
-*
+* E: String (el script a cargar), funcion a llamar
+* S: Nada
 */
+function loadScript(src) {
+    let script = document.createElement("script");
+    script.src = src;
+
+    script.addEventListener("load", function () {
+        let p = crearParrafo("Se ha cargado el script con exito");
+        document.body.appendChild(p);
+    });
+    script.addEventListener("error", function () {
+        let p = crearParrafo(new Error("Ha habido un error al cargar el script con " + src));
+        document.body.appendChild(p);
+    });
+    
+    document.head.append(script);
+}

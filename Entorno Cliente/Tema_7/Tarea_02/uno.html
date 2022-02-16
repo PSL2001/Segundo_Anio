@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="../src/eventos.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            document.getElementById("cargar").addEventListener("click", cargarScript);
+        }
+
+        function cargarScript() {
+            let script = document.getElementById("script").value;
+            loadScript(script);
+        }
+    </script>
+</head>
+<body>
+    <h3>Introduce un archivo .js a cargar</h3>
+    <input type="text" id="script">
+    <br>
+    <button id="cargar">Cargar Script</button>
+</body>
+</html>
