@@ -49,10 +49,17 @@
         <script>
             Livewire.on('borrar', function(txt) {
                 Swal.fire({
-                icon: 'error',
-                title: 'Informacion',
-                text: txt,
-})
+                    icon: 'error',
+                    title: 'Informacion',
+                    text: txt,
+                })
+            })
+            Livewire.on('info', function(txt) {
+                Swal.fire(
+                    'Informacion',
+                     txt,
+                    'success'
+                )
             })
         </script>
     </body>

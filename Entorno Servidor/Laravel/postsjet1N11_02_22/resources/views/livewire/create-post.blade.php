@@ -7,12 +7,15 @@
             Nuevo Post
         </x-slot>
         <x-slot name="content">
+            @wire
             <x-form-input name="titulo" label="Titulo" placeholder="Titulo del Post" />
             <x-form-textarea name="contenido" placeholder="Contenido del Post" label="Contenido" />
-            <x-form-group name="s" label="Estado del post" inline>
+            <x-form-group label="Estado del post" inline>
                 <x-form-radio name="status" value="1" label="Borrador" />&nbsp;&nbsp;
                 <x-form-radio name="status" value="2" label="Publicado" />
             </x-form-group>
+            <x-form-errors name="status" />
+            @endwire
             {{-- Comienzo input de Imagen --}}
             <div class="grid mt-2 grid-cols-2 gap-4">
                 <div>
@@ -35,7 +38,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button wire:loading.attr="disabled" wire:click="guardar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 <i class="fas fa-save"></i> Enviar
             </button>
         </x-slot>

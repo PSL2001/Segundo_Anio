@@ -36,7 +36,11 @@
                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                     @if($item->status==1) bg-red-100 text-red-800 @else bg-green-100 text-green-800 @endif">@if($item->status == 1) Borrador @else Activo @endif </span>
                   </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Editar</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <button wire:click="editar({{$item}})" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                          <i class="fas fa-edit"></i>
+                      </button>
+                  </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" wire:click="borrar({{$item}})">
                         <i class="fas fa-trash"></i>
@@ -58,5 +62,31 @@
         Todavia no tienes ningun post, aprovecha y crea el primer post
     </p>
     @endif
-
+    <!-- Ventana modal para Editar -->
+    <x-jet-dialog-modal wire:model="isOpen">
+        <x-slot name="title">
+            Editar Post
+        </x-slot>
+        <x-slot name="content">
+            <x-form-input name="last_name" label="Titulo" />
+            <x-form-textarea name="" label="Contenido" />
+            <x-form-group label="Estado del Post" inline>
+                <x-form-radio name="" value="1" label="Borrador" />&nbsp;&nbsp;
+                <x-form-radio name="status" value="2" label="Publicado" />
+            </x-form-group>
+            <!-- Campo Imagen -->
+            <div class="mt-2 grid grid-cols-2 gap-2 w-full">
+                <div class="w-1/2">
+                    <input type="file" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
+                </div>
+                <div class="w-1/2">
+                    <img src="{{asset('storage/noImage.jpg')}}" alt="" class="object-cover object-center">
+                </div>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></button>
+        </x-slot>
+    </x-jet-dialog-modal>
+    <!-- Fin Ventana Modal -->
 </div>
