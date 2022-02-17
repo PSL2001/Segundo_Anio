@@ -13,10 +13,22 @@ class ShowUserPosts extends Component
 
     public $campo = 'id', $orden = 'desc';
     public $isOpen = false;
+    public $imagen;
+
+    public Post $post;
     //listeners para la vista 'listener' => 'funcion'
     //A veces lo encuentras como 'render'
     protected $listeners = ['renderizarVista'=>'render'];
+    protected $rules = [
+        'post.titulo'=>'',
+        'post.contenido'=>['required', 'string', 'min:10'],
+        'post.status'=>['required'],
+        'imagen'=>['nullable', 'image', 'max:1024']
+    ];
 
+    public function mount() {
+        $this->post = new Post();
+    }
     public function render()
     {
         //auth()->user()->id devuelve el id del usuario registrado
@@ -42,6 +54,24 @@ class ShowUserPosts extends Component
         $this->emit('borrar', 'Registro Borrado');
     }
     public function editar(Post $post) {
+        $this->post = $post;
         $this->isOpen = true;
+    }
+
+    public function update() {
+        $this->validate([
+            'post.titulo'=>['required', 'string', 'min:3', 'unique:posts.titulo,'.$this->post->titulo]
+        ]);
+        //Queremos editar el registro
+        if ($this->imagen) {
+            # He subido la imagen
+            //1. Borro la imagen antigua
+            Storage::delete($this->post->imagen);
+            $nuevaImagen = $this->imagen->store('posts');
+            $this->post->imagen = $nuevaImagen;
+        }
+        $this->post->save();
+        $this->emit('info', "Registro Actualizado");
+        $this->reset('isOpen', 'imagen');
     }
 }

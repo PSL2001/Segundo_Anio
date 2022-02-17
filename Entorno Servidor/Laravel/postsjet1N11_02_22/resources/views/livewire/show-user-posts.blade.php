@@ -68,25 +68,35 @@
             Editar Post
         </x-slot>
         <x-slot name="content">
-            <x-form-input name="last_name" label="Titulo" />
-            <x-form-textarea name="" label="Contenido" />
+            @wire
+            <x-form-input name="post.titulo" label="Titulo" />
+            <x-form-textarea name="post.contenido" label="Contenido" />
             <x-form-group label="Estado del Post" inline>
-                <x-form-radio name="" value="1" label="Borrador" />&nbsp;&nbsp;
-                <x-form-radio name="status" value="2" label="Publicado" />
+                <x-form-radio name="post.status" value="1" label="Borrador" />&nbsp;&nbsp;
+                <x-form-radio name="post.status" value="2" label="Publicado" />
             </x-form-group>
+            <x-form-errors name="post.status" />
+            @endwire
             <!-- Campo Imagen -->
             <div class="mt-2 grid grid-cols-2 gap-2 w-full">
                 <div class="w-1/2">
-                    <input type="file" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
+                    <input type="file" wire:model='imagen' accept="image/*" class="form-input border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm" />
                 </div>
                 <div class="w-1/2">
-                    <img src="{{asset('storage/noImage.jpg')}}" alt="" class="object-cover object-center">
+                    @if($imagen && !$errors->has('imagen'))
+                    <img src="{{$imagen->temporaryUrl()}}" alt="" class="object-cover object-center">
+                    @else
+                    <img src="{{Storage::url($post->imagen)}}" alt="" class="object-cover object-center">
+                    @endif
                 </div>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i></button>
+            <button wire:click="update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" wire:click><i class="fas fa-edit"></i> Editar</button>
         </x-slot>
     </x-jet-dialog-modal>
     <!-- Fin Ventana Modal -->
+    <!-- Ventana modal para Detalles -->
+
+    <!-- Fin Vetana modal de detalle -->
 </div>
