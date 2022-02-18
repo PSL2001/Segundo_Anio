@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
 use App\Http\Livewire\ShowUserPosts;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('userposts', ShowUserPosts::class)->name('posts.index');
+//Rutas para el formulario de contacto
+Route::middleware(['auth:sanctum', 'verified'])->get('contacto', [ContactoController::class, 'pintarForm'])->name('contacto.pintar');
+Route::middleware(['auth:sanctum', 'verified'])->post('contacto', [ContactoController::class, 'procesarForm'])->name('contacto.procesar');

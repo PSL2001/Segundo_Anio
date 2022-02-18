@@ -18,7 +18,7 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                         <i class="fa-solid fa-gears"></i>&nbsp;{{ __('Gestionar Posts') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="" :active="request()->routeIs('posts.index')">
+                    <x-jet-nav-link href="{{ route('contacto.pintar') }}" :active="request()->routeIs('contacto.pintar')">
                         <i class="fa-solid fa-at"></i>&nbsp;{{ __('Formulario de contacto') }}
                     </x-jet-nav-link>
                 </div>
@@ -150,7 +150,7 @@
             <x-jet-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                 {{ __('Mis Posts') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('contacto.pintar') }}" :active="request()->routeIs('contacto.pintar')">
                 {{ __('Contacto') }}
             </x-jet-responsive-nav-link>
         </div>
