@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
     <script src="../src/eventos.js"></script>
     <script>
         //Iniciamos un evento al cargar la ventana
@@ -19,7 +19,19 @@
             //Guardamos el valor del input que tendra la direccion del src
             let script = document.getElementById("script").value;
             //Llamamos a la funcion manejadora
-            loadScript(script);
+            let nuevoScript = loadScript(script, true);
+            nuevoScript.then((r, s) => mostrarCorrecto(r, s)).catch((r, s) => mostrarError(r, script));
+        }
+
+        function mostrarCorrecto(mensa, script) {
+            let p = crearParrafo(mensa);
+            document.body.appendChild(p);
+        }
+
+        function mostrarError(error, script) {
+            let p = crearParrafo(error);
+            document.body.appendChild(p);
+            eliminarElemento(script);
         }
     </script>
 </head>

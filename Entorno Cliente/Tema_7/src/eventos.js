@@ -182,9 +182,9 @@ function changeSize(etiqueta, tamanio) {
     etiqueta.style = "font-size:" + tamanio + "px;";
 }
 /*
-* E: string Texto
-* S: devuelve el texto con la primera mayuscula
-*/
+ * E: string Texto
+ * S: devuelve el texto con la primera mayuscula
+ */
 function capitalize(texto) {
     let mayus = texto.charAt(0).toUpperCase();
     let minus = texto.slice(1);
@@ -192,9 +192,9 @@ function capitalize(texto) {
     return capitalizado;
 }
 /*
-* E: Array con opciones, id (opcional)
-* S: devuelve un objeto select
-*/
+ * E: Array con opciones, id (opcional)
+ * S: devuelve un objeto select
+ */
 function createSelect(opciones, id) {
     let select = document.createElement("select");
     for (let i = 0; i < opciones.length; i++) {
@@ -212,9 +212,9 @@ function createSelect(opciones, id) {
     }
 }
 /*
-* E: texto
-* S: devuelve una etiqueta de tipo label
-*/
+ * E: texto
+ * S: devuelve una etiqueta de tipo label
+ */
 function createLabel(texto) {
     let label = document.createElement("label");
     label.innerHTML = texto;
@@ -222,9 +222,9 @@ function createLabel(texto) {
     return label;
 }
 /*
-* E: Contenido (array), id (opcional)
-* S: Objeto Div
-*/
+ * E: Contenido (array), id (opcional)
+ * S: Objeto Div
+ */
 function createDiv(contenido, id) {
     let div = document.createElement("div");
     for (let i = 0; i < contenido.length; i++) {
@@ -239,8 +239,8 @@ function createDiv(contenido, id) {
     }
 }
 /*
-*
-*/
+ *
+ */
 function createSpan(mensaje, id) {
     let span = document.createElement("span");
     if (mensaje) {
@@ -253,8 +253,8 @@ function createSpan(mensaje, id) {
     return span;
 }
 /*
-*
-*/
+ *
+ */
 function createInput(tipo, id) {
     let input = document.createElement("input");
     input.setAttribute("type", tipo);
@@ -264,8 +264,8 @@ function createInput(tipo, id) {
     return input;
 }
 /*
-*
-*/
+ *
+ */
 function rellenarInput(etiqueta, input, valores) {
     switch (etiqueta.value) {
         case "1":
@@ -282,34 +282,61 @@ function rellenarInput(etiqueta, input, valores) {
     }
 }
 /*
-*
-*/
+ *
+ */
 function eliminarElemento(id) {
-    elemento = document.getElementById(id);
+    let elemento = document.getElementById(id);
     if (!elemento) {
         return false;
     } else {
-        padre = elemento.parentNode;
+        let padre = elemento.parentNode;
         padre.removeChild(elemento);
     }
 }
 
 /*
-* E: String (el script a cargar), funcion a llamar
-* S: Nada
-*/
-function loadScript(src) {
-    let script = document.createElement("script");
-    script.src = src;
+ * E: String (el script a cargar), funcion a llamar, boolean (opcional)
+ * S: Nada
+ */
+function loadScript(src, usaPromesas) {
+    if (!usaPromesas) {
+        //Primero creamos un elemento script
+        let script = document.createElement("script");
+        //A dicho elemento, le añadimos el atributo src cuyo valor es el que recibimos en el parametro
+        script.src = src;
 
-    script.addEventListener("load", function () {
-        let p = crearParrafo("Se ha cargado el script con exito");
-        document.body.appendChild(p);
-    });
-    script.addEventListener("error", function () {
-        let p = crearParrafo(new Error("Ha habido un error al cargar el script con " + src));
-        document.body.appendChild(p);
-    });
-    
-    document.head.append(script);
-}
+        //Creamos dos eventos a escuchar por el script
+        //El primero es para cuando carga con exito
+        script.addEventListener("load", function () {
+            //Se crea un elemento parrafo el cual nos dice que ha salido con exito
+            let p = crearParrafo("Se ha cargado el script con exito");
+            document.body.appendChild(p);
+        });
+        //La segunda es en caso de error
+        script.addEventListener("error", function () {
+            //Crea un elemento de tipo error que escribe en el parrafo
+            let p = crearParrafo(new Error("Ha habido un error al cargar el script con " + src));
+            //Inserta dicho parrafo en el documento
+            document.body.appendChild(p);
+            //Y ademas elimina ese elemento del head
+            document.head.removeChild(script);
+        });
+        //Al final despues de escribir dichos eventos, se añade la etiqueta al head
+        document.head.append(script);
+    } else {
+        let crearScript = new Promise(function (resolve, reject) {
+            //Primero creamos un elemento script
+            let script = document.createElement("script");
+            //A dicho elemento, le añadimos el atributo src cuyo valor es el que recibimos en el parametro
+            script.src = src;
+            //Al final despues de escribir dichos eventos, se añade la etiqueta al head
+            script.onload = () => resolve("Se ha cargado el script con exito", script);
+            script.onerror = () => reject(new Error("Ha habido un error al cargar el script con " + src), script);
+
+            document.head.append(script);
+            
+        });
+
+        return crearScript;
+    }
+} //Fin de funcion
