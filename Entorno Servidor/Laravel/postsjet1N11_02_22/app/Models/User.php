@@ -27,6 +27,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'external_id',
+        'external_provider',
+        'github_token',
+        'github_refresh_token',
+        'email_verification_at'
     ];
 
     /**
@@ -39,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+
     ];
 
     /**

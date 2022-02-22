@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //Campos para oath
+            $table->string('external_id')->nullable();
+            $table->string('external_provider')->nullable();
+            $table->string('github_token')->nullable();
+            $table->string('github_refresh_token')->nullable();
+            //Fin
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
