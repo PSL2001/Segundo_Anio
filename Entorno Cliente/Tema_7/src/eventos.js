@@ -282,15 +282,16 @@ function rellenarInput(etiqueta, input, valores) {
     }
 }
 /*
- *
+ * E: string (Id de elemento)
+ * S: Nada solo borra el elemento
  */
 function eliminarElemento(id) {
-    let elemento = document.getElementById(id);
-    if (!elemento) {
-        return false;
-    } else {
-        let padre = elemento.parentNode;
-        padre.removeChild(elemento);
+    let elemento = document.getElementById(id); //Primero busca al elemento con la id
+    if (!elemento) { //Si no lo encuentra o es nulo
+        return false; //Devuelve un false (para escribir un error por si falla)
+    } else { //Pero si existe
+        let padre = elemento.parentNode; //Llama al padre del elemento
+        padre.removeChild(elemento); //Y el padre elimina dicho elemento
     }
 }
 
@@ -327,16 +328,20 @@ function loadScript(src, usaPromesas) {
         let crearScript = new Promise(function (resolve, reject) {
             //Primero creamos un elemento script
             let script = document.createElement("script");
+            //Guardamos ademas cuantos scripts hay en el documento. Lo necesitaremos luego
+            let scripts = document.getElementsByTagName("script");
             //A dicho elemento, le añadimos el atributo src cuyo valor es el que recibimos en el parametro
             script.src = src;
+            //Le añadimos ademas un id para en caso luego tener que borrarlo, esta id es la cantidad de scripts que hay en el documento
+            script.id = scripts.length;
             //Al final despues de escribir dichos eventos, se añade la etiqueta al head
-            script.onload = () => resolve("Se ha cargado el script con exito", script);
-            script.onerror = () => reject(new Error("Ha habido un error al cargar el script con " + src), script);
+            script.onload = () => resolve("Se ha cargado el script con exito"); //Resolve si todo ha ido bien con la carga
+            script.onerror = () => reject(new Error("Ha habido un error al cargar el script con " + src)); //Reject si no
 
             document.head.append(script);
             
         });
-
+        //Al final devolvemos la promesa
         return crearScript;
-    }
+    } //Fin de if else
 } //Fin de funcion

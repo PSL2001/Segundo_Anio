@@ -20,17 +20,24 @@
             let script = document.getElementById("script").value;
             //Llamamos a la funcion manejadora
             let nuevoScript = loadScript(script, true);
-            nuevoScript.then((r, s) => mostrarCorrecto(r, s)).catch((r, s) => mostrarError(r, script));
+            //Decimos en que caso hacemos si la promesa ha ido bien o mal
+            //Si todo ha ido bien llama a la funcion "mostrarCorrecto", llama a "mostrarError" si no
+            nuevoScript.then(r => mostrarCorrecto(r)).catch(r => mostrarError(r));
         }
 
-        function mostrarCorrecto(mensa, script) {
+        //Esta funcion crea un parrafo con la respuesta de la promesa
+        function mostrarCorrecto(mensa) {
             let p = crearParrafo(mensa);
             document.body.appendChild(p);
         }
 
-        function mostrarError(error, script) {
+        function mostrarError(error) {
+            //Esta funcion ademas de crear un parrafo
             let p = crearParrafo(error);
             document.body.appendChild(p);
+            //Coje el ultimo elemento de los scripts (que es el script que no se ha podido cargar)
+            let script = document.getElementsByTagName("script").length - 1
+            //Y llama a una funcion que elimina un elemento por id
             eliminarElemento(script);
         }
     </script>
