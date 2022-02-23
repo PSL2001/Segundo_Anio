@@ -345,3 +345,26 @@ function loadScript(src, usaPromesas) {
         return crearScript;
     } //Fin de if else
 } //Fin de funcion
+
+function createTable(datos) {
+    let tabla = document.createElement("table");
+    let tbody = document.createElement("tbody");
+
+    //Crear las celdas
+    for (let i = 0; i < array.length; i++) {
+        //Aqui se crean las filas
+        let fila = document.createElement("tr");
+        for (let j = 0; j < array.length; j++) {
+            //Aqui se crean las columnas
+            let columna = document.createElement("td");
+            let textoColumna = document.createTextNode(datos);
+            columna.appendChild(textoColumna);
+            fila.appendChild(columna);
+        }
+        tbody.appendChild(fila);
+    }
+    tabla.appendChild(tbody);
+    document.body.appendChild(tabla);
+    tabla.setAttribute("border", "2");
+
+}

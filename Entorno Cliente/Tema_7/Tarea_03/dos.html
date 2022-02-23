@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
+    <script src="../src/eventos.js"></script>
+    <script src="../src/llamadas.js"></script>
     <script>
         let names = ['iliakan', 'remy', 'jeresig'];
         let requests = names.map(name => fetch(`https://api.github.com/users/${name}`));
@@ -16,7 +18,7 @@
                 }
                 return responses;
             })
-            .then(responses => Promise.all(responses.map(r => r.json())))
+            .then(responses => Promise.all(responses.map(r => mostrarDatos(r))))
             .then(users => users.forEach(user => alert(user.name)))
     </script>
 </head>
