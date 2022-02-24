@@ -94,7 +94,7 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <button wire:click="update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" wire:click><i class="fas fa-edit"></i> Editar</button>
+            <button wire:click="update" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"><i class="fas fa-edit"></i> Editar</button>
         </x-slot>
     </x-jet-dialog-modal>
     <!-- Fin Ventana Modal -->
@@ -112,6 +112,11 @@
          </div>
          <div class="mt-4">
              <p><span class="font-bold">Creado:</span> {{$post->created_at}}</p>
+         </div>
+         <div class="mt-4">
+             @if (isset($post->user->email))
+             <p><span class="font-bold">Creado por:</span> {{ $post->user->email }}</p>
+             @endif
          </div>
          <div class="mt-4">
              <p><span class="font-bold">Estado: </span>

@@ -17,7 +17,9 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>$this->faker->unique()->word(),
+            'descripcion'=>$this->faker->text(),
+            'color'=>$this->faker->safeHexColor()
         ];
     }
 }
