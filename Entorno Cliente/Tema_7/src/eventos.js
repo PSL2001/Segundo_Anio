@@ -346,14 +346,16 @@ function loadScript(src, usaPromesas) {
     } //Fin de if else
 } //Fin de funcion
 
-function showProps(obj, objName) {
+function mostrarPropiedades(obj, objName) {
+    //Creamos una tabla y un tbdody
     let tabla = document.createElement("table");
     let body = document.createElement("tbody");
 
     //Creamos las celdas
-    for (var i in obj) {
-        let tr = document.createElement("tr");
+    for (let i in obj) { //Para cada atributo de objeto
+        let tr = document.createElement("tr"); //Creamos el tr y el td
         let celda = document.createElement("td");
+        //En el texto ponemos el nombre del objeto y su valor
         let textoCelda = document.createTextNode(`${objName}.${i} = ${obj[i]}\n`);
         celda.appendChild(textoCelda);
         tr.appendChild(celda);

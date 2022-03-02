@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2</title>
     <script src="../src/eventos.js"></script>
-    <script src="../src/llamadas.js"></script>
     <script>
         let names = ['iliakan', 'remy', 'jeresig'];
         let requests = names.map(name => fetch(`https://api.github.com/users/${name}`));
@@ -19,7 +18,8 @@
                 return responses;
             })
             .then(responses => Promise.all(responses.map(r => r.json())))
-            .then(users => users.forEach(user => showProps(user, user.name)))
+            //Aqui en vez de mostrar el usuario y el nombre, llamo a la funcion y le paso esos parametros
+            .then(users => users.forEach(user => mostrarPropiedades(user, user.name)))
     </script>
 </head>
 
