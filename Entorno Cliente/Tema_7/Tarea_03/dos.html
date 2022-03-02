@@ -18,8 +18,8 @@
                 }
                 return responses;
             })
-            .then(responses => Promise.all(responses.map(r => mostrarDatos(r))))
-            .then(users => users.forEach(user => alert(user.name)))
+            .then(responses => Promise.all(responses.map(r => r.json())))
+            .then(users => users.forEach(user => showProps(user, user.name)))
     </script>
 </head>
 

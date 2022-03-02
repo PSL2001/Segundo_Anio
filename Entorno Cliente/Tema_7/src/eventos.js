@@ -339,32 +339,27 @@ function loadScript(src, usaPromesas) {
             script.onerror = () => reject(new Error("Ha habido un error al cargar el script con " + src)); //Reject si no
 
             document.head.append(script);
-            
+
         });
         //Al final devolvemos la promesa
         return crearScript;
     } //Fin de if else
 } //Fin de funcion
 
-function createTable(datos) {
+function showProps(obj, objName) {
     let tabla = document.createElement("table");
-    let tbody = document.createElement("tbody");
+    let body = document.createElement("tbody");
 
-    //Crear las celdas
-    for (let i = 0; i < array.length; i++) {
-        //Aqui se crean las filas
-        let fila = document.createElement("tr");
-        for (let j = 0; j < array.length; j++) {
-            //Aqui se crean las columnas
-            let columna = document.createElement("td");
-            let textoColumna = document.createTextNode(datos);
-            columna.appendChild(textoColumna);
-            fila.appendChild(columna);
-        }
-        tbody.appendChild(fila);
+    //Creamos las celdas
+    for (var i in obj) {
+        let tr = document.createElement("tr");
+        let celda = document.createElement("td");
+        let textoCelda = document.createTextNode(`${objName}.${i} = ${obj[i]}\n`);
+        celda.appendChild(textoCelda);
+        tr.appendChild(celda);
+        body.appendChild(celda);
     }
-    tabla.appendChild(tbody);
+    tabla.appendChild(body);
     document.body.appendChild(tabla);
     tabla.setAttribute("border", "2");
-
 }

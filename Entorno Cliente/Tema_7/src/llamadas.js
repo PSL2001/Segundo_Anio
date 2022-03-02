@@ -96,13 +96,3 @@ function callback3(error, segundos, etiqueta) {
         }
     }
 }
-
-/*
- * E: Un objeto de respuesta
- * S: nada, muestra en una tabla los datos de este
-*/
-function mostrarDatos(response) {
-    let json = response.json();
-    console.log(json);
-    createTable(json);
-}
