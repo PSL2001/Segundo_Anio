@@ -22,14 +22,29 @@
             //Guardamos el valor de los inputs
             let clave = document.getElementById("nom").value;
             let valor = document.getElementById("valor").value;
-            if (window.localStorage) {
-                //Localstorage esta activado, haz las operaciones
-                localStorage.setItem(clave, valor);
-                alert("Se ha guardado la clave en LocalStorage");
-            } else {
-                //Localstorage no esta activado, manda un error
-                let p = crearParrafo(new Error("Localstorage no esta activado"));
-                document.body.appendChild(p);
+            let usar = document.getElementsByName("usar");
+            for (let i = 0; i < usar.length; i++) {
+                if (usar[i].checked && usar[i].id == "usa_local") {
+                    if (window.localStorage) {
+                    //Localstorage esta activado, haz las operaciones
+                    localStorage.setItem(clave, valor);
+                    alert("Se ha guardado la clave en LocalStorage");
+                    } else {
+                    //Localstorage no esta activado, manda un error
+                    let p = crearParrafo(new Error("Localstorage no esta activado"));
+                    document.body.appendChild(p);
+                    }
+                } else if (usar[i].checked && usar[i].id == "usa_session") {
+                    if (window.sessionStorage) {
+                    //sessionStorage esta activado, haz las operaciones
+                    sessionStorage.setItem(clave, valor);
+                    alert("Se ha guardado la clave en SessionStorage");
+                    } else {
+                    //SessionStorage no esta activado, manda un error
+                    let p = crearParrafo(new Error("sessionStorage no esta activado"));
+                    document.body.appendChild(p);
+                    }
+                }
             }
             mostrarAlmacen(document.getElementById("almacen"));
         }
@@ -69,11 +84,21 @@
                 //Localstorage no esta activado, manda un error
                 let p = crearParrafo(new Error("Localstorage no esta activado"));
                 document.body.appendChild(p);
+            } 
+            if (window.sessionStorage) {
+                let valor = sessionStorage.getItem(clave);
+                if (valor == null) {
+                    alert("La clave "+ "'" + clave + "'" + " no existe en el almacenamiento de sesion");
+                } else {
+                    sessionStorage.removeItem(clave);
+                    alert("La clave " +"'" + clave + "'" + " ha sido eliminada del almacenamiento de sesion");
+                }
             }
             mostrarAlmacen(document.getElementById("almacen"));
         }
+        
     </script>
-    <title>Ejercicio 1</title>
+    <title>Ejercicio 2</title>
 </head>
 <body>
     <label for="nom">Nombre:</label>
@@ -81,6 +106,9 @@
     <br>
     <label for="valor">Valor:</label>
     <input type="text" id="valor">
+    <br>
+    <input type="radio" value="LocalStorage" name="usar" id="usa_local"/> Usar LocalStorage
+    <input type="radio" value="SessionStorage" name="usar" id="usa_session"/> Usar SessionStorage
     <br>
     <button id="crear">Guardar en Localstorage</button>
     <button id="buscar">Buscar en Localstorage con ese valor</button>
