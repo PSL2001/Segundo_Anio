@@ -14,6 +14,8 @@
             document.getElementById("crear").addEventListener("click", crearCookie);
             document.getElementById("buscar").addEventListener("click", buscarCookie);
             document.getElementById("borrar").addEventListener("click", borrarCookie);
+            //Ademas llamamos a una funcion que nos muestra las cookies
+            mostrarCookies(document.getElementById("cookies"));
         }
 
         function crearCookie() {
@@ -28,6 +30,8 @@
             }
             //Mandamos el mensaje de que se ha creado
             alert("Cookie creada con exito");
+            //Y mostramos las cookies actuales
+            mostrarCookies(document.getElementById("cookies"));
         }
 
         function buscarCookie() {
@@ -52,9 +56,11 @@
             } else { //Pero en caso contrario mostramos el resultado
                 alert(resultado);
             }
+            //Al final mostramos todas las cookies independientemente de que se haya borrado o no
+            mostrarCookies(document.getElementById("cookies"));
         }
     </script>
-    <title>Ejercicio 2</title>
+    <title>Ejercicio 3</title>
 </head>
 <body>
     <label for="nom">Nombre de Cookie:</label>
@@ -69,5 +75,8 @@
     <button id="crear">Crear la cookie</button>
     <button id="buscar">Buscar una cookie con ese valor</button>
     <button id="borrar">Borra la cookie con ese valor</button>
+    <div id="cookies">
+
+    </div>
 </body>
 </html>
