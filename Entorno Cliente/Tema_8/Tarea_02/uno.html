@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/eventos.js"></script>
+    <script src="../src/storage.js"></script>
+    <script>
+        //Creamos un evento al cargar la pagina
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            //Añadimos los eventos a los botones
+            document.getElementById("crear").addEventListener("click", guardarAlmacen);
+            document.getElementById("buscar").addEventListener("click", buscarAlmacen);
+            document.getElementById("borrar").addEventListener("click", borrarAlmacen);
+            mostrarAlmacen(document.getElementById("almacen"));
+        }
+
+        function guardarAlmacen() {
+            //Guardamos el valor de los inputs
+            let clave = document.getElementById("nom").value;
+            let valor = document.getElementById("valor").value;
+            if (window.localStorage) {
+                //Localstorage esta activado, haz las operaciones
+                localStorage.setItem(clave, valor);
+                alert("Se ha guardado la clave en LocalStorage");
+            } else {
+                //Localstorage no esta activado, manda un error
+                let p = crearParrafo(new Error("Localstorage no esta activado"));
+                document.body.appendChild(p);
+            }
+        }
+
+        function buscarAlmacen() {
+            //Guardamos el nombre de la cookie
+            let clave = document.getElementById("nom").value;
+            if (window.localStorage) {
+                //Localstorage esta activado
+                let valor = localStorage.getItem(clave);
+                if (valor == null) {
+                    alert("La clave " +"'" +  clave +"'"+ " no existe en el almacenamiento local");
+                } else {
+                    alert("La clave " +"'"+clave +"'" +" tiene de valor " + "'"+ valor +"'");
+                }
+            } else {
+                //Localstorage no esta activado, manda un error
+                let p = crearParrafo(new Error("Localstorage no esta activado"));
+                document.body.appendChild(p);
+            }
+            
+        }
+
+        function borrarAlmacen() {
+            //Guardamos el nombre dado
+            let clave = document.getElementById("nom").value;
+            if (window.localStorage) {
+                //Localstorage esta activado
+                let valor = localStorage.getItem(clave);
+                if (valor == null) {
+                    alert("La clave "+ "'" + clave + "'" + " no existe en el almacenamiento local");
+                } else {
+                    localStorage.removeItem(clave);
+                    alert("La clave " +"'" + clave + "'" + " ha sido eliminada del almacenamiento local");
+                }
+            } else {
+                //Localstorage no esta activado, manda un error
+                let p = crearParrafo(new Error("Localstorage no esta activado"));
+                document.body.appendChild(p);
+            }
+
+            
+        }
+    </script>
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <label for="nom">Nombre:</label>
+    <input type="text" id="nom">
+    <br>
+    <label for="valor">Valor:</label>
+    <input type="text" id="valor">
+    <br>
+    <button id="crear">Guardar en Localstorage</button>
+    <button id="buscar">Buscar en Localstorage con ese valor</button>
+    <button id="borrar">Borrar del Localstorage con ese valor</button>
+    <div id="almacen">
+
+    </div>
+</body>
+</html>
