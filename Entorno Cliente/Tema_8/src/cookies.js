@@ -1,3 +1,7 @@
+/*
+ * E: Nombre de la cookie (string), valor de la cookie (string), dias de expiracion (int)
+ * S: Nada, crea una cookie en el navegador
+ */
 function setCookie(cname, cvalue, exdays) {
     //Creamos una variable de tipo fecha
     const fecha = new Date();
@@ -9,7 +13,10 @@ function setCookie(cname, cvalue, exdays) {
     //Por ultimo creamos la cookie
     document.cookie = cname + "=" + cvalue + ";" + fecha_exp;
 }
-
+/*
+ * E: Nombre de la cookie (string)
+ * S: Valor de la cookie o false si no se encuentra
+ */
 function getCookie(cname) {
     //Primero guardamos la variable del nombre
     let nombre = cname + "=";
@@ -30,7 +37,10 @@ function getCookie(cname) {
     //Pero si no, devolvemos falso
     return false;
 }
-
+/*
+ * E: Nombre de la cookie (string)
+ * S: False si no se encuentra o nada si borra la cookie
+ */
 function removeCookie(cname) {
     //Primero comprobamos que la cookie existe
     let cookie = getCookie(cname);
@@ -43,4 +53,11 @@ function removeCookie(cname) {
         return "Cookie " + cname + " eliminada con exito";
     }
 
+}
+/*
+ * E: Etiqueta HTML
+ * S: Nada solo muestra las cookies en la etiqueta dada
+ */
+function mostrarCookies(etiqueta) {
+    etiqueta.textContent = document.cookie;
 }
