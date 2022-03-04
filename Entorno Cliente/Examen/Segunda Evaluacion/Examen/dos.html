@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="../src/eventos.js"></script>
+    <script src="../src/validaciones.js"></script>
+    <script>
+        //Cuando carga la ventana se llama a esta funcion
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            //En esta funcion definimos los eventos
+            document.getElementById("enviar").addEventListener("click", validar);
+            let inputs = document.getElementsByTagName("input");
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener("keypress", siguienteCampo);
+                inputs[i].addEventListener("mouseover", cambiarColor);
+                inputs[i].addEventListener("mouseout", cambiarColor);
+                inputs[i].addEventListener("change", validaCampo);
+            }
+        }
+
+        function validar() {
+            //Guardamos los inputs
+            let inputs = document.getElementsByTagName("input");
+            //Y comprobamos que cada campo sigue la expresion dada
+            //Identificador espera 4 Mayusculas, 2 digitos y 2 minusculas (ABCD12ab)
+            let res_id = validarCampo(inputs[0], /[A-Z]{4}[0-9]{2}[a-z]{2}/, "El campo identificador no sigue la expresion regular", "El campo identificador es correcto");
+            //Titulo espera cualquier letra
+            let res_tit = validarCampo(inputs[1], /[a-zA-Z]/, "El campo titulo no sigue la expresion regular", "El campo titulo es correcto")
+            //Y nombre espera cualquier letra seguido de .zip/.html/.js (uno.html)
+            let res_nom = validarCampo(inputs[2], /\w+(?=\.zip)|(?=\.html)|(?=\.js)/g, "El nombre no sigue la expresion regular", "El nombre es correcto")
+            document.getElementById("logs").innerHTML = res_id + "\n" + res_tit + "\n" + res_nom;
+            let correcto = compruebaEstilos(inputs, "red");
+            if (correcto) {
+                let p = crearParrafo("Identificador del ejercicio: " + inputs[0].value + "\nTitulo: " + inputs[1].value + "\nFichero: " + inputs[2].value);
+                document.body.appendChild(p);
+            }
+
+        }
+
+        function cambiarColor(event) {
+            //Cojemos el input que ha disparado el evento
+            let input = event.target;
+            //Y el tipo de evento que lo ha activado
+            let trigger = event.type;
+            if (trigger == "mouseover") { //Dependiendo del evento, cambia el color de fondo 
+                cambiaColor(input, "green");
+            } else if (trigger == "mouseout") {
+                cambiaColor(input, "white");
+            }
+        }
+        function validaCampo(event) {
+            //Guardamos la etiqueta que haya activado el evento, ademas de la id
+            let input = event.target;
+            let id = input.id;
+            let res = "";
+            switch (id) { //Como cada campo tiene una validacion diferente, dependiendo de la id se llama la funcion de validar correspondiente
+                case "ident":
+                    res = validarCampo(input, /[A-Z]{4}[0-9]{2}[a-z]{2}/, "El campo identificador no sigue la expresion regular", "El campo identificador es correcto");
+                    document.getElementById("logs").innerHTML = res;
+                    break;
+                case "tit":
+                    res = validarCampo(input, /[a-zA-Z]/, "El campo titulo no sigue la expresion regular", "El campo titulo es correcto");
+                    document.getElementById("logs").innerHTML = res;
+                    break;
+                case "fich":
+                    res = validarCampo(inputs[2], /\w+(?=\.zip)|(?=\.html)|(?=\.js)/g, "El nombre no sigue la expresion regular", "El nombre es correcto");
+                    document.getElementById("logs").innerHTML = res;
+                    break;
+            }
+        }
+    </script>
+</head>
+<body>
+    <label for="ident">Identificador de Ejercicio</label>
+    <input type="text" id="ident">
+    <br>
+    <label for="tit">Titulo del Ejercicio</label>
+    <input type="text" id="tit">
+    <br>
+    <label for="fich">Nombre del Fichero</label>
+    <input type="text" id="fich">
+    <br>
+    <label for="logs">Comprobaciones</label>
+    <br>
+    <textarea id="logs" disabled></textarea>
+    <br>
+    <button id="enviar">Enviar</button>
+</body>
+</html>

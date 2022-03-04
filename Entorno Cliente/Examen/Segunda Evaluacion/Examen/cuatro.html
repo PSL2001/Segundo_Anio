@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script src="../src/cookies.js"></script>
+    <script src="../src/eventos.js"></script>
+    <script>
+        //Creamos un evento al cargar la pagina
+        window.addEventListener("load", iniciar);
+
+        function iniciar() {
+            //Añadimos los eventos a los botones
+            document.getElementById("crear").addEventListener("click", crearCookie);
+            document.getElementById("buscar").addEventListener("click", buscarCookie);
+            document.getElementById("borrar").addEventListener("click", borrarCookie);
+            document.getElementById("mostrar").addEventListener("click", showCookies);
+        }
+
+        function crearCookie() {
+            //Guardamos el valor de los inputs
+            let nombreCook = document.getElementById("nom").value;
+            let valorCook = document.getElementById("valor").value;
+            let dias = document.getElementById("dias").value;
+            if (parseInt(dias) == NaN || dias == "") { //Si dias estan vacios o su parseo no es un numero
+                setCookie(nombreCook, valorCook, 3);   //Ponemos de dias por defecto 3
+            } else { //Pero en otro caso
+                setCookie(nombreCook, valorCook, dias); //Usamos los dias dados
+            }
+            //Mandamos el mensaje de que se ha creado
+            alert("Cookie creada con exito");
+        }
+
+        function buscarCookie() {
+            //Guardamos el nombre de la cookie
+            let nombreCook = document.getElementById("nom").value;
+            //Llamamos la funcion dada
+            let resultado = getCookie(nombreCook);
+            if (resultado == false) { //Si el resultado da false, es que la cookie no existe
+                alert("La cookie no existe");
+            } else { //En caso contrario se muestra al usuario el valor de esa cookie
+                alert("El valor de la cookie con el nombre " + nombreCook + " es " + resultado);
+            }
+        }
+
+        function borrarCookie() {
+            //Guardamos el nombre dado
+            let nombreCook = document.getElementById("nom").value;
+            //Llamamos a la funcion dada
+            let resultado = removeCookie(nombreCook);
+            if (resultado == false) { //Si da falso entonces es que la cookie no existia
+                alert("La cookie no se ha podido borrar porque no existe");
+            } else { //Pero en caso contrario mostramos el resultado
+                alert(resultado);
+            }
+        }
+
+        function showCookies() {
+            let cookies = document.cookie;
+            mostrarEnTabla(cookies);
+        }
+    </script>
+</head>
+<body>
+    <label for="nom">Nombre de Cookie:</label>
+    <input type="text" id="nom">
+    <br>
+    <label for="valor">Valor de la Cookie:</label>
+    <input type="text" id="valor">
+    <br>
+    <label for="dias">Numero de Dias:</label>
+    <input type="number" id="dias">
+    <br>
+    <button id="crear">Crear la cookie</button>
+    <button id="buscar">Buscar una cookie con ese valor</button>
+    <button id="borrar">Borra la cookie con ese valor</button>
+    <button id="mostrar">Mostrar las cookies</button>
+</body>
+</html>

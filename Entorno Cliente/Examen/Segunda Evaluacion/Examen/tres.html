@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="../src/eventos.js"></script>
+    <script src="../src/validaciones.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+        
+        function iniciar() {
+            document.getElementById("callback").addEventListener("click", createScript);
+            document.getElementById("promesas").addEventListener("click", createScript);
+        }
+
+        function createScript() {
+            crearScript(event, "logs", "fichero", "tiempo")
+        }
+    </script>
+</head>
+<body>
+    <label for="fichero">Introduce el fichero que quieras introducir en este documento</label>
+    <input type="text" id="fichero">
+    <br>
+    <label for="tiempo">Introduce el cuanto debe tardar en cargar y validar</label>
+    <input type="number" id="tiempo">
+    <br>
+    <label for="logs">Resultados de las operaciones</label>
+    <br>
+    <textarea id="logs" disabled></textarea>
+    <br>
+    <button id="callback">Usar Callbacks</button>
+    <button id="promesas">Usar Promesas</button>
+</body>
+</html>
