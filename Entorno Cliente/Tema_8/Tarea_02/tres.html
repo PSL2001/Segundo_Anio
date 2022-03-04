@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="../src/matematicas.js"></script>
+    <script>
+        window.addEventListener("load", iniciar);
+        var intentos = (localStorage.getItem("intentos") == null) ? null : localStorage.getItem("intentos");
+        var fallos = (localStorage.getItem("fallos") == null) ? null : localStorage.getItem("fallos");
+
+        function iniciar() {
+            document.getElementById("enviar").addEventListener("click", mayorCero);
+            document.getElementById("reset").addEventListener("click", reiniciarValores);
+            if (intentos == null) {
+                localStorage.setItem("intentos", 0);
+                intentos = localStorage.getItem("intentos");
+            }
+
+            if (fallos == null) {
+                localStorage.setItem("fallos", 0);
+                fallos = localStorage.getItem("fallos");
+            }
+            mostrarPorcentaje();
+        }
+
+        function mostrarPorcentaje() {
+            let porciento = porcentaje(fallos, intentos);
+            document.getElementById("envios").value = intentos;
+            if (porciento == false) {
+                document.getElementById("porcentaje").value = "0";
+            } else {
+                document.getElementById("porcentaje").value = porciento;
+            }
+        }
+
+        function mayorCero() {
+            let numero = parseInt(document.getElementById("numero").value);
+            intentos++;
+
+            if (numero == NaN) {
+                alert("No has introducido un numero");
+                return;
+            }
+
+            if (numero > 0) {
+                alert("El numero es mayor a 0");
+            } else {
+                fallos++;
+                alert("El numero no es mayor a 0");
+            }
+            localStorage.setItem("intentos", intentos);
+            localStorage.setItem("fallos", fallos);
+            document.getElementById("envios").value = intentos;
+            mostrarPorcentaje();
+        }
+
+        function reiniciarValores() {
+            localStorage.setItem("intentos", 0);
+            localStorage.setItem("fallos", 0);
+            intentos = localStorage.getItem("intentos");
+            fallos = localStorage.getItem("fallos");
+            alert("Valores Reiniciados, refresca la pagina");
+        }
+    </script>
+</head>
+
+<body>
+    <input type="number" id="numero" placeholder="Introduce un numero">
+    <button id="enviar">Comprobar si es mayor de 0</button>
+    <br>
+    <button id="reset">Reiniciar valores</button>
+    <br>
+    <label for="envios">Total de veces que se ha enviado el formulario</label>
+    <input type="text" disabled id="envios">
+    <br>
+    <label for="porcentaje">% de Fallos</label>
+    <input type="text" disabled id="porcentaje">
+</body>
+
+</html>

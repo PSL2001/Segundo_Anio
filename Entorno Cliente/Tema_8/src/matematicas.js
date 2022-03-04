@@ -246,3 +246,15 @@ function sumatoria(n) {
         //Cerramos la tabla
     } //Fin de else
 } //fin funcion
+
+/*
+ * E: 2 numeros
+ * S: el porcentaje de dicho numero
+ */
+function porcentaje(n1, n2) {
+    if (n2 == 0) {
+        return false;
+    } else {
+        return (n1/n2) * 100;
+    }
+}

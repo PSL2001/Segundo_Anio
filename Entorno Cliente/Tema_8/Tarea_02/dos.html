@@ -93,6 +93,10 @@
                     sessionStorage.removeItem(clave);
                     alert("La clave " +"'" + clave + "'" + " ha sido eliminada del almacenamiento de sesion");
                 }
+            } else {
+                //Session storage no esta activado
+                let p = crearParrafo(new Error("SessionStorage no esta activado"));
+                document.body.appendChild(p);
             }
             mostrarAlmacen(document.getElementById("almacen"));
         }
