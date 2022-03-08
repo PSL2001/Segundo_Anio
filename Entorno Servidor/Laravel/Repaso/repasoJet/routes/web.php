@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $post = Post::orderBy('id', 'DESC')->paginate(5);
+    return view('welcome', compact('post'));
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
