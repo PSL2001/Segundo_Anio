@@ -47,7 +47,7 @@ class LibroController extends Controller
         $imagen = $request->portada->store('portada');
         Libro::create([
             'titulo'=>$request->titulo,
-            'resume'=>$request->resumen,
+            'resumen'=>$request->resumen,
             'portada'=>$imagen
         ]);
         return redirect()->route('libros.index')->with('info', 'Libro Creado');
@@ -72,7 +72,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        //
+        return view('libros.edit', compact('libro'));
     }
 
     /**
@@ -84,7 +84,12 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
-        //
+        //Validaciones
+        $request->validate([
+            'titulo'=>['required', 'string', 'min:3', 'unique:libros,titulo'.$libro->titulo],
+            'resumen'=>['required', 'string', 'min:5'],
+            'portada'=>['nullable', 'image', 'max:2048']
+        ]);
     }
 
     /**

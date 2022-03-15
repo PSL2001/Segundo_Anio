@@ -33,7 +33,7 @@ Listado de Libros
         </td>
         <td>{{ $item->resumen }}</td>
         <td>
-            Editar
+            <a href="{{route('libros.edit', $item)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
         </td>
         <td>
             <form action="{{route('libros.destroy', $item)}}" method="POST">
